@@ -1,0 +1,33 @@
+#-------------------------------------------------------------------------------
+# BESSEL BEAM P
+#-------------------------------------------------------------------------------
+vswf.bbp<-function(gama,kz,xo,yo,zo,lmax,M,s,p){
+   k<-sqrt(gama^2+kz^2)
+   cth<-kz/k
+   sth<-gama/k
+   LMAX=lmax*(lmax+2)+1
+   #----------------------------------------
+   u<-vswf.qlm(kz/k,lmax+1)
+   Qlm<-u$Qlm
+   dQlm<-u$dQlm
+   rm(u)
+   #----------------------------------------
+   clmp<-function(l,m,p){return(sqrt(l*(l+1)-m*(m+p)))}
+   Klmqp<-function(l,m,q,p){return(((l+p*m)*(l+p*q))/((2*l-1)*(2*l+1)))}
+   #----------------------------------------
+   GTE<-rep(0,LMAX)
+   GTM<-rep(0,LMAX)
+   for(l in 1:lmax){
+      m<--l:l
+      psio<-vswf.psi(gama,kz,xo,yo,zo,M-1-s*(m-p),s)
+      if(l>0){
+         A0<-4*pi*(1i^(l-s*(m-p)))*psio/sqrt(2*l*(l+1))
+      }else{
+         A0<-0
+      }
+      GTE[vswf.jlm(l,m)]<-A0*clmp(l,m,-p)*Qlm[vswf.jlm(l,m-p)]
+      GTM[vswf.jlm(l,m)]<--1i*A0*(cth*sth*dQlm[vswf.jlm(l,m)]-
+         p*m*Qlm[vswf.jlm(l,m)]/sth)  
+   }
+   return(data.frame(GTE,GTM))
+}

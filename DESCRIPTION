@@ -1,0 +1,13 @@
+Package: rvswf
+Type: Package
+Title: RVSWF: Expansion in Vector Spherical Wave Functions written in R
+Version: 1.2.4
+Date: 2013-02-21
+Author: Wendel Lopes Moreira
+Maintainer: Wendel Lopes Moreira <wendellopes@gmail.com>
+Depends: gsl
+SystemRequirements: Gnu Scientific Library version >= 1.12
+Description: Expansion in Vector Spherical Wave Functions
+License: GPL-2
+LazyLoad: no
+Packaged: 2014-04-28 08:52:31 UTC; god0

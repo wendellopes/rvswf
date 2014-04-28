@@ -1,0 +1,2 @@
+PKG_CFLAGS = `gsl-config --cflags` -fopenmp
+PKG_LIBS   = `gsl-config --libs` -lgomp

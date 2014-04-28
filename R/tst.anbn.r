@@ -1,0 +1,9 @@
+tst.anbn<-function(n,m,x){
+   u.1<-tst.abcd(n,x)
+   u.m<-tst.abcd(n,m*x)
+   Ta<-(u.m$An/m-u.1$An)/(u.m$An/m-u.1$Bn)
+   Tb<-(u.m$An*m-u.1$An)/(u.m$An*m-u.1$Bn)
+   an<-u.1$Cn*Ta
+   bn<-u.1$Cn*Tb
+   return(data.frame(An=u.1$An,Bn=u.1$Bn,Cn=u.1$Cn,Ta,Tb,an,bn))
+}

@@ -2,11 +2,17 @@
 # BESSEL BEAM P
 #-------------------------------------------------------------------------------
 vwfd.bbp<-function(P,M,S,g,kz,x,y,z){
+   if(abs(P)!=1){
+      stop("P must be plus or minus 1")
+   }
+   if(abs(S)!=1){
+      stop("S must be plus or minus 1")
+   }
 nx<-length(x)
 ny<-length(y)
 nz<-length(z)
 dummy<-rep(0,nx*ny*nz)
-.C("wfd_bbp",
+.C("vwfd_bbp",
    P=as.integer(P),M=as.integer(M),S=as.integer(S),
    nx=as.integer(nx),ny=as.integer(ny),nz=as.integer(nz),
    gama=as.double(g),kz=as.double(kz),

@@ -1,11 +1,12 @@
 #-------------------------------------------------------------------------------
-# Logarithmic Derivative Riccati-Bessel [OK]
-lcf.rbld<-function(n,x,NMAX=2000){
+# Logarithmic Derivative Spherical Bessel [OK]
+#-------------------------------------------------------------------------------
+lcfe.sbl<-function(n,x,NMAX=2000){
    # Constants
    eo<-.Machine$double.xmin
    ACC<-10^-50
    # initialization of calculations
-   fn<-lcf.afsn(n+1,x)    # bo
+   fn<-lcf.afsn(n,x)    # bo
    if(abs(fn)<eo){fn<-eo} # migth be zero
    Pn<-fn
    Qn<-0

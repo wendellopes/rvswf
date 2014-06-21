@@ -10,7 +10,7 @@ nx<-length(x)
 ny<-length(y)
 nz<-length(z)
 dummy<-rep(0,nx*ny*nz)
-.C("pwe_vsw",
+.C("vswf_pwe",
    k=as.double(k),
    x=as.double(x),
    y=as.double(y),

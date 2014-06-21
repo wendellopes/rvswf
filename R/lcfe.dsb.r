@@ -1,11 +1,12 @@
 #-------------------------------------------------------------------------------
-# j_{n+1}/j_{n} [OK] BARNETT
-lcf.sbri<-function(n,x,NMAX=2000){
+# j_{n}/j_{n+1} [OK] DIRECT - Spherical and Riccati-Bessel Functions
+#-------------------------------------------------------------------------------
+lcfe.sbd<-function(n,x,NMAX=2000){
    # Constants
    eo<-.Machine$double.xmin
    ACC<-10^-50
    # initialization of calculations
-   fn<-0    # bo
+   fn<-lcf.afsn(2*(n+1)+1,x)    # bo
    if(abs(fn)<eo){fn<-eo} # migth be zero
    Pn<-fn
    Qn<-0
@@ -13,9 +14,9 @@ lcf.sbri<-function(n,x,NMAX=2000){
    j<-0
    Dn<-10
    while(abs(Dn-1)>ACC){
-      an<-(-1)^sign(j)
       j<-j+1
-      bn<-lcf.afsn(2*(n+j)+1,x);
+      an<--1
+      bn<-lcf.afsn(2*(n+j+1)+1,x); 
       Pn<-bn+an/Pn
       if(abs(Pn)<eo){Pn<-eo} # migth be zero
       Qn<-bn+an*Qn

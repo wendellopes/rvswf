@@ -1,12 +1,12 @@
 #-------------------------------------------------------------------------------
-# SPHERICAL BESSEL FUNCTIONS [DONE]
+# RICCATI BESSEL FUNCTIONS [DONE]
 #-------------------------------------------------------------------------------
-sph.rjyn<-function(x,nmax){
+bess.ric<-function(x,nmax){
 	Dn<-rep(0,nmax+1)  # Vector 
 	gn<-rep(1,nmax+1)  # Vector
-	Dn[nmax+1]<-lcf.sbld(nmax,x) # Last element
+	Dn[nmax+1]<-lcf.rbld(nmax,x) # Last element
 	gn[nmax+1]<-lcf.sbrd(nmax,x) # Last element
-	Sn<-(0:(nmax+1))/x
+	Sn<-(0:(nmax))/x
 	nj<-(nmax+1):2        # n+1
 	Gm<-gn
 	Dm<-Dn
@@ -14,13 +14,13 @@ sph.rjyn<-function(x,nmax){
 	RN<-1
    for(n in nj){
    	  # original
-   	  #gn[n-1]<-Sn[n+1]+Dn[n]
-   	  #Dn[n-1]<-Sn[n-1]-1/gn[n-1]
-   	  Gm[n-1]<-Sn[n+1]+Dm[n]
-   	  Dm[n-1]<-Sn[n-1]-1/Gm[n-1]
+   	  #gn[n-1]<-Sn[n]+Dn[n]
+   	  #Dn[n-1]<-Sn[n]-1/gn[n-1]
+   	  Gm[n-1]<-Sn[n]+Dm[n]
+   	  Dm[n-1]<-Sn[n]-1/Gm[n-1]
    	  # modified (permits one step normalization)
-   	  gn[n-1]<-Sn[n+1]*gn[n]+Dn[n]
-   	  Dn[n-1]<-Sn[n-1]*gn[n-1]-gn[n]
+   	  gn[n-1]<-Sn[n]*gn[n]+Dn[n]
+   	  Dn[n-1]<-Sn[n]*gn[n-1]-gn[n]
    	  # Normalization
    	  #print(c(gn[n-1],Dn[n-1]))
    	  if(abs(gn[n-1])>1e100){
@@ -34,16 +34,16 @@ sph.rjyn<-function(x,nmax){
    # one step normalization taking care about zeros
    # Bessel function
    if(abs(gn[1])<abs(gn[2])){
-      jn<-(gn/gn[1])*sin(x)/x # create functions for normalizations
+      Jn<-(gn/gn[1])*sin(x) # create functions for normalizations
    }else{
-      jn<-(gn/gn[2])*(-cos(x)+sin(x)/x)*(1/x)   	
+      Jn<-(gn/gn[2])*(sin(x)/x-cos(x)) 	
    }
    # Its Derivative
    if(abs(Dn[1])>abs(Dn[2])){
-   	  djn<-(Dn/Dn[1])*(-jn[2])
+   	  dJn<-(Dn/Dn[1])*(-Jn[2])
    }else{
-   	  djn<-(Dn/Dn[2])*(1/3)*(jn[1]-2*jn[3])
+   	  dJn<-(Dn/Dn[2])*(1/3)*(2*Jn[1]-Jn[3])
    }
    # Return results
-   return(data.frame(rh=Gm,An=Dm,jn,djn))
+   return(data.frame(gm=Gm,Dn=Dm,Jn,dJn))
 }

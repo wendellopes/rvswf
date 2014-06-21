@@ -1,11 +1,12 @@
 #-------------------------------------------------------------------------------
-# J_{n}/J_{n+1} [OK] DIRECT
-lcf.cbrd<-function(n,x,NMAX=2000){
+# Logarithmic Derivative Riccati-Bessel [OK]
+#-------------------------------------------------------------------------------
+lcfe.rbl<-function(n,x,NMAX=2000){
    # Constants
    eo<-.Machine$double.xmin
    ACC<-10^-50
    # initialization of calculations
-   fn<-lcf.afsn(2*(n+1),x)    # bo
+   fn<-lcf.afsn(n+1,x)    # bo
    if(abs(fn)<eo){fn<-eo} # migth be zero
    Pn<-fn
    Qn<-0
@@ -15,7 +16,7 @@ lcf.cbrd<-function(n,x,NMAX=2000){
    while(abs(Dn-1)>ACC){
       j<-j+1
       an<--1
-      bn<-lcf.afsn(2*(n+j+1),x);
+      bn<-lcf.afsn(2*(n+j)+1,x);
       Pn<-bn+an/Pn
       if(abs(Pn)<eo){Pn<-eo} # migth be zero
       Qn<-bn+an*Qn

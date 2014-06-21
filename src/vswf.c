@@ -1,3 +1,10 @@
+/*------------------------------------------------------------------------------
+ * VSWF: Vector Spherical Wave Functions dynamic libraries written in C.
+ * author: Wendel Lopes Moreira <wendellopes@gmail.com>
+ * date: 2014-06-21
+ * version 1.2
+ * depends: Gnu Scientific Library <http://www.gnu.org/software/gsl/>
+------------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <math.h>
 #include <complex.h>
@@ -10,14 +17,22 @@
 //------------------------------------------------------------------------------
 //# Auxliary Function
 //------------------------------------------------------------------------------
-double lcf_afsn(int n,double x){
-   double s=n/x;
-   return(s);
+double lcf_afsn(/* FUNCTION */
+      int n,
+      double x
+   ){
+   //-----------------------------------
+   return(n/x);
 }
 //------------------------------------------------------------------------------
 //# Logarithmic Derivative of Cylindrical Bessel [OK]
 //------------------------------------------------------------------------------
-double lcf_cbld(int n,double x,int NMAX){
+double lcf_cbld(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(n,x);
@@ -50,7 +65,12 @@ double lcf_cbld(int n,double x,int NMAX){
 //------------------------------------------------------------------------------
 //# J_{n}/J_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
-double lcf_cbrd(int n,double x,int NMAX){
+double lcf_cbrd(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(2*(n+1),x);
@@ -83,7 +103,12 @@ double lcf_cbrd(int n,double x,int NMAX){
 //------------------------------------------------------------------------------
 //# J_{n+1}/J_{n} [OK] BARNETT
 //------------------------------------------------------------------------------
-double lcf_cbri(int n,double x,int NMAX){
+double lcf_cbri(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=0.0;
@@ -116,7 +141,12 @@ double lcf_cbri(int n,double x,int NMAX){
 //------------------------------------------------------------------------------
 //# Logarithmic Derivative of Riccati-Bessel [OK]
 //------------------------------------------------------------------------------
-double lcf_rbld(int n,double x,int NMAX){
+double lcf_rbld(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    double eo=DBL_MIN;;
    double ACC=10^-50;
    double fn=lcf_afsn(n+1,x);    // bo;
@@ -149,7 +179,12 @@ double lcf_rbld(int n,double x,int NMAX){
 //------------------------------------------------------------------------------
 //# Logarithmic Derivative of Spherical Bessel [OK]
 //------------------------------------------------------------------------------
-double lcf_sbld(int n,double x,int NMAX){;
+double lcf_sbld(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    double eo=DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(n,x);    // bo;
@@ -182,7 +217,12 @@ double lcf_sbld(int n,double x,int NMAX){;
 //------------------------------------------------------------------------------
 //# j_{n}/j_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
-double lcf_sbrd(int n,double x,int NMAX){
+double lcf_sbrd(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(2*(n+1)+1,x);
@@ -215,7 +255,12 @@ double lcf_sbrd(int n,double x,int NMAX){
 //------------------------------------------------------------------------------
 //# j_{n+1}/j_{n} [OK] BARNETT
 //------------------------------------------------------------------------------
-double lcf_sbri(int n,double x,int NMAX){
+double lcf_sbri(/* FUNCTION */
+      int n,
+      double x,
+      int NMAX
+   ){
+   //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=0.0;
@@ -245,20 +290,15 @@ double lcf_sbri(int n,double x,int NMAX){
    }
    return(fn);
 }
-/*------------------------------------------------------------------------------
- * VSWF: Vector Spherical Wave Functions dynamic libraries written in C.
- * author: Wendel Lopes Moreira <wendellopes@gmail.com>
- * date: 2013-02-18
- * version 1.1
- * depends: Gnu Scientific Library <http://www.gnu.org/software/gsl/>
-------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 // Psi_m(\vec{k},\vec{r}): Basic function for cylindrical simetries
-// used in Cylindrical Wave Guides and Bessel Beams.
 //------------------------------------------------------------------------------
-double complex psi_mkr(int *m,int *s,
+double complex psim_def(/* FUNCTION */
+      int *m,int *s,
       double *gamma,double *kz,
-      double *x,double *y,double *z){
+      double *x,double *y,double *z
+   ){
+   //-----------------------------------
    double rho=sqrt(*x*(*x)+*y*(*y));
    double cph,sph;
    cph=*x/rho;
@@ -272,12 +312,13 @@ double complex psi_mkr(int *m,int *s,
 //------------------------------------------------------------------------------
 // RECTANGULAR WAVE GUIDE - TM MODE
 //------------------------------------------------------------------------------
-void rwg_tmm(
+void drwg_tmm(/* FUNCTION */
       double *kx, double *ky, double *kz,
       double *x,  double *y,  double *z,
       double complex *Hm, double complex *Hz, double complex *Hp,
       double complex *Em, double complex *Ez, double complex *Ep
-      ){
+   ){
+   //-----------------------------------
    double gamma2=*kx*(*kx)+*ky*(*ky);
    double k=sqrt(*kx*(*kx)+*ky*(*ky)+*kz*(*kz));
    //
@@ -311,12 +352,13 @@ void rwg_tmm(
 //------------------------------------------------------------------------------
 // RECTANGULAR WAVE GUIDE - TE MODE
 //------------------------------------------------------------------------------
-void rwg_tem(
+void drwg_tem(/* FUNCTION */
       double *kx, double *ky, double *kz,
       double *x,  double *y,  double *z,
       double complex *Hm, double complex *Hz, double complex *Hp,
       double complex *Em, double complex *Ez, double complex *Ep
-      ){
+   ){
+   //-----------------------------------
    double gamma2=*kx*(*kx)+*ky*(*ky);
    double k=sqrt(*kx*(*kx)+*ky*(*ky)+*kz*(*kz));
    //
@@ -342,15 +384,16 @@ void rwg_tem(
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
-void wfd_rwg(
-                    int *TE,
-                    int *nx, int *ny, int *nz,
-                    double *kx, double *ky, double *kz,
-                    double *x,  double *y,  double *z,
-                    double *rx, double *ry, double *rz,
-                    double complex *Hm, double complex *Hz, double complex *Hp,
-                    double complex *Em, double complex *Ez, double complex *Ep
-                    ){ 
+void vwfd_rwg(/* FUNCTION */
+      int *TE,
+      int *nx, int *ny, int *nz,
+      double *kx, double *ky, double *kz,
+      double *x,  double *y,  double *z,
+      double *rx, double *ry, double *rz,
+      double complex *Hm, double complex *Hz, double complex *Hp,
+      double complex *Em, double complex *Ez, double complex *Ep
+   ){ 
+   //-----------------------------------
    int i=0;
    for(int ix=0; ix<*nx; ix++){
       for(int iy=0; iy<*ny; iy++){
@@ -359,13 +402,13 @@ void wfd_rwg(
            ry[i]=y[iy];
            rz[i]=z[iz];
            if(*TE==1){
-              rwg_tem(kx,ky,kz,
+              drwg_tem(kx,ky,kz,
                     &x[ix],&y[iy],&z[iz],
                     &Hm[i],&Hz[i],&Hp[i],
                     &Em[i],&Ez[i],&Ep[i]);
            }
            if(*TE==0){
-              rwg_tmm(kx,ky,kz,
+              drwg_tmm(kx,ky,kz,
                     &x[ix],&y[iy],&z[iz],
                     &Hm[i],&Hz[i],&Hp[i],
                     &Em[i],&Ez[i],&Ep[i]);
@@ -378,40 +421,42 @@ void wfd_rwg(
 //------------------------------------------------------------------------------
 // CYLINDRICAL WAVE GUIDE - TM MODE
 //------------------------------------------------------------------------------
-void cwg_all(
+void dcwg_all(/* FUNCTION */
       int *MD,int *M,int *S,
       double *gamma, double *kz,
       double *x,  double *y,  double *z,
       double complex *Hm, double complex *Hz, double complex *Hp,
       double complex *Em, double complex *Ez, double complex *Ep
-      ){
+   ){
+   //-----------------------------------
    double k=sqrt(*gamma*(*gamma)+*kz*(*kz));
    double ctg=*kz/(*gamma);
    double csc=k/(*gamma);
    int msm=*M-*S;
    int msp=*M+*S;
    //
-   *Em= psi_mkr(&msm,S,gamma,kz,x,y,z)*( I*(*S)*ctg)/sqrt(2.0);
-   *Ez= psi_mkr(M,   S,gamma,kz,x,y,z);
-   *Ep= psi_mkr(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*ctg)/sqrt(2.0);
+   *Em= psim_def(&msm,S,gamma,kz,x,y,z)*( I*(*S)*ctg)/sqrt(2.0);
+   *Ez= psim_def(M,   S,gamma,kz,x,y,z);
+   *Ep= psim_def(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*ctg)/sqrt(2.0);
    // If TM, H = -H, E = E
    // If TE, E =  H, H = E
-   *Hm=-(*MD)*psi_mkr(&msm,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
+   *Hm=-(*MD)*psim_def(&msm,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
    *Hz=0;
-   *Hp=-(*MD)*psi_mkr(&msp,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
+   *Hp=-(*MD)*psim_def(&msp,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
-void wfd_cwg(
-                    int *TE, int *m, int *s,
-                    int *nx, int *ny, int *nz,
-                    double *gamma, double *kz,
-                    double *x,  double *y,  double *z,
-                    double *rx, double *ry, double *rz,
-                    double complex *Hm, double complex *Hz, double complex *Hp,
-                    double complex *Em, double complex *Ez, double complex *Ep
-                    ){ 
+void vwfd_cwg(/* FUNCTION */
+      int *TE, int *m, int *s,
+      int *nx, int *ny, int *nz,
+      double *gamma, double *kz,
+      double *x,  double *y,  double *z,
+      double *rx, double *ry, double *rz,
+      double complex *Hm, double complex *Hz, double complex *Hp,
+      double complex *Em, double complex *Ez, double complex *Ep
+   ){ 
+   //-----------------------------------
    int MD;
    int i=0;
    for(int ix=0; ix<*nx; ix++){
@@ -423,7 +468,7 @@ void wfd_cwg(
            if(*TE==1){
               // MODO TE
               MD=1;
-              cwg_all(&MD,m,s,
+              dcwg_all(&MD,m,s,
                     gamma,kz,
                     &x[ix],&y[iy],&z[iz],
                     &Em[i],&Ez[i],&Ep[i],
@@ -432,7 +477,7 @@ void wfd_cwg(
            if(*TE==0){
               // MODO TM
               MD=-1;
-              cwg_all(&MD,m,s,
+              dcwg_all(&MD,m,s,
                     gamma,kz,
                     &x[ix],&y[iy],&z[iz],
                     &Hm[i],&Hz[i],&Hp[i],
@@ -446,40 +491,41 @@ void wfd_cwg(
 //------------------------------------------------------------------------------
 // BESSEL BEAMS Z ORIENTED
 //------------------------------------------------------------------------------
-void def_bbz(
+void fdef_bbz(/* FUNCTION */
       int *MD,int *M,int *S,
       double *gamma, double *kz,
       double *x,  double *y,  double *z,
       double complex *Hm, double complex *Hz, double complex *Hp,
       double complex *Em, double complex *Ez, double complex *Ep
-      ){
+   ){
+   //-----------------------------------
    double k=sqrt(*gamma*(*gamma)+*kz*(*kz));
    double cth=*kz/k;
    double sth=(*gamma)/k;
    int msm=*M-*S;
    int msp=*M+*S;
    // TM MODE
-   *Em=(*MD)*psi_mkr(&msm,S,gamma,kz,x,y,z)*( I*(*S)*cth*sth)/sqrt(2.0);
-   *Ez=(*MD)*psi_mkr(M,   S,gamma,kz,x,y,z)*sth*sth;
-   *Ep=(*MD)*psi_mkr(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*cth*sth)/sqrt(2.0);
+   *Em=(*MD)*psim_def(&msm,S,gamma,kz,x,y,z)*( I*(*S)*cth*sth)/sqrt(2.0);
+   *Ez=(*MD)*psim_def(M,   S,gamma,kz,x,y,z)*sth*sth;
+   *Ep=(*MD)*psim_def(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*cth*sth)/sqrt(2.0);
    //
-   *Hm=psi_mkr(&msm,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
+   *Hm=psim_def(&msm,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
    *Hz=0;
-   *Hp=psi_mkr(&msp,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
+   *Hp=psim_def(&msp,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
-void wfd_bbz(
-                    int *TE, int *m, int *s,
-                    int *nx, int *ny, int *nz,
-                    double *gamma, double *kz,
-                    double *x,  double *y,  double *z,
-                    double *rx, double *ry, double *rz,
-                    double complex *Hm, double complex *Hz, double complex *Hp,
-                    double complex *Em, double complex *Ez, double complex *Ep
-                    ){ 
-//------------------------------------------------------------------------------
+void vwfd_bbz(/* FUNCTION */
+      int *TE, int *m, int *s,
+      int *nx, int *ny, int *nz,
+      double *gamma, double *kz,
+      double *x,  double *y,  double *z,
+      double *rx, double *ry, double *rz,
+      double complex *Hm, double complex *Hz, double complex *Hp,
+      double complex *Em, double complex *Ez, double complex *Ep
+   ){ 
+   //-----------------------------------
    int MD;
    int i=0;
    for(int ix=0; ix<*nx; ix++){
@@ -490,7 +536,7 @@ void wfd_bbz(
            rz[i]=z[iz];
            if(*TE==1){
               MD=1;
-              def_bbz(&MD,m,s,
+              fdef_bbz(&MD,m,s,
                     gamma,kz,
                     &x[ix],&y[iy],&z[iz],
                     &Hm[i],&Hz[i],&Hp[i],
@@ -498,7 +544,7 @@ void wfd_bbz(
            }
            if(*TE==0){
               MD=-1;
-              def_bbz(&MD,m,s,
+              fdef_bbz(&MD,m,s,
                     gamma,kz,&x[ix],
                     &y[iy],&z[iz],&Em[i],&Ez[i],
                     &Ep[i],&Hm[i],&Hz[i],&Hp[i]);
@@ -508,17 +554,17 @@ void wfd_bbz(
       }    
    }    
 }
-
 //------------------------------------------------------------------------------
 // BESSEL BEAMS P ORIENTED
 //------------------------------------------------------------------------------
-void def_bbp(
+void fdef_bbp(/* FUNCTION */
       int *P,int *M,int *S,
       double *gamma, double *kz,
       double *x,  double *y,  double *z,
       double complex *Hm, double complex *Hz, double complex *Hp,
       double complex *Em, double complex *Ez, double complex *Ep
-      ){
+   ){
+   //-----------------------------------
    double k=sqrt(*gamma*(*gamma)+*kz*(*kz));
    double cth=*kz/k;
    double sth=(*gamma)/k;
@@ -530,28 +576,28 @@ void def_bbp(
    int mspm0=*M-1+*S*(*P);
    int mspp1=*M-1+*S*(*P+1);
 
-   *Em=pp1*psi_mkr(&mm1,S,gamma,kz,x,y,z)/2
-      -*P*(sth*sth)*psi_mkr(&mspm1,S,gamma,kz,x,y,z)/2;
-   *Ez= -I*(*P)*(*S)*cth*sth*psi_mkr(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
-   *Ep=pm1*psi_mkr(&mm1,S,gamma,kz,x,y,z)/2
-      +*P*(sth*sth)*psi_mkr(&mspp1,S,gamma,kz,x,y,z)/2;
-   *Hm=-I*(*P)*cth*psi_mkr(&mm1,S,gamma,kz,x,y,z)*pp1/2.0;
-   *Hz=-(*S)*sth*psi_mkr(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
-   *Hp=-I*(*P)*cth*psi_mkr(&mm1,S,gamma,kz,x,y,z)*pm1/2.0;
+   *Em=pp1*psim_def(&mm1,S,gamma,kz,x,y,z)/2
+      -*P*(sth*sth)*psim_def(&mspm1,S,gamma,kz,x,y,z)/2;
+   *Ez= -I*(*P)*(*S)*cth*sth*psim_def(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
+   *Ep=pm1*psim_def(&mm1,S,gamma,kz,x,y,z)/2
+      +*P*(sth*sth)*psim_def(&mspp1,S,gamma,kz,x,y,z)/2;
+   *Hm=-I*(*P)*cth*psim_def(&mm1,S,gamma,kz,x,y,z)*pp1/2.0;
+   *Hz=-(*S)*sth*psim_def(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
+   *Hp=-I*(*P)*cth*psim_def(&mm1,S,gamma,kz,x,y,z)*pm1/2.0;
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
-void wfd_bbp(
-                    int *p, int *m, int *s, 
-                    int *nx, int *ny, int *nz,
-                    double *gamma, double *kz,
-                    double *x,  double *y,  double *z,
-                    double *rx, double *ry, double *rz,
-                    double complex *Hm, double complex *Hz, double complex *Hp,
-                    double complex *Em, double complex *Ez, double complex *Ep
-                    ){ 
-//------------------------------------------------------------------------------
+void vwfd_bbp(/* FUNCTION */
+      int *p, int *m, int *s, 
+      int *nx, int *ny, int *nz,
+      double *gamma, double *kz,
+      double *x,  double *y,  double *z,
+      double *rx, double *ry, double *rz,
+      double complex *Hm, double complex *Hz, double complex *Hp,
+      double complex *Em, double complex *Ez, double complex *Ep
+   ){ 
+   //-----------------------------------
    int i=0;
    for(int ix=0; ix<*nx; ix++){
       for(int iy=0; iy<*ny; iy++){
@@ -559,7 +605,7 @@ void wfd_bbp(
            rx[i]=x[ix];
            ry[i]=y[iy];
            rz[i]=z[iz];
-           def_bbp(p,m,s,
+           fdef_bbp(p,m,s,
                  gamma,kz,
                  &x[ix],&y[iy],&z[iz],
                  &Hm[i],&Hz[i],&Hp[i],
@@ -576,31 +622,49 @@ void wfd_bbp(
 //------------------------------------------------------------------------------
 // CONSTANTS FOR Qlm (NORMALIZED ASSOCIATED LEGENDRE POLYNOMIALS)
 //------------------------------------------------------------------------------
-double alfaQ(int lo, int mo){
+double alfaQ(/* FUNCTION */
+      int lo, 
+      int mo
+   ){
+   //-----------------------------------
    double l=lo;
    double m=mo;
    return sqrt(((2*l-1)*(2*l+1))/((l-m)*(l+m)));
 }
 //------------------------------------------------------------------------------
-double betaQ(int lo, int mo){
+double betaQ(/* FUNCTION */
+      int lo, 
+      int mo
+   ){
+   //-----------------------------------
    double l=lo;
    double m=mo;
    return sqrt((2*l+1)/(2*l-3))*sqrt(((l+m-1)*(l-m-1))/((l-m)*(l+m)));
 }
 //------------------------------------------------------------------------------
-double gammaQ(int lo){
+double gammaQ(/* FUNCTION */
+      int lo
+   ){
+   //-----------------------------------
    double l=lo;
    return sqrt((2*l+1)/(2*l));
 }
 //------------------------------------------------------------------------------
-double deltaQ(int lo){
+double deltaQ(/* FUNCTION */
+      int lo
+   ){
+   //-----------------------------------
    double l=lo;
    return sqrt(2*l+1);
 }
 //------------------------------------------------------------------------------
 // POSITIONER IN THE (l,m) LIST
 //------------------------------------------------------------------------------
-int jlm(int l, int m){
+int jlm(/* FUNCTION */
+      int l, 
+      int m
+   ){
+   //-----------------------------------
    if(abs(m)>l){
       return 0;
    }else{
@@ -618,21 +682,35 @@ int jlm(int l, int m){
 * i=iz+nz*(iy-1)+nz*ny*(ix-1) : comecando de 1
 * i=iz+nz*iy+nz*ny*ix         : comecando de 0
 */
-int lijk(int ix, int ni, int iy,int ny, int iz, int nz){
-   int l=iz+nz*iy+nz*ny*ix;
-   return(l);
-
+int lijk(/* FUNCTION */
+      int ix, 
+      int ni, 
+      int iy,
+      int ny, 
+      int iz, 
+      int nz
+   ){
+   //-----------------------------------
+   return(iz+nz*iy+nz*ny*ix);
 }
 //------------------------------------------------------------------------------
 // CONSTANTS FOR \vec{X}_{lm}
 //------------------------------------------------------------------------------
-double cp(int lo, int mo){
+double cp(/* FUNCTION */
+      int lo, 
+      int mo
+   ){
+   //-----------------------------------
    double l=lo;
    double m=mo;
    return sqrt(l*(l+1)-m*(m+1));
 }
 //------------------------------------------------------------------------------
-double cm(int lo, int mo){
+double cm(/* FUNCTION */
+      int lo, 
+      int mo
+   ){
+   //-----------------------------------
    double l=lo;
    double m=mo;
    return sqrt(l*(l+1)-m*(m-1));
@@ -640,15 +718,16 @@ double cm(int lo, int mo){
 //------------------------------------------------------------------------------
 // POSITION DEPENDENT CALCULATIONS - MULTIPLE LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
-void def_vsw(double *k,double *x, double *y, double *z,
-                    int *lmax, 
-                    double complex *GTE, double complex *GTM,
-                    double complex *Em, double complex *Ez, double complex *Ep,
-                    double complex *Hm, double complex *Hz, double complex *Hp
-                    ){
-//------------------------------------------------------------------------------
+void vswf_def(/* FUNCTION */
+      double *k,double *x, double *y, double *z,
+      int *lmax, 
+      double complex *GTE, double complex *GTM,
+      double complex *Em, double complex *Ez, double complex *Ep,
+      double complex *Hm, double complex *Hz, double complex *Hp
+   ){
+   //-----------------------------------
    int l;
-//   int LMAX=*lmax*(*lmax+2);
+//   int LMAX=*lmax*(*lmax+2); # MUST CALCULATE ONE MORE POINT #
    int LMAXE=(*lmax+1)*(*lmax+3);
    double cph; 
    double sph;
@@ -656,7 +735,7 @@ void def_vsw(double *k,double *x, double *y, double *z,
    double r=sqrt(rho*rho+*z*(*z));
    double sth=rho/r;
    double cth=*z/r;
-//------------------------------------------------------------------------------
+   //-----------------------------------
    if((*x==0)&&(*y==0)){
       cph=1;
       sph=0;
@@ -664,33 +743,34 @@ void def_vsw(double *k,double *x, double *y, double *z,
       cph=*x/rho;
       sph=*y/rho;
    }
-//------------------------------------------------------------------------------
-   // Spherical Bessel Funtions
+   /*---------------------------------*/
+   /* SPHERICAL BESSEL FUNCTIONS      */
+   /*---------------------------------*/
    double JLM[*lmax+2];
    gsl_sf_bessel_jl_steed_array(*lmax+1,*k*r,JLM);
-//------------------------------------------------------------------------------
+   //-----------------------------------
    // Qlm - First 4 terms
    double Qlm[LMAXE];
    Qlm[jlm(0, 0)]=1/sqrt(4*M_PI);
    Qlm[jlm(1, 1)]=-gammaQ(1)*sth*Qlm[jlm(0,0)]; // Q11
    Qlm[jlm(1, 0)]=sqrt(3.0)*cth*Qlm[jlm(0,0)];  // Q10
    Qlm[jlm(1,-1)]=-Qlm[jlm(1,1)];               // Q11*(-1)
-//------------------------------------------------------------------------------
+   //-----------------------------------
    // Complex Exponencial for m=-1,0,1
    double complex Eim[2*(*lmax)+3];
    Eim[*lmax-1]=(cph-I*sph);
    Eim[*lmax  ]=1+I*0;
    Eim[*lmax+1]=(cph+I*sph);
-//------------------------------------------------------------------------------
+   //-----------------------------------
    // Ylm - First 4 terms
    double complex Ylm[LMAXE];
    Ylm[jlm(0, 0)]=Qlm[jlm(0, 0)];
    Ylm[jlm(1,-1)]=Qlm[jlm(1,-1)]*Eim[*lmax-1];
    Ylm[jlm(1, 0)]=Qlm[jlm(1, 0)];
    Ylm[jlm(1, 1)]=Qlm[jlm(1, 1)]*Eim[*lmax+1];
-//------------------------------------------------------------------------------
-   // VECTOR SPHERICAL HARMONICS
-//------------------------------------------------------------------------------
+   /*---------------------------------*/
+   /* VECTOR SPHERICAL HARMONICS      */
+   /*---------------------------------*/
    // r
    double complex rm=sth*(cph-I*sph)/sqrt(2);
    double complex rz=cth;
@@ -707,9 +787,9 @@ void def_vsw(double *k,double *x, double *y, double *z,
    double complex VM;
    double complex VZ;
    double complex VP;
-//------------------------------------------------------------------------------
-   // HANSEN MULTIPOLES
-//------------------------------------------------------------------------------
+   /*---------------------------------*/
+   /* HANSEN MULTIPOLES               */
+   /*---------------------------------*/
    // M
    double complex MM;
    double complex MZ;
@@ -718,14 +798,14 @@ void def_vsw(double *k,double *x, double *y, double *z,
    double complex NM;
    double complex NZ;
    double complex NP;
-//------------------------------------------------------------------------------
-   // OTHERS
-//------------------------------------------------------------------------------
+   /*---------------------------------*/
+   /* OTHERS                          */
+   /*---------------------------------*/
    double kl;
-//------------------------------------------------------------------------------
+   //-----------------------------------
    // MAIN LOOP
+   //-----------------------------------
    for(l=1;l<=(*lmax);l++){
-//------------------------------------------------------------------------------
       //Qlm extremos positivos um passo a frente
       Qlm[jlm(l+1, l+1)]=-gammaQ(l+1)*sth*Qlm[jlm(l,l)];
       Qlm[jlm(l+1, l  )]= deltaQ(l+1)*cth*Qlm[jlm(l,l)];
@@ -742,7 +822,7 @@ void def_vsw(double *k,double *x, double *y, double *z,
       Ylm[jlm(l+1,-l  )]=Qlm[jlm(l+1,-l  )]*Eim[*lmax-l  ];
       // others
       kl=1/(sqrt(l*(l+1)));
-//------------------------------------------------------------------------------
+      //--------------------------------
       for(int m=l; m>=(-l); m--){
          // CALCULATIONS OF SSH
          if(m>=0){
@@ -790,14 +870,15 @@ void def_vsw(double *k,double *x, double *y, double *z,
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
-void pwe_vsw(double *k,double *x, double *y, double *z,
-                    int *lmax, int *nx, int *ny, int *nz, 
-                    double complex *GTE, double complex *GTM,
-                    double *rx, double *ry, double *rz,
-                    double complex *Em, double complex *Ez, double complex *Ep,
-                    double complex *Hm, double complex *Hz, double complex *Hp
-                    ){ 
-//------------------------------------------------------------------------------
+void vswf_pwe(/* FUNCTION */
+      double *k,double *x, double *y, double *z,
+      int *lmax, int *nx, int *ny, int *nz, 
+      double complex *GTE, double complex *GTM,
+      double *rx, double *ry, double *rz,
+      double complex *Em, double complex *Ez, double complex *Ep,
+      double complex *Hm, double complex *Hz, double complex *Hp
+   ){ 
+   //-----------------------------------
    int i=0;
    #pragma omp parallel for
    for(int ix=0; ix<*nx; ix++){
@@ -816,16 +897,15 @@ void pwe_vsw(double *k,double *x, double *y, double *z,
            rx[i]=x[ix];
            ry[i]=y[iy];
            rz[i]=z[iz];
-           def_vsw(k,
+           vswf_def(k,
                  &x[ix],&y[iy],&z[iz],
                  lmax,GTE,GTM,
                  &Em[i],&Ez[i],&Ep[i],
                  &Hm[i],&Hz[i],&Hp[i]);
-           //i++; 
-         } /* for iz */    
-      } /* for iy */    
-   } /* for ix */    
-} /*void pwe_vsw */
+         } /* end for iz */    
+      } /* end for iy */    
+   } /* end for ix */    
+}
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------

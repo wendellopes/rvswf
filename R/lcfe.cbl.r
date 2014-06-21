@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------------------
-# Logarithmic Derivative Spherical Bessel [OK]
-lcf.sbld<-function(n,x,NMAX=2000){
+# Logarithmic Derivative Cylindrical Bessel [OK]
+#-------------------------------------------------------------------------------
+lcfe.cbl<-function(n,x,NMAX=2000){
    # Constants
    eo<-.Machine$double.xmin
    ACC<-10^-50
@@ -15,7 +16,7 @@ lcf.sbld<-function(n,x,NMAX=2000){
    while(abs(Dn-1)>ACC){
       j<-j+1
       an<--1
-      bn<-lcf.afsn(2*(n+j)+1,x);
+      bn<-lcf.afsn(2*(n+j),x);
       Pn<-bn+an/Pn
       if(abs(Pn)<eo){Pn<-eo} # migth be zero
       Qn<-bn+an*Qn

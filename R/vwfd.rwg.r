@@ -12,7 +12,7 @@ nx<-length(x)
 ny<-length(y)
 nz<-length(z)
 dummy<-rep(0,nx*ny*nz)
-.C("wfd_rwg",
+.C("vwfd_rwg",
    TE=as.integer(te),
    nx=as.integer(nx),ny=as.integer(ny),nz=as.integer(nz),
    kx=as.double(kx) ,ky=as.double(ky) ,kz=as.double(kz),

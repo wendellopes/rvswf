@@ -2,6 +2,9 @@
 # BESSEL BEAM Z
 #-------------------------------------------------------------------------------
 vwfd.bbz<-function(TE=TRUE,M,S,g,kz,x,y,z){
+   if(abs(S)!=1){
+      stop("S must be plus or minus 1")
+   }
 if(TE)
 {
    te<-1
@@ -12,7 +15,7 @@ nx<-length(x)
 ny<-length(y)
 nz<-length(z)
 dummy<-rep(0,nx*ny*nz)
-.C("wfd_bbz",
+.C("vwfd_bbz",
    TE=as.integer(te),M=as.integer(M),S=as.integer(S),
    nx=as.integer(nx),ny=as.integer(ny),nz=as.integer(nz),
    gama=as.double(g),kz=as.double(kz),

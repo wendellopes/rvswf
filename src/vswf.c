@@ -18,11 +18,11 @@
 //# Auxliary Function
 //------------------------------------------------------------------------------
 double lcfe_afs(/* FUNCTION */
-      int *n,
-      double *x
+      int n,
+      double x
    ){
    //-----------------------------------
-   return((*n)/(*x));
+   return(n/x);
 }
 //------------------------------------------------------------------------------
 //# Logarithmic Derivative of Cylindrical Bessel [OK]
@@ -36,7 +36,7 @@ void lcfe_cbl(/* FUNCTION */
    //-----------------------------------
    double eo = DBL_MIN;
    double ACC=10^-50;
-   *fn=lcfe_afs(n,x);
+   *fn=lcfe_afs(*n,*x);
    if(fabs(*fn)<eo){*fn=eo;}
    double Pn=*fn;
    double Qn=0.0;
@@ -49,7 +49,7 @@ void lcfe_cbl(/* FUNCTION */
       j=j+1;
       an=-1;
       int u=2*(*n+j);
-      bn=lcfe_afs(&u,x);
+      bn=lcfe_afs(u,*x);
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;}// # migth be zero
       Qn=bn+an*Qn;
@@ -66,17 +66,17 @@ void lcfe_cbl(/* FUNCTION */
 //# J_{n}/J_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
 void lcfe_cbd(/* FUNCTION */
-      int n,
-      double x,
-      int NMAX,
-      double fn
+      int *n,
+      double *x,
+      int *NMAX,
+      double *fn
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
-   fn=lcfe_afs(2*(n+1),x);
-   if(fabs(fn)<eo){fn=eo;} // migth be zero
-   double Pn=fn;
+   *fn=lcfe_afs(2*(*n+1),*x);
+   if(fabs(*fn)<eo){*fn=eo;} // migth be zero
+   double Pn=*fn;
    double Qn=0.0;
    // Loop Parameters
    int j=0;
@@ -86,15 +86,15 @@ void lcfe_cbd(/* FUNCTION */
    while((Dn-1.)>ACC){
       j=j+1;
       an=-1;
-      bn=lcfe_afs(2*(n+j+1),x);
+      bn=lcfe_afs(2*(*n+j+1),*x);
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;} // migth be zero
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} // migth be zero
       Qn=1/Qn;
       Dn=Pn*Qn;
-      fn=fn*Dn;
-      if(j==NMAX){
+      *fn=*fn*Dn;
+      if(j==*NMAX){
          break;
       }
    }
@@ -103,17 +103,17 @@ void lcfe_cbd(/* FUNCTION */
 //# J_{n+1}/J_{n} [OK] BARNETT
 //------------------------------------------------------------------------------
 void lcfe_cbi(/* FUNCTION */
-      int n,
-      double x,
-      int NMAX,
-      doube fn
+      int *n,
+      double *x,
+      int *NMAX,
+      double *fn
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
-   fn=0.0;
-   if(fabs(fn)<eo){fn=eo;} // migth be zero
-   double Pn=fn;
+   *fn=0.0;
+   if(fabs(*fn)<eo){*fn=eo;} // migth be zero
+   double Pn=*fn;
    double Qn=0.0;
    // Loop Parameters
    int j=0;
@@ -121,17 +121,17 @@ void lcfe_cbi(/* FUNCTION */
    double an;
    double bn;
    while((Dn-1.)>ACC){
-      an=(-1)^(j/fabs(j));
+      an=(-1)^(j/abs(j));
       j=j+1;
-      bn=lcfe_afs(2*(n+j),x);
+      bn=lcfe_afs(2*(*n+j),*x);
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;} //# migth be zero
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} //# migth be zero
       Qn=1/Qn;
       Dn=Pn*Qn;
-      fn=fn*Dn;
-      if(j==NMAX){
+      *fn=*fn*Dn;
+      if(j==*NMAX){
 //       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
@@ -141,17 +141,17 @@ void lcfe_cbi(/* FUNCTION */
 //# Logarithmic Derivative of Riccati-Bessel [OK]
 //------------------------------------------------------------------------------
 void lcfe_rbl(/* FUNCTION */
-      int n,
-      double x,
-      int NMAX,
-      double fn
+      int *n,
+      double *x,
+      int *NMAX,
+      double *fn
    ){
    //-----------------------------------
    double eo=DBL_MIN;;
    double ACC=10^-50;
-   fn=lcfe_afs(n+1,x);    // bo;
-   if(fabs(fn)<eo){fn=eo;} // migth be zero;
-   double Pn=fn;
+   *fn=lcfe_afs(*n+1,*x);    // bo;
+   if(fabs(*fn)<eo){*fn=eo;} // migth be zero;
+   double Pn=*fn;
    double Qn=0.0;
    double an;
    double bn;
@@ -161,15 +161,15 @@ void lcfe_rbl(/* FUNCTION */
    while((Dn-1.)>ACC){;
       j=j+1;
       an=-1;
-      bn=lcfe_afs(2*(n+j)+1,x);
+      bn=lcfe_afs(2*(*n+j)+1,*x);
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;} // migth be zero;
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} // migth be zero;
       Qn=1/Qn;
       Dn=Pn*Qn;
-      fn=fn*Dn;
-      if(j==NMAX){
+      *fn=*fn*Dn;
+      if(j==*NMAX){
          break;
       }
    }
@@ -178,17 +178,17 @@ void lcfe_rbl(/* FUNCTION */
 //# Logarithmic Derivative of Spherical Bessel [OK]
 //------------------------------------------------------------------------------
 void lcfe_sbl(/* FUNCTION */
-      int n,
-      double x,
-      int NMAX,
-      double fn
+      int *n,
+      double *x,
+      int *NMAX,
+      double *fn
    ){
    //-----------------------------------
    double eo=DBL_MIN;
    double ACC=10^-50;
-   fn=lcfe_afs(n,x);    // bo;
-   if(fabs(fn)<eo){fn=eo;} // migth be zero;
-   double Pn=fn;
+   *fn=lcfe_afs(*n,*x);    // bo;
+   if(fabs(*fn)<eo){*fn=eo;} // migth be zero;
+   double Pn=*fn;
    double Qn=0.0;
    // Loop Parameters;
    double j=0;
@@ -198,15 +198,15 @@ void lcfe_sbl(/* FUNCTION */
    while((Dn-1.)>ACC){;
       j=j+1;
       an=-1;
-      bn=lcfe_afs(2*(n+j)+1,x);;
+      bn=lcfe_afs(2*(*n+j)+1,*x);;
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;} // migth be zero;
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} // migth be zero;
       Qn=1/Qn;
       Dn=Pn*Qn;
-      fn=fn*Dn;
-      if(j==NMAX){
+      *fn=*fn*Dn;
+      if(j==*NMAX){
          break;
       }
    }
@@ -215,17 +215,17 @@ void lcfe_sbl(/* FUNCTION */
 //# j_{n}/j_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
 void lcfe_sbr(/* FUNCTION */
-      int n,
-      double x,
-      int NMAX,
-      double fn
+      int *n,
+      double *x,
+      int *NMAX,
+      double *fn
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
-   fn=lcfe_afs(2*(n+1)+1,x);
-   if(fabs(fn)<eo){fn=eo;} // migth be zero
-   double Pn=fn;
+   *fn=lcfe_afs(2*(*n+1)+1,*x);
+   if(fabs(*fn)<eo){*fn=eo;} // migth be zero
+   double Pn=*fn;
    double Qn=0.0;
    // Loop Parameters
    int j=0;
@@ -235,15 +235,15 @@ void lcfe_sbr(/* FUNCTION */
    while((Dn-1.)>ACC){
       j=j+1;
       an=-1;
-      bn=lcfe_afs(2*(n+j+1)+1,x);
+      bn=lcfe_afs(2*(*n+j+1)+1,*x);
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;} // migth be zero
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} // migth be zero
       Qn=1/Qn;
       Dn=Pn*Qn;
-      fn=fn*Dn;
-      if(j==NMAX){
+      *fn=*fn*Dn;
+      if(j==*NMAX){
          break;
       }
    }
@@ -252,17 +252,17 @@ void lcfe_sbr(/* FUNCTION */
 //# j_{n+1}/j_{n} [OK] BARNETT
 //------------------------------------------------------------------------------
 void lcfe_sbi(/* FUNCTION */
-      int n,
-      double x,
-      int NMAX,
-      double fn
+      int *n,
+      double *x,
+      int *NMAX,
+      double *fn
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
    double ACC=10^-50;
-   fn=0.0;
-   if(fabs(fn)<eo){fn=eo;} // migth be zero
-   double Pn=fn;
+   *fn=0.0;
+   if(fabs(*fn)<eo){*fn=eo;} // migth be zero
+   double Pn=*fn;
    double Qn=0.0;
    // Loop Parameters
    int j=0;
@@ -270,17 +270,17 @@ void lcfe_sbi(/* FUNCTION */
    double an;
    double bn;
    while((Dn-1.)>ACC){
-      an=(-1)^(j/fabs(j));
+      an=(-1)^(j/abs(j));
       j=j+1;
-      bn=lcfe_afs(2*(n+j)+1,x);
+      bn=lcfe_afs(2*(*n+j)+1,*x);
       Pn=bn+an/Pn;
       if(fabs(Pn)<eo){Pn=eo;} //# migth be zero
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} //# migth be zero
       Qn=1/Qn;
       Dn=Pn*Qn;
-      fn=fn*Dn;
-      if(j==NMAX){
+      *fn=*fn*Dn;
+      if(j==*NMAX){
          break;
       }
    }

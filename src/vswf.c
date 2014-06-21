@@ -4,53 +4,24 @@
 #include <stdlib.h>
 #include <float.h>
 #include <gsl/gsl_sf_bessel.h>
-#include <omp.h>
-//#-------------------------------------------------------------------------------
-//# AUXILIARY FUNCTION
-//lcf.afsn<-function(n,x){
-//   return(n/x)
-//}
+#ifdef _OPENMP
+   #include <omp.h>
+#endif
+//------------------------------------------------------------------------------
+//# Auxliary Function
+//------------------------------------------------------------------------------
 double lcf_afsn(int n,double x){
    double s=n/x;
    return(s);
 }
-//#-------------------------------------------------------------------------------
-//# Cylindrical Bessel [OK]
-//lcf.cbld<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-lcf.afsn(n,x)    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      j<-j+1
-//      an<--1
-//      bn<-lcf.afsn(2*(n+j),x);
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
+//# Logarithmic Derivative of Cylindrical Bessel [OK]
+//------------------------------------------------------------------------------
 double lcf_cbld(int n,double x,int NMAX){
    double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(n,x);
-   if(abs(fn)<eo){fn<-eo;}
+   if(abs(fn)<eo){fn=eo;}
    double Pn=fn;
    double Qn=0.0;
    // Loop Parameters
@@ -58,7 +29,7 @@ double lcf_cbld(int n,double x,int NMAX){
    double Dn=10.0;
    double an;
    double bn;
-   while(abs(Dn-1)>ACC){
+   while((Dn-1.)>ACC){
       j=j+1;
       an=-1;
       bn=lcf_afsn(2*(n+j),x);
@@ -70,49 +41,20 @@ double lcf_cbld(int n,double x,int NMAX){
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
    return(fn);
 }
-//#-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 //# J_{n}/J_{n+1} [OK] DIRECT
-//lcf.cbrd<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-lcf.afsn(2*(n+1),x)    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      j<-j+1
-//      an<--1
-//      bn<-lcf.afsn(2*(n+j+1),x);
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
 double lcf_cbrd(int n,double x,int NMAX){
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(2*(n+1),x);
-   if(abs(fn)<eo){fn<-eo;} // migth be zero
+   if(abs(fn)<eo){fn=eo;} // migth be zero
    double Pn=fn;
    double Qn=0.0;
    // Loop Parameters
@@ -120,61 +62,32 @@ double lcf_cbrd(int n,double x,int NMAX){
    double Dn=10;
    double an;
    double bn;
-   while(abs(Dn-1)>ACC){
+   while((Dn-1.)>ACC){
       j=j+1;
       an=-1;
       bn=lcf_afsn(2*(n+j+1),x);
       Pn=bn+an/Pn;
-      if(abs(Pn)<eo){Pn<-eo;} // migth be zero
+      if(abs(Pn)<eo){Pn=eo;} // migth be zero
       Qn=bn+an*Qn;
-      if(abs(Qn)<eo){Qn<-eo;} // migth be zero
+      if(abs(Qn)<eo){Qn=eo;} // migth be zero
       Qn=1/Qn;
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
    return(fn);
 }
-//#-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 //# J_{n+1}/J_{n} [OK] BARNETT
-//lcf.cbri<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-0    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      an<-(-1)^sign(j)
-//      j<-j+1
-//      bn<-lcf.afsn(2*(n+j),x);
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
 double lcf_cbri(int n,double x,int NMAX){
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=0.0;
-   if(abs(fn)<eo){fn<-eo;} // migth be zero
+   if(abs(fn)<eo){fn=eo;} // migth be zero
    double Pn=fn;
    double Qn=0.0;
    // Loop Parameters
@@ -182,7 +95,7 @@ double lcf_cbri(int n,double x,int NMAX){
    double Dn=10;
    double an;
    double bn;
-   while(abs(Dn-1)>ACC){
+   while((Dn-1.)>ACC){
       an=(-1)^(j/abs(j));
       j=j+1;
       bn=lcf_afsn(2*(n+j),x);
@@ -194,44 +107,15 @@ double lcf_cbri(int n,double x,int NMAX){
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
    return(fn);
 }
-//#-------------------------------------------------------------------------------
-//# Riccati-Bessel [OK]
-//lcf.rbld<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-lcf.afsn(n+1,x)    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      j<-j+1
-//      an<--1
-//      bn<-lcf.afsn(2*(n+j)+1,x);
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
+//# Logarithmic Derivative of Riccati-Bessel [OK]
+//------------------------------------------------------------------------------
 double lcf_rbld(int n,double x,int NMAX){
    double eo=DBL_MIN;;
    double ACC=10^-50;
@@ -244,7 +128,7 @@ double lcf_rbld(int n,double x,int NMAX){
    // Loop Parameters;
    int j=0;
    double Dn=10.0;
-   while(abs(Dn-1)>ACC){;
+   while((Dn-1.)>ACC){;
       j=j+1;
       an=-1;
       bn=lcf_afsn(2*(n+j)+1,x);
@@ -256,44 +140,15 @@ double lcf_rbld(int n,double x,int NMAX){
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
    return(fn);
 }
-//#-------------------------------------------------------------------------------
-//# Spherical Bessel [OK]
-//lcf.sbld<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-lcf.afsn(n,x)    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      j<-j+1
-//      an<--1
-//      bn<-lcf.afsn(2*(n+j)+1,x);
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
+//# Logarithmic Derivative of Spherical Bessel [OK]
+//------------------------------------------------------------------------------
 double lcf_sbld(int n,double x,int NMAX){;
    double eo=DBL_MIN;
    double ACC=10^-50;
@@ -306,7 +161,7 @@ double lcf_sbld(int n,double x,int NMAX){;
    double Dn=10;
    double an;
    double bn;
-   while(abs(Dn-1)>ACC){;
+   while((Dn-1.)>ACC){;
       j=j+1;
       an=-1;
       bn=lcf_afsn(2*(n+j)+1,x);;
@@ -318,49 +173,20 @@ double lcf_sbld(int n,double x,int NMAX){;
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
    return(fn);
 }
-//#-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 //# j_{n}/j_{n+1} [OK] DIRECT
-//lcf.sbrd<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-lcf.afsn(2*(n+1)+1,x)    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      j<-j+1
-//      an<--1
-//      bn<-lcf.afsn(2*(n+j+1)+1,x); 
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
 double lcf_sbrd(int n,double x,int NMAX){
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=lcf_afsn(2*(n+1)+1,x);
-   if(abs(fn)<eo){fn<-eo;} // migth be zero
+   if(abs(fn)<eo){fn=eo;} // migth be zero
    double Pn=fn;
    double Qn=0.0;
    // Loop Parameters
@@ -368,7 +194,7 @@ double lcf_sbrd(int n,double x,int NMAX){
    double Dn=10;
    double an;
    double bn;   
-   while(abs(Dn-1)>ACC){
+   while((Dn-1.)>ACC){
       j=j+1;
       an=-1;
       bn=lcf_afsn(2*(n+j+1)+1,x);
@@ -380,49 +206,20 @@ double lcf_sbrd(int n,double x,int NMAX){
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
    return(fn);
 }
-//#-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 //# j_{n+1}/j_{n} [OK] BARNETT
-//lcf.sbri<-function(n,x,NMAX=2000){
-//   # Constants
-//   eo<-.Machine$double.xmin
-//   ACC<-10^-50
-//   # initialization of calculations
-//   fn<-0    # bo
-//   if(abs(fn)<eo){fn<-eo} # migth be zero
-//   Pn<-fn
-//   Qn<-0
-//   # Loop Parameters
-//   j<-0
-//   Dn<-10
-//   while(abs(Dn-1)>ACC){
-//      an<-(-1)^sign(j)
-//      j<-j+1
-//      bn<-lcf.afsn(2*(n+j)+1,x);
-//      Pn<-bn+an/Pn
-//      if(abs(Pn)<eo){Pn<-eo} # migth be zero
-//      Qn<-bn+an*Qn
-//      if(abs(Qn)<eo){Qn<-eo} # migth be zero
-//      Qn<-1/Qn
-//      Dn<-Pn*Qn
-//      fn<-fn*Dn
-//      if(j==NMAX){
-//         cat("LIMITE DE",NMAX,"ITERACOES EXCEDIDO COM ACC =",abs(Dn-1),"\n")
-//         break
-//      }
-//   }
-//   return(fn)
-//}
+//------------------------------------------------------------------------------
 double lcf_sbri(int n,double x,int NMAX){
    const double eo = DBL_MIN;
    double ACC=10^-50;
    double fn=0.0;
-   if(abs(fn)<eo){fn<-eo;} // migth be zero
+   if(abs(fn)<eo){fn=eo;} // migth be zero
    double Pn=fn;
    double Qn=0.0;
    // Loop Parameters
@@ -430,7 +227,7 @@ double lcf_sbri(int n,double x,int NMAX){
    double Dn=10;
    double an;
    double bn;
-   while(abs(Dn-1)>ACC){
+   while((Dn-1.)>ACC){
       an=(-1)^(j/abs(j));
       j=j+1;
       bn=lcf_afsn(2*(n+j)+1,x);
@@ -442,7 +239,7 @@ double lcf_sbri(int n,double x,int NMAX){
       Dn=Pn*Qn;
       fn=fn*Dn;
       if(j==NMAX){
-         printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,abs(Dn-1));
+//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
          break;
       }
    }
@@ -597,8 +394,8 @@ void cwg_all(
    *Em= psi_mkr(&msm,S,gamma,kz,x,y,z)*( I*(*S)*ctg)/sqrt(2.0);
    *Ez= psi_mkr(M,   S,gamma,kz,x,y,z);
    *Ep= psi_mkr(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*ctg)/sqrt(2.0);
-   // If TM, H <- -H, E <- E
-   // If TE, E <-  H, H <- E
+   // If TM, H = -H, E = E
+   // If TE, E =  H, H = E
    *Hm=-(*MD)*psi_mkr(&msm,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
    *Hz=0;
    *Hp=-(*MD)*psi_mkr(&msp,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
@@ -818,8 +615,8 @@ int jlm(int l, int m){
 * (sn-1)(dn-1)(dn-2)...(d1)+(sn-1-1)(dn-2)...(d1)+...+(s2-1)(d1)+s1
 * Because of this scheme, you can index an array using any number of subscripts.
 *
-* i<-iz+nz*(iy-1)+nz*ny*(ix-1) : comecando de 1
-* i<-iz+nz*iy+nz*ny*ix         : comecando de 0
+* i=iz+nz*(iy-1)+nz*ny*(ix-1) : comecando de 1
+* i=iz+nz*iy+nz*ny*ix         : comecando de 0
 */
 int lijk(int ix, int ni, int iy,int ny, int iz, int nz){
    int l=iz+nz*iy+nz*ny*ix;
@@ -1009,10 +806,11 @@ void pwe_vsw(double *k,double *x, double *y, double *z,
            /*In general, the offset formula for an array with dimensions 
             * [d1 d2 d3 ... dn] using any subscripts (s1 s2 s3 ... sn) is
             * (sn-1)(dn-1)(dn-2)...(d1)+(sn-1-1)(dn-2)...(d1)+...+(s2-1)(d1)+s1
-            * Because of this scheme, you can index an array using any number of subscripts. 
+            * Because of this scheme, you can index an array 
+            * using any number of subscripts. 
             * 
-            * i<-iz+nz*(iy-1)+nz*ny*(ix-1) : comecando de 1
-            * i<-iz+nz*iy+nz*ny*ix         : comecando de 0
+            * i=iz+nz*(iy-1)+nz*ny*(ix-1) : comecando de 1
+            * i=iz+nz*iy+nz*ny*ix         : comecando de 0
             */
            i=iz+(*nz)*iy+(*nz)*(*ny)*ix; 
            rx[i]=x[ix];

@@ -1,19 +1,19 @@
 useDynLib(rvswf)
-export(vwfd.rwg,
-       vwfd.cwg,
-       vwfd.bbz,
-       vwfd.bbp,
-       vswf.pwe,
-       vswf.jlm,
-       vswf.qlm,
-       vswf.psi,
-       vswf.gpw,
-       vswf.mpw,
-       vswf.gwg,
-       vswf.rwg,
-       vswf.cwg,
-       vswf.bbz,
-       vswf.bbp,
-       vswf.vsh,
-       vswf.sbf,
-       vswf.hmp)
+export(vwfd.rwg, # Wave Field Definition: Rectangular Wave Guide
+       vwfd.cwg, # Wave Field Definition: Cylindrical Wave Guide
+       vwfd.bbz, # Wave Field Definition: Bessel Beams Z-Oriented
+       vwfd.bbp, # Wave Field Definition: Bessel Beams P-Oriented
+       vswf.pwe, # Vector Spherical Wave Functions: Partial Wave Expansion
+       vswf.jlm, # Vector Spherical Wave Functions: Positioner j(l,m)
+       vswf.qlm, # Vector Spherical Wave Functions: Legendre Q_{lm}
+       vswf.psi, # Vector Spherical Wave Functions: Wave Function Psi_{lm}(r)
+       vswf.gpw, # Vector Spherical Wave Functions: Generic Plane Wave
+       vswf.mpw, # Vector Spherical Wave Functions: Mie's Plane Wave
+       vswf.gwg, # Vector Spherical Wave Functions: Generic Wave Guide
+       vswf.rwg, # Vector Spherical Wave Functions: Rectangular Wave Guide
+       vswf.cwg, # Vector Spherical Wave Functions: Cylindrical Wave Guide
+       vswf.bbz, # Vector Spherical Wave Functions: Bessel Beams Z-Oriented
+       vswf.bbp, # Vector Spherical Wave Functions: Bessel Beams P-Oriented
+       vswf.vsh, # Vector Spherical Wave Functions: Vector Spherical Harmonics
+       vswf.sbf, # Vector Spherical Wave Functions: Spherical Bessel Functions
+       vswf.hmp) # Vector Spherical Wave Functions: Hansen Multipoles

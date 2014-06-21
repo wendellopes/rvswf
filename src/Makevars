@@ -1,2 +1,2 @@
-PKG_CFLAGS = -std=gnu99 `gsl-config --cflags` -fopenmp
-PKG_LIBS   = -std=gnu99 `gsl-config --libs` -lgomp
+PKG_CFLAGS = -std=gnu99 `gsl-config --cflags` $(SHLIB_OPENMP_CFLAGS)
+PKG_LIBS   = -std=gnu99 `gsl-config --libs` $(SHLIB_OPENMP_CFLAGS)

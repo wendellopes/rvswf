@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Cylindrical Bessel Derivatives for J
 #-------------------------------------------------------------------------------
-tst.cbdj<-function(x,n){
+reff.cdj<-function(x,n){
    return(.5*(besselJ(x,n-1)-besselJ(x,n+1)))
 }

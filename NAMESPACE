@@ -27,6 +27,21 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        lcfe.sbi, # Lenz Continued Fraction Evaluation: Sph. & Ric. Inverse Ratio
        #
        comp.rcj, # Comparative for the Ratio \gamma_n=J_n/J_{n+1}: Cyl. Bessel
-       comp.rsh, # Comparative for the Ratio \rho_n=h_n/h_{n+1}: Sph./Ric Bessel
        comp.rsj, # Comparative for the Ratio \rho_n=j_n/j_{n+1}: Sph./Ric Bessel
-       comp.rsy) # Comparative for the Ratio \rho_n=y_n/y_{n+1}: Sph./Ric Bessel
+       comp.rsy, # Comparative for the Ratio \rho_n=y_n/y_{n+1}: Sph./Ric Bessel
+       comp.lcj, # Comparative Log. Derivative D_n=J_n'/J_n: Cyl. Bessel
+       comp.lsj, # Comparative Log. Derivative c_n=j_n'/j_n: Sph. Bessel
+       comp.lrj, # Comparative Log. Derivative C_n=(x j_n)'/(x j_n): Ric. Bessel
+       #
+       reff.cjn, # Reference function: Cylindrical Bessel J_n(x)
+       reff.sjn, # Reference function: Spherical Bessel function j_n(x)
+       reff.rjn, # Reference function: Riccati-Bessel x j_n(x)
+       reff.cdj, # Reference function: Derivative of Cylindrical Bessel J_n'(x)
+       reff.sdj, # Reference function: Derivative of Spherical Bessel j_n'(x)
+       reff.rdj, # Reference function: Derivative of Ricatti-Bessel (x j_n(x))'
+       reff.ch1, # Reference function: Spherical Hankel function h_n(1)=j_n+iy_n
+       reff.cdh, # Reference function: Derivative of Spherical Hankel h_n'(1)
+       #
+       zess.cyl, #
+       zess.sph, #
+       zess.ric) #

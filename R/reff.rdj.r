@@ -1,8 +1,8 @@
 #-------------------------------------------------------------------------------
-# Derivative of Spherical Bessel Functions
+# Derivative of Riccati Bessel Functions
 #-------------------------------------------------------------------------------
-tst.sbdj<-function(x,n){
+reff.rdj<-function(x,n){
    a<-n/(2*n+1)
    b<-(n+1)/(2*n+1)
-	return(a*tst.sbjn(x,n-1)-b*tst.sbjn(x,n+1))
+	return(b*reff.rjn(x,n-1)-a*reff.rjn(x,n+1))
 }

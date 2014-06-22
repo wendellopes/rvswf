@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# Spherical Bessel Functions
+# Cylindrical Bessel Derivatives for J
 #-------------------------------------------------------------------------------
-tst.sbjn<-function(x,n){
-	return(sqrt(pi/2)*besselJ(x,n+.5)/sqrt(x))
+reff.cjn<-function(x,n){
+   return(besselJ(x,n))
 }

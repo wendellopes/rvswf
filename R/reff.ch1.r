@@ -1,7 +1,10 @@
 #-------------------------------------------------------------------------------
 # Cylindrical Hankel
 #-------------------------------------------------------------------------------
-tst.cbh1<-function(x,n,type=1){
+reff.ch1<-function(x,n,type=1){
+   if(abs(type)!=1){
+      stop("type must be plus or minus 1!")
+   }
    if(type==1){
       return(besselJ(x,n)+1i*besselY(x,n))
    }

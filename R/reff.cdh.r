@@ -1,8 +1,11 @@
 #-------------------------------------------------------------------------------
 # Derivative of Cylindrical Hankel
 #-------------------------------------------------------------------------------
-tst.cbdh<-function(x,n,type=1){
-   return(.5*(tst.cbh1(x,n-1,type)-tst.cbh1(x,n+1,type)))
+reff.cdh<-function(x,n,type=1){
+   if(abs(type)!=1){
+      stop("type must be plus or minus 1!")
+   }
+   return(.5*(reff.ch1(x,n-1,type)-reff.ch1(x,n+1,type)))
 }
 #-------------------------------------------------------------------------------
 # Spherical Bessel Functions

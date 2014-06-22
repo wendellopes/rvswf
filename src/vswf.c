@@ -45,7 +45,7 @@ void lcfe_cbl(/* FUNCTION */
    double Dn=10.0;
    double an;
    double bn;
-   while((Dn-1.)>ACC){
+   while(fabs(Dn-1.)>ACC){
       if(j>*NMAX){
          break;
       }
@@ -122,8 +122,12 @@ void lcfe_cbi(/* FUNCTION */
    double Dn=10;
    double an;
    double bn;
-   while((Dn-1.)>ACC){
-      an=(-1)^(j/abs(j));
+   while(fabs(Dn-1.)>ACC){
+      if(j==0){
+         an=1;
+      }else{
+         an=-1;
+      }
       j=j+1;
       bn=lcfe_afs(2*(*n+j),*x);
       Pn=bn+an/Pn;
@@ -160,7 +164,7 @@ void lcfe_rbl(/* FUNCTION */
    // Loop Parameters;
    int j=0;
    double Dn=10.0;
-   while((Dn-1.)>ACC){;
+   while(fabs(Dn-1.)>ACC){;
       j=j+1;
       an=-1;
       bn=lcfe_afs(2*(*n+j)+1,*x);
@@ -198,7 +202,7 @@ void lcfe_sbl(/* FUNCTION */
    double Dn=10;
    double an;
    double bn;
-   while((Dn-1.)>ACC){;
+   while(fabs(Dn-1.)>ACC){;
       j=j+1;
       an=-1;
       bn=lcfe_afs(2*(*n+j)+1,*x);;
@@ -236,7 +240,7 @@ void lcfe_sbd(/* FUNCTION */
    double Dn=10;
    double an;
    double bn;   
-   while((Dn-1.)>ACC){
+   while(fabs(Dn-1.)>ACC){
       j=j+1;
       an=-1;
       bn=lcfe_afs(2*(*n+j+1)+1,*x);
@@ -274,8 +278,12 @@ void lcfe_sbi(/* FUNCTION */
    double Dn=10;
    double an;
    double bn;
-   while((Dn-1.)>ACC){
-      an=(-1)^(j/abs(j));
+   while(fabs(Dn-1.)>ACC){
+      if(j==0){
+         an=1;
+      }else{
+         an=-1;
+      }
       j=j+1;
       bn=lcfe_afs(2*(*n+j)+1,*x);
       Pn=bn+an/Pn;

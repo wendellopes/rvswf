@@ -2,6 +2,7 @@
 # J_{n}/J_{n+1} [OK] DIRECT - Cylindrical Bessel Ratio Direct
 #-------------------------------------------------------------------------------
 lcfe.cbd<-function(n,x,NMAX=2000,code="C"){
+   n<-as.integer(n)
    nmaxo<-NMAX
    fn<-0
    if(!code%in%c("C","R")){

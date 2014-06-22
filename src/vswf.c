@@ -25,45 +25,6 @@ double lcfe_afs(/* FUNCTION */
    return(n/x);
 }
 //------------------------------------------------------------------------------
-//# Logarithmic Derivative of Cylindrical Bessel [OK]
-//------------------------------------------------------------------------------
-void lcfe_cbl(/* FUNCTION */
-      int *n,
-      double *x,
-      int *NMAX,
-      double *fn
-   ){
-   //-----------------------------------
-   double eo = DBL_MIN;
-   double ACC=1e-50;
-   *fn=lcfe_afs(*n,*x);
-   if(fabs(*fn)<eo){*fn=eo;}
-   double Pn=*fn;
-   double Qn=0.0;
-   // Loop Parameters
-   int j=0;
-   double Dn=10.0;
-   double an;
-   double bn;
-   while(fabs(Dn-1.)>ACC){
-      if(j>*NMAX){
-         break;
-      }
-      j=j+1;
-      an=-1;
-      int u=2*(*n+j);
-      bn=lcfe_afs(u,*x);
-      Pn=bn+an/Pn;
-      if(fabs(Pn)<eo){Pn=eo;}// # migth be zero
-      Qn=bn+an*Qn;
-      if(fabs(Qn)<eo){Qn=eo;}// # migth be zero
-      Qn=1/Qn;
-      Dn=Pn*Qn;
-      *fn=*fn*Dn;
-   }
-   *NMAX=j;
-}
-//------------------------------------------------------------------------------
 //# J_{n}/J_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
 void lcfe_cbd(/* FUNCTION */
@@ -302,7 +263,7 @@ void lcfe_sbi(/* FUNCTION */
 //------------------------------------------------------------------------------
 // Psi_m(\vec{k},\vec{r}): Basic function for cylindrical simetries
 //------------------------------------------------------------------------------
-double complex psim_def(/* FUNCTION */
+double complex vswf_psi(/* FUNCTION */
       int *m,int *s,
       double *gamma,double *kz,
       double *x,double *y,double *z
@@ -444,14 +405,14 @@ void dcwg_all(/* FUNCTION */
    int msm=*M-*S;
    int msp=*M+*S;
    //
-   *Em= psim_def(&msm,S,gamma,kz,x,y,z)*( I*(*S)*ctg)/sqrt(2.0);
-   *Ez= psim_def(M,   S,gamma,kz,x,y,z);
-   *Ep= psim_def(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*ctg)/sqrt(2.0);
+   *Em= vswf_psi(&msm,S,gamma,kz,x,y,z)*( I*(*S)*ctg)/sqrt(2.0);
+   *Ez= vswf_psi(M,   S,gamma,kz,x,y,z);
+   *Ep= vswf_psi(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*ctg)/sqrt(2.0);
    // If TM, H = -H, E = E
    // If TE, E =  H, H = E
-   *Hm=-(*MD)*psim_def(&msm,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
+   *Hm=-(*MD)*vswf_psi(&msm,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
    *Hz=0;
-   *Hp=-(*MD)*psim_def(&msp,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
+   *Hp=-(*MD)*vswf_psi(&msp,S,gamma,kz,x,y,z)*(*S*csc)/sqrt(2.0);
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
@@ -514,13 +475,13 @@ void fdef_bbz(/* FUNCTION */
    int msm=*M-*S;
    int msp=*M+*S;
    // TM MODE
-   *Em=(*MD)*psim_def(&msm,S,gamma,kz,x,y,z)*( I*(*S)*cth*sth)/sqrt(2.0);
-   *Ez=(*MD)*psim_def(M,   S,gamma,kz,x,y,z)*sth*sth;
-   *Ep=(*MD)*psim_def(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*cth*sth)/sqrt(2.0);
+   *Em=(*MD)*vswf_psi(&msm,S,gamma,kz,x,y,z)*( I*(*S)*cth*sth)/sqrt(2.0);
+   *Ez=(*MD)*vswf_psi(M,   S,gamma,kz,x,y,z)*sth*sth;
+   *Ep=(*MD)*vswf_psi(&msp,S,gamma,kz,x,y,z)*(-I*(*S)*cth*sth)/sqrt(2.0);
    //
-   *Hm=psim_def(&msm,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
+   *Hm=vswf_psi(&msm,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
    *Hz=0;
-   *Hp=psim_def(&msp,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
+   *Hp=vswf_psi(&msp,S,gamma,kz,x,y,z)*(*S*sth)/sqrt(2.0);
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
@@ -585,14 +546,14 @@ void fdef_bbp(/* FUNCTION */
    int mspm0=*M-1+*S*(*P);
    int mspp1=*M-1+*S*(*P+1);
 
-   *Em=pp1*psim_def(&mm1,S,gamma,kz,x,y,z)/2
-      -*P*(sth*sth)*psim_def(&mspm1,S,gamma,kz,x,y,z)/2;
-   *Ez= -I*(*P)*(*S)*cth*sth*psim_def(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
-   *Ep=pm1*psim_def(&mm1,S,gamma,kz,x,y,z)/2
-      +*P*(sth*sth)*psim_def(&mspp1,S,gamma,kz,x,y,z)/2;
-   *Hm=-I*(*P)*cth*psim_def(&mm1,S,gamma,kz,x,y,z)*pp1/2.0;
-   *Hz=-(*S)*sth*psim_def(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
-   *Hp=-I*(*P)*cth*psim_def(&mm1,S,gamma,kz,x,y,z)*pm1/2.0;
+   *Em=pp1*vswf_psi(&mm1,S,gamma,kz,x,y,z)/2
+      -*P*(sth*sth)*vswf_psi(&mspm1,S,gamma,kz,x,y,z)/2;
+   *Ez= -I*(*P)*(*S)*cth*sth*vswf_psi(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
+   *Ep=pm1*vswf_psi(&mm1,S,gamma,kz,x,y,z)/2
+      +*P*(sth*sth)*vswf_psi(&mspp1,S,gamma,kz,x,y,z)/2;
+   *Hm=-I*(*P)*cth*vswf_psi(&mm1,S,gamma,kz,x,y,z)*pp1/2.0;
+   *Hz=-(*S)*sth*vswf_psi(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
+   *Hp=-I*(*P)*cth*vswf_psi(&mm1,S,gamma,kz,x,y,z)*pm1/2.0;
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS

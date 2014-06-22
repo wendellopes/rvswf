@@ -35,7 +35,7 @@ void lcfe_cbl(/* FUNCTION */
    ){
    //-----------------------------------
    double eo = DBL_MIN;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=lcfe_afs(*n,*x);
    if(fabs(*fn)<eo){*fn=eo;}
    double Pn=*fn;
@@ -46,6 +46,9 @@ void lcfe_cbl(/* FUNCTION */
    double an;
    double bn;
    while((Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
       j=j+1;
       an=-1;
       int u=2*(*n+j);
@@ -57,10 +60,8 @@ void lcfe_cbl(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
-         break;
-      }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 //# J_{n}/J_{n+1} [OK] DIRECT
@@ -73,7 +74,7 @@ void lcfe_cbd(/* FUNCTION */
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=lcfe_afs(2*(*n+1),*x);
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
    double Pn=*fn;
@@ -83,7 +84,10 @@ void lcfe_cbd(/* FUNCTION */
    double Dn=10;
    double an;
    double bn;
-   while((Dn-1.)>ACC){
+   while(fabs(Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
       j=j+1;
       an=-1;
       bn=lcfe_afs(2*(*n+j+1),*x);
@@ -94,10 +98,8 @@ void lcfe_cbd(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
-         break;
-      }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 //# J_{n+1}/J_{n} [OK] BARNETT
@@ -110,7 +112,7 @@ void lcfe_cbi(/* FUNCTION */
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=0.0;
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
    double Pn=*fn;
@@ -131,11 +133,11 @@ void lcfe_cbi(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
-//       printf("LIMITE DE %d ITERACOES EXCEDIDO COM ACC = %f \n",NMAX,(Dn-1.));
+      if(j>*NMAX){
          break;
       }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 //# Logarithmic Derivative of Riccati-Bessel [OK]
@@ -148,7 +150,7 @@ void lcfe_rbl(/* FUNCTION */
    ){
    //-----------------------------------
    double eo=DBL_MIN;;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=lcfe_afs(*n+1,*x);    // bo;
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero;
    double Pn=*fn;
@@ -169,10 +171,11 @@ void lcfe_rbl(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
+      if(j>*NMAX){
          break;
       }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 //# Logarithmic Derivative of Spherical Bessel [OK]
@@ -185,7 +188,7 @@ void lcfe_sbl(/* FUNCTION */
    ){
    //-----------------------------------
    double eo=DBL_MIN;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=lcfe_afs(*n,*x);    // bo;
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero;
    double Pn=*fn;
@@ -206,15 +209,16 @@ void lcfe_sbl(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
+      if(j>*NMAX){
          break;
       }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 //# j_{n}/j_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
-void lcfe_sbr(/* FUNCTION */
+void lcfe_sbd(/* FUNCTION */
       int *n,
       double *x,
       int *NMAX,
@@ -222,7 +226,7 @@ void lcfe_sbr(/* FUNCTION */
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=lcfe_afs(2*(*n+1)+1,*x);
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
    double Pn=*fn;
@@ -243,10 +247,11 @@ void lcfe_sbr(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
+      if(j>*NMAX){
          break;
       }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 //# j_{n+1}/j_{n} [OK] BARNETT
@@ -259,7 +264,7 @@ void lcfe_sbi(/* FUNCTION */
    ){
    //-----------------------------------
    const double eo = DBL_MIN;
-   double ACC=10^-50;
+   double ACC=1e-50;
    *fn=0.0;
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
    double Pn=*fn;
@@ -280,10 +285,11 @@ void lcfe_sbi(/* FUNCTION */
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
-      if(j==*NMAX){
+      if(j>*NMAX){
          break;
       }
    }
+   *NMAX=j;
 }
 //------------------------------------------------------------------------------
 // Psi_m(\vec{k},\vec{r}): Basic function for cylindrical simetries
@@ -901,10 +907,179 @@ void vswf_pwe(/* FUNCTION */
       } /* end for iy */    
    } /* end for ix */    
 }
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////------------------------------------------------------------------------------
+////-------------------------------------------------------------------------------
+//// CYLINDRICAL BESSEL FUNCTIONS [DONE]
+////-------------------------------------------------------------------------------
+//void bess_cyl(/* FUNCTION */
+//      double *x,
+//      int *lmax, 
+//      int *NMAX, 
+//      double *Jl,
+//      double *dJl,
+//      double *Gl,
+//      double *Dl 
+//   ){
+//   /* Calculation of the last value by Lentz Continued Fraction                 */
+//   double nmax=*NMAX;
+//	*Dl[*lmax]=lcfe_cbl(x,lmax,nmax,&Dl[*lmax]); // Last element 
+//	*Gl[*lmax]=lcfe_cbd(x,lmax,nmax,&Gl[*lmax]); // Last element 
+//   if(nmax>*NMAX){
+//      printf("INCREASE NMAX\n")
+//   }
+//   // Modified vectors
+//	double Gm[*lmax+1];  // Vector Gamma_m - Logarithmic Derivative
+//	double Dm[*lmax+1];  // Vector D_m     - Ratio J_m/J_{m+1}
+//	double Sl[*lmax+1];
+//	int nl=*lmax;
+//	Gm[*lmax]=Gl[*lmax];
+//	Dm[*lmax]=Dl[*lmax];
+//   Sl[*lmax]=*lmax/(*x)
+//	// DOWNWARD RECURRENCE
+//	int RN=1; //Renormalization counter
+//   for(n=*lmax,n>0,n--){
+//        Sl[n-1]=(n-1)/(*x);
+//        //
+//   	  Gm[n-1]=Sl[n]+Dm[n]
+//   	  Dm[n-1]=Sl[n-1]-1/Gm[n-1]
+//   	  // modified Equation (permits one step normalization)
+//   	  Gl[n-1]=Sl[n]*Gl[n]+Dl[n]
+//   	  Dl[n-1]=Sl[n-1]*Gl[n-1]-Gl[n]
+//   	  // Normalization
+//   	  //print(c(Gl[n-1],Dl[n-1]))
+//   	  if(fabs(Gl[n-1])>1e20){
+//   	  	 cat("renorming...\n")
+//   	  	 //print(c(Gl[n-1],Dl[n-1]))
+//   	  	 Dl=Dl/Gl[n-1] // this must be done first
+//   	  	 Gl=Gl/Gl[n-1] // otherwise the result will be wrong.
+//   	  }
+//   	  //print(c(Gl[n-1],Dl[n-1]))
+//   }
+//   // one step normalization taking care about zeros
+//   // Bessel function
+//   if(abs(Gl[1])<abs(Gl[2])){
+//      Jn=(Gl/Gl[1])*besselJ(x,0) // create functions for normalizations
+//   }else{
+//      Jn=(Gl/Gl[2])*besselJ(x,1)   	
+//   }
+//   // Its Derivative
+//   if(abs(Dl[1])>abs(Dl[2])){
+//   	  dJn=(Dl/Dl[1])*(-Jn[2])
+//   }else{
+//   	  dJn=(Dl/Dl[2])*.5*(Jn[1]-Jn[3])
+//   }
+//   //DIRECT CALCULATION
+//   Jl=dJl=Jn
+//   Jl[1]=besselJ(x,0)
+//   dJl[1]=Jl[1]*Dm[1]
+//   for(n in 1:(lmax)){
+//   	  Jl[n+1]=Jl[n]/Gm[n]
+//   	  dJl[n+1]=Jl[n+1]*Dm[n+1]
+//   }
+//   // Return results
+//   return(data.frame(gm=Gm,Dl=Dm,Jn,Jl,dJn,dJl))
+//}
+////-------------------------------------------------------------------------------
+//// RICCATI BESSEL FUNCTIONS [DONE]
+////-------------------------------------------------------------------------------
+//bess.ric=function(x,nmax){
+//	Dn=rep(0,nmax+1)  // Vector 
+//	gn=rep(1,nmax+1)  // Vector
+//	Dn[nmax+1]=lcf.rbld(nmax,x) // Last element
+//	gn[nmax+1]=lcf.sbrd(nmax,x) // Last element
+//	Sn=(0:(nmax))/x
+//	nj=(nmax+1):2        // n+1
+//	Gm=gn
+//	Dm=Dn
+//	// DOWNWARD RECURRENCE
+//	RN=1
+//   for(n in nj){
+//   	  // original
+//   	  //gn[n-1]=Sn[n]+Dn[n]
+//   	  //Dn[n-1]=Sn[n]-1/gn[n-1]
+//   	  Gm[n-1]=Sn[n]+Dm[n]
+//   	  Dm[n-1]=Sn[n]-1/Gm[n-1]
+//   	  // modified (permits one step normalization)
+//   	  gn[n-1]=Sn[n]*gn[n]+Dn[n]
+//   	  Dn[n-1]=Sn[n]*gn[n-1]-gn[n]
+//   	  // Normalization
+//   	  //print(c(gn[n-1],Dn[n-1]))
+//   	  if(abs(gn[n-1])>1e100){
+//   	  	 cat("renorming...\n")
+//   	  	 //print(c(gn[n-1],Dn[n-1]))
+//   	  	 Dn=Dn/gn[n-1] // this must be done first
+//   	  	 gn=gn/gn[n-1] // otherwise the result will be wrong.
+//   	  }
+//   	  //print(c(gn[n-1],Dn[n-1]))
+//   }
+//   // one step normalization taking care about zeros
+//   // Bessel function
+//   if(abs(gn[1])<abs(gn[2])){
+//      Jn=(gn/gn[1])*sin(x) // create functions for normalizations
+//   }else{
+//      Jn=(gn/gn[2])*(sin(x)/x-cos(x)) 	
+//   }
+//   // Its Derivative
+//   if(abs(Dn[1])>abs(Dn[2])){
+//   	  dJn=(Dn/Dn[1])*(-Jn[2])
+//   }else{
+//   	  dJn=(Dn/Dn[2])*(1/3)*(2*Jn[1]-Jn[3])
+//   }
+//   // Return results
+//   return(data.frame(gm=Gm,Dn=Dm,Jn,dJn))
+//}
+////-------------------------------------------------------------------------------
+//// SPHERICAL BESSEL FUNCTIONS [DONE]
+////-------------------------------------------------------------------------------
+//bess.sph=function(x,nmax){
+//	Dn=rep(0,nmax+1)  // Vector 
+//	gn=rep(1,nmax+1)  // Vector
+//	Dn[nmax+1]=lcf.sbld(nmax,x) // Last element
+//	gn[nmax+1]=lcf.sbrd(nmax,x) // Last element
+//	Sn=(0:(nmax+1))/x
+//	nj=(nmax+1):2        // n+1
+//	Gm=gn
+//	Dm=Dn
+//	// DOWNWARD RECURRENCE
+//	RN=1
+//   for(n in nj){
+//   	  // original
+//   	  //gn[n-1]=Sn[n+1]+Dn[n]
+//   	  //Dn[n-1]=Sn[n-1]-1/gn[n-1]
+//   	  Gm[n-1]=Sn[n+1]+Dm[n]
+//   	  Dm[n-1]=Sn[n-1]-1/Gm[n-1]
+//   	  // modified (permits one step normalization)
+//   	  gn[n-1]=Sn[n+1]*gn[n]+Dn[n]
+//   	  Dn[n-1]=Sn[n-1]*gn[n-1]-gn[n]
+//   	  // Normalization
+//   	  //print(c(gn[n-1],Dn[n-1]))
+//   	  if(abs(gn[n-1])>1e100){
+//   	  	 cat("renorming...\n")
+//   	  	 //print(c(gn[n-1],Dn[n-1]))
+//   	  	 Dn=Dn/gn[n-1] // this must be done first
+//   	  	 gn=gn/gn[n-1] // otherwise the result will be wrong.
+//   	  }
+//   	  //print(c(gn[n-1],Dn[n-1]))
+//   }
+//   // one step normalization taking care about zeros
+//   // Bessel function
+//   if(abs(gn[1])<abs(gn[2])){
+//      jn=(gn/gn[1])*sin(x)/x // create functions for normalizations
+//   }else{
+//      jn=(gn/gn[2])*(-cos(x)+sin(x)/x)*(1/x)   	
+//   }
+//   // Its Derivative
+//   if(abs(Dn[1])>abs(Dn[2])){
+//   	  djn=(Dn/Dn[1])*(-jn[2])
+//   }else{
+//   	  djn=(Dn/Dn[2])*(1/3)*(jn[1]-2*jn[3])
+//   }
+//   // Return results
+//   return(data.frame(rh=Gm,An=Dm,jn,djn))
+//}

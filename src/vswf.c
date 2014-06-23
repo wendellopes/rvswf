@@ -25,45 +25,6 @@ double lcfe_afs(/* FUNCTION */
    return(n/x);
 }
 //------------------------------------------------------------------------------
-//# Logarithmic Derivative of Cylindrical Bessel [OK]
-//------------------------------------------------------------------------------
-void lcfe_cbl(/* FUNCTION */
-      int *n,
-      double *x,
-      int *NMAX,
-      double *fn
-   ){
-   //-----------------------------------
-   double eo = DBL_MIN;
-   double ACC=1e-50;
-   *fn=lcfe_afs(*n,*x);
-   if(fabs(*fn)<eo){*fn=eo;}
-   double Pn=*fn;
-   double Qn=0.0;
-   // Loop Parameters
-   int j=0;
-   double Dn=10.0;
-   double an;
-   double bn;
-   while(fabs(Dn-1.)>ACC){
-      if(j>*NMAX){
-         break;
-      }
-      j=j+1;
-      an=-1;
-      int u=2*(*n+j);
-      bn=lcfe_afs(u,*x);
-      Pn=bn+an/Pn;
-      if(fabs(Pn)<eo){Pn=eo;}// # migth be zero
-      Qn=bn+an*Qn;
-      if(fabs(Qn)<eo){Qn=eo;}// # migth be zero
-      Qn=1/Qn;
-      Dn=Pn*Qn;
-      *fn=*fn*Dn;
-   }
-   *NMAX=j;
-}
-//------------------------------------------------------------------------------
 //# J_{n}/J_{n+1} [OK] DIRECT
 //------------------------------------------------------------------------------
 void lcfe_cbd(/* FUNCTION */

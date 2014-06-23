@@ -17,12 +17,9 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        vswf.vsh, # Vector Spherical Wave Functions: Vector Spherical Harmonics
        vswf.sbf, # Vector Spherical Wave Functions: Spherical Bessel Functions
        vswf.hmp, # Vector Spherical Wave Functions: Hansen Multipoles
-<<<<<<< HEAD
-       lcfe.afs,
-       lcfe.cbl,
-=======
->>>>>>> FETCH_HEAD
-       lcfe.cbd, # Lenz Continued Fraction Evaluation: Cyl. Bessel Direct Ratio
+       lcfe.afs, # Lenz Continued Fraction Evaluation: Auxiliary Function S_n
+       lcfe.cbl, # Lenz Continued Fraction Evaluation: Cyl. Bessel Log Deriv.
+       lcfe.cbd, # Lenz Continued Fraction Evaluation: Cyl. Bessel Direct Ratio 
        lcfe.cbi, # Lenz Continued Fraction Evaluation: Cyl. Bessel Inverse Ratio
        lcfe.rbl, # Lenz Continued Fraction Evaluation: Ric. Bessel Log. Deriv.
        lcfe.sbl, # Lenz Continued Fraction Evaluation: Sph. Bessel Log. Deriv.
@@ -36,9 +33,6 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        reff.rdj, # Reference function: Derivative of Ricatti-Bessel (x j_n(x))'
        reff.ch1, # Reference function: Spherical Hankel function h_n(1)=j_n+iy_n
        reff.cdh, # Reference function: Derivative of Spherical Hankel h_n'(1)
-<<<<<<< HEAD
-       bess.cyl, #
-=======
->>>>>>> FETCH_HEAD
-       bess.sph, #
-       bess.ric) #
+       bess.cyl, # Cylindrical Bessel Function J_n
+       bess.sph, # Spherical Bessel Function j_n
+       bess.ric) # Riccati-Bessel Function x j_n

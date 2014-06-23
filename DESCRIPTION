@@ -19,10 +19,7 @@ Collate:lcfe.afs.r
         lcfe.sbl.r
         lcfe.sbd.r
         lcfe.sbi.r
-<<<<<<< HEAD
         bess.cyl.r
-=======
->>>>>>> FETCH_HEAD
         bess.ric.r
         bess.sph.r
         vswf.bbp.r
@@ -51,7 +48,6 @@ Collate:lcfe.afs.r
         reff.rjn.r
         reff.sdj.r
         reff.sjn.r
-<<<<<<< HEAD
         comp.cyl.r
         comp.lcj.r
         comp.lrj.r
@@ -61,8 +57,6 @@ Collate:lcfe.afs.r
         comp.rsj.r
         comp.rsy.r
         comp.sph.r
-=======
->>>>>>> FETCH_HEAD
         test.abc.r
         test.abn.r
         miec.abn.r

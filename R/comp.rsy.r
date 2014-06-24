@@ -2,32 +2,38 @@
 # RHO FOR SPHERICAL AND RICCATI BESSEL Y
 #-------------------------------------------------------------------------------
 comp.rsy<-function(n,x){
+   #------------------------------------
+   # Cylindrical Bessel Function y
+   # \rho*_n+1/\rho*_{n+1}=S_{2(n+1)+1}
+   # \rho_{n}*=-1/rho_{-n-2}
+   # S_n=n/x
+   # \rho*_n=y_n/y_{n+1}=-j_{-n-1}/j_{-n-2}
+   # S_n=lcfe.afs(n,x)
+   # \rho_n=lcfe.sbd(n,x)
+   # 1/\rho_n=lcfe.sbi(n,x)
+   #------------------------------------
    a<-besselY(x,n+ .5)/besselY(x,n+1.5)
-   b<-besselY(x,n+1.5)/besselY(x,n+2.5)
+   b<-besselY(x,n+2.5)/besselY(x,n+1.5)
    c<-(2*(n+1)+1)/x
+   #
    d<--besselJ(x,-n- .5)/besselJ(x,-n-1.5)
-   e<--besselJ(x,-n-1.5)/besselJ(x,-n-2.5)
+   e<--besselJ(x,-n-2.5)/besselJ(x,-n-1.5)
+   f<-lcfe.afs(2*(n+1)+1,x)
+   #
+   g<--1/lcfe.sbd(-n-2,x)
+   h<--lcfe.sbd(-n-3,x)
+   #
+   i<--lcfe.sbi(-n-2,x)
+   j<--1/lcfe.sbi(-n-3,x)
    #------------------------------------
-   cat("a=y[n]/y[n+1]\n")               # 1
-   cat("b=y[n+1]/y[n+2]\n")             # 2
-   cat("c=(2n+3)/x\n")                  # 3
-   cat("d=j[-n-1]/j[-n-2]\n")           # 4
-   cat("e=j[-n-2]/j[-n-3]\n")           # 5
-   cat("u=a+1/b=c\n")                   # 6
-   cat("v=-1/lcfe.sbd(-n-2,x)\n")       # 7
-   cat("w=-lcfe.sbi(-n-2,x)\n")         # 8
-   cat("x=-1/lcfe.sbd(-n-2,x,\"R\")\n") # 9
-   cat("y=-lcfe.sbi(-n-2,x,\"R\")\n")   # 10
    #------------------------------------
-   names=c("a","b","c","d","e",         # 1,2,3,4,5
-           "a+1/b",                     # 6
-           "C.sbd","C.sbi",             # 7,8
-           "R.sbd","R.sbi")             # 9,10
-   value=c(a,b,c,d,e,                   # 1,2,3,4,5
-           a+1/b,                       # 6
-           -1/lcfe.sbd(-n-2,x),         # 7
-           -lcfe.sbi(-n-2,x),           # 8
-           -1/lcfe.sbd(-n-2,x,code="R"),# 9
-           -lcfe.sbi(-n-2,x,code="R"))  # 10
-   return(cbind(names,value))
+   names<-c("  rho*_{n  }",       # a,c
+            "1/rho*_{n+1}",       # b,d
+            "S_{2n+3}    ")       # g,e
+   v.rfy<-c(a,b,c)
+   v.rfj<-c(d,e,f)
+   v.dir<-c(g,h,g+h)
+   v.inv<-c(i,j,i+j)
+   return(cbind(names,v.rfy,v.rfj,v.dir,v.inv))
+   #------------------------------------ 
 }

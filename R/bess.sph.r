@@ -5,7 +5,7 @@ bess.sph<-function(x,nmax){
 	cn<-rep(0,nmax+1)  # Vector 
 	rn<-rep(1,nmax+1)  # Vector
 	cn[nmax+1]<-lcfe.sbl(nmax,x) # Last element
-	rn[nmax+1]<-lcfe.sbi(nmax,x) # Last element
+	rn[nmax+1]<-lcfe.sbd(nmax,x) # Last element
 	Sn<-(0:(nmax+1))/x
 	nj<-(nmax+1):2        # n+1
 	rm<-rn

@@ -10,8 +10,8 @@ comp.lcj<-function(n,x){
    # S_n=lcfe.afs(n,x)
    # D_n=lcfe.cbl(n,x)
    #------------------------------------
-   a<-test.cdj(x,n  )/besselJ(x,n  )
-   b<-test.cdj(x,n+1)/besselJ(x,n+1)
+   a<-reff.cdj(x,n  )/besselJ(x,n  )
+   b<-reff.cdj(x,n+1)/besselJ(x,n+1)
    c<-lcfe.cbl(n  ,x)
    d<-lcfe.cbl(n+1,x)
    e<-lcfe.afs(n  ,x)
@@ -19,8 +19,8 @@ comp.lcj<-function(n,x){
    g<-n/x
    h<-(n+1)/x
    #------------------------------------
-   cat("a<-test.cdj(x,n  )/besselJ(x,n  )\n")
-   cat("b<-test.cdj(x,n+1)/besselJ(x,n+1)\n")
+   cat("a<-reff.cdj(x,n  )/besselJ(x,n  )\n")
+   cat("b<-reff.cdj(x,n+1)/besselJ(x,n+1)\n")
    cat("c<-lcfe.cbl(n  ,x)               \n")
    cat("d<-lcfe.cbl(n+1,x)               \n")
    cat("e<-lcfe.afs(n  ,x)               \n")

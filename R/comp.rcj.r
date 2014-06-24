@@ -1,29 +1,32 @@
 #-------------------------------------------------------------------------------
-# RHO FOR CYLINDRICAL BESSEL J
+# GAMMA FOR CYLINDRICAL BESSEL J
 #-------------------------------------------------------------------------------
 comp.rcj<-function(n,x){
+   #------------------------------------
+   # Cylindrical Bessel Function
+   # \gamma_n+1/\gamma_{n+1}=S_{2(n+1)}
+   # S_n=n/x
+   # \gamma_n=J_n(x)/J_{n+1}(x)
+   # S_n=lcfe.afs(n,x)
+   # \gamma_n=lcfe.cbd(n,x)
+   # 1/\gamma_n=lcfe.cbi(n,x)
+   #------------------------------------
    a<-besselJ(x,n)/besselJ(x,n+1)
-   b<-besselJ(x,n+1)/besselJ(x,n+2)
+   b<-besselJ(x,n+2)/besselJ(x,n+1)
    c<-(2*(n+1))/x
+   d<-lcfe.cbd(n,x)
+   e<-1/lcfe.cbd(n+1,x)
+   #f<-lcfe.afs(2*(n+1),x)
+   g<-1/lcfe.cbi(n,x)
+   h<-lcfe.cbi(n+1,x)
    #------------------------------------
-   cat("a=gamma[n]=J[n]/J[n+1]\n")  # 1
-   cat("b=gamma[n+1]\n")            # 2
-   cat("c=(2n+2)/x\n")              # 3
-   cat("u=a+1/b=c\n")               # 4
-   cat("v=lcfe.cbd(n,x)\n")         # 5
-   cat("w=1/lcfe.cbi(n,x)\n")       # 6
-   cat("x=lcfe.cbd(n,x,\"R\")\n")   # 7
-   cat("y=1/lcfe.cbi(n,x,\"R\")\n") # 8
    #------------------------------------
-   names=c("a","b","c",             # 1,2,3
-           "a+1/b",                 # 4
-           "C.cbd","C.cbi",         # 5,6
-           "R.cbd","R.cbi")         # 7,8
-   value=c(a,b,c,                   # 1,2,3
-           a+1/b,                   # 4
-           lcfe.cbd(n,x),           # 5
-           1/lcfe.cbi(n,x),         # 6
-           lcfe.cbd(n,x,code="R"),  # 7
-           1/lcfe.cbi(n,x,code="R"))# 8
-   return(cbind(names,value))
+   names<-c("  gamma_{n  }",       # a,c
+            "1/gamma_{n+1}",       # b,d
+            "S_{2n+2}     ")       # g,e
+   v.ref<-c(a,b,c)
+   v.dir<-c(d,e,d+e)
+   v.inv<-c(g,h,g+h)
+   return(cbind(names,v.ref,v.dir,v.inv))
+   #------------------------------------  
 }

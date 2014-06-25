@@ -36,9 +36,9 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        bess.cyl, # Cylindrical Bessel Function J_n
        bess.sph, # Spherical Bessel Function j_n
        bess.ric, # Riccati-Bessel Function x j_n
-       comp.lcj,
-       comp.lrj,
-       comp.lsj,
-       comp.rcj,
-       comp.rsj,
-       comp.rsy)
+       comp.cbl,
+       comp.rbl,
+       comp.sbl,
+       comp.cbd,
+       comp.sbd,
+       comp.sby)

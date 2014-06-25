@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # RICCATI BESSEL FUNCTIONS [DONE]
 #-------------------------------------------------------------------------------
-bess.ric<-function(x,nmax){
+bess.ric<-function(nmax,x){
 	Cn<-rep(0,nmax+1)  # Vector 
 	rn<-rep(1,nmax+1)  # Vector
 	Cn[nmax+1]<-lcfe.rbl(nmax,x) # Last element

@@ -10,7 +10,7 @@
 # \rho_n=lcfe.sbd(n,x)
 # 1/\rho_n=lcfe.sbi(n,x)
 #------------------------------------
-comp.rsj<-function(n,x){
+comp.sbd<-function(n,x){
    a<-besselJ(x,n+ .5)/besselJ(x,n+1.5)
    b<-besselJ(x,n+2.5)/besselJ(x,n+1.5)
    c<-(2*(n+1)+1)/x

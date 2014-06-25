@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # SPHERICAL BESSEL FUNCTIONS [DONE]
 #-------------------------------------------------------------------------------
-bess.sph<-function(x,nmax){
+bess.sph<-function(nmax,x){
 	cn<-rep(0,nmax+1)  # Vector 
 	rn<-rep(1,nmax+1)  # Vector
 	cn[nmax+1]<-lcfe.sbl(nmax,x) # Last element
@@ -47,3 +47,4 @@ bess.sph<-function(x,nmax){
    # Return results
    return(data.frame(rn,cn,jn,djn))
 }
+print(bess.sph(4,4))

@@ -1,7 +1,7 @@
 Package: rvswf
 Type: Package
 Title: RVSWF: Expansion in Vector Spherical Wave Functions written in R
-Version: 1.2.7
+Version: 1.2.7.2
 Date: 2013-02-21
 Author: Wendel Lopes Moreira
 Maintainer: Wendel Lopes Moreira <wendellopes@gmail.com>
@@ -48,15 +48,15 @@ Collate:lcfe.afs.r
         reff.rjn.r
         reff.sdj.r
         reff.sjn.r
+        comp.cbl.r
+        comp.rbl.r
+        comp.sbl.r
+        comp.cbd.r
+        comp.sbd.r
+        comp.sby.r
         comp.cyl.r
-        comp.lcj.r
-        comp.lrj.r
-        comp.lsj.r
-        comp.rcj.r
-        comp.ric.r
-        comp.rsj.r
-        comp.rsy.r
         comp.sph.r
+        comp.ric.r
         test.abc.r
         test.abn.r
         miec.abn.r

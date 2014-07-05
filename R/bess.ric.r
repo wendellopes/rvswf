@@ -2,47 +2,51 @@
 # RICCATI BESSEL FUNCTIONS [DONE]
 #-------------------------------------------------------------------------------
 bess.ric<-function(nmax,x){
+   S<-function(n,x){
+      return(n/x)
+   }
 	Cn<-rep(0,nmax+1)  # Vector 
 	rn<-rep(1,nmax+1)  # Vector
+	rm<-rn
 	Cn[nmax+1]<-lcfe.rbl(nmax,x) # Last element
 	rn[nmax+1]<-lcfe.sbd(nmax,x) # Last element
-	Sn<-(0:(nmax))/x
-	nj<-(nmax+1):2        # n+1
-	rm<-rn
 	Cm<-Cn
 	# DOWNWARD RECURRENCE
 	RN<-1
-   for(n in nj){
+   for(n in nmax:1){
    	  # original
-   	  #rn[n-1]<-Sn[n]+Cn[n]
-   	  #Cn[n-1]<-Sn[n]-1/rn[n-1]
-   	  rn[n-1]<-Sn[n]+Cn[n]
-   	  Cn[n-1]<-Sn[n]-1/rn[n-1]
+   	  rn[n]<-S(n,x)+Cn[n+1]
+   	  Cn[n]<-S(n,x)-1/rn[n]
    	  # modified (permits one step normalization)
-   	  rm[n-1]<-Sn[n]*rm[n]+Cm[n]
-   	  Cm[n-1]<-Sn[n]*rm[n-1]-rm[n]
+   	  rm[n]<-S(n,x)*rm[n+1]+Cm[n+1]
+   	  Cm[n]<-S(n,x)*rm[n]-rm[n+1]
    	  # Normalization
-   	  #print(c(rn[n-1],Cn[n-1]))
-   	  if(abs(rm[n-1])>1e100){
+   	  if(abs(rm[n])>1e10){
    	  	 cat("renorming...\n")
    	  	 #print(c(rn[n-1],Cn[n-1]))
-   	  	 Cm<-Cm/rm[n-1] # this must be done first
-   	  	 rm<-rm/rm[n-1] # otherwise the result will be wrong.
+   	  	 Cm<-Cm/rm[n] # this must be done first
+   	  	 rm<-rm/rm[n] # otherwise the result will be wrong.
    	  }
    	  #print(c(rn[n-1],Cn[n-1]))
    }
    # one step normalization taking care about zeros
    # Bessel function
-   if(abs(rm[1])<abs(rm[2])){
-      jn<-(rm/rm[1])*sin(x) # create functions for normalizations
+   j0<-bess.zro(x)
+   j1<-bess.uno(x)
+   R0<-x*j0
+   R1<-x*j1
+   dR0<-cos(x)
+   dR1<--j1+R0
+   if(abs(R0)>1e-6){ # R_0 != 0
+      jn<-(rm/rm[1])*R0 # create functions for normalizations
    }else{
-      jn<-(rm/rm[2])*(sin(x)/x-cos(x)) 	
+      jn<-(rm/rm[2])*R1
    }
    # Its Derivative
-   if(abs(Cm[1])>abs(Cm[2])){
-   	  djn<-(Cm/Cm[1])*(-jn[2])
+   if(dR0>1e-6){ # R_0' != 0
+   	  djn<-(Cm/Cm[1])*dR0
    }else{
-   	  djn<-(Cm/Cm[2])*(1/3)*(2*jn[1]-jn[3])
+   	  djn<-(Cm/Cm[2])*dR1
    }
    # Return results
    return(data.frame(rn,Cn,jn,djn))

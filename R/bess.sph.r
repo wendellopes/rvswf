@@ -33,6 +33,9 @@ bess.uno<-function(x){
 }
 #-------------------------------------------------------------------------------
 bess.sph<-function(nmax,x,code="C"){
+   if(abs(x)<1e-10){
+      return(data.frame(Rn=rep(0,nmax+1),Dn=rep(0,nmax+1)))
+   }
    if(!code%in%c("C","R")){
       stop("Code must be \"C\" or \"R\"")
    }

@@ -11,6 +11,9 @@
 # (S_n-D_n)(S_{n+1}+D_{n+1})=1
 #---------------------------------------
 bess.cyl<-function(nmax,x,code="C"){ # PROBLEMAS COM ZEROS #
+   if(abs(x)<1e-10){
+      return(data.frame(Rn=rep(0,nmax+1),Dn=rep(0,nmax+1)))
+   }
    if(!code%in%c("C","R")){
       stop("Code must be \"C\" or \"R\"")
    }

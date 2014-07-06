@@ -2,6 +2,9 @@
 # RICCATI BESSEL FUNCTIONS [DONE]
 #-------------------------------------------------------------------------------
 bess.ric<-function(nmax,x,code="C"){
+   if(abs(x)<1e-10){
+      return(data.frame(Rn=rep(0,nmax+1),Dn=rep(0,nmax+1)))
+   }
    if(!code%in%c("C","R")){
       stop("Code must be \"C\" or \"R\"")
    }
@@ -12,7 +15,7 @@ bess.ric<-function(nmax,x,code="C"){
             x=as.double(x),
             Rn=as.double(dummy),
             Dn=as.double(dummy))
-      return(data.frame(Jn=u$Rn,dRn=u$Dn))
+      return(data.frame(Rn=u$Rn,dRn=u$Dn))
    }else{
       S<-function(n,x){
          return(n/x)

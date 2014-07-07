@@ -320,6 +320,102 @@ double SN( /* FUNCTION */
    return(j/x);
 }
 //------------------------------------------------------------------------------
+// Cylindrical Bessel function ratio and logarithmic derivative 
+// \gamma_n = J_{n}/J_{n+1} == gn;
+// D_{n}    = J_{n}'/J_{n}  == Dn;
+void lcfa_cyl( /* FUNCTION */
+      int *nmax,
+      double *x,
+      double *gn,
+      double *Dn,
+      int *NMAX
+   ){
+//--------------------------------------
+   int NMAY=*NMAX;
+   // starting values calculated by Lentz
+   lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
+   lcfe_cbd(nmax,x,NMAX,&gn[*nmax]);
+   // testing if Lentz reached max number of iterations
+   // if yes, so we must increase the number of iteratations
+   while(*NMAX==NMAY){
+      *NMAX=2*NMAY;
+      NMAY=*NMAX;
+      lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
+      lcfe_cbd(nmax,x,NMAX,&gn[*nmax]);
+      printf("Precision increased to %d\n",*NMAX);
+   }
+   // Downward Recursion
+   int n;
+   for(n=*nmax;n>0;n--){
+      gn[n-1]=SN(n  ,*x)+Dn[n];
+      Dn[n-1]=SN(n-1,*x)-1/gn[n-1];
+   }
+}
+//------------------------------------------------------------------------------
+// Spherical Bessel function ratio and logarithmic derivative 
+// \rho_{n} = j_{n}/j_{n+1} == gn;
+// c_{n}    = j_{n}'/j_{n}  == Dn;
+void lcfa_sph( /* FUNCTION */
+      int *nmax,
+      double *x,
+      double *gn,
+      double *Dn,
+      int *NMAX
+   ){
+//--------------------------------------
+   int NMAY=*NMAX;
+   // starting values calculated by Lentz
+   lcfe_sbl(nmax,x,NMAX,&Dn[*nmax]);
+   lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
+   // testing if Lentz reached max number of iterations
+   // if yes, so we must increase the number of iteratations
+   while(*NMAX==NMAY){
+      *NMAX=2*NMAY;
+      NMAY=*NMAX;
+      lcfe_sbl(nmax,x,NMAX,&Dn[*nmax]);
+      lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
+      printf("Precision increased to %d\n",*NMAX);
+   }
+   // Downward Recursion
+   int n;
+   for(n=*nmax;n>0;n--){
+      gn[n-1]=SN(n+1,*x)+Dn[n];
+      Dn[n-1]=SN(n-1,*x)-1/gn[n-1];
+   }
+}
+//------------------------------------------------------------------------------
+// Riccati-Bessel function ratio and logarithmic derivative 
+// \rho_n = R_{n}/R_{n+1} =j_{n}/j_{n+1} == gn;
+// C_{n}    = R_{n}'/R_{n}  == Dn;
+void lcfa_ric( /* FUNCTION */
+      int *nmax,
+      double *x,
+      double *gn,
+      double *Dn,
+      int *NMAX
+   ){
+//--------------------------------------
+   int NMAY=*NMAX;
+   // starting values calculated by Lentz
+   lcfe_rbl(nmax,x,NMAX,&Dn[*nmax]);
+   lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
+   // testing if Lentz reached max number of iterations
+   // if yes, so we must increase the number of iteratations
+   while(*NMAX==NMAY){
+      *NMAX=2*NMAY;
+      NMAY=*NMAX;
+      lcfe_rbl(nmax,x,NMAX,&Dn[*nmax]);
+      lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
+      printf("Precision increased to %d\n",*NMAX);
+   }
+   // Downward Recursion
+   int n;
+   for(n=*nmax;n>0;n--){
+      gn[n-1]=SN(n,*x)+Dn[n];
+      Dn[n-1]=SN(n,*x)-1/gn[n-1];
+   }
+}
+//------------------------------------------------------------------------------
 // Spherical Bessel function j_0(x)
 void bess_zro( /* FUNCTION */
       double *x, 
@@ -449,22 +545,13 @@ void bess_ssv( /* FUNCTION */
       // Downward Recursion
       jn[n-1]=SN(*nmax+n+1,*x)*jn[n  ]+cn[n];
       cn[n-1]=SN(*nmax+n-1,*x)*jn[n-1]-jn[n];
-      //printf("BREC n = %d, jn = %f, cn = %f\n",*nmax+n,jn[n],cn[n]);
-      //printf("AREC n = %d, jn = %f, cn = %f\n",*nmax+n-1,jn[n-1],cn[n-1]);
-      //printf("n = %d, jn = %f, cn = %f, SN = %f\n",*nmax+n+1,jn[n],cn[n],SN(*nmax+n+1,*x));
-      //printf("REC n = %d, jn = %f, cn = %f\n",n-1,jn[n-1],cn[n-1]);
       //Renormalization may be required
       if(fabs(jn[n-1])>1e+2){
-         //printf("ANTES n=%d, jn=%f\n",n-1,fabs(jn[n-1]));
          for(j=n-1;j<=*dig;j++){
-            //printf("DENTRO ANTES j=%d, jn=%f\n",j,fabs(jn[j]));
             cn[j]=cn[j]/jn[n-1];
             jn[j]=jn[j]/jn[n-1];
-            //printf("DENTRO DEPOIS j=%d, jn=%f\n",j,fabs(jn[j]));
          }
-         //printf("DEPOIS n=%d, jn=%f\n",n-1,fabs(jn[n-1]));
       }
-      //printf("n = %d, jn = %f, dn = %f\n",*nmax+n-1,jn[n-1],cn[n-1]);
    }
    *JN=jn[0];
    *CN=cn[0];
@@ -485,17 +572,13 @@ void bess_sph( /* FUNCTION */
    bess_zro(x,j0);
    bess_uno(x,j1);
    //beginning of the array calculation
-   //jn[*nmax]=0.0;  // n-th Bessel function
-   //dn[*nmax]=1.0;  // Derivative of the n-th Bessel function
    int dig=15;     // Number of digits of precision
    bess_ssv(nmax,&dig,x,&jn[*nmax],&dn[*nmax]);
-   //printf("SAIDA jn = %f, dn = %f\n",jn[*nmax],dn[*nmax]);
    int n,j;
    for(n=*nmax;n>0;n--){
       // Downward Recursion
       jn[n-1]=SN(n+1,*x)*jn[n  ]+dn[n];
       dn[n-1]=SN(n-1,*x)*jn[n-1]-jn[n];
-      //printf("SAIDA n = %d, jn = %f, dn = %f\n",n-1,jn[n-1],dn[n-1]);
       //Renormalization may be required
       if(fabs(jn[n-1])>1e10){
          for(j=n-1;j<=*nmax;j++){
@@ -508,26 +591,20 @@ void bess_sph( /* FUNCTION */
    double pf=1.0;
    if(fabs(*j0)>1e-10){
       pf=*j0/jn[0];
-      //printf("A = %f\n",pf);
    }else{
       pf=*j1/jn[1];
-      //printf("B = %f\n",pf);
    }
    // Normalization factor for the derivative
    double pd=1.0;
    if(fabs(*j1)>1e-10){
       pd=-(*j1)/dn[0];
-      //printf("C = %f\n",pd);
    }else{
       pd=(1./3.)*(jn[0]-2*jn[2])/dn[1];
-      //printf("D = %f\n",pd);
    }
    // Normalizations
    for(n=0;n<=*nmax;n++){
-      //printf("n = %d, j_n = %f, d_n = %f\n",n,jn[n],dn[n]);
       jn[n]=jn[n]*pf;
       dn[n]=dn[n]*pd;
-      //printf("n = %d, j_n = %f, d_n = %f\n",n,jn[n],dn[n]);
    }
 }
 //------------------------------------------------------------------------------
@@ -579,8 +656,6 @@ void bess_ric( /* FUNCTION */
    bess_uno(x,&j1);
    *R0=*x*j0;
    *R1=*x*j1;
-   //Rn[*nmax]=0.0;  // n-th Bessel function
-   //Cn[*nmax]=1.0;  // Derivative of the n-th Bessel function
    int dig=15;
    bess_rsv(nmax,&dig,x,&Rn[*nmax],&Cn[*nmax]);
    //printf("Rn = %f, Cn = %f\n",Rn[*nmax],Cn[*nmax]);
@@ -589,7 +664,6 @@ void bess_ric( /* FUNCTION */
       // Downward Recursion
       Rn[n-1]=SN(n,*x)*Rn[n  ]+Cn[n];
       Cn[n-1]=SN(n,*x)*Rn[n-1]-Rn[n];
-      //printf("n = %d, Rn = %f, Cn = %f\n",n-1,Rn[n-1],Cn[n-1]);
       //Renormalization may be required
       if(fabs(Rn[n-1])>1e2){
          for(j=n-1;j<=*nmax;j++){
@@ -608,12 +682,8 @@ void bess_ric( /* FUNCTION */
    // Normalization factor for the derivative
    double pd=1.0;
    if(fabs(*R1)>1e-10){
-      printf("A\n");
-      //pd=-(*R1)/Cn[0];
       pd=cos(*x)/Cn[0];
    }else{
-      printf("B\n");
-      //pd=(1./3.)*(2*Rn[0]-Rn[2])/Cn[1];
       pd=(-j1+*R0)/Cn[1];
    }
    // Normalizations

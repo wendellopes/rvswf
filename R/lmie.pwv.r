@@ -1,4 +1,5 @@
 #-------------------------------------------------------------------------------
+# Lorentz-Mie Plane Wave Expansion
 # G^TE, G^TM For Plane Waves +1 (Jackson's Classical Electrodynamics book)
 #-------------------------------------------------------------------------------
 mie.gbsc<-function(m,x){

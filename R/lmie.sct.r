@@ -2,8 +2,8 @@
 # SCATTERING COEFFICIENTS
 #-------------------------------------------------------------------------------
 # Single value at time
-mie.qnmx<-function(m,x){
-   ab<-mie.anbn(m,x)
+lmie.cal<-function(m,x){
+   ab<-lmie.exp(m,x)
    n<-nrow(ab)
    n<-1:n
    an<-ab$an
@@ -14,10 +14,10 @@ mie.qnmx<-function(m,x){
    return(Q)
 }
 # Vector of values
-mie.scat<-function(m,x){
+lmie.sct<-function(m,x){
    u<-data.frame(Qsca=x,Qext=x)
    for(i in 1:length(x)){
-      u[i,]<-mie.qnmx(m,x[i])
+      u[i,]<-lmie.cal(m,x[i])
    }
    return(u)
 }

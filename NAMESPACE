@@ -17,14 +17,21 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        vswf.vsh, # Vector Spherical Wave Functions: Vector Spherical Harmonics
        vswf.sbf, # Vector Spherical Wave Functions: Spherical Bessel Functions
        vswf.hmp, # Vector Spherical Wave Functions: Hansen Multipoles
-       lcfe.afs, # Lenz Continued Fraction Evaluation: Auxiliary Function S_n
-       lcfe.cbl, # Lenz Continued Fraction Evaluation: Cyl. Bessel Log Deriv.
-       lcfe.cbd, # Lenz Continued Fraction Evaluation: Cyl. Bessel Direct Ratio 
-       lcfe.cbi, # Lenz Continued Fraction Evaluation: Cyl. Bessel Inverse Ratio
-       lcfe.rbl, # Lenz Continued Fraction Evaluation: Ric. Bessel Log. Deriv.
-       lcfe.sbl, # Lenz Continued Fraction Evaluation: Sph. Bessel Log. Deriv.
-       lcfe.sbd, # Lenz Continued Fraction Evaluation: Sph. & Ric. Direct Ratio
-       lcfe.sbi, # Lenz Continued Fraction Evaluation: Sph. & Ric. Inverse Ratio
+       lcfe.afs, # Lentz Continued Fraction Evaluation: Auxiliary Function S_n
+       lcfe.cbl, # Lentz Continued Fraction Evaluation: Cyl. Bessel Log Deriv.
+       lcfe.cbd, # Lentz Continued Fraction Evaluation: Cyl. Bessel Direct Ratio 
+       lcfe.cbi, # Lentz Continued Fraction Evaluation: Cyl. Bessel Inverse Rat.
+       lcfe.rbl, # Lentz Continued Fraction Evaluation: Ric. Bessel Log. Deriv.
+       lcfe.sbl, # Lentz Continued Fraction Evaluation: Sph. Bessel Log. Deriv.
+       lcfe.sbd, # Lentz Continued Fraction Evaluation: Sph. & Ric. Direct Ratio
+       lcfe.sbi, # Lentz Continued Fraction Evaluation: Sph. & Ric. Inverse Rat.
+       lcfa.cyl, # Lentz Continued Fraction Array by Downward Recurrence: Cyl.
+       lcfa.sph, # Lentz Continued Fraction Array by Downward Recurrence: Sph.
+       lcfa.ric, # Lentz Continued Fraction Array by Downward Recurrence: Ric.
+       lmie.log, # Lorentz-Mie an/bn calculation by logarithmic derivative
+       lmie.rho, # Lorentz-Mie an/bn calculation by ratio of Bessel functions
+       lmie.exp, # Lorentz-Mie an/bn (choose between log/rho)
+       lmie.sct, # Lorentz-Mie Q_ext and Q_sct calculation
        reff.cjn, # Reference function: Cylindrical Bessel J_n(x)
        reff.sjn, # Reference function: Spherical Bessel function j_n(x)
        reff.rjn, # Reference function: Riccati-Bessel x j_n(x)

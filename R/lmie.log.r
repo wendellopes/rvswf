@@ -4,8 +4,8 @@
 lmie.log<-function(m,x,NMAX=floor(x+7.5*x^(1/3))+2){
    # STOPPING CRITERIUM
    # DOWNWARD RECURRENCE
-   An.1<-rep(-17,NMAX)
-   An.m<-rep(-17,NMAX)
+   #An.1<-rep(-17,NMAX)
+   #An.m<-rep(-17,NMAX)
    #------------------------------------
    # CALCULATIONS - ORIG
    #An.1[NMAX]<-lcfe.rbl(NMAX,  x)
@@ -15,9 +15,9 @@ lmie.log<-function(m,x,NMAX=floor(x+7.5*x^(1/3))+2){
    #   An.m[n-1]<-lcfe.afs(n,m*x)-1/(n/(m*x)+An.m[n])
    #}
    #------------------------------------
-   # CALCULATIONS - NEW
-   An.1<-lcfa.ric(NMAX  ,x)$Dn
-   An.1<-lcfa.ric(NMAX,m*x)$Dn
+   # CALCULATIONS - It must exclude first value (n=0)
+   An.1<-lcfa.ric(NMAX  ,x)$Dn[-1]
+   An.m<-lcfa.ric(NMAX,m*x)$Dn[-1]
    #------------------------------------
    # UPWARD RECURRENCE
    Cn<-Bn<-rep(1,NMAX)
@@ -33,7 +33,7 @@ lmie.log<-function(m,x,NMAX=floor(x+7.5*x^(1/3))+2){
    # MIE COEFFICIENTS
    an<-Cn*Ta
    bn<-Cn*Tb
-   # SCATTERING 
+   # SCATTERING
    u<-data.frame(Cn,Ta,Tb,an,bn)
    return(u)
 }

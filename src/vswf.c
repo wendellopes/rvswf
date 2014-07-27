@@ -28,7 +28,15 @@ double lcfe_afs(/* FUNCTION */
    return(n/x);
 }
 //------------------------------------------------------------------------------
-//# Logarithmic Derivative of Cylindrical Bessel [OK]
+double complex lcfc_afs(/* FUNCTION */
+      int n,
+      double complex x
+   ){
+   //-----------------------------------
+   return(n/x);
+}
+//------------------------------------------------------------------------------
+//# Logarithmic Derivative of Cylindrical Bessel [OK] == REAL
 //------------------------------------------------------------------------------
 void lcfe_cbl(/* FUNCTION */
       int *n,
@@ -67,7 +75,46 @@ void lcfe_cbl(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-//# J_{n}/J_{n+1} [OK] DIRECT
+//# Logarithmic Derivative of Cylindrical Bessel [OK] == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_cbl(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;
+   double ACC=1e-50;
+   *fn=lcfc_afs(*n,*x);
+   if(cabs(*fn)<eo){*fn=eo;}
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;
+   while(cabs(Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
+      j=j+1;
+      an=-1+0*I;
+      int u=2*(*n+j);
+      bn=lcfc_afs(u,*x);
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;}// # migth be zero
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;}// # migth be zero
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# J_{n}/J_{n+1} [OK] DIRECT == REAL
 //------------------------------------------------------------------------------
 void lcfe_cbd(/* FUNCTION */
       int *n,
@@ -105,7 +152,45 @@ void lcfe_cbd(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-//# J_{n+1}/J_{n} [OK] BARNETT
+//# J_{n}/J_{n+1} [OK] DIRECT == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_cbd(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;
+   double ACC=1e-50;
+   *fn=lcfc_afs(2*(*n+1),*x);
+   if(cabs(*fn)<eo){*fn=eo*(1+I);} // migth be zero
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;
+   while(cabs(Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
+      j=j+1;
+      an=-1;
+      bn=lcfc_afs(2*(*n+j+1),*x);
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;} // migth be zero
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;} // migth be zero
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# J_{n+1}/J_{n} [OK] BARNETT == REAL
 //------------------------------------------------------------------------------
 void lcfe_cbi(/* FUNCTION */
       int *n,
@@ -147,7 +232,50 @@ void lcfe_cbi(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-//# Logarithmic Derivative of Riccati-Bessel [OK]
+//# J_{n+1}/J_{n} [OK] BARNETT == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_cbi(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;
+   double ACC=1e-50;
+   *fn=0.0;
+   if(cabs(*fn)<eo){*fn=eo;} // migth be zero
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;
+   while(cabs(Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
+      if(j==0){
+         printf("AH\n");
+         an=1;
+      }else{
+         an=-1;
+      }
+      j=j+1;
+      bn=lcfc_afs(2*(*n+j),*x);
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;} //# migth be zero
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;} //# migth be zero
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# Logarithmic Derivative of Riccati-Bessel [OK] == REAL
 //------------------------------------------------------------------------------
 void lcfe_rbl(/* FUNCTION */
       int *n,
@@ -185,7 +313,45 @@ void lcfe_rbl(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-//# Logarithmic Derivative of Spherical Bessel [OK]
+//# Logarithmic Derivative of Riccati-Bessel [OK] == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_rbl(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;;
+   double ACC=1e-50;
+   *fn=lcfc_afs(*n+1,*x);
+   if(cabs(*fn)<eo){*fn=eo;} // migth be zero;
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;
+   while(cabs(Dn-1.)>ACC){;
+      if(j>*NMAX){
+         break;
+      }
+      j=j+1;
+      an=-1;
+      bn=lcfc_afs(2*(*n+j)+1,*x);
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;} // migth be zero;
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;} // migth be zero;
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# Logarithmic Derivative of Spherical Bessel [OK] == REAL
 //------------------------------------------------------------------------------
 void lcfe_sbl(/* FUNCTION */
       int *n,
@@ -223,7 +389,45 @@ void lcfe_sbl(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-//# j_{n}/j_{n+1} [OK] DIRECT
+//# Logarithmic Derivative of Spherical Bessel [OK] == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_sbl(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;
+   double ACC=1e-50;
+   *fn=lcfc_afs(*n,*x);
+   if(cabs(*fn)<eo){*fn=eo;} // migth be zero;
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;
+   while(cabs(Dn-1.)>ACC){;
+      if(j>*NMAX){
+         break;
+      }
+      j=j+1;
+      an=-1;
+      bn=lcfc_afs(2*(*n+j)+1,*x);;
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;} // migth be zero;
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;} // migth be zero;
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# j_{n}/j_{n+1} [OK] DIRECT == REAL
 //------------------------------------------------------------------------------
 void lcfe_sbd(/* FUNCTION */
       int *n,
@@ -261,7 +465,45 @@ void lcfe_sbd(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-//# j_{n+1}/j_{n} [OK] BARNETT
+//# j_{n}/j_{n+1} [OK] DIRECT == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_sbd(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;
+   double ACC=1e-50;
+   *fn=lcfc_afs(2*(*n+1)+1,*x);
+   if(cabs(*fn)<eo){*fn=eo;} // migth be zero
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;   
+   while(cabs(Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
+      j=j+1;
+      an=-1;
+      bn=lcfc_afs(2*(*n+j+1)+1,*x);
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;} // migth be zero
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;} // migth be zero
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# j_{n+1}/j_{n} [OK] BARNETT == REAL
 //------------------------------------------------------------------------------
 void lcfe_sbi(/* FUNCTION */
       int *n,
@@ -296,6 +538,48 @@ void lcfe_sbi(/* FUNCTION */
       if(fabs(Pn)<eo){Pn=eo;} //# migth be zero
       Qn=bn+an*Qn;
       if(fabs(Qn)<eo){Qn=eo;} //# migth be zero
+      Qn=1/Qn;
+      Dn=Pn*Qn;
+      *fn=*fn*Dn;
+   }
+   *NMAX=j;
+}
+//------------------------------------------------------------------------------
+//# j_{n+1}/j_{n} [OK] BARNETT == COMPLEX
+//------------------------------------------------------------------------------
+void lcfc_sbi(/* FUNCTION */
+      int *n,
+      double complex *x,
+      int *NMAX,
+      double complex *fn
+   ){
+   //-----------------------------------
+   const double eo = DBL_MIN;
+   double ACC=1e-50;
+   *fn=0.0;
+   if(cabs(*fn)<eo){*fn=eo;} // migth be zero
+   double complex Pn=*fn;
+   double complex Qn=0.0;
+   // Loop Parameters
+   int j=0;
+   double complex Dn=10.0;
+   double complex an;
+   double complex bn;
+   while(cabs(Dn-1.)>ACC){
+      if(j>*NMAX){
+         break;
+      }
+      if(j==0){
+         an=1;
+      }else{
+         an=-1;
+      }
+      j=j+1;
+      bn=lcfc_afs(2*(*n+j)+1,*x);
+      Pn=bn+an/Pn;
+      if(cabs(Pn)<eo){Pn=eo;} //# migth be zero
+      Qn=bn+an*Qn;
+      if(cabs(Qn)<eo){Qn=eo;} //# migth be zero
       Qn=1/Qn;
       Dn=Pn*Qn;
       *fn=*fn*Dn;
@@ -735,24 +1019,16 @@ void drwg_tmm(/* FUNCTION */
    double complex ETMx=I*(*kz*(*kx)/gamma2)*ckx*sky*cexp(I*(*kz)*(*z));
    double complex ETMy=I*(*kz*(*ky)/gamma2)*skx*cky*cexp(I*(*kz)*(*z));
    //
-   double complex ETMm=(ETMx-I*ETMy)/sqrt(2.0);
-   double complex ETMz=sin(*kx*(*x))*sin(*ky*(*y))*cexp(I*(*kz)*(*z));
-   double complex ETMp=(ETMx+I*ETMy)/sqrt(2.0);
+   *Em=(ETMx-I*ETMy)/sqrt(2.0);
+   *Ez=sin(*kx*(*x))*sin(*ky*(*y))*cexp(I*(*kz)*(*z));
+   *Ep=(ETMx+I*ETMy)/sqrt(2.0);
    //
    double complex HTMx=-I*(k*(*ky)/gamma2)*skx*cky*cexp(I*(*kz)*(*z));
    double complex HTMy= I*(k*(*kx)/gamma2)*ckx*sky*cexp(I*(*kz)*(*z));
    //
-   double complex HTMm=(HTMx-I*HTMy)/sqrt(2.0);
-   double complex HTMz=0.0+I*0.0;
-   double complex HTMp=(HTMx+I*HTMy)/sqrt(2.0);
-   //
-   Em=&ETMm;
-   Ez=&ETMz;
-   Ep=&ETMp;
-   //
-   Hm=&HTMm;
-   Hz=&HTMz;
-   Hp=&HTMp;
+   *Hm=(HTMx-I*HTMy)/sqrt(2.0);
+   *Hz=0.0+I*0.0;
+   *Hp=(HTMx+I*HTMy)/sqrt(2.0);
 }
 //------------------------------------------------------------------------------
 // RECTANGULAR WAVE GUIDE - TE MODE

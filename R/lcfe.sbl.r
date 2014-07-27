@@ -8,12 +8,21 @@ lcfe.sbl<-function(n,x,NMAX=2000,code="C"){
       stop("Code must be \"C\" or \"R\"")
    }
    if(code=="C"){
-      u<-.C("lcfe_sbl",
-         n=as.integer(n),
-         x=as.double(x),
-         NMAX=as.integer(NMAX),
-         fn=as.double(fn)
-      )
+      if(is.complex(x)){
+         u<-.C("lcfc_sbl",
+               n=as.integer(n),
+               x=as.complex(x),
+               NMAX=as.integer(NMAX),
+               fn=as.complex(fn)
+         )
+      }else{
+         u<-.C("lcfe_sbl",
+               n=as.integer(n),
+               x=as.double(x),
+               NMAX=as.integer(NMAX),
+               fn=as.double(fn)
+         )
+      }
       if(u$NMAX>nmaxo){
          stop(paste("The accuracy was not reached in",NMAX,"iterations!"))
       }

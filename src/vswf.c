@@ -9,7 +9,7 @@
 #include <math.h>
 #include <complex.h>
 #include <stdlib.h>
-#include <float.h>
+// #include <float.h> Was not working, changed 1e-37 by 1e-37
 #include <gsl/gsl_sf_bessel.h>
 #ifdef _OPENMP
    #include <omp.h>
@@ -45,7 +45,7 @@ void lcfe_cbl(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfe_afs(*n,*x);
    if(fabs(*fn)<eo){*fn=eo;}
@@ -84,7 +84,7 @@ void lcfc_cbl(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfc_afs(*n,*x);
    if(cabs(*fn)<eo){*fn=eo;}
@@ -123,7 +123,7 @@ void lcfe_cbd(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfe_afs(2*(*n+1),*x);
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
@@ -161,7 +161,7 @@ void lcfc_cbd(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfc_afs(2*(*n+1),*x);
    if(cabs(*fn)<eo){*fn=eo*(1+I);} // migth be zero
@@ -199,7 +199,7 @@ void lcfe_cbi(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=0.0;
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
@@ -241,9 +241,8 @@ void lcfc_cbi(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
-   *fn=0.0;
    if(cabs(*fn)<eo){*fn=eo;} // migth be zero
    double complex Pn=*fn;
    double complex Qn=0.0;
@@ -257,7 +256,6 @@ void lcfc_cbi(/* FUNCTION */
          break;
       }
       if(j==0){
-         printf("AH\n");
          an=1;
       }else{
          an=-1;
@@ -284,7 +282,7 @@ void lcfe_rbl(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;;
+   const double eo = 1e-37;;
    double ACC=1e-50;
    *fn=lcfe_afs(*n+1,*x);
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero;
@@ -322,7 +320,7 @@ void lcfc_rbl(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;;
+   const double eo = 1e-37;;
    double ACC=1e-50;
    *fn=lcfc_afs(*n+1,*x);
    if(cabs(*fn)<eo){*fn=eo;} // migth be zero;
@@ -360,7 +358,7 @@ void lcfe_sbl(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfe_afs(*n,*x);
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero;
@@ -398,7 +396,7 @@ void lcfc_sbl(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfc_afs(*n,*x);
    if(cabs(*fn)<eo){*fn=eo;} // migth be zero;
@@ -436,7 +434,7 @@ void lcfe_sbd(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfe_afs(2*(*n+1)+1,*x);
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
@@ -474,7 +472,7 @@ void lcfc_sbd(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=lcfc_afs(2*(*n+1)+1,*x);
    if(cabs(*fn)<eo){*fn=eo;} // migth be zero
@@ -512,7 +510,7 @@ void lcfe_sbi(/* FUNCTION */
       double *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=0.0;
    if(fabs(*fn)<eo){*fn=eo;} // migth be zero
@@ -554,7 +552,7 @@ void lcfc_sbi(/* FUNCTION */
       double complex *fn
    ){
    //-----------------------------------
-   const double eo = DBL_MIN;
+   const double eo = 1e-37;
    double ACC=1e-50;
    *fn=0.0;
    if(cabs(*fn)<eo){*fn=eo;} // migth be zero

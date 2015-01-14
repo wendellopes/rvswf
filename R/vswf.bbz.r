@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # BESSEL BEAM Z
 #-------------------------------------------------------------------------------
-vswf.bbz<-function(gama,kz,xo,yo,zo,lmax,M,s){
+vswf.bbz<-function(TM=TRUE,gama,kz,xo,yo,zo,lmax,M,s){
    k<-sqrt(gama^2+kz^2)
    LMAX=lmax*(lmax+2)+1
    #----------------------------------------
@@ -23,5 +23,9 @@ vswf.bbz<-function(gama,kz,xo,yo,zo,lmax,M,s){
      GTE[vswf.jlm(l,m)]<-m*Qlm[vswf.jlm(l,m)]*A0
      GTM[vswf.jlm(l,m)]<-1i*((gama/k)^2)*dQlm[vswf.jlm(l,m)]*A0
    }
-   return(data.frame(GTE,GTM))
+   if(TM){
+      return(data.frame(GTE,GTM))
+   }else{
+      return(data.frame(GTE=GTM,GTM=-GTE))
+   }
 }

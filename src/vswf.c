@@ -1196,7 +1196,7 @@ void fdef_bbz(/* FUNCTION */
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
 //------------------------------------------------------------------------------
 void vwfd_bbz(/* FUNCTION */
-      int *TE, int *m, int *s,
+      int *TM, int *m, int *s,
       int *nx, int *ny, int *nz,
       double *gamma, double *kz,
       double *x,  double *y,  double *z,
@@ -1213,7 +1213,8 @@ void vwfd_bbz(/* FUNCTION */
            rx[i]=x[ix];
            ry[i]=y[iy];
            rz[i]=z[iz];
-           if(*TE==1){
+           // MESMA ORDEM DO PARSER
+           if(*TM==0){
               MD=1;
               fdef_bbz(&MD,m,s,
                     gamma,kz,
@@ -1221,12 +1222,13 @@ void vwfd_bbz(/* FUNCTION */
                     &Hm[i],&Hz[i],&Hp[i],
                     &Em[i],&Ez[i],&Ep[i]);
            }
-           if(*TE==0){
+           if(*TM==1){
               MD=-1;
               fdef_bbz(&MD,m,s,
                     gamma,kz,&x[ix],
-                    &y[iy],&z[iz],&Em[i],&Ez[i],
-                    &Ep[i],&Hm[i],&Hz[i],&Hp[i]);
+                    &y[iy],&z[iz],
+                    &Em[i],&Ez[i],&Ep[i],
+                    &Hm[i],&Hz[i],&Hp[i]);
            }
            i++; 
          }    
@@ -1250,19 +1252,19 @@ void fdef_bbp(/* FUNCTION */
 
    int pp1=1+*P;
    int pm1=1-*P;
-   int mm1=*M-1;
-   int mspm1=*M-1+*S*(*P-1);
-   int mspm0=*M-1+*S*(*P);
-   int mspp1=*M-1+*S*(*P+1);
+   int mm=*M;
+   int mspm1=*M+*S*(*P-1);
+   int mspm0=*M+*S*(*P);
+   int mspp1=*M+*S*(*P+1);
 
-   *Em=pp1*vswf_psi(&mm1,S,gamma,kz,x,y,z)/2
+   *Em=pp1*vswf_psi(&mm,S,gamma,kz,x,y,z)/2
       -*P*(sth*sth)*vswf_psi(&mspm1,S,gamma,kz,x,y,z)/2;
    *Ez= -I*(*P)*(*S)*cth*sth*vswf_psi(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
-   *Ep=pm1*vswf_psi(&mm1,S,gamma,kz,x,y,z)/2
+   *Ep=pm1*vswf_psi(&mm,S,gamma,kz,x,y,z)/2
       +*P*(sth*sth)*vswf_psi(&mspp1,S,gamma,kz,x,y,z)/2;
-   *Hm=-I*(*P)*cth*vswf_psi(&mm1,S,gamma,kz,x,y,z)*pp1/2.0;
+   *Hm=-I*(*P)*cth*vswf_psi(&mm,S,gamma,kz,x,y,z)*pp1/2.0;
    *Hz=-(*S)*sth*vswf_psi(&mspm0,S,gamma,kz,x,y,z)/sqrt(2.0);
-   *Hp=-I*(*P)*cth*vswf_psi(&mm1,S,gamma,kz,x,y,z)*pm1/2.0;
+   *Hp=-I*(*P)*cth*vswf_psi(&mm,S,gamma,kz,x,y,z)*pm1/2.0;
 }
 //------------------------------------------------------------------------------
 // POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS

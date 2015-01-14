@@ -19,7 +19,7 @@ vswf.bbp<-function(gama,kz,xo,yo,zo,lmax,M,s,p){
    GTM<-rep(0,LMAX)
    for(l in 1:lmax){
       m<--l:l
-      psio<-vswf.psi(gama,kz,xo,yo,zo,M-1-s*(m-p),s)
+      psio<-vswf.psi(gama,kz,xo,yo,zo,M-s*(m-p),s)
       if(l>0){
          A0<-4*pi*(1i^(l-s*(m-p)))*psio/sqrt(2*l*(l+1))
       }else{

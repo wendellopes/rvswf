@@ -732,6 +732,8 @@ void bess_uno( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 //Starting values for downward recurrence, Cylindrical Bessel functions
+//For calculation of J_n(x), one can calculate by downward recurrence from
+//   J_{n-dig}(x), where dig is the number of precision in J_n(x).
 void bess_csv( /* FUNCTION */
       int *nmax,
       int *dig,

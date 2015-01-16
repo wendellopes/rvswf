@@ -29,36 +29,6 @@
 #' plot(a$jn)
 #' points(b$jn,col='red',pch=4)
 #' points(d,col='blue',pch=3)
-bess.zro<-function(x){
-   Kj<-function(x,j){
-      return(x/j)
-   }
-   if(x>1){
-      return(sin(x)/x)
-   }else{
-      S<-1
-      for(j in seq(10,1,-1)){
-         S<-1-Kj(x,2*j)*Kj(x,2*j+1)*S
-      }
-      return(S)
-   }
-}
-#-------------------------------------------------------------------------------
-bess.uno<-function(x){
-   Kj<-function(x,j){
-      return(x/j)
-   }
-   if(x>1){
-      return((sin(x)/x-cos(x))/x)
-   }else{
-      S<-0
-      for(j in seq(10,1,-1)){
-         S<-(2*j)/(2*j+1)-Kj(x,2*j+1)*Kj(x,2*j+2)*S
-      }
-      S<-x*S/2
-      return(S)
-   }
-}
 #-------------------------------------------------------------------------------
 bess.sph<-function(nmax,x,code="C"){
    if(abs(x)<1e-10){
@@ -115,8 +85,8 @@ bess.sph<-function(nmax,x,code="C"){
       }
       # one step normalization taking care about zeros
       # Bessel function
-      b0<-bess.zro(x)
-      b1<-bess.uno(x)
+      b0<-bess.szr(x)
+      b1<-bess.sun(x)
       if(abs(b0)>1e-10){ # j_0 != 0
          jn<-(rm/rm[1])*b0 # create functions for normalizations
       }else{            # j_0 == 0

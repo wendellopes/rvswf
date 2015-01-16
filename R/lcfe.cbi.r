@@ -1,6 +1,14 @@
-#-------------------------------------------------------------------------------
-# J_{n+1}/J_{n} [OK] BARNETT - Cylindrical Bessel Ratio Inverse
-#-------------------------------------------------------------------------------
+#' Calculates the inverse of the ratio of Cylindrical Bessel Functions.
+#' 
+#' @details Using Lentz method is possible to calculate the ratio 
+#' \eqn{\gamma_n(x)=J_{n+1}(x)/J_{n}(x)}. By downward recurrence one can 
+#' calculate \eqn{1/g_n}, as shown in Barnett's paper.
+#' @param n The order of \eqn{g_n(x)}.
+#' @param x The argument of \eqn{g_n(x)} of type complex.
+#' @param NMAX The maximum number of iterations.
+#' @param code Choice between \code{C} or native {R} code.
+#' @return The value of \eqn{1/\gamma_n} for complex arguments.
+#' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
 lcfe.cbi<-function(n,x,NMAX=2000,code="C"){
    nmaxo<-NMAX
    fn<-0

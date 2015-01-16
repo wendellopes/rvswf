@@ -1,0 +1,32 @@
+\name{lcfe.cbi}
+\alias{lcfe.cbi}
+\title{Calculates the inverse of the ratio of Cylindrical Bessel Functions.}
+\usage{
+lcfe.cbi(n, x, NMAX = 2000, code = "C")
+}
+\arguments{
+  \item{n}{The order of \eqn{g_n(x)}.}
+
+  \item{x}{The argument of \eqn{g_n(x)} of type complex.}
+
+  \item{NMAX}{The maximum number of iterations.}
+
+  \item{code}{Choice between \code{C} or native {R} code.}
+}
+\value{
+The value of \eqn{1/\gamma_n} for complex arguments.
+}
+\description{
+Calculates the inverse of the ratio of Cylindrical Bessel
+Functions.
+}
+\details{
+Using Lentz method is possible to calculate the ratio
+\eqn{\gamma_n(x)=J_{n+1}(x)/J_{n}(x)}. By downward
+recurrence one can calculate \eqn{1/g_n}, as shown in
+Barnett's paper.
+}
+\seealso{
+\code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+}
+

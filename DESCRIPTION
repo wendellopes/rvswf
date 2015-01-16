@@ -22,8 +22,12 @@ Collate:lcfe.afs.r
         lcfa.cyl.r
         lcfa.sph.r
         lcfa.ric.r
+        bess.czr.r
+        bess.cun.r
         bess.cyl.r
         bess.ric.r
+        bess.szr.r
+        bess.sun.r
         bess.sph.r
         vswf.bbp.r
         vswf.bbz.r

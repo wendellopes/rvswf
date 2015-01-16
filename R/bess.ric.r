@@ -74,8 +74,8 @@ bess.ric<-function(nmax,x,code="C"){
       }
       # one step normalization taking care about zeros
       # Bessel function
-      j0<-bess.zro(x)
-      j1<-bess.uno(x)
+      j0<-bess.szr(x)
+      j1<-bess.sun(x)
       R0<-x*j0
       R1<-x*j1
       dR0<-cos(x)

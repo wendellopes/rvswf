@@ -1,0 +1,53 @@
+\BOOKMARK [-1][-]{part.1}{I C\341lculo das Fun\347\365es de Bessel}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Teoria de Mie}{part.1}% 2
+\BOOKMARK [0][-]{chapter.2}{C\341lculo dos coeficientes de Mie}{part.1}% 3
+\BOOKMARK [1][-]{section.2.1}{Coeficientes de Mie}{chapter.2}% 4
+\BOOKMARK [2][-]{subsection.2.1.1}{C\341lculo dos coeficientes de Mie}{section.2.1}% 5
+\BOOKMARK [0][-]{chapter.3}{Fun\347\365es de Bessel}{part.1}% 6
+\BOOKMARK [1][-]{subsection.3.0.2}{Fun\347\365es cil\355ndricas de Bessel}{chapter.3}% 7
+\BOOKMARK [2][-]{subsection.3.0.3}{Fun\347\365es esf\351ricas de Bessel}{subsection.3.0.2}% 8
+\BOOKMARK [2][-]{subsection.3.0.4}{Fun\347\365es de Riccati-Bessel}{subsection.3.0.2}% 9
+\BOOKMARK [2][-]{subsection.3.0.5}{C\341lculo das fun\347\365es de Bessel}{subsection.3.0.2}% 10
+\BOOKMARK [0][-]{chapter.4}{Fra\347\365es continuadas}{part.1}% 11
+\BOOKMARK [1][-]{section.4.1}{Calculando as fra\347\365es continuadas}{chapter.4}% 12
+\BOOKMARK [2][-]{subsection.4.1.1}{Calculando }{section.4.1}% 13
+\BOOKMARK [2][-]{subsection.4.1.2}{Calculando as derivadas logar\355tmicas das fun\347\365es de Bessel}{section.4.1}% 14
+\BOOKMARK [2][-]{subsection.4.1.3}{Calculando as raz\365es entre as fun\347\365es de Bessel}{section.4.1}% 15
+\BOOKMARK [2][-]{subsection.4.1.4}{Algor\355tmo para o c\341lculo das fra\347\365es continuadas}{section.4.1}% 16
+\BOOKMARK [2][-]{subsection.4.1.5}{C\341lculo das fun\347\365es de Bessel}{section.4.1}% 17
+\BOOKMARK [-1][-]{part.2}{II Harm\364nicos Esf\351ricos Vetoriais}{}% 18
+\BOOKMARK [0][-]{chapter.5}{As ondas parciais}{part.2}% 19
+\BOOKMARK [1][-]{section.5.1}{Defini\347\365es}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{C\341lculo dos harm\364nicos esf\351ricos escalares}{chapter.5}% 21
+\BOOKMARK [2][-]{subsection.5.2.1}{Caso para =0}{section.5.2}% 22
+\BOOKMARK [2][-]{subsection.5.2.2}{M\351todo das listas}{section.5.2}% 23
+\BOOKMARK [1][-]{section.5.3}{Harm\364nicos esf\351ricos vetoriais}{chapter.5}% 24
+\BOOKMARK [2][-]{subsection.5.3.1}{Vetores complexos}{section.5.3}% 25
+\BOOKMARK [1][-]{section.5.4}{Defini\347\365es de VSH}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.5}{Formas expl\355citas}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.6}{Compara\347\365es}{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.7}{Multipolos de Hansen}{chapter.5}% 29
+\BOOKMARK [2][-]{subsection.5.7.1}{Rela\347\365es de recorr\352ncia para fun\347\365es esf\351ricas de Bessel}{section.5.7}% 30
+\BOOKMARK [2][-]{subsection.5.7.2}{Harm\364nicos esf\351ricos vetoriais para l=0}{section.5.7}% 31
+\BOOKMARK [0][-]{chapter.6}{Exemplos de expans\365es}{part.2}% 32
+\BOOKMARK [1][-]{section.6.1}{Onda Plana}{chapter.6}% 33
+\BOOKMARK [1][-]{section.6.2}{Guias de onda}{chapter.6}% 34
+\BOOKMARK [2][-]{subsection.6.2.1}{Defini\347\343o das transformadas}{section.6.2}% 35
+\BOOKMARK [2][-]{subsection.6.2.2}{Campos no interior de guias de onda}{section.6.2}% 36
+\BOOKMARK [2][-]{subsection.6.2.3}{Calculo das componentes}{section.6.2}% 37
+\BOOKMARK [2][-]{subsection.6.2.4}{Limites da expans\343o}{section.6.2}% 38
+\BOOKMARK [2][-]{subsection.6.2.5}{Guias de onda}{section.6.2}% 39
+\BOOKMARK [2][-]{subsection.6.2.6}{Derivada de Qlm\(x\)}{section.6.2}% 40
+\BOOKMARK [1][-]{section.6.3}{Guia de onda retangular}{chapter.6}% 41
+\BOOKMARK [2][-]{subsection.6.3.1}{Geometria do guia de onda retangular}{section.6.3}% 42
+\BOOKMARK [1][-]{section.6.4}{Guia de onda cil\355ndrico}{chapter.6}% 43
+\BOOKMARK [2][-]{subsection.6.4.1}{Campos no interior do guia de onda cil\355ndrico}{section.6.4}% 44
+\BOOKMARK [2][-]{subsection.6.4.2}{Expans\343o em ondas parciais}{section.6.4}% 45
+\BOOKMARK [1][-]{section.6.5}{Feixe de Bessel}{chapter.6}% 46
+\BOOKMARK [2][-]{subsection.6.5.1}{Expans\343o em ondas parciais}{section.6.5}% 47
+\BOOKMARK [2][-]{subsection.6.5.2}{Caso I}{section.6.5}% 48
+\BOOKMARK [2][-]{subsection.6.5.3}{Caso II}{section.6.5}% 49
+\BOOKMARK [-1][-]{part.3}{III C\341lculos de For\347a \323ptica}{}% 50
+\BOOKMARK [0][-]{chapter.7}{C\341lculo da For\347a}{part.3}% 51
+\BOOKMARK [0][-]{appendix.A}{Mudan\347a de coordenadas}{part.3}% 52
+\BOOKMARK [1][-]{section.A.1}{Produtos vetoriais}{appendix.A}% 53

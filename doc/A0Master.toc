@@ -1,0 +1,54 @@
+\select@language {brazil}
+\contentsline {part}{I\hspace {1em}C\'alculo das Fun\c c\~oes de Bessel}{5}{part.1}
+\contentsline {chapter}{\numberline {1}Teoria de Mie}{7}{chapter.1}
+\contentsline {chapter}{\numberline {2}C\'alculo dos coeficientes de Mie}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}Coeficientes de Mie}{11}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}C\'alculo dos coeficientes de Mie}{13}{subsection.2.1.1}
+\contentsline {chapter}{\numberline {3}Fun\c c\~oes de Bessel}{17}{chapter.3}
+\contentsline {subsection}{\numberline {3.0.2}Fun\c c\~oes cil\IeC {\'\i }ndricas de Bessel}{17}{subsection.3.0.2}
+\contentsline {subsection}{\numberline {3.0.3}Fun\c c\~oes esf\'ericas de Bessel}{19}{subsection.3.0.3}
+\contentsline {subsection}{\numberline {3.0.4}Fun\c c\~oes de Riccati-Bessel}{20}{subsection.3.0.4}
+\contentsline {subsection}{\numberline {3.0.5}C\'alculo das fun\c c\~oes de Bessel}{21}{subsection.3.0.5}
+\contentsline {chapter}{\numberline {4}Fra\c c\~oes continuadas}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Calculando as fra\c c\~oes continuadas}{25}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Calculando $\sqrt {\alpha }$}{26}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Calculando as derivadas logar\IeC {\'\i }tmicas das fun\c c\~oes de Bessel}{26}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Calculando as raz\~oes entre as fun\c c\~oes de Bessel}{28}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Algor\IeC {\'\i }tmo para o c\'alculo das fra\c c\~oes continuadas}{29}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}C\'alculo das fun\c c\~oes de Bessel}{29}{subsection.4.1.5}
+\contentsline {part}{II\hspace {1em}Harm\^onicos Esf\'ericos Vetoriais}{33}{part.2}
+\contentsline {chapter}{\numberline {5}As ondas parciais}{35}{chapter.5}
+\contentsline {section}{\numberline {5.1}Defini\c c\~oes}{35}{section.5.1}
+\contentsline {section}{\numberline {5.2}C\'alculo dos harm\^onicos esf\'ericos escalares}{36}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Caso para $\theta =0$}{37}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}M\'etodo das listas}{38}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Harm\^onicos esf\'ericos vetoriais}{39}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Vetores complexos}{39}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}Defini\c c\~oes de VSH}{39}{section.5.4}
+\contentsline {section}{\numberline {5.5}Formas expl\IeC {\'\i }citas}{40}{section.5.5}
+\contentsline {section}{\numberline {5.6}Compara\c c\~oes}{42}{section.5.6}
+\contentsline {section}{\numberline {5.7}Multipolos de Hansen}{43}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Rela\c c\~oes de recorr\^encia para fun\c c\~oes esf\'ericas de Bessel}{44}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Harm\^onicos esf\'ericos vetoriais para $l=0$}{44}{subsection.5.7.2}
+\contentsline {chapter}{\numberline {6}Exemplos de expans\~oes}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}Onda Plana}{45}{section.6.1}
+\contentsline {section}{\numberline {6.2}Guias de onda}{46}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Defini\c c\~ao das transformadas}{48}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Campos no interior de guias de onda}{48}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Calculo das componentes}{52}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}Limites da expans\~ao}{54}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.5}Guias de onda}{54}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}Derivada de $Q_{lm}(x)$}{54}{subsection.6.2.6}
+\contentsline {section}{\numberline {6.3}Guia de onda retangular}{55}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Geometria do guia de onda retangular}{57}{subsection.6.3.1}
+\contentsline {section}{\numberline {6.4}Guia de onda cil\IeC {\'\i }ndrico}{61}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Campos no interior do guia de onda cil\IeC {\'\i }ndrico}{61}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Expans\~ao em ondas parciais}{62}{subsection.6.4.2}
+\contentsline {section}{\numberline {6.5}Feixe de Bessel}{64}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Expans\~ao em ondas parciais}{67}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Caso $I$}{68}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.3}Caso $II$}{70}{subsection.6.5.3}
+\contentsline {part}{III\hspace {1em}C\'alculos de For\c ca \'Optica}{75}{part.3}
+\contentsline {chapter}{\numberline {7}C\'alculo da For\c ca}{77}{chapter.7}
+\contentsline {chapter}{\numberline {A}Mudan\c ca de coordenadas}{79}{appendix.A}
+\contentsline {section}{\numberline {A.1}Produtos vetoriais}{81}{section.A.1}

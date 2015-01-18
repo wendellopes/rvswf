@@ -1,0 +1,382 @@
+% !Rnw root = A0Master.Rnw 
+%-------------------------------------------------------------------------------
+\chapter{Cálculo dos coeficientes de Mie}
+%-------------------------------------------------------------------------------
+\section{Coeficientes de Mie}
+%-------------------------------------------------------------------------------
+Como vimos, estamos interessados no cálculo dos coeficientes $a_n$, $b_n$,
+$c_n$ e $d_n$ dados pelas equações 
+\begin{eqnarray}\label{eq:miete}
+\left[
+\begin{array}{c}
+b_n\\
+d_n\\
+\end{array}
+\right]
+=\frac{1}{\Delta^{TE}}
+\left[
+\begin{array}{cc}
+-\psi_n'(Mx)&  \frac{1}{M}\psi_n (Mx)\\
+-\zeta_n'  (x)&             \zeta_n   (x)\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\psi_n (x)\\
+\psi_n'(x)\\
+\end{array}
+\right]
+\end{eqnarray}
+para o caso TE e para o caso TM
+\begin{eqnarray}\label{eq:mietm}
+\left[
+\begin{array}{c}
+a_n\\
+c_n\\
+\end{array}
+\right]
+=\frac{1}{\Delta^{TM}}
+\left[
+\begin{array}{cc}
+-\frac{1}{M}\psi_n'(Mx)& \psi_n (Mx)\\
+           -\zeta_n'(x)  &  \zeta_n (x) \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\psi_n (x)\\
+\psi_n'(x)\\
+\end{array}
+\right]
+\end{eqnarray}
+em que $\Delta^{TE/TM}$ são os determinantes
+das respectivas matrizes, dados por
+\begin{eqnarray}
+\Delta^{TE}&=&-           \psi_n'(Mx)\zeta_n(x)+\frac{1}{M}\psi_n(Mx)\zeta_n'(x)\\
+\Delta^{TM}&=&-\frac{1}{M}\psi_n'(Mx)\zeta_n(x)+           \psi_n(Mx)\zeta_n'(x)
+\end{eqnarray}
+As funções acima são conhecidas como funções de Riccati-Bessel, dadas
+por $\psi_n(x)=xj_n(x)$, $\chi_n(x)=-xy_n(x)$\footnote{Aqui usamos a notação mais
+comum, que segue van de Huslt. Alguns autores entretanto não utilizam o sinal negativo
+na função de Hankel. O fato de se utilizar uma função de Hankel ou outra está na
+definção de onda que que chega e onda que sai da origem.}
+, $\zeta_n(x)=\psi_n(x)+i\chi_n(x)=xh_n^{(2)}(x)$ e
+$\xi_n(x)=\psi_n(x)-i\chi_n(x)=xh_n^{(1)}(x)$.
+Reescrevendo os determinantes, obtemos
+\begin{eqnarray}
+b_n&=&\frac{M\psi_n'(Mx)\psi_n(x) - \psi_n(Mx) \psi_n'(x)}{M\psi_n'(Mx)\zeta_n(x) - \psi_n(Mx)\zeta_n'(x)}\\
+d_n&=&\frac{M\zeta_n'(x)  \psi_n(x) -M\zeta_n(x)   \psi_n'(x)}{M\psi_n'(Mx)\zeta_n(x) - \psi_n(Mx)\zeta_n'(x)}\\
+a_n&=&\frac{ \psi_n'(Mx)\psi_n(x) -M\psi_n(Mx) \psi_n'(x)}{ \psi_n'(Mx)\zeta_n(x) -M\psi_n(Mx)\zeta_n'(x)}\\
+c_n&=&\frac{M\zeta_n'(x)  \psi_n(x) -M\zeta_n(x)   \psi_n'(x)}{ \psi_n'(Mx)\zeta_n(x) -M\psi_n(Mx)\zeta_n'(x)}
+\end{eqnarray}
+em que usamos o Wronskiano das funções de Riccati-Bessel em que $W[\psi_n,\chi_n](x)=1$, o 
+que nos diz que
+\begin{eqnarray}
+\zeta_n'\psi_n-\zeta_n\psi_n'
+%=(\psi_n'+i\chi_n')\psi_n-(\psi_n+i\chi_n)\psi_n'
+%=\psi_n'\psi_n+i\chi_n'\psi_n-\psi_n\psi_n'-i\chi_n\psi_n'
+=i(\psi_n\chi_n'-\psi_n'\chi_n)
+=iW[\psi_n,\chi_n]=i
+\end{eqnarray}
+e com isto obtemos os coeficientes 
+para os campos externos
+\begin{eqnarray}
+a_n&=&\frac{ \psi_n'(Mx)\psi_n(x) -M\psi_n(Mx) \psi_n'(x)}{ \psi_n'(Mx)\zeta_n(x) -M\psi_n(Mx)\zeta_n'(x)}\\
+b_n&=&\frac{M\psi_n'(Mx)\psi_n(x) - \psi_n(Mx) \psi_n'(x)}{M\psi_n'(Mx)\zeta_n(x) - \psi_n(Mx)\zeta_n'(x)}
+\end{eqnarray}
+e para os campos internos
+\begin{eqnarray}
+c_n&=&\frac{iM}{ \psi_n'(Mx)\zeta_n(x) -M\psi_n(Mx)\zeta_n'(x)}\\
+d_n&=&\frac{iM}{M\psi_n'(Mx)\zeta_n(x) - \psi_n(Mx)\zeta_n'(x)}
+\end{eqnarray}
+Vamos agora definir as funções de derivadas logarítmicas
+$A_n(x)=\psi_n' (x)/\psi_n (x)$,
+$B_n(x)=\zeta_n'(x)/\zeta_n(x)$, e as razões entre funções
+$C_n(x)=\psi_n  (x)/\zeta_n(x)$ e
+$D_n(x)=\psi_n  (x)/\psi_n(Mx)$, o que vai nos dar
+para os campos externos
+\begin{eqnarray}
+a_n&=&C_n\frac{A_n(Mx)/M -A_n(x)}{A_n(Mx)/M -B_n(x)}\\
+b_n&=&C_n\frac{A_n(Mx) M -A_n(x)}{A_n(Mx) M  -B_n(x)}
+\end{eqnarray}
+e para os campos internos
+% \begin{eqnarray}
+% c_n&=&\frac{iM}{\psi_n(Mx)\zeta_n(x) }\frac{1}{ A_n(Mx)-MB_n(x)}\\
+% d_n&=&\frac{iM}{\psi_n(Mx)\zeta_n(x) }\frac{1}{MA_n(Mx)- B_n(x)}
+% \end{eqnarray}
+\begin{eqnarray}
+c_n&=& D_n\frac{B_n(x)-A_n(x)}{A_n(Mx)/M-B_n(x)}\\
+d_n&=&MD_n\frac{B_n(x)-A_n(x)}{A_n(Mx) M-B_n(x)}
+\end{eqnarray}
+%Outra forma é utilizar o Wronskiano
+%\begin{equation}
+%\zeta_n'\psi_n-\zeta_n\psi_n'=i
+%\end{equation}
+%que nos diz que
+%\begin{equation}
+%\psi_n(x)\zeta_n(x)\Big(B_n(x)-A_n(x)\Big)=i
+%\end{equation}
+%-------------------------------------------------------------------------------
+\subsection{Cálculo dos coeficientes de Mie}
+%-------------------------------------------------------------------------------
+Vamos agora definir as funções de derivadas logarítmicas e uma
+razão entre duas funções de Bessel diferentes
+\begin{eqnarray}
+A_n(x)&=&\frac{\psi_n'(x)}{\psi_n(x)}\\
+B_n(x)&=&\frac{\zeta_n'(x) }{\zeta_n(x) }\\
+C_n(x)&=&\frac{\psi_n(x) }{\zeta_n(x) }
+\end{eqnarray}
+Com uma pequena manipulação nas equações dos coeficientes,
+obtemos (para o caso dos campos espalhados)
+\begin{eqnarray}
+a_n&=&C_nT_{a_n}\\
+b_n&=&C_nT_{b_n}
+\end{eqnarray}
+em que
+\begin{eqnarray}
+T_{a_n}&=&\frac{ A_n(Mx)/M-A_n(x)}{ A_n(Mx)/M-B_n(x)}\\
+T_{b_n}&=&\frac{MA_n(Mx)  -A_n(x)}{MA_n(Mx)  -B_n(x)}
+\end{eqnarray}
+
+
+Deste modo estamos concentrando nossos cálculos nas derivadas
+logarítmicas. Outro de modo de se calcular consiste em tomar
+a relação entre duas funções
+\begin{eqnarray}
+\rho_n&=&\frac{\psi_n}{\psi_{n+1}}\\
+\gamma_n&=&\frac{\zeta_n}{\zeta_{n+1}}
+\end{eqnarray}
+e ainda as relações
+\begin{eqnarray}
+A_n(x)&=&\rho_{n-1}-\frac{n}{x}\\
+B_n(x)&=&\gamma_{n-1}-\frac{n}{x}
+\end{eqnarray}
+Deste modo vamos obter para os coeficientes
+\begin{eqnarray}
+a_n&=&C_nU_a\\
+b_n&=&C_nU_b
+\end{eqnarray}
+em que 
+\begin{eqnarray}
+U_a&=&\frac{\rho_{n-1}(mx)/m-\rho_{n-1}(x)+(1-1/m^2)(n/x)}{\rho_{n-1}(mx)/m-\gamma_{n-1}(x)+(1-1/m^2)(n/x)}\\
+U_b&=&\frac{\rho_{n-1}(mx) m-\rho_{n-1}(x)               }{\rho_{n-1}(mx) m-\gamma_{n-1}(x)               }
+\end{eqnarray}
+%e para os campos internos
+%\begin{eqnarray}
+%c_n&=&\frac{iM}{\psi_n(Mx)\zeta_n(x) }\frac{1}{ A_n(Mx)-MB_n(x)}\\
+%d_n&=&\frac{iM}{\psi_n(Mx)\zeta_n(x) }\frac{1}{MA_n(Mx)- B_n(x)}
+%\end{eqnarray}
+
+%-------------------------------------------------------------------------------
+% Figura
+%\input{FigCompBess}
+%%-------------------------------------------------------------------------------
+%\subsubsection{Tabela de Funções}
+%%-------------------------------------------------------------------------------
+%As primeiras funções de Riccati-Bessel são dadas por
+%\begin{eqnarray}
+%\psi_0(x)&=&\sin x\\
+%\psi_1(x)&=&\frac{1}{x}\psi_0-\chi_0=\frac{\sin x}{x}-\cos x\\
+%\psi_2(x)&=&i\left(\frac{3}{x^2}-1\right)\sin x-\frac{3}{x}\cos x
+%\end{eqnarray}
+%e ainda 
+%\begin{eqnarray}
+%\chi_0(x)&=&-\cos x\\
+%\chi_1(x)&=&\frac{1}{x}\chi_0+\psi_0=-\sin x-\frac{\cos x}{x}\\
+%\chi_2(x)&=&-\frac{3}{x}\sin x-\left(\frac{3}{x^2}-1\right)\cos x
+%\end{eqnarray}
+%Entretanto podemos utilizar as relações de recorrência para calcular
+%as derivadas das funções de Riccati-Bessel, fazendo
+%\begin{eqnarray}
+%R_n'(x)=R_{n-1}(x)-n\frac{R_n(x)}{x}%=R_{n-1}(x)-nz_n(x)
+%\end{eqnarray}
+%sendo que $\psi_0'(x)=\cos x$ e $\chi_0'(x)=\sin x$.
+%Deste modo, podemos calcular todas as funções e todas as 
+%suas derivadas.
+%%-------------------------------------------------------------------------------
+%\subsubsection{Tentativa de cálculo do razão entre as funções de Bessel}
+%%-------------------------------------------------------------------------------
+%Queremos de fato calcular $\gamma_n=\zeta_n/\zeta_{n+1}$ e também
+%$C_n=\psi_n/\zeta_n$. Para isto vamos fazer
+%\begin{eqnarray}
+%C_n=\frac{\psi_n}{\zeta_n}
+%   =\frac{\psi_n}{\psi_n+i\chi_n}
+%   =\frac{1}{1+i(\chi_n/\psi_n)}
+%\end{eqnarray}
+%Por outro lado também precisamos saber 
+%\begin{eqnarray}
+%\gamma_n=\frac{\zeta_n}{\zeta_{n+1}}
+%        =\frac{\psi_n+i\chi_n}{\psi_{n+1}+i\chi_{n+1}}
+%        =\frac{\psi_n}{\psi_{n+1}}\frac{1+i(\chi_n/\psi_n)}{1+i(\chi_{n+1}/\psi_{n+1})}
+%\end{eqnarray}
+%Fazendo então $\beta_n=\chi_n/\psi_n$, temos
+%\begin{eqnarray}
+%C_n=\frac{1}{1+i\beta_n}
+%\end{eqnarray}
+%Por outro lado também precisamos saber 
+%\begin{eqnarray}
+%\gamma_n=\rho_n\frac{1+i\beta_n}{1+i\beta_{n+1}}
+%\end{eqnarray}
+%Deste modo, para o cálculo de $C_n$ e de $\gamma_n$, necessários para o cálculo de $a_n$
+%e $b_n$, devemos então calcular $\beta_n$. 
+%%Das propriedades das funções esféricas de Bessel vamos ter que
+%%\begin{eqnarray}
+%%\chi_n=(-1)^{n+1}\psi_{-(n+1)}
+%%\end{eqnarray}
+%Sabemos ainda, que das relações de recorrência das funções esféricas de Bessel
+%temos que $\rho_n=\psi_n/\psi_{n+1}$, e o mesmo vale para $\chi_n$, ou seja,
+%$\tilde\rho_n=\chi_n/\chi_{n+1}$, temos que $\psi_n=\rho_n\psi_{n+1}$ e 
+%$\chi_n=\tilde\rho_n\chi_{n+1}$. Deste modo temos que
+%\begin{eqnarray}
+%\frac{\chi_n}{\psi_n}=\frac{\tilde\rho_n\chi_{n+1}}{\rho_n\psi_{n+1}}
+%\end{eqnarray}
+%ou seja, diretamente obtemos que
+%\begin{eqnarray}
+%\frac{\beta_n}{\beta_{n+1}}=\frac{\tilde\rho_n}{\rho_n}
+%\end{eqnarray}
+%ou seja, a partir de um valor inicial de $\beta_n$ podemos obter todos os demais,
+%desde que conheçamos $\tilde\rho_n$ e $\rho_n$.
+%
+%Outra relação podemos obter sabendo que
+%\begin{eqnarray}
+%\tilde\rho_n+\frac{1}{\tilde\rho_{n+1}}=\rho_n+\frac{1}{\rho_{n+1}}
+%\end{eqnarray}
+%Da definição vamos obter
+%\begin{eqnarray}
+%\frac{\chi_n}{\chi_{n+1}}+\frac{\chi_{n+2}}{\chi_{n+1}}=
+%\frac{\psi_n}{\psi_{n+1}}+\frac{\psi_{n+2}}{\psi_{n+1}}
+%\end{eqnarray}
+%ou seja,
+%\begin{eqnarray}
+%\frac{\chi_{n+1}}{\psi_{n+1}}=\frac{\chi_n+\chi_{n+2}}{\psi_n+\psi_{n+2}}
+%							 =\frac{\chi_n}{\psi_n}\frac{1+\chi_{n+2}/\chi_n}{1+\psi_{n+2}/\psi_n}
+%							 =\frac{\chi_n}{\psi_n} 
+%							  \frac{1+(\chi_{n+2}/\chi_{n+1})(\chi_{n+1}/\chi_n)}
+%							       {1+(\psi_{n+2}/\psi_{n+1})(\psi_{n+1}/\psi_n)}
+%\end{eqnarray}
+%Substituindo obtemos
+%\begin{eqnarray}
+%\frac{\beta_{n+1}}{\beta_n}=\frac{1+1/(\tilde\rho_n\tilde\rho_{n+1})}{1+1/(\rho_n\rho_{n+1})}
+%						   =\frac{\rho_n\rho_{n+1}}{\tilde\rho_n\tilde\rho_{n+1}}
+%						    \frac{1+\tilde\rho_n\tilde\rho_{n+1}}{1+\rho_n\rho_{n+1}}
+%\end{eqnarray}
+%Substituindo o valor obtido anteriormente
+%\begin{eqnarray}
+%\frac{\beta_{n+1}}{\beta_n}=\frac{\beta_{n+1}\beta_{n+2}}{\beta_n\beta_{n+1}}
+%						    \frac{1+\tilde\rho_n\tilde\rho_{n+1}}{1+\rho_n\rho_{n+1}}
+%\end{eqnarray}
+%ou seja
+%\begin{eqnarray}
+%\frac{\beta_{n+1}}{\beta_{n+2}}=\frac{1+\tilde\rho_n\tilde\rho_{n+1}}{1+\rho_n\rho_{n+1}}
+%\end{eqnarray}
+%Agora reduzindo os índices e recuperando o valor obtido anteriormente
+%\begin{eqnarray}
+%\frac{\beta_{n}}{\beta_{n+1}}=\frac{1+\tilde\rho_{n-1}\tilde\rho_{n}}{1+\rho_{n-1}\rho_{n}}
+%						     =\frac{\tilde\rho_n}{\rho_n}
+%\end{eqnarray}
+%que até agora não quer dizer nada!
+%%-------------------------------------------------------------------------------
+%\subsubsection{O método de Jianqi Shen \& Xiaoshu Cai}
+%Usam a seguinte relação de recorrência para o cálculo de $C_n$
+%\begin{equation}
+%C_n=C_{n-1}\frac{B_n+n/x}{A_n+n/x}
+%\end{equation}
+%Lembrando que $C_n=\psi_n/\zeta_n$, $B_n=\zeta_n'/\zeta_n$ e $A_n=\psi_n'/\psi_n$,
+%esta equação foi obtida a partir da relação
+%\begin{equation}
+%\psi_{n-1}\zeta_{n-1}=\zeta_{n-1}\psi_{n-1}
+%\end{equation}
+%e utilizando a relação de recorrência
+%\begin{equation}
+%R_{n-1}=R_n'+\frac{n}{x}R_n
+%\end{equation}
+%faz com que
+%\begin{equation}
+%\psi_{n-1}\left(\zeta_n'+\frac{n}{x}\zeta_n\right)=\zeta_{n-1}\left(\psi_n'+\frac{n}{x}\psi_n\right)
+%\end{equation}
+%Agora, basta retirar as funções de dentro dos parênteses
+%\begin{equation}
+%\psi_{n-1}\zeta_n\left(B_n+\frac{n}{x}\right)=\zeta_{n-1}\psi_n\left(A_n+\frac{n}{x}\right)
+%\end{equation}
+%Agora temos
+%\begin{equation}
+%\frac{\psi_{n-1}}{\zeta_{n-1}}\left(B_n+\frac{n}{x}\right)=\frac{\psi_n}{\zeta_n}\left(A_n+\frac{n}{x}\right)
+%\end{equation}
+%ou seja
+%\begin{equation}
+%C_n=C_{n-1}\frac{B_n+n/x}{A_n+n/x}
+%\end{equation}
+%Por outro lado, não queremos usar derivadas logarítmicas. Em vez disto, vamos
+%utilizar as relações $A_n=\rho_{n-1}-n/x$ e $B_n=\gamma_{n-1}-n/x$, e substituindo
+%na equação acima obtemos imediatamente
+%\begin{equation}
+%C_n=C_{n-1}\frac{\gamma_{n-1}}{\rho_{n-1}}
+%\end{equation}
+Assim, calculamos $\rho_n$ (ou $A_n$) via \emph{downward recurrence}, utilizando o método
+de Lentz para calcular o valor inicial, e $\gamma_n$ (ou $B_n$) via \emph{upward recurrence},
+calculando os valores iniciais manualmente, já que temos as funções tabeladas.
+%
+%
+%Esta relação pode também ser obtida imediatamente, lembrando que
+Podemos nos valer da definição de 
+$\psi_n=\rho_n\psi_{n+1}$ e  $\zeta_n=\gamma_n\zeta_{n+1}$. Dividindo
+uma equação pela outra, obtemos imediatamente
+\begin{equation}
+\frac{\psi_n}{\zeta_n}=\frac{\rho_{n}}{\gamma_{n}}\frac{\psi_{n+1}}{\zeta_{n+1}}
+%C_n=C_{n-1}\frac{\gamma_{n-1}}{\rho_{n-1}}
+\end{equation}
+ou seja, reajustando os termos e substituindo as definições
+\begin{equation}
+C_n=C_{n-1}\frac{\gamma_{n-1}}{\rho_{n-1}}.
+\end{equation}
+
+Se em vez de calcularmos as razões $\rho_n$ e $\gamma_n$, 
+tivermos calculado as derivadas logarítmicas $A_n$ e $B_n$,
+podemos fazer $\rho_{n-1}=A_n+n/x$ e $\gamma_{n-1}=B_n-n/x$,
+obtendo assim a relação de recorrência 
+\begin{equation}
+C_n=C_{n-1}\frac{B_n+n/x}{A_n+n/x}.
+\end{equation}
+Com isto temos todos os elementos de que necessitamos para calcular os coeficientes
+de Mie.
+
+O mesmo raciocínio vale se quisermos calcular os campos internos. Temos então que
+$D_n=\psi_n(x)/\psi_n(Mx)$. Utilizando a definção de 
+$\rho_n=\rho_n(x)=\psi_n(x)/\psi_{n+1}(x)$,
+e fazendo $\rho_n^M=\psi_n(Mx)/\psi_{n+1}(Mx)=\rho_n(Mx)$, temos que
+\begin{equation}
+D_n=D_{n+1}\frac{\rho_{n}}{\rho_{n}^M}
+\end{equation}
+ou, a relação inversa
+\begin{equation}
+D_{n}=D_{n-1}\frac{\rho_{n-1}^M}{\rho_{n-1}}
+\end{equation}
+ou termos de derivadas logarítmicas
+\begin{equation}
+D_{n}=D_{n-1}\frac{A_n(Mx)-n/(Mx)}{A_n(x)-n/x}
+\end{equation}
+
+O cálculo de $\rho_n$ é feito via \emph{downward recurrence},
+com valor inicial $\rho_N$ é calculado via método de Lentz.
+Deste modo, vamos ter que
+\begin{equation}
+\rho_{n-1}=S_{2n+1}-\frac{1}{\rho_{n}}
+\end{equation}
+O cálculo de $\gamma_n$ é feito via \emph{upward recurrence},
+com valor inicial calculado a partir das expressões para
+as funções de Riccati-Bessel, ou seja,
+\begin{eqnarray}
+\gamma_{n}=\frac{1}{S_{2n+1}-\gamma_{n-1}}
+\end{eqnarray}
+sendo que 
+\begin{equation}
+\gamma_0=\frac{\zeta_0}{\zeta_1}%=\frac{\psi_0+i\chi_0}{\psi_1+i\chi_1}=\frac{}{}
+\end{equation}
+Temos ainda que $\zeta_n=\psi_n+i\chi_n$, $\psi_0=\sin x$ e $\chi_0=\cos x$ e ainda
+que
+\begin{eqnarray}
+\psi_1&=&\frac{1}{x}\psi_0-\chi_0\\
+\chi_1&=&\frac{1}{x}\chi_0-\psi_0\\
+\end{eqnarray}
+Com isto temos como calcular $\gamma_0$.
+%-------------------------------------------------------------------------------

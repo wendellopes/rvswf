@@ -1,17 +1,18 @@
-\name{vwfd.rwg}
-\alias{vwfd.rwg}
-\title{Vector Wave Field Definition: Rectangular Wave Guide}
+\name{vwfd.cwg}
+\alias{vwfd.cwg}
+\title{Vector Wave Field Definition: Cylindrical Wave Guide}
 \usage{
-vwfd.rwg(TE = TRUE, kx, ky, kz, x, y, z)
+vwfd.cwg(TE = TRUE, M, S, g, kz, x, y, z)
 }
 \arguments{
   \item{TE}{Type of the wave field.}
 
-  \item{kx}{Component \eqn{x} of the wave vector (single
-  value).}
+  \item{M}{Order of the wave guide.}
 
-  \item{ky}{Component \eqn{y} of the wave vector (single
-  value).}
+  \item{S}{Chirality of the wave guide (\eqn{S=\pm 1})}
+
+  \item{g}{Transversal component of the wave vector
+  (\eqn{\gamma}).}
 
   \item{kz}{Component \eqn{z} of the wave vector (single
   value).}
@@ -31,10 +32,10 @@ six complex values of components of the electromagnetic
 fields.
 }
 \description{
-Vector Wave Field Definition: Rectangular Wave Guide
+Vector Wave Field Definition: Cylindrical Wave Guide
 }
 \details{
-Calculates the vector components of a rectangular wave
+Calculates the vector components of a cylindrical wave
 guide of type Transversal Electric (TE), that means that
 \eqn{E_z=0}, or Transversal Magnetic (TM), that means
 \eqn{H_z=0}, in terms of the components of the wave vector

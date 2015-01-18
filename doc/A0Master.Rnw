@@ -1,0 +1,58 @@
+%--------------------------------------------------------------------------------
+% R CMD Sweave --encoding=latin1 A0Master.Rnw
+% R CMD pdflatex A0Master.tex
+% R CMD bibtex A0Master.tex
+% R CMD pdflatex A0Master.tex
+% R CMD pdflatex A0Master.tex
+%--------------------------------------------------------------------------------
+\documentclass[12pt]{book}                  %% LaTeX 2e
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{colordvi}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage[numbers,sort&compress,super,comma,square]{natbib}
+\usepackage{hypernat}
+\usepackage{fancyhdr}
+\usepackage{bm}
+\usepackage[letterpaper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
+%--------------------------------------------------------------------------------
+\renewcommand\familydefault{\sfdefault}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand*{\fplus}{\genfrac{}{}{0pt}{}{}{+}}
+\newcommand*{\fdots}{\genfrac{}{}{0pt}{}{}{\cdots}}
+%--------------------------------------------------------------------------------
+\title{Expans\~ao de Campos Eletromagn\'eticos Arbitr\'arios em Termos de 
+Fun\c c\~oes de Onda Vetoriais}
+\author{Wendel Lopes Moreira}
+%-------------------------------------------------------------------------------
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+%-------------------------------------------------------------------------------
+\onehalfspacing
+\maketitle
+%-------------------------------------------------------------------------------
+\tableofcontents
+%-------------------------------------------------------------------------------
+\part{C\'alculo das Fun\c c\~oes de Bessel}
+%-------------------------------------------------------------------------------
+\SweaveInput{B1TeoriaDeMie.Rnw}
+\SweaveInput{B2CalculoCoeficientesMie.Rnw}
+\SweaveInput{B3BesselFunctions.Rnw}
+\SweaveInput{B4FracoesContinuadas.Rnw}
+%-------------------------------------------------------------------------------
+\part{Harm\^onicos Esf\'ericos Vetoriais}
+%-------------------------------------------------------------------------------
+\SweaveInput{C1SphericalHarmonics.Rnw}
+\SweaveInput{C2Expansoes.Rnw}
+\part{C\'alculos de For\c ca \'Optica}
+\SweaveInput{C3CalculoForca.Rnw}
+\appendix
+\SweaveInput{C4MudancaCoordenadas.Rnw}
+%-------------------------------------------------------------------------------
+\end{document}

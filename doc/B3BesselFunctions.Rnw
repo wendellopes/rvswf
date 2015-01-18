@@ -1,0 +1,186 @@
+% !Rnw root = A0Master.Rnw
+%-------------------------------------------------------------------------------
+\chapter{Funções de Bessel}
+%-------------------------------------------------------------------------------
+Estamos interessados em calcular os coeficientes de Mie, coeficientes estes
+que depende das funções esféricas de Riccati-Bessel e Riccati-Hankel, dadas
+por
+\begin{eqnarray}
+R_n(x) &=&\sqrt{\frac{\pi x}{2}}Z_{\nu+1/2}(x)=xz_n(x)
+%\psi_n(x) &=&\sqrt{\frac{\pi x}{2}}J_{\nu+1/2}(x)=xj_n(x)\\
+%\zeta_n(x)&=&\sqrt{\frac{\pi x}{2}}H_{\nu+1/2}^{(1)}(x)=xh_n^{(1)}(x)
+\end{eqnarray}
+em que $R_n(x)$ são as chamadas funções de Riccati-Bessel, $Z_n(x)$ são
+as chamdas funções (cilíndricas) de Bessel e $z_n(x)$ são as funções
+esféricas de Bessel. Vamos tratar do cálculo destas três funções
+em conjunto.
+%-------------------------------------------------------------------------------
+\subsection{Funções cilíndricas de Bessel}
+%-------------------------------------------------------------------------------
+Os métodos modernos de cálculo das funções de Bessel são baseados em 
+relações de recorrência
+\begin{eqnarray}
+Z_{\nu-1}(x)+Z_{\nu+1}(x)&=&\frac{2\nu}{x}Z_\nu(x)\\
+Z_{\nu-1}(x)-Z_{\nu+1}(x)&=&2Z_\nu'(x)
+\end{eqnarray}
+As relações assintóticas das funções de Bessel nos dão que
+\begin{eqnarray}
+J_\nu(x)&\approx& \sqrt{\frac{1}{2\pi\nu}}\left(\frac{ex}{2\nu}\right)^{ \nu}\\
+Y_\nu(x)&\approx&-\sqrt{\frac{2}{ \pi\nu}}\left(\frac{ex}{2\nu}\right)^{-\nu}
+\end{eqnarray}
+ que nos dá para valores de $\nu$ grandes
+\begin{eqnarray}
+\alpha_\nu&=&\frac{J_{\nu-1}(x)}{J_\nu(x)}\approx\frac{2\nu}{x}\\
+\beta_\nu &=&\frac{Y_{\nu-1}(x)}{Y_\nu(x)}\approx\frac{x}{2\nu}
+\end{eqnarray}
+o que faz com o módulo de $\beta_\nu$ se torne cada vez menor à medida em que
+$\nu$ se torna muito maior que $|x|$ enquanto $\alpha_\nu$ cresce à mesma
+medida. Isto nos diz que para calcularmos $Y_\nu$ devemos usar a recorrência
+crescente em $\nu$ e para calcularmos $J_\nu$ devemos usar recorrência
+decrescente. 
+
+Podemos ainda dividir ambas as equações
+\begin{eqnarray}
+Z_{\nu-1}(x)+Z_{\nu+1}(x)&=&\frac{2\nu}{x}Z_\nu(x)\\
+Z_{\nu-1}(x)-Z_{\nu+1}(x)&=&2Z_\nu'(x)
+\end{eqnarray}
+por $Z_{\nu}(x)$, e definindo $D_\nu(x)=Z_{\nu}'(x)/Z_{\nu}(x)$ e 
+$\gamma_\nu=Z_{\nu}(x)/Z_{\nu+1}(x)$, e $S_\nu(x)=\nu/x$, vamos obter
+\begin{eqnarray}
+%\frac{Z_{\nu-1}(x)}{Z_\nu(x)}+\frac{Z_{\nu+1}(x)}{Z_\nu(x)}&=&\frac{2\nu}{x}\\
+%\frac{Z_{\nu-1}(x)}{Z_\nu(x)}-\frac{Z_{\nu+1}(x)}{Z_\nu(x)}&=&2D_\nu(x)
+\gamma_{\nu-1}+\frac{1}{\gamma_\nu}&=&2S_\nu\\
+\gamma_{\nu-1}-\frac{1}{\gamma_\nu}&=&2D_\nu
+\end{eqnarray}
+Somando/subtraindo as duas equações obtemos
+\begin{eqnarray}
+\gamma_{\nu}        &=&S_{\nu+1}+D_{\nu+1}\\
+\frac{1}{\gamma_\nu}&=&S_\nu-D_\nu
+\end{eqnarray}
+
+A partir da equação acima obtemos duas relações de
+recorrência, uma para $D_\nu$ e outra para $\gamma_\nu$,
+sendo que multiplicando uma pela outra vamos obter
+\begin{eqnarray}
+(S_\nu-D_\nu)(S_{\nu+1}+D_{\nu+1})=1
+\end{eqnarray}
+e ajustando os índices e somando as duas equações obtemos
+\begin{eqnarray}
+%\gamma_{\nu}        &=&S_{\nu+1}+D_{\nu+1}\\
+%\frac{1}{\gamma_{\nu+1}}&=&S_{\nu+1}-D_{\nu+1}
+\gamma_{\nu}+\frac{1}{\gamma_{\nu+1}}=S_{2(\nu+1)}
+\end{eqnarray}
+
+Esta equação pode ser escrita de modo a obtermos uma relação
+de recorrência crescente ou decrescente, de acordo com o caso
+em questão.
+%-------------------------------------------------------------------------------
+\subsection{Funções esféricas de Bessel}
+%-------------------------------------------------------------------------------
+As mesmas conclusões se aplicam para as funções esféricas
+de Bessel
+\begin{eqnarray}
+z_n(x)=\sqrt{\frac{\pi}{2x}}Z_{\nu+1/2}(x)
+\end{eqnarray}
+que obedecem relações de recorrência
+\begin{eqnarray}
+ z_{n-1}(x)+     z_{n+1}(x)&=&(2n+1)\frac{z_n(x)}{x}\\
+nz_{n-1}(x)-(n+1)z_{n+1}(x)&=&(2n+1)z_n'(x)
+\end{eqnarray}
+%Temos também as expressões para a derivada
+%\begin{eqnarray}
+%z_{n}'(x)= z_{n-1}(x)-(n+1)\frac{z_n(x)}{x}\\
+%z_{n}'(x)=-z_{n+1}(x)+ n   \frac{z_n(x)}{x}
+%\end{eqnarray}
+Sabendo que
+\begin{eqnarray}
+\rho_n=\frac{R_{n}}{R_{n+1}}=\frac{z_{n}}{z_{n+1}}=\frac{Z_{n+1/2}}{Z_{n+3/2}}=\gamma_{n+1/2}
+\end{eqnarray}
+e que $c_n=z_n'/z_n$, vamos novamente dividir as equações por $z_n(x)$,
+o que vai nos dar
+\begin{eqnarray}
+ \rho_{n-1}+     \frac{1}{\rho_n}&=&S_{2n+1}\\
+n\rho_{n-1}-(n+1)\frac{1}{\rho_n}&=&(2n+1)c_n
+\end{eqnarray}
+Somando/subtraindo as duas equações obtemos
+\begin{eqnarray}
+\rho_{n}          &=&S_{n+2}+c_{n+1}\\
+\frac{1}{\rho_{n}}&=&S_{n}-c_n
+\end{eqnarray}
+Multiplicando ambas as equações vamos obter
+\begin{eqnarray}
+(S_{n+2}+c_{n+1})(S_{n}-c_n)=1
+\end{eqnarray}
+Ajustando os índices e somando obtemos também
+\begin{eqnarray}
+%\rho_{n}          &=&S_{n+2}+c_{n+1}\\
+%\frac{1}{\rho_{n+1}}&=&S_{n+1}-c_{n+1}
+\rho_{n}+\frac{1}{\rho_{n+1}}=S_{2n+3}
+\end{eqnarray}
+
+%-------------------------------------------------------------------------------
+\subsection{Funções de Riccati-Bessel}
+%-------------------------------------------------------------------------------
+As relações de recorrência para as funções de Riccati-Bessel 
+são obtidas da mesma forma, fazendo-se $R_n(x)=xz_n(x)$ nas
+equações acima, o que nos dá
+\begin{eqnarray}
+R_{n-1}(x)     + R_{n+1}(x)&=&(2n+1)\frac{R_n(x)}{x}\\
+(n+1)R_{n-1}(x)-nR_{n+1}(x)&=&(2n+1)R_n'(x)
+\end{eqnarray}
+Vamos agora calcular as derivadas logarítmicas $C_n(x)=R_n'/R_n$.
+Dividindo ambos os lados das expressões para $R_n(x)$ vamos ter
+a derivada logarítmica 
+\begin{eqnarray}
+\rho_{n-1}     + \frac{1}{\rho_n}&=&\frac{2n+1}{x}\\
+(n+1)\rho_{n-1}-n\frac{1}{\rho_n}&=&(2n+1)C_n
+\end{eqnarray}
+Somando/subtraindo as duas equações obtemos
+\begin{eqnarray}
+\rho_{n}          &=&S_{n+1}+C_{n+1}\\
+\frac{1}{\rho_{n}}&=&S_{n+1}-C_n
+\end{eqnarray}
+Multiplicando ambas as equações 
+\begin{eqnarray}
+\Big(S_{n+1}-C_n\Big)\Big(S_{n+1}+C_{n+1}\Big)=1
+\end{eqnarray}
+Ajustando os índices e somando obtemos também
+\begin{eqnarray}
+%\rho_{n}          &=&S_{n+1}+C_{n+1}\\
+%\frac{1}{\rho_{n+1}}&=&S_{n+2}-C_{n+1}
+\rho_{n}+\frac{1}{\rho_{n+1}}=S_{2n+3}
+\end{eqnarray}
+
+
+
+Estas relações de recorrência dependem da função cuja razão vai
+ser calculada e da direção em que a recorrência é aplicada.
+A vantagem computacional das derivadas logarítmicas e das razões
+está no fato de que  estas quantidades são todas de ordens
+comparáveis e geralmente dentro de poucas ordens de magnitude
+da unidade, mesmo para argumentos complexos, assim minimizando
+problemas numéricos.
+
+%-------------------------------------------------------------------------------
+\subsection{Cálculo das funções de Bessel}
+%-------------------------------------------------------------------------------
+Como pudemos ver, todas as funções de Bessel obedecem a uma mesma regra, ou seja
+\begin{eqnarray}
+J_n   ,Y_n   &\to&\Big(S_{n  }-D_n\Big)\Big(S_{n+1}+D_{n+1}\Big)=1\\
+j_n   ,y_n   &\to&\Big(S_{n  }-c_n\Big)\Big(S_{n+2}+c_{n+1}\Big)=1\\
+\psi_n,\chi_n&\to&\Big(S_{n+1}-C_n\Big)\Big(S_{n+1}+C_{n+1}\Big)=1
+\end{eqnarray}
+Deste modo, tomando um valor de $N>>x$, calculamos por recorrência descendente
+as derivadas logarítmicas $D_n$, $C_n$ ou $c_n$, iniciando com $D_N=C_N=c_N=0$. 
+Chegando ao fim calculamos por recorrência ascendente usando
+\begin{eqnarray}
+J_n   ,Y_n   &\to&\gamma_n=S_{n+1}+D_{n+1}\\
+j_n   ,y_n   &\to&\rho_n  =S_{n+2}+c_{n+1}\\
+\psi_n,\chi_n&\to&\rho_n  =S_{n+1}+C_{n+1}
+\end{eqnarray}
+Este método nos permite calcular todas as funções de Bessel de que necessitamos.
+Entretanto, se quisermos adicionar um termo a mais na fração continuada
+$D_n$, $C_n$ ou $c_n$ temos de recalcular a fração inteira. Vamos então ver 
+um modo de calcular esta fração continuada pelo método de Lentz, que evita
+que tenhamos de recalcuar a fração continuada quando queremos aumentar a precisão
+do cálculo.

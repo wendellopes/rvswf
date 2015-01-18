@@ -1,0 +1,378 @@
+% !Rnw root = A0Master.Rnw
+%-------------------------------------------------------------------------------
+\chapter{Frações continuadas}
+%-------------------------------------------------------------------------------
+Estamos interessados em resolver o problema de econtrar o valor da
+função $f$ dada por
+\begin{eqnarray}
+f=b_0+\cfrac{a_1}{b_1+\cfrac{a_2}{b_2+\cfrac{a_3}{b_3+\ldots}}}
+\end{eqnarray}
+que é melhor escrito como
+\begin{eqnarray}
+f=b_0+\frac{a_1}{b_1}\fplus\frac{a_2}{b_2}\fplus\frac{a_3}{b_3}\fdots
+\end{eqnarray}
+% %Sendo assim, definimos
+% %\begin{eqnarray}
+% %f_k=b_0+\frac{a_1}{b_1}\fplus\frac{a_2}{b_2}\fplus\fdots\fplus\frac{a_k}{b_k}
+% %\end{eqnarray}
+% %que podemos fazer 
+% %\begin{eqnarray}
+% %f_k=[b_1,b_2,b_3,\ldots,b_k]
+% %\end{eqnarray}
+% %o que faz com que
+% %\begin{eqnarray}
+% %\lim_{k\to\infty}f_k=f.
+% %\end{eqnarray}
+Deste modo, temos ainda que
+\begin{eqnarray}
+f_0&=&b_0\\
+f_1&=&b_0+\frac{a_1}{b_1}=\frac{b_0b_1+a_1}{b_1}\\
+f_2&=&b_0+\frac{a_1}{b_1+a_2/b_2}
+%    = \frac{b_0(a_2+b_1b_2)+a_1b_2}{a_2+b_1b_2}
+    = \frac{(b_0b_1+a_1)b_2+b_0a_2}{b_2b_1+a_2}
+\end{eqnarray}
+e assim por diante. De uma forma geral podemos escrever 
+\begin{eqnarray}
+f_k=\frac{p_k}{q_k}
+\end{eqnarray}
+e pode-se mostrar ainda que 
+\begin{eqnarray}
+p_k&=&b_kp_{k-1}+a_kp_{k-2}\\
+q_k&=&b_kq_{k-1}+a_kq_{k-2}
+\end{eqnarray}
+Deste modo, temos que 
+$p_{-2}=0$, $p_{-1}=1$, $p_{ 0}=b_0$,
+$q_{-2}=1$, $q_{-1}=0$, $q_{ 0}=1$, sendo que $a_0=1$.
+Já sabemos que esta série vale para os primeiros termos.
+Agora vamos calcular $f_{k+1}$ dado por
+\begin{eqnarray}
+f_{k+1}=\frac{p_{k+1}}{q_{k+1}}
+       =\frac{b_{k+1}p_{k}+a_{k+1}p_{k-1}}{b_{k+1}q_{k}+a_{k+1}q_{k-1}}
+       =\frac{b_{k+1}(b_kp_{k-1}+a_{k}p_{k-2})+a_{k+1}p_{k-1}}{b_{k+1}(b_kq_{k-1}+a_{k}q_{k-2})+a_{k+1}q_{k-1}}
+\end{eqnarray}
+Vamos agora simplificar multiplicando a expressão acima por $1=(1/b_{k+1})/(1/b_{k+1})$ e em
+seguida simplificando
+\begin{eqnarray}
+f_{k+1}
+=\frac{(b_k+a_{k+1}/b_{k+1})p_{k-1}+a_kp_{k-2}}{(b_k+a_{k+1}/b_{k+1})q_{k-1}+a_kq_{k-2}}
+\end{eqnarray}
+que mantém a forma de convergência de $f_k\to f$.
+
+Por outro lado, sabemos que
+\begin{eqnarray}
+p_k&=&b_kp_{k-1}+a_kp_{k-2}\\
+q_k&=&b_kq_{k-1}+a_kq_{k-2}
+\end{eqnarray}
+o que nos diz que
+\begin{eqnarray}
+\frac{p_k}{p_{k-1}}&=&b_k+a_k\frac{p_{k-2}}{p_{k-1}}=b_k+\frac{a_k}{p_{k-1}/p_{k-2}}\\
+\frac{q_k}{q_{k-1}}&=&b_k+a_k\frac{q_{k-2}}{q_{k-1}}=b_k+\frac{a_k}{q_{k-1}/q_{k-2}}
+\end{eqnarray}
+Podemos fazer  $P_k=p_k/p_{k-1}$ e $Q_k=q_k/q_{k-1}$, o que nos dá a partir da equação acima
+\begin{eqnarray}
+P_k&=&b_k+\frac{a_k}{P_{k-1}}\\% =\frac{p_k}{p_{k-1}}\\
+Q_k&=&b_k+\frac{a_k}{Q_{k-1}}  % =\frac{q_k}{q_{k-1}}
+\end{eqnarray}
+Isto nos leva novamente a uma equação em frações continuadas. O último termo
+é o que contém $a_1$, o que nos dá, substituindo os valores conhecidos
+de
+$p_{-2}=0$, $p_{-1}=1$, $p_{ 0}=a_0$,
+$q_{-2}=1$, $q_{-1}=0$, $q_{ 0}=1  $, vamos obter
+\begin{eqnarray}
+P_1&=&b_1+a_1/b_0\\
+Q_1&=&b_1
+\end{eqnarray}
+o que nos diz que a fração continuada $Q_n$ é menor
+que a fração continuada $P_k$, ou seja,
+\begin{eqnarray}
+p_k&=\frac{p_k}{p_{k-1}}p_{k-1}
+    =\frac{p_k}{p_{k-1}}\frac{p_{k-1}}{p_{n-2}}p_{n-2}
+    =\frac{p_k}{p_{k-1}}\frac{p_{k-1}}{p_{k-2}}\ldots\frac{p_1}{p_0}p_0\\
+q_k&=\frac{q_k}{q_{k-1}}q_{k-1}
+    =\frac{q_k}{q_{k-1}}\frac{q_{k-1}}{q_{k-2}}q_{k-2}
+    =\frac{q_k}{q_{k-1}}\frac{q_{k-1}}{q_{k-2}}\ldots\frac{q_1}{q_0}q_0
+\end{eqnarray}
+ou seja
+\begin{eqnarray}
+p_k&=&P_kP_{k-1}P_{k-2}\ldots P_3P_2P_1p_0\\
+q_k&=&Q_kQ_{k-1}Q_{k-2}\ldots Q_3Q_2Q_1q_0
+\end{eqnarray}
+o que nos leva à equação final
+\begin{eqnarray}
+f_k=\frac{P_kP_{k-1}P_{k-2}\ldots P_3P_2P_1a_0}{Q_kQ_{k-1}Q_{k-2}\ldots Q_3Q_2Q_1}
+\end{eqnarray}
+Esta equação é a base do método de Lentz, e tem a vantagem de que 
+é trivial calcular $f_k$ a partir de $f_{k-1}$, enquanto a passagem
+de $k$ para $k+1$ na fração continuada original é feita recalculando
+completamente a fração. Desta maneira, esta equação nos permite 
+incrementar $k$ às custas de duas adições e três divisões por
+passo até que $P_k/Q_k$ seja indistinguível da unidade. 
+Isto porque à medida em que $f_k$ tende a $f$, temos que
+\begin{eqnarray}
+f_k=\frac{a_0\prod_{j=1}^{k} P_j}{b_0\prod_{j=1}^{k} Q_j}
+\end{eqnarray}
+temos então
+que 
+\begin{eqnarray}
+f_{k+1}
+=\frac{a_0\prod_{j=1}^{k+1} P_j}{b_0\prod_{j=1}^{k+1} Q_j}
+=\left(\frac{P_{k+1}}{Q_{k+1}}\right)\frac{a_0\prod_{j=1}^{k} P_j}{b_0\prod_{j=1}^{k} Q_j}
+=\frac{P_{k+1}}{Q_{k+1}}f_k
+\end{eqnarray}
+Deste modo, obrigatoriamente
+temos que $P_{k+1}/Q_{k+1}\to 1$.
+Isto possibilita
+a máxima precisão para uma determinada representação de
+ponto flutuante, da maneira mais simples possivel e provavelmente
+com o mínimo de esforço computacional.
+%-------------------------------------------------------------------------------
+\section{Calculando as frações continuadas}
+%-------------------------------------------------------------------------------
+Estamos interessados em calcular a aproximação $f_k\to f$ dada por
+\begin{eqnarray}
+f_k=\frac{P_kP_{k-1}P_{k-2}\ldots P_3P_2P_1a_0}{Q_kQ_{k-1}Q_{k-2}\ldots Q_3Q_2Q_1}
+\end{eqnarray}
+em que podemos calcular
+\begin{eqnarray}
+P_k&=&b_k+\frac{a_k}{P_{k-1}}\\
+Q_k&=&b_k+\frac{a_k}{Q_{k-1}}
+\end{eqnarray}
+sabendo ainda que
+\begin{eqnarray}
+P_1&=&b_1+\frac{a_1}{b_0}\\
+Q_1&=&b_1
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\subsection{Calculando $\sqrt{\alpha}$}
+%-------------------------------------------------------------------------------
+Vamos expandir em frações parciais um valor conhecido. 
+Sabemos que $(\sqrt{\alpha})^2=(1+x)^2=\alpha$ e que $(1+x)^2=1+2x+x^2=x(2+x)+1$. Com isto
+temos que $x(2+x)=\alpha-1$, o que nos diz que $x=(\alpha-1)/(2+x)$.
+Substituindo $x$ na expressão de $x$ obtemos
+\begin{eqnarray}
+x=\frac{\alpha-1}{2}\fplus\frac{\alpha-1}{2}\fplus\frac{\alpha-1}{2}\fplus\frac{\alpha-1}{2}\fdots
+\end{eqnarray}
+Agora fazendo $\sqrt{\alpha}=1+x$, 
+\begin{eqnarray}
+\sqrt{\alpha}=1+\frac{\alpha-1}{2}\fplus\frac{\alpha-1}{2}\fplus\frac{\alpha-1}{2}\fplus\frac{\alpha-1}{2}\fdots
+\end{eqnarray}
+Deste modo, temos todos os termos para calcularmos o valor de $\sqrt{\alpha}$.
+
+%-------------------------------------------------------------------------------
+\subsection{Calculando as derivadas logarítmicas das funções de Bessel}
+%-------------------------------------------------------------------------------
+Como pudemos ver, todas as derivadas logaríticas das funções de Bessel 
+obedecem a uma fração continuada, ou seja
+\begin{eqnarray}
+J_n   ,Y_n   &\to&\Big(S_{n  }-D_n\Big)\Big(S_{n+1}+D_{n+1}\Big)=1\\
+n_n   ,y_n   &\to&\Big(S_{n  }-c_n\Big)\Big(S_{n+2}+c_{n+1}\Big)=1\\
+\psi_n,\chi_n&\to&\Big(S_{n+1}-C_n\Big)\Big(S_{n+1}+C_{n+1}\Big)=1
+\end{eqnarray}
+Deste modo, podemos calcular as funções de Bessel. Transformando
+as expressões acima em uma relação direta, obtemos para 
+a recorrência descendente
+\begin{eqnarray}
+J_n   ,Y_n   &\to&D_{n}=S_{n  }-\frac{1}{S_{n+1}+D_{n+1}}\\
+j_n   ,y_n   &\to&c_{n}=S_{n  }-\frac{1}{S_{n+2}+c_{n+1}}\\
+\psi_n,\chi_n&\to&C_{n}=S_{n+1}-\frac{1}{S_{n+1}+C_{n+1}}
+\end{eqnarray}
+Vamos tomar o seguinte caso, para as funções de Riccati-Bessel
+\begin{eqnarray}
+C_{n  }&=&S_{n+1}-\frac{1}{S_{n+1}+C_{n+1}}\\
+C_{n+1}&=&S_{n+2}-\frac{1}{S_{n+2}+C_{n+2}}\\
+C_{n+2}&=&S_{n+3}-\frac{1}{S_{n+3}+C_{n+3}}%\\
+% C_{n+3}&=&S_{n+4}-\frac{1}{S_{n+4}+C_{n+4}}\\
+% C_{n+4}&=&S_{n+5}-\frac{1}{S_{n+5}+C_{n+5}}\\
+% C_{n+5}&=&S_{n+6}-\frac{1}{S_{n+6}+C_{n+6}}\\
+% C_{n+6}&=&S_{n+7}-\frac{1}{S_{n+7}+C_{n+7}}
+\end{eqnarray}
+ou seja
+\begin{eqnarray}
+%C_{n}=S_{n+1}-\cfrac{1}{S_{n+1}+S_{n+2}-\cfrac{1}{S_{n+2}+S_{n+3}-\cfrac{1}{S_{n+3}+S_{n+4}-\cfrac{1}{S_{n+4}+S_{n+5}+\ldots}}}}
+C_{n}=S_{n+1}+\frac{-1}{S_{n+1}+S_{n+2}}\fplus\frac{-1}{S_{n+2}+S_{n+3}}\fplus\frac{-1}{S_{n+3}+S_{n+4}}\fdots
+\end{eqnarray}
+e como $S_m+S_l=S_{m+l}$, temos que
+\begin{eqnarray}
+%C_{n}=S_{n+1}-\cfrac{1}{S_{n+3}-\cfrac{1}{S_{n+5}-\cfrac{1}{S_{n+7}-\cfrac{1}{S_{n+9}+\ldots}}}}
+C_{n}=S_{n+1}+\cfrac{-1}{S_{2n+3}}\fplus\frac{-1}{S_{2n+5}}\fplus\frac{-1}{S_{2n+7}}\fplus\frac{-1}{S_{2n+9}}\fdots
+\end{eqnarray}
+e com isto temos $b_0=S_{n+1}$, $a_j=-1$, $b_j=S_{2(n+j)+1}$ sendo que $1\leq j\leq\infty$.
+
+Para as funções esféricas de Bessel temos uma relação semelhante, ou seja
+\begin{eqnarray}
+c_{n}=S_{n}+\cfrac{-1}{S_{2n+3}}\fplus\frac{-1}{S_{2n+5}}\fplus\frac{-1}{S_{2n+7}}\fplus\frac{-1}{S_{2n+9}}\fdots
+\end{eqnarray}
+e com isto temos $b_0=S_{n}$, $a_j=-1$, $b_j=S_{2(n+j)+1}$ sendo que $1\leq j\leq\infty$.
+Finalmente para as funções cilíndricas de Bessel vamos ter
+\begin{eqnarray}
+D_{n}=S_{n}+\cfrac{-1}{S_{2n+2}}\fplus\frac{-1}{S_{2n+4}}\fplus\frac{-1}{S_{2n+6}}\fplus\frac{-1}{S_{2n+8}}\fdots
+\end{eqnarray}
+e com isto temos $b_0=S_{n}$, $a_j=-1$, $b_j=S_{2(n+j)}$ sendo que $1\leq j\leq\infty$,
+lembrando que $S_n=n/x$.
+
+%-------------------------------------------------------------------------------
+\subsection{Calculando as razões entre as funções de Bessel}
+%-------------------------------------------------------------------------------
+As relações de recorrência para as razões $\gamma_\nu=Z_\nu/Z_{\nu+1}$
+e $\rho_n=R_n/R_{n+1}=z_n/z_{n+1}$ são dadas por
+\begin{eqnarray}
+\gamma_\nu+\frac{1}{\gamma_{\nu+1}}&=&S_{2(\nu+1)}\\
+\rho_n+\frac{1}{\rho_{n+1}}&=&S_{2n+3}
+\end{eqnarray}
+Podemos simplificar as expressões fazendo
+\begin{eqnarray}
+u_n+\frac{1}{u_{n+1}}=w_n
+\end{eqnarray}
+o que nos dá
+\begin{eqnarray}
+u_n=w_n-\frac{1}{u_{n+1}}
+\end{eqnarray}
+ou seja
+\begin{eqnarray}
+u_n=w_n+\frac{-1}{w_{n+1}}\fplus\frac{-1}{w_{n+2}}\fplus\frac{-1}{w_{n+3}}\cdots
+\end{eqnarray}
+fazendo com que $a_j=-1$ e $b_j=w_{n+j}$, ou seja, para o caso das funções
+cilíndricas de Bessel vamos ter que $a_j=-1$ e $b_j=4S_{2(n+j+1)}$. 
+Para as funções esféricas de Bessel e Riccati-Bessel temos
+$a_j=-1$ e $b_j=S_{2(n+j)+3}$ para $0\leq j\leq\infty$.
+
+Outra possibilidade é calcular em função de $1/u_n$, ou seja
+\begin{eqnarray}
+u_n=w_n-\frac{1}{u_{n+1}}
+\end{eqnarray}
+o que nos dá que
+\begin{eqnarray}
+\frac{1}{u_n}=\frac{1}{w_n-\dfrac{1}{u_{n+1}}}
+\end{eqnarray}
+ou seja
+\begin{eqnarray}
+\frac{1}{u_n}=\frac{1}{w_n}\fplus\frac{-1}{w_{n+1}}\fplus\frac{-1}{w_{n+2}}\fdots
+\end{eqnarray}
+como mostrado em Barnett, o que nos dá que $b_0=0$, $b_j=w_{n+j-1}$, $a_1=1$ e 
+$a_k=-1$, $1\leq j\leq\infty$ e $2\leq k\leq\infty$. Com isto, vamos ter para
+o caso das funções cilíndricas de Bessel que $b_j=4S_{2(n+j)}$ e para o caso
+das funções de Riccati-Bessel e esféricas de Bessel $b_j=S_{2(n+j)+1}$.
+%-------------------------------------------------------------------------------
+\subsection{Algorítmo para o cálculo das frações continuadas}
+%-------------------------------------------------------------------------------
+Para calcularmos a fração continuada
+\begin{eqnarray}
+f=b_0+\frac{a_1}{b_1}\fplus\frac{a_2}{b_2}\fplus\frac{a_3}{b_3}\fdots
+\end{eqnarray}
+usamos o seguinte algorítmo, sendo $\epsilon$ o menor número possível
+e $\delta$ a precisão estipulada:\\
+%==================================================================%
+$f_0\leftarrow b_0$\\                                              %
+\texttt{if(}$f_0=0$\texttt{)\{$f_0\leftarrow\epsilon$\}}\\         %
+$P_0\leftarrow f_0$\\                                              %
+$Q_0\leftarrow 0$\\                                                %
+\texttt{for n in 1:N}\\                                            %
+\indent$P_n\leftarrow b_n+a_n/P_{n-1}$\\                           %
+\indent\texttt{if(}$P_n=0$\texttt{)\{$P_n\leftarrow\epsilon$\}}\\  %
+\indent$Q_n\leftarrow b_n+a_n Q_{n-1}$\\                           %
+\indent\texttt{if(}$Q_n=0$\texttt{)\{$Q_n\leftarrow\epsilon$\}}\\  %
+\indent$Q_n\leftarrow1/Q_n$\\
+\indent$\Delta_n\leftarrow P_nQ_n$\\                              %
+\indent$f_n\leftarrow f_{n-1}\Delta_n$\\                           %
+\indent\texttt{if(}$||\Delta_n-1||<\delta$\texttt{)\{exit\}}\\     %
+\texttt{end for}\\                                                 %
+%==================================================================%
+%-------------------------------------------------------------------------------
+\subsection{Cálculo das funções de Bessel}
+%-------------------------------------------------------------------------------
+Até o momento somos capazes de calcular as derivadas logarítmicas e as
+razões entre funções de Bessel, utilizando o método de Lentz-Thomsom, sendo
+que os coeficientes estão resumidos  nas Tabelas~\ref{tab:Logder},
+\ref{tab:dirrat} e \ref{tab:ibarnett}.
+Para o cálculo das funções de Bessel, temos duas alternativas: para
+o caso do cálculo de um valor isolado utilizar a derivada logarítmica
+e a razão entre duas funções consecutivas, ou para o caso de um vetor
+calcular uma série e normalizar com os valores conhecidos, em geral para
+os índices 0 e 1.
+
+\begin{table}[h!]\label{tab:Logder}
+\caption{Logarithmic derivatives of Bessel functions.}%, $S_n(x)=n/x$.}
+\centering
+\begin{tabular}{l||c|c|c|c}
+\hline
+\hline
+Função& Símbolo & $b_0$ & $a_j$ & $b_j$\\
+\hline
+Cilíndrica & $D_n$ & $S_{n  }$ & $-1$ & $S_{2(n+j)  }$\\
+Esférica   & $c_n$ & $S_{n  }$ & $-1$ & $S_{2(n+j)+1}$\\
+Riccati    & $C_n$ & $S_{n+1}$ & $-1$ & $S_{2(n+j)  }$\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]\label{tab:dirrat}
+\caption{Ratio between Bessel functions, direct calculation.}%, $S_n(x)=n/x$.}
+\centering
+\begin{tabular}{l||c|c|c}
+\hline
+\hline
+Função           & Símbolo    &  $a_j$ & $b_j$\\
+\hline
+Cilíndrica       & $\gamma_n$ & $-1$ & $S_{2(n+j+1)  }$\\
+Esférica/Riccati & $\rho_n$   & $-1$ & $S_{2(n+j+1)+1}$\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]\label{tab:ibarnett}
+\caption{Ratio between Bessel functions, Barnett calculation.}%, $S_n(x)=n/x$.}
+\centering
+\begin{tabular}{l||c|c|c|c|c}
+\hline
+\hline
+Função           & Símbolo    & $b_0$ & $a_1$ & $a_j$ & $b_j$         \\
+\hline
+Cilíndrica       & $\gamma_n$ & $  0$ & $  1$ & $ -1$ & $S_{2(n+j)  }$\\
+Esférica/Riccati & $\rho_n$   & $  0$ & $  1$ & $ -1$ & $S_{2(n+j)+1}$\\
+\hline
+\end{tabular}
+\end{table}
+
+Um detalhe importantíssimo quase nunca mencionado é que tanto as derivadas
+logarítmicas quanto as razões entre funções de Bessel estão relacionadas às
+"funções de Bessel", e não as funções de Hankel ou Neumann. Isto se deve ao
+fato de que podemos escrever as demais em função da primeira, ou seja, para
+o caso esférico (e por conseguinte de Riccati) vamos ter
+%cilíndrico vamos ter
+\begin{eqnarray}
+y_n(x)=(-1)^{n+1}j_{-(n+1)}
+\end{eqnarray} 
+e para o caso cilíndrico temos para as funções de Neumann
+\begin{eqnarray}
+Y_\nu(z)\sin\nu\pi=J_\nu(z)\cos\nu\pi-J_{-\nu}(z)
+\end{eqnarray} 
+e para as funções de Hankel
+\begin{eqnarray}
+H_\nu^{(1,2)}\sin\nu\pi=J_\nu(z)\pm iY_\nu(z)=\pm i(e^{\mp\nu\pi t}J_{\nu}(z)-J_{-\nu}(z))
+\end{eqnarray} 
+Nos casos de $\nu=n$, $n$ inteiro, temos
+\begin{eqnarray}
+J_{-n}(z)&=&(-1)^nJ_n(z)\\
+Y_{-n}(z)&=&(-1)^nY_n(z)
+\end{eqnarray}
+e para as funções de Hankel
+\begin{eqnarray}
+H_{-\nu}^{(1)}(z)&=&e^{ \nu\pi i}H_{\nu}^{(1)}(z)\\
+H_{-\nu}^{(2)}(z)&=&e^{-\nu\pi i}H_{\nu}^{(2)}(z)
+\end{eqnarray}
+
+Deste modo, no caso em que estamos interessados, vamos ter que 
+\begin{eqnarray}
+\rho_n=\frac{j_n}{j_{n+1}}
+\end{eqnarray}
+vai nos dar o valor para as funções esféricas de Bessel $j_n$. Se
+quisermos obter $\tilde{\rho}_n$ para as funções de Neumann
+vamos ter de fazer
+\begin{eqnarray}
+\tilde{\rho}_n=\frac{y_n}{y_{n+1}}=\frac{(-1)^{n+1}j_{-n-1}}{(-1)^{n+2}j_{-n-2}}
+\end{eqnarray}
+Resolvendo vamos ter que
+\begin{eqnarray}
+\tilde\rho_n=-\frac{j_{-n-1}}{j_{-n-2}}=-\frac{1}{j_{-n-2}/j_{-n-1}}=-1/\rho_{-n-2}
+\end{eqnarray}
+Entretanto, relação semelhante para as funções de Hankel não é facilmente obtida.

@@ -1,0 +1,304 @@
+% !Rnw root = A0Master.Rnw 
+%-------------------------------------------------------------------------------
+\chapter{Teoria de Mie}\label{ap:mie}
+%-------------------------------------------------------------------------------
+Mie resolveu o problema do espalhamento de ondas eletromagnéticas por uma
+esféra dielétrica expandindo o campo incidente na forma
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}_{i}(\bm{{\rm r}})\\
+Z\bm{{\rm H}}_{i}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\sum_{nm}
+\left[
+\begin{array}{c}
+G_{nm}^{TM}\\
+G_{nm}^{TE}\\
+\end{array}
+\right]\bm{{\rm M}}_{nm}^{i}(\bm{{\rm r}})
++
+\left[
+\begin{array}{c}
+ G_{nm}^{TE}\\
+-G_{nm}^{TM}\\
+\end{array}
+\right]\bm{{\rm N}}_{nm}^{i}(\bm{{\rm r}})
+\end{eqnarray}
+em que 
+\begin{eqnarray}
+\bm{{\rm M}}_{nm}^{i}(\bm{{\rm r}})&=&j_p(kr)\bm{{\rm X}}_{nm}(\bm{{\rm \hat{r}}})\\
+\bm{{\rm N}}_{nm}^{i}(\bm{{\rm r}})&=&\frac{i}{k}\nabla\times\bm{{\rm M}}_{nm}^{i}(\bm{{\rm r}})
+\end{eqnarray}
+
+O campo espalhado é dado por 
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}_{s}(\bm{{\rm r}})\\
+Z\bm{{\rm H}}_{s}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\sum_{nm}
+\left[
+\begin{array}{c}
+b_nG_{nm}^{TM}\\
+a_nG_{nm}^{TE}\\
+\end{array}
+\right]\bm{{\rm M}}_{nm}^{s}(\bm{{\rm r}})
++
+\left[
+\begin{array}{c}
+ a_nG_{nm}^{TE}\\
+-b_nG_{nm}^{TM}\\
+\end{array}
+\right]\bm{{\rm N}}_{nm}^{s}(\bm{{\rm r}})
+\end{eqnarray}
+em que
+\begin{eqnarray}
+\bm{{\rm M}}_{nm}^{s}(\bm{{\rm r}})&=&h_p^{(2)}(kr)\bm{{\rm X}}_{nm}(\bm{{\rm \hat{r}}})\\
+\bm{{\rm N}}_{nm}^{s}(\bm{{\rm r}})&=&\frac{i}{k}\nabla\times\bm{{\rm M}}_{nm}^{s}(\bm{{\rm r}})
+\end{eqnarray}
+e o campo no interior da esfera por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}_{w}(\bm{{\rm r}})\\
+Z'\bm{{\rm H}}_{w}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\sum_{nm}
+\left[
+\begin{array}{c}
+d_nG_{nm}^{TM}\\
+c_nG_{nm}^{TE}\\
+\end{array}
+\right]\bm{{\rm M}}_{nm}^{w}(\bm{{\rm r}})
++
+\left[
+\begin{array}{c}
+ c_nG_{nm}^{TE}\\
+-d_nG_{nm}^{TM}\\
+\end{array}
+\right]\bm{{\rm N}}_{nm}^{w}(\bm{{\rm r}})
+\end{eqnarray}
+em que
+\begin{eqnarray}
+\bm{{\rm M}}_{nm}^{w}(\bm{{\rm r}})&=&j_p(k'r)\bm{{\rm X}}_{nm}(\bm{{\rm \hat{r}}})\\
+\bm{{\rm N}}_{nm}^{w}(\bm{{\rm r}})&=&\frac{i}{k}\nabla\times\bm{{\rm M}}_{nm}^{w}(\bm{{\rm r}})
+\end{eqnarray}
+sendo que $M=n_s/n_0$, $n_s$ é o índice de refração da esfera, $n_0$ o índice de refração
+do meio externo, $k$ é número de onda do meio externo e $k'$ o do meio interno, $Z$ é 
+a impedância do meio externo e $Z'$ a impedância do meio interno (esfera), e $k'=Mk$ e
+$Zk/Z'k'=\mu/\mu'$.
+
+
+Os campos eletromagnéticos devem satisfazer as equações de Maxwell em
+pontos onde $\varepsilon$ e $\mu$ sejam contínuos, e nas interfaces às seguintes condições
+de contorno:
+\begin{eqnarray}
+\bm{{\rm\hat{r}}}\times\Big(\bm{{\rm E}}_{\rm in}-\bm{{\rm E}}_{\rm out}\Big)&=&0\\
+\bm{{\rm\hat{r}}}\times\Big(\bm{{\rm H}}_{\rm in}-\bm{{\rm H}}_{\rm out}\Big)&=&0
+\end{eqnarray}
+em que $\bm{{\rm E}}_{\rm in}=\bm{{\rm E}}_{w}$ e $\bm{{\rm E}}_{\rm out}=\bm{{\rm E}}_{i}+\bm{{\rm E}}_{s}$ e
+em que $\bm{{\rm H}}_{\rm in}=\bm{{\rm H}}_{w}$ e $\bm{{\rm H}}_{\rm out}=\bm{{\rm H}}_{i}+\bm{{\rm H}}_{s}$.
+
+Mas devemos notar que 
+\begin{eqnarray}
+\bm{{\rm\hat{r}}}\times\bm{{\rm X}}_{nm}&=&i\bm{{\rm V}}_{nm}\\
+\bm{{\rm\hat{r}}}\times\bm{{\rm V}}_{nm}&=&i\bm{{\rm X}}_{nm}
+\end{eqnarray}
+e como
+\begin{eqnarray}
+\bm{{\rm N}}_{nm}(\bm{{\rm r}})
+=
+-\left(j_p'(kr)+\frac{j_p(kr)}{kr}\right)\bm{{\rm V}}_{nm}(\bm{{\rm \hat{r}}})-
+\sqrt{p(p+1)}\frac{j_p(kr)}{kr}\bm{{\rm Y}}_{nm}(\bm{{\rm \hat{r}}})
+\end{eqnarray}
+então
+\begin{eqnarray}
+\bm{{\rm\hat{r}}}\times\bm{{\rm M}}_{nm}(\bm{{\rm r}})&=&iu_p(kr)\bm{{\rm V}}_{nm}(\bm{{\rm \hat{r}}})\\
+\bm{{\rm\hat{r}}}\times\bm{{\rm N}}_{nm}(\bm{{\rm r}})&=&-i\left(u_p'(kr)+\frac{u_p(kr)}{kr}\right)\bm{{\rm X}}_{nm}(\bm{{\rm \hat{r}}})
+\end{eqnarray}
+
+Aqui convém introduzir as funções de Ricatti-Bessel $v_n(x)=xu_n(x)$ em que $u_n(x)$ são
+funções esféricas de Bessel, dadas por 
+\begin{eqnarray}
+\psi_n(x)&=&xj_n(x)\\
+\zeta_n(x)&=&xh_n^{(2)}(x)
+\end{eqnarray}
+As derivadas das funções de Ricatti-Bessel são dadas por $v_n'(x)=xu_n'(x)+u_n(x)$, de modo
+\begin{eqnarray}
+\frac{v_n'(x)}{x}=u_n'(x)+\frac{u_n(x)}{x}
+\end{eqnarray}
+Da equação acima pode-se perceber que estas funções 
+aparecerão junto ao termo $\bm{{\rm\hat{r}}}\times\bm{{\rm N}}_{nm}$. As
+funções de Ricatti-Bessel por sua vez aparecerão quando multiplicarmos
+ a equação dos termos de $\bm{{\rm M}}_{nm}$.
+Juntando-se todas estas informações, vamos obter para uma esfera de raio $a$:
+\begin{eqnarray}
+\left[
+\begin{array}{cc}
+\zeta_n (x) & -\frac{1}{M}    \psi_n (Mx)\\
+\zeta_n'(x) & -\frac{\mu}{\mu'}\psi_n'(Mx)\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+b_n\\
+d_n\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+\psi_n (x)\\
+\psi_n'(x)\\
+\end{array}
+\right]
+\end{eqnarray}
+para o caso TE, isto é, os índices que acompanham $\bm{{\rm M}}$
+\begin{eqnarray}
+\left[
+\begin{array}{cc}
+\zeta_n (x) & -\frac{\mu}{\mu'}\psi_n (Mx)\\
+\zeta_n'(x) & -\frac{1}{M}     \psi_n'(Mx)\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+a_n\\
+c_n\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+\psi_n (x)\\
+\psi_n'(x)\\
+\end{array}
+\right]
+\end{eqnarray}
+para o caso TM, isto é, os índices que acompanham $\bm{{\rm N}}$, e
+para simplificar fazemos $x=ka$, também conhecido como fator de tamanho.
+
+As soluções desses dois sistemas de equações
+são simples. Para o caso em que $\mu'\approx\mu$ temos
+\begin{eqnarray}\label{eq:miete}
+\left[
+\begin{array}{c}
+b_n\\
+d_n\\
+\end{array}
+\right]
+=\frac{1}{\Delta^{TE}}
+\left[
+\begin{array}{cc}
+-\psi_n'(Mx)& \frac{1}{M}\psi_n (Mx)\\
+-\zeta_n'  (x)&            \zeta_n   (x)\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\psi_n (x)\\
+\psi_n'(x)\\
+\end{array}
+\right]
+\end{eqnarray}
+para o caso TE e para o caso TM
+\begin{eqnarray}\label{eq:mietm}
+\left[
+\begin{array}{c}
+a_n\\
+c_n\\
+\end{array}
+\right]
+=\frac{1}{\Delta^{TM}}
+\left[
+\begin{array}{cc}
+-\frac{1}{M}\psi_n'(Mx)& \psi_n (Mx)\\
+           -\zeta_n'(x)  &  \zeta_n (x) \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\psi_n (x)\\
+\psi_n'(x)\\
+\end{array}
+\right]
+\end{eqnarray}
+em que $\Delta^{TE/TM}$ são os determinantes
+das respectivas matrizes. Estas equações características são independentes 
+do feixe incidente. Os coeficientes dos campos espalhados e dos 
+ campos dentro da partícula são independentes do índice $m$ devido à 
+simetria esférica do espalhador. Caso a esfera fosse deformada os 
+modos azimutais não seriam mais degenerados. 
+Se o índice de refração relativo $M$ for igual a um não existe o espalhador,
+ os coeficientes de espalhamentos são nulos como esperado. 
+Se para um $n$ particular a freqüência ou o raio é tal que um destes
+denominadores seja muito pequeno, o modo normal correspondente irá dominar no
+campo espalhado. Em geral, o campo é espalhado em uma superposição
+de modos normais. As freqüências para as quais (\ref{eq:miete}) e 
+(\ref{eq:mietm}) são exatamente satisfeitas 
+são chamadas de MDR -- \emph{morphology dependent resonances} ou de
+freqüências naturais de uma esfera, são complexas e os modos associados são
+denominados virtuais. Se as partes imaginárias destas freqüências complexas forem
+pequenas quando comparadas as partes reais, a freqüência natural corresponde
+aproximadamente à freqüência real da onda EM incidente que excita os vários
+modos EM.
+
+Onde a seção de choque de espalhamento é dada por\cite{BohrenHuffman1983}
+\begin{eqnarray}
+C_{\rm scat}=\frac{2\pi}{k^2}\sum_{n=1}^\infty (2n+1)\Big(||a_n||^2+||b_n||^2\Big)
+\end{eqnarray}
+Esta função de $x$ para $M$ fixo tem vários traços: uma série de máximos e mínimos
+regularmente espaçados chamados de estrutura de interferência e uma estrutura de
+ondulações que são picos espaçados irregularmente representando os modos
+eletromagnéticos normais de uma esfera. Este último também é conhecido como
+\emph{morphology dependent resonance} -- MDR -- ou por 
+\emph{whispering gallery mode} -- WGM -- onde a nomeclatura MDR é mais apropriada.
+
+O grande significado das equações (\ref{eq:miete}) e
+(\ref{eq:mietm}) está no fato de, se conhecermos os coeficientes $G^{TE/TM}$ do
+campo incidente, podemos determinar os campos espalhados. O \emph{calcanhar de
+Aquiles} deste método está no fato de sabermos se é possível calcular estes
+coeficientes. Até então estes coeficientes eram dados por 
+\begin{eqnarray}
+E_0j_p(kr)
+\left[
+\begin{array}{c}
+G_{pq}^{TE}\\
+G_{pq}^{TM}\\
+\end{array}
+\right]
+=\int d\Omega(\bm{{\rm \hat{r}}})~
+\bm{{\rm X}}_{pq}^*(\bm{{\rm \hat{r}}})\cdot
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}(\bm{{\rm r}})\\
+Z\bm{{\rm H}}(\bm{{\rm r}})\\
+\end{array}
+\right]
+\end{eqnarray}
+que tem o problema da função radial do lado esquerdo, e de uma dependência radial
+do lado direito não explicitada. Neste trabalho mostramos que este problema tem 
+solução, dada por 
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{pq}^{TM}\\
+G_{pq}^{TE}\\
+\end{array}
+\right]
+&=&i^p\sqrt{\frac{2}{\pi}}\int d\Omega(\bm{{\rm\hat{k}}}')~\bm{{\rm \mathcal{X}}}_{pq}^*(\bm{{\rm\hat{k}}}')\cdot
+\left[
+\begin{array}{c}
+\bm{{\rm \mathcal{H}}}_{\rm k}(\bm{{\rm\hat{k}}}')\\
+\bm{{\rm \mathcal{E}}}_{\rm k}(\bm{{\rm\hat{k}}}')\\
+\end{array}
+\right]
+\end{eqnarray}
+em função das transformadas de Fourier dos campos incidentes. Ademais, mostramos
+três exemplos, além do da onda plana já conhecido, de cálculo destes coeficientes.
+

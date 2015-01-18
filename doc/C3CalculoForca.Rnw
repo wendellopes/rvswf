@@ -1,0 +1,28 @@
+% !Rnw root = A0Master.Rnw 
+%-------------------------------------------------------------------------------
+\chapter{Cálculo da Força}
+%-------------------------------------------------------------------------------
+A força vai depender de 
+\begin{eqnarray}
+\bm{{\rm F}}(\bm{{\rm r}})=-\frac{\epsilon}{2}\int d\Omega~\bm{{\rm\hat{r}}}\Big(||E||^2+||ZH||^2\Big)
+\end{eqnarray}
+o que por sua vez vai depender de 
+\begin{eqnarray}
+I_{lm}^{jk}&=&\int d\Omega~\bm{{\rm\hat{r}}}~\bm{{\rm X}}_{lm}^*\cdot\bm{{\rm X}}_{jk}\\
+J_{lm}^{jk}&=&\int d\Omega~\bm{{\rm\hat{r}}}~\bm{{\rm X}}_{lm}^*\cdot\bm{{\rm V}}_{jk}
+\end{eqnarray}
+A primeira integral  é facilmente resolvida, sabendo-se que
+\begin{eqnarray}
+\bm{{\rm X}}_{lm}^*\cdot\bm{{\rm X}}_{jk}=\frac{
+c_-^{lm}c_+^{jk}Y_l^{m-1}{}^*Y_j^{k+1}+
+2     m       k Y_l^{m  }{}^*Y_j^{k  }+
+c_+^{lm}c_-^{jk}Y_l^{m+1}{}^*Y_j^{k-1}
+}{2\sqrt{l(l+1)j(j+1)}}
+\end{eqnarray}
+Por outro lado, temos que
+\begin{eqnarray}
+r_-Y_l^m&=&\sin\theta e^{-i\phi}Y_l^m=-K_{+,l}^{m,m-1}Y_{l-1}^{m-1}+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}\\
+r_zY_l^m&=&\cos\theta           Y_l^m= K_{0,l}^{m,m  }Y_{l-1}^{m  }+K_{0,l+1}^{m,m  }Y_{l+1}^{m  }\\
+r_+Y_l^m&=&\sin\theta e^{ i\phi}Y_l^m= K_{-,l}^{m,m+1}Y_{l-1}^{m+1}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}
+\end{eqnarray}
+e deste modo temos que 

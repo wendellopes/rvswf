@@ -1,0 +1,647 @@
+% !Rnw root = A0Master.Rnw
+%-------------------------------------------------------------------------------
+\chapter{As ondas parciais}
+%-------------------------------------------------------------------------------
+\section{Definições}
+%-------------------------------------------------------------------------------
+A expansão em termos de funções de onda esféricas vetoriais para campos 
+eletromagnéticos arbitrários é dada pela expressão
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm E}}(\bm{{\rm r}})\\
+\bm{{\rm H}}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=\sum_{l=1}^\infty\sum_{m=-l}^l\left(
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+\bm{{\rm M}}_{lm}(\bm{{\rm r}})
++
+\left[
+\begin{array}{c}
+-G_{lm}^{TM}\\
+ G_{lm}^{TE}\\
+\end{array}
+\right]
+\bm{{\rm N}}_{lm}(\bm{{\rm r}})
+\right)
+\end{eqnarray}
+em que
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}(\bm{{\rm r}})&=&j_l(kr)\bm{{\rm X}}_{lm}(\bm{{\rm\hat{r}}})\\
+\bm{{\rm N}}_{lm}(\bm{{\rm r}})&=&\frac{-i}{k}\nabla\times\bm{{\rm M}}_{lm}(\bm{{\rm r}}).
+\end{eqnarray}
+Sabendo que $\bm{{\rm X}}_{lm}=\bm{{\rm L}}Y_l^m/\sqrt{l(l+1)}$ e algumas propriedades
+vetorias obtemos
+\begin{eqnarray}
+\bm{{\rm N}}_{lm}(\bm{{\rm r}})
+=\left(j_l'(kr)+\frac{j_l(kr)}{kr}\right)\bm{{\rm V}}_{lm}(\bm{{\rm\hat{r}}})
++\sqrt{l(l+1)}\frac{j_l(kr)}{kr}\bm{{\rm Y}}_{lm}(\bm{{\rm\hat{r}}})
+\end{eqnarray}
+uma vez que $\bm{{\rm V}}_{lm}(\bm{{\rm\hat{r}}})=
+-i\bm{{\rm\hat{r}}}\times\bm{{\rm X}}_{lm}(\bm{{\rm\hat{r}}})$ e 
+$\bm{{\rm Y}}_{lm}(\bm{{\rm\hat{r}}})=\bm{{\rm\hat{r}}}Y_l^m(\bm{{\rm\hat{r}}})$.
+Com isto, conhecendo-se $G_{lm}^{TE/TM}$ podemos calcular os campos 
+eletromagnéticos.
+%-------------------------------------------------------------------------------
+\section{Cálculo dos harmônicos esféricos escalares}
+%-------------------------------------------------------------------------------
+Para isto usamos as relações de recorrência dos polinômios de Legendre, dados
+pela fórmula de Rodrigues para $m>0$
+\begin{eqnarray}
+P_l^m(x)=(-1)^m(1-x^2)^{m/2}\frac{d^{l+m}}{dx^{l+m}}(x^2-1)^l,
+\end{eqnarray}
+o que vai nos dar os harmônicos esféricos escalares
+\begin{eqnarray}
+Y_l^m(\theta,\phi)=\sqrt{\frac{2l+1}{4\pi}}
+\sqrt{\frac{(l-m)!}{(l+m)!}}P_l^m(\cos\theta)e^{im\phi}.
+\end{eqnarray}
+
+Temos também as seguintes relações 
+\begin{eqnarray}
+P_l^{-m}(x)=(-1)^m\frac{(l-m)!}{(l+m)!}P_l^m(x),
+\end{eqnarray}
+e para os harmônicos esféricos escalares
+\begin{eqnarray}
+Y_l^{-m}(\theta,\phi)=(-1)^mY_l^m{}^*(\theta,\phi).
+\end{eqnarray}
+
+Devido a instabilidade numérica, alguns programas utilizam os
+polinômios associados de Legendre normalizados. Utilizaremos
+deste modo, a seguinte normalização
+\begin{eqnarray}
+Q_l^m(x)=\sqrt{\frac{2l+1}{4\pi}}\sqrt{\frac{(l-m)!}{(l+m)!}}P_l^m(x)
+\end{eqnarray}
+o que vai nos dar diretamente
+\begin{eqnarray}
+Y_l^m(\theta,\phi)=Q_l^m(\cos\theta)e^{im\phi},
+\end{eqnarray}
+e além disso, a relação
+\begin{eqnarray}
+Q_l^{-m}(x)=(-1)^mQ_l^m(x)
+\end{eqnarray}
+também será válida.
+
+Estes polinômios são calculados via relação de recorrência, basicamente
+em três termos, utilizando
+\begin{eqnarray}
+P_l^m    (x)&=&\frac{2l-1}{l-m}P_{l-1}^m(x)-\frac{l+m-1}{l-m}P_{l-2}^m(x)\\
+P_l^l    (x)&=&-(2l-1)\sqrt{1-x^2}P_{l-1}^{l-1}(x)\\
+P_l^{l-1}(x)&=&(2l-1)xP_{l-1}^{l-1}(x)
+\end{eqnarray}
+ou para os polinômios normalizados
+\begin{eqnarray}
+Q_l^m  (x)\!\!\!\!&=&\!\!\!\!\sqrt{\frac{(2l-1)(2l+1)}{(l-m)(l+m)}}Q_{l-1}^m(x)
+\!-\!\sqrt{\frac{2l+1}{2l-3}}\sqrt{\frac{(l-m-1)(l+m-1)}{(l-m)(l+m)}}
+Q_{l-2}^m(x)\\
+Q_l^l    (x)\!\!\!\!&=&\!\!\!\!
+-\sqrt{\frac{2l-1}{2l}}\sqrt{1-x^2}Q_{l-1}^{l-1}(x)\\
+Q_l^{l-1}(x)\!\!\!\!&=&\!\!\!\!\sqrt{2l+1}xQ_{l-1}^{l-1}(x)
+\end{eqnarray}
+Sabendo que $P_0^0=1$ temos que $Q_0^0=1/\sqrt{4\pi}$, podemos primeiramente 
+calcular os elementos da diagonal utilizando a recorrência em $P_l^l$ 
+ou $Q_l^l$, depois calcular a diagonal inferior para $m>0$ por meio de 
+$P_l^{l-1}$ ou $Q_l^{l-1}$. Os demais termos são calculados pela forma geral de 
+$P_l^m$ ou de $Q_l^m$, e os termos para $m<0$ por meio da relação de paridade.
+Para efeito de comparação utilizamos a biblioteca \texttt{gsl} (Gnu Scientific
+Library) que nos fornece tanto $P_l^m$ quanto $Q_l^m$, como definimos, e também
+o \emph{software} \texttt{scilab}, que nos fornece $P_l^m$ e $\sqrt{2\pi}Q_l^m$.
+%-------------------------------------------------------------------------------
+\subsection{Caso para $\theta=0$}
+%-------------------------------------------------------------------------------
+Sabemos que 
+\begin{eqnarray}
+Y_l^m(0,\phi)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}.
+\end{eqnarray}
+Para demonstrar isto utilizaremos as relações de recorrências
+dos polinômios associados de Legendre.
+Para o caso $\theta=0$ temos que $x=\cos\theta=1$, o que nos dá,
+para $l=1$
+\begin{eqnarray}
+P_1^1  (1)&=&0\\
+P_1^{0}(1)&=&(2l-1)P_{0}^{0}(1)=P_{0}^{0}(1)
+\end{eqnarray}
+para $l>2$
+\begin{eqnarray}
+P_l^m    (1)&=&\frac{2l-1}{l-m}P_{l-1}^m(1)-\frac{l+m-1}{l-m}P_{l-2}^m(1)\\
+P_l^l    (1)&=&0\\
+P_l^{l-1}(1)&=&(2l-1)P_{l-1}^{l-1}(1)=0
+\end{eqnarray}
+com isto temos que só serão diferentes de zero os termos com $m=0$, e para eles
+\begin{eqnarray}
+P_l^0(1)&=&\frac{2l-1}{l}P_{l-1}^m(1)-\frac{l-1}{l}P_{l-2}^m(1)\\
+\end{eqnarray}
+Para $l=2$ temos que $P_1^0=P_0^0=1$, o que nos diz que 
+\begin{eqnarray}
+P_2^0(1)&=&\frac{2l-1}{l}-\frac{l-1}{l}=1
+\end{eqnarray}
+e com isto mostramos que $P_l^0(1)=1$. Sendo assim,
+fica claro que 
+\begin{eqnarray}
+Q_l^m(1)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}
+\end{eqnarray}
+e por conseguinte
+\begin{eqnarray}
+Y_l^m(0,\phi)=Q_l^m(1)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\subsection{Método das listas}
+%-------------------------------------------------------------------------------
+Vamos de agora em diante escrever tudo como uma lista contínua dada por $l$, em
+que um determinado para $(p,q)$ ocupa a posição $l=p(p+1)+q$.  Numa lista com 
+$p$ máximo igual $p_M$, vamos ter um total de $l_M=p_M(p_M+2)$ elementos.
+A rotina para cálculos dos polinômios de Legendre via relação de recorrência
+é muito mais rápida que utilizando a biblioteca \texttt{gsl}, já que 
+necessitamos de todas ordens dos polinômios de Legendre, ao passo que o
+ao calcular um a um, os termos utilizados na recorrência são deixados de lado,
+sendo novamente calculados na próxima sequência.
+%-------------------------------------------------------------------------------
+\section{Harmônicos esféricos vetoriais}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\subsection{Vetores complexos}
+%-------------------------------------------------------------------------------
+Vamos ao longo deste trabalho utilizar uma base complexa definida como
+\begin{eqnarray}
+\bm{{\rm\hat{e}}}_+&=&\frac{\bm{{\rm\hat{e}}}_x+\bm{{\rm\hat{e}}}_y}{\sqrt{2}}\\
+\bm{{\rm\hat{e}}}_-&=&\frac{\bm{{\rm\hat{e}}}_x-\bm{{\rm\hat{e}}}_y}{\sqrt{2}}.
+\end{eqnarray}
+Os vetores são definidos como 
+$\bm{{\rm A}}=A_x\bm{{\rm\hat{e}}}_x+A_y\bm{{\rm\hat{e}}}_y$, sendo que
+$A_x=\bm{{\rm\hat{e}}}_x\cdot\bm{{\rm A}}$, deste modo temos
+$A_\pm=\bm{{\rm\hat{e}}}_\pm\cdot\bm{{\rm A}}$ e assim
+$\bm{{\rm A}}=A_+\bm{{\rm\hat{e}}}_-+A_-\bm{{\rm\hat{e}}}_+$.
+Entretanto, convém notar que $\bm{{\rm\hat{e}}}_\pm^*=\bm{{\rm\hat{e}}}_\mp$,
+o que inverte o sinal do termo da base.
+Assim, um vetor $\bm{{\rm U}}$ é dado por
+\begin{eqnarray}
+\bm{{\rm U}}
+=
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_-\cdot\bm{{\rm U}}\\
+\bm{{\rm\hat{e}}}_z\cdot\bm{{\rm U}}\\
+\bm{{\rm\hat{e}}}_+\cdot\bm{{\rm U}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+U_-\\
+U_z\\
+U_+\\
+\end{array}
+\right].
+\end{eqnarray}
+Deste modo, há de se tomar extremo cuidado ao fazer produtos escalares e
+vetoriais com estas componentes complexas. O produto vetorial é
+dado por
+\begin{eqnarray}
+\bm{{\rm U}}=\bm{{\rm A}}\times\bm{{\rm B}}
+=i
+\left|
+\begin{array}{ccc}
+\bm{{\rm\hat{e}}}_-&\bm{{\rm\hat{e}}}_z&\bm{{\rm\hat{e}}}_+\\
+A_-&A_z&A_+\\
+B_-&B_z&B_+\\
+\end{array}
+\right|
+=i
+\left[
+\begin{array}{c}
+A_-B_z-A_zB_-\\
+A_+B_--A_-B_z\\
+A_zB_+-A_+B_-\\
+\end{array}
+\right].
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\section{Definições de VSH}
+%-------------------------------------------------------------------------------
+Devemos calcular os harmônicos esféricos vetoriais em função dos harmônicos
+esféricos escalares. Para compararmos vamos utilizar os diversos tipos de 
+definição para compararmos os resultados.
+Podemos facilmente definir os VSH como sendo
+%-------------------------------------------------------------------------------
+\begin{eqnarray}
+\bm{{\rm Y}}_{lm}
+   &=&\bm{{\rm \hat{r}}}Y_{lm}\\
+\bm{{\rm X}}_{lm}
+   &=&\frac{\bm{{\rm L}}Y_{lm}}{\sqrt{l(l+1)}}\\
+\bm{{\rm V}}_{lm}
+   &=&-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm},
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+e ainda pode-se facilmente mostrar que $\bm{{\rm X}}_{lm}$ e $\bm{{\rm V}}_{lm}$
+mantém a seguinte relação
+%-------------------------------------------------------------------------------
+\begin{eqnarray}
+\bm{{\rm X}}_{lm}   &=&-i\bm{{\rm \hat{r}}}\times\bm{{\rm V}}_{lm},\\
+\bm{{\rm V}}_{lm}   &=&-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}.
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+Deste modo, podemos calcular $\bm{{\rm Y}}_{lm}$ diretamente, e 
+$\bm{{\rm X}}_{lm}$ também quase que diretamente, e $\bm{{\rm V}}_{lm}$
+pode ser obtido por meio das expressões diretas ou pelo produto vetorial.
+Além disso temos também os VSH definidos como
+$\bm{{\rm Y}}_{j,l}^{m}$, dados por
+\begin{eqnarray}
+\bm{ Y}_{j,j-1}^{m}&=&
+ \sqrt{\frac{j  }{2j+1}}\bm{{\rm Y}}_{jm}
++\sqrt{\frac{j+1}{2j+1}}\bm{{\rm V}}_{jm}\\
+\bm{ Y}_{j,j  }^{m}&=&
+                        \bm{{\rm X}}_{jm}\\
+\bm{ Y}_{j,j+1}^{m}&=&
+-\sqrt{\frac{j+1}{2j+1}}\bm{{\rm Y}}_{jm}
++\sqrt{\frac{j  }{2j+1}}\bm{{\rm V}}_{jm}
+\end{eqnarray}
+Estas expressões podem ser facilmente invertidas, de onde podemos tirar
+\begin{eqnarray}
+\bm{{\rm Y}}_{jm}&=& 
+ \sqrt{\frac{j  }{2j+1}}\bm{ Y}_{j,j-1}^{m}
++\sqrt{\frac{j+1}{2j+1}}\bm{ Y}_{j,j+1}^{m}\\
+\bm{{\rm X}}_{jm}&=& 
+                       \bm{ Y}_{j,j  }^{m}\\
+\bm{{\rm V}}_{jm}&=& 
+ \sqrt{\frac{j+1}{2j+1}}\bm{ Y}_{j,j-1}^{m}
+-\sqrt{\frac{j  }{2j+1}}\bm{ Y}_{j,j+1}^{m}
+\end{eqnarray}
+
+
+
+
+
+%-------------------------------------------------------------------------------
+\section{Formas explícitas}
+%-------------------------------------------------------------------------------
+Ulilizaremos em muitas ocasiões as definições
+\begin{eqnarray}
+\bm{{\rm \hat{r}}}
+=\bm{{\rm \hat{x}}}\sin\theta\cos\phi
++\bm{{\rm \hat{y}}}\sin\theta\sin\phi
++\bm{{\rm \hat{z}}}\cos\theta
+=\frac{\sin\theta e^{-i\phi}}{\sqrt{2}}\bm{{\rm \hat{e}}}_+
++\frac{\sin\theta e^{i\phi}}{\sqrt{2}}\bm{{\rm \hat{e}}}_-
++\cos\theta\bm{{\rm \hat{z}}},%\\
+\end{eqnarray}
+e também
+\begin{eqnarray}
+\bm{{\rm L}}=\frac{L_-}{\sqrt{2}}\bm{{\rm \hat{e}}}_+
++\frac{L_+}{\sqrt{2}}\bm{{\rm \hat{e}}}_-
++L_z\bm{{\rm \hat{z}}}.
+\end{eqnarray}
+Sabendo que $L_\pm Y_l^m=c^{\pm}_{lm}Y_l^{m\pm1}$, 
+sendo que $c^{\pm}_{lm}=\sqrt{l(l+1)-m(m\pm1)}$, temos
+\begin{eqnarray}
+K_{+,l}^{m,q}&=&\sqrt{\frac{(l+m)(l+q)}{(2l-1)(2l+1)}}\\
+K_{-,l}^{m,q}&=&\sqrt{\frac{(l-m)(l-q)}{(2l-1)(2l+1)}}\\
+K_{0,l}^{m,q}&=&\sqrt{\frac{(l-m)(l+q)}{(2l-1)(2l+1)}}
+\end{eqnarray}
+vamos ter \cite{Arfken2005}
+\begin{eqnarray}
+\cos\theta~Y_l^m           &=&
+K_{0,l+1}^{m,m  }Y_{l+1}^{m  }+K_{0,l  }^{m,m  }Y_{l-1}^{m  }\\
+\sin\theta e^{ i\phi}~Y_l^m&=&
+K_{-,l  }^{m,m+1}Y_{l-1}^{m+1}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}\\
+\sin\theta e^{-i\phi}~Y_l^m&=&
+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}-K_{+,l  }^{m,m-1}Y_{l-1}^{m-1}
+\end{eqnarray}
+o que vai nos dar 
+para $\bm{{\rm V}}_{lm}=-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}$
+\begin{eqnarray}
+\bm{{\rm V}}_{lm}
+&=&
+\frac{1}{\sqrt{l(l+1)}}
+\left[
+\begin{array}{c}
+-(l+1)K_{+,l}^{m,m-1}Y_{l-1}^{m-1}/\sqrt{2}
+-l K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}/\sqrt{2}\\
+ (l+1)K_{0,l}^{m,m  }Y_{l-1}^{m  }         
+-l K_{0,l+1}^{m,m  }Y_{l+1}^{m  }         \\       
+ (l+1)K_{-,l}^{m,m+1}Y_{l-1}^{m+1}/\sqrt{2}
++l K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]\\
+\bm{{\rm Y}}_{lm}
+&=&
+\left[
+\begin{array}{c}
+-K_{+,l}^{m,m-1}Y_{l-1}^{m-1}/\sqrt{2}+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}/\sqrt{2}\\
+ K_{0,l}^{m,m  }Y_{l-1}^{m  }         +K_{0,l+1}^{m,m  }Y_{l+1}^{m  }         \\
+ K_{-,l}^{m,m+1}Y_{l-1}^{m+1}/\sqrt{2}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]\\
+%
+\bm{{\rm X}}_{lm}
+&=&\frac{1}{\sqrt{l(l+1)}}
+\left[
+\begin{array}{c}
+c_-^{l,m}Y_{l}^{m-1}/\sqrt{2}\\
+       m Y_{l}^{m  }\\
+c_+^{l,m}Y_{l}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]
+\end{eqnarray}
+
+Os outros harmônicos esféricos vetoriais são dados por\cite{Newton2002}
+\begin{eqnarray}
+\bm{ Y}_{l,l-1}^{m}&=&
+\left[
+\begin{array}{c}
+\frac{c_-^{l-1,m}}{\sqrt{2l(2l-1)}}Y_{l-1,m-1}\\
+\frac{         m }{\sqrt{ l(2l-1)}}Y_{l-1,m  }\\
+\frac{c_+^{l-1,m}}{\sqrt{2l(2l-1)}}Y_{l-1,m+1}\\
+\end{array}
+\right]\\
+\bm{ Y}_{l,l  }^{m}&=&
+\left[
+\begin{array}{c}
+\frac{c_-^{lm}}{\sqrt{2l(l+1)}}Y_{l,m-1}\\
+\frac{      m }{\sqrt{ l(l+1)}}Y_{l,m  }\\
+\frac{c_+^{lm}}{\sqrt{2l(l+1)}}Y_{l,m+1}\\
+\end{array}
+\right]\\
+\bm{ Y}_{l,l+1}^{m}&=&
+\left[
+\begin{array}{c}
+\frac{c_-^{l+1,m}}{\sqrt{2(l+1)(2l+3)}}Y_{l+1,m-1}\\
+\frac{         m }{\sqrt{ (l+1)(2l+3)}}Y_{l+1,m  }\\
+\frac{c_+^{l+1,m}}{\sqrt{2(l+1)(2l+3)}}Y_{l+1,m+1}\\
+\end{array}
+\right]
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\section{Comparações}
+%-------------------------------------------------------------------------------
+Primeiramente vamos começar com $\bm{{\rm Y}}_{lm}=\bm{{\rm \hat{r}}}Y_{lm}$,
+fazendo a multiplicação. Temos
+\begin{eqnarray}
+\bm{{\rm Y}}_{lm}=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{c}
+\sin\theta e^{-i\phi}\\
+\sin\theta e^{ i\phi}\\
+\sqrt{2}\cos\theta \\
+\end{array}
+\right]Y_l^m(\theta,\phi)
+\end{eqnarray}
+e vamos comparar com a forma explícita.
+%\begin{eqnarray}
+%\bm{{\rm Y}}_{lm}=\frac{1}{\sqrt{2}}
+%\left[
+%\begin{array}{c}
+%K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}-K_{+,l  }^{m,m-1}Y_{l-1}^{m-1}\\
+%K_{0,l+1}^{m,m  }Y_{l+1}^{m  }+K_{0,l  }^{m,m  }Y_{l-1}^{m  }\\
+%K_{-,l  }^{m,m+1}Y_{l-1}^{m+1}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}\\
+%\end{array}
+%\right].
+%\end{eqnarray}
+Calculamos então $\bm{{\rm Y}}_{lm}$ por meio de 
+$-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}$
+e comparamos com a expressão explícita. Fazendo
+\begin{eqnarray}
+-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}
+=
+\left|
+\begin{array}{ccc}
+\bm{{\rm \hat{e}}}_-&\bm{{\rm \hat{e}}}_z&\bm{{\rm \hat{e}}}_+\\
+r_-&r_z&r_+\\
+X_-&X_z&X_+\\
+\end{array}
+\right|
+=
+\left[
+\begin{array}{c}
+r_-X_z-r_zX_-\\
+r_+X_--r_-X_+\\
+r_zX_+-r_+X_z\\
+\end{array}
+\right],
+\end{eqnarray}
+podemos comparar os valores de $\bm{{\rm V}}_{lm}$ obtidos pela fórmula
+explícita e pela fórmula direta.
+
+Podemos ainda comparar com os resultados de $\bm{ Y}_{l,j}^{m}$. Com
+isto, verificamos dois a dois os valores para 
+$\bm{{\rm Y}}_{lm}$ e $\bm{{\rm V}}_{lm}$. E finalmente, podemos
+conferir os valores de $\bm{ Y}_{l,j}^{m}$ com $\bm{{\rm X}}_{lm}$,
+$\bm{{\rm Y}}_{lm}$ e  $\bm{{\rm V}}_{lm}$ por meio dos multipolos
+de Hansen.
+
+%-------------------------------------------------------------------------------
+% Como podemos ver, necessitamos calcular para $\bm{{\rm Y}}_{lm}$
+% \begin{eqnarray}
+% \left[
+% \begin{array}{c}
+% K_{-,l+1}^{m,m-1}\\
+% K_{0,l+1}^{m,m  }\\
+% K_{+,l+1}^{m,m+1}\\
+% K_{-,l  }^{m,m+1}\\
+% K_{0,l  }^{m,m  }\\
+% K_{+,l  }^{m,m-1}\\
+% \end{array}
+% \right]
+% \end{eqnarray}
+%e para $\bm{{\rm V}}_{p,q}$
+%
+%\begin{eqnarray}
+%\left[
+%\begin{array}{c}
+%K_{+,p  }^{q  ,q-1}\\
+%K_{-,p+1}^{q  ,q-1}\\
+%K_{-,p  }^{q  ,q+1}\\
+%K_{+,p+1}^{q  ,q+1}\\
+%K_{0,p  }^{q  ,q  }\\
+%K_{0,p+1}^{q  ,q  }\\
+%\end{array}
+%\right]
+%\end{eqnarray}
+%
+%\begin{eqnarray}
+%\left[
+%\begin{array}{c}
+%Y_{p-1}^{q-1}\\
+%Y_{p+1}^{q-1}\\
+%Y_{p-1}^{q+1}\\
+%Y_{p+1}^{q+1}\\
+%Y_{p-1}^{q  }\\
+%Y_{p+1}^{q  }\\
+%\end{array}
+%\right]
+%\end{eqnarray}
+%
+%
+%
+%
+%
+% dados por
+% \begin{eqnarray}
+% K_{-,l}^{m,q}&=&\sqrt{\frac{(l-m)(l-q)}{(2l-1)(2l+1)}}\\
+% K_{0,l}^{m,q}&=&\sqrt{\frac{(l-m)(l+q)}{(2l-1)(2l+1)}}\\
+% K_{+,l}^{m,q}&=&\sqrt{\frac{(l+m)(l+q)}{(2l-1)(2l+1)}}
+% \end{eqnarray}
+% 
+% Vamos então averiguar o comportamento destas funções para valores
+% extremos. Para $m=l_{max}$ temos
+% \begin{eqnarray}
+% K_{-,l+1}^{l+1,l  }&=&0\\
+% K_{0,l+1}^{l+1,l+1}&=&0\\
+% K_{+,l+1}^{l+1,l+2}&=&\sqrt{\frac{2l+2}{2l+1}}\\
+% K_{-,l  }^{l  ,l+1}&=&0\\
+% K_{0,l  }^{l  ,l  }&=&0\\
+% K_{+,l  }^{l  ,l-1}&=&\sqrt{\frac{2l}{2l+1}}
+% \end{eqnarray}
+% Para $m=-l_{max}$ temos
+% \begin{eqnarray}
+% K_{-,l+1}^{-l-1,-l-2}&=&\sqrt{\frac{2l+2}{2l+1}}\\
+% K_{0,l+1}^{-l-1,-l-1}&=&0\\
+% K_{+,l+1}^{-l-1,-l  }&=&0\\
+% K_{-,l  }^{-l  ,-l+1}&=&\sqrt{\frac{2l}{2l+1}}\\
+% K_{0,l  }^{-l  ,-l  }&=&0\\
+% K_{+,l  }^{-l  ,-l-1}&=&0
+% \end{eqnarray}
+%%-------------------------------------------------------------------------------
+%Precisamos então calcular em lista os termos para os VSH
+%\begin{eqnarray}
+%%K_{-,l+1}^{m,m-1}
+%%K_{0,l+1}^{m,m  }
+%%K_{+,l+1}^{m,m+1}
+%%K_{-,l  }^{m,m+1}
+%%K_{0,l  }^{m,m  }
+%%K_{+,l  }^{m,m-1}
+%Y_{l-1}^{m-1}\\
+%Y_{l-1}^{m  }\\
+%Y_{l-1}^{m+1}\\
+%Y_{l  }^{m-1}\\
+%Y_{l  }^{m  }\\
+%Y_{l  }^{m+1}\\
+%Y_{l+1}^{m-1}\\
+%Y_{l+1}^{m  }\\
+%Y_{l+1}^{m+1}\\
+%\end{eqnarray}
+
+
+
+
+
+
+%-------------------------------------------------------------------------------
+\section{Multipolos de Hansen}
+%-------------------------------------------------------------------------------
+Os multipolos de Hansen são definidos como se segue
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}&=&u_l(kr)\bm{{\rm X}}_{lm}\\
+\bm{{\rm N}}_{lm}&=&-\frac{i}{k}\nabla\times\bm{{\rm M}}_{lm}
+%\bm{{\rm L}}_{lm}&=&-\frac{i}{k}\nabla\big(u_l(kr)Y_{lm}(\bm{{\rm\hat{r}}})\big)
+\end{eqnarray}
+A grande virtude destes multipolos é que eles são ótimos para
+decompor campos que são mutuamente rotacionais (como requer
+as leis de Faraday e Ampére) ou divergentes (como requer
+a lei de Gauss):
+\begin{eqnarray}
+\nabla\cdot\bm{{\rm M}}_{lm}&=&0\\
+\nabla\cdot\bm{{\rm N}}_{lm}&=&0%\\
+%\nabla\cdot\bm{{\rm L}}_{lm}&=&iku_l(kr)Y_{lm}(\bm{{\rm\hat{r}}})
+\end{eqnarray}
+e também
+\begin{eqnarray}
+\nabla\times\bm{{\rm M}}_{lm}&=&ik\bm{{\rm N}}_{lm}\\
+\nabla\times\bm{{\rm N}}_{lm}&=&ik\bm{{\rm M}}_{lm}%\\
+%\nabla\times\bm{{\rm L}}_{lm}&=&0
+\end{eqnarray}
+o que mostra como $\bm{{\rm M}}_{lm}$ e $\bm{{\rm N}}_{lm}$ são ideais
+para descrever em multipolos os campos elétrico e magnético, ligados
+pelas leis de Ampère e de Faraday.
+
+Vamos então expandir as definições e verificar as formas explícitas destes
+multipolos.
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}&=&j_l(kr)\bm{Y}_{l,l}^m\\
+\bm{{\rm N}}_{lm}&=&\sqrt{\frac{l+1}{2l+1}}j_{l-1}(kr)\bm{Y}_{l,l-1}^m
+-\sqrt{\frac{l  }{2l+1}}j_{l+1}(kr)\bm{Y}_{l,l+1}^m
+%\bm{{\rm L}}_{lm}&=&\sqrt{\frac{l  }{2l+1}}f_{l-1}(kr)\bm{Y}_{l,l-1}^m
+%+\sqrt{\frac{l+1}{2l+1}}f_{l+1}(kr)\bm{Y}_{l,l+1}^m
+\end{eqnarray}
+ou na forma diferencial
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}&=&j_l(kr)\bm{{\rm X}}_{lm}\\
+\bm{{\rm N}}_{lm}&=&
+\left(j_l'(kr)+\frac{j_l(kr)}{kr}\right)\bm{{\rm V}}_{lm}
++\sqrt{l(l+1)}\frac{j_l(kr)}{kr}\bm{{\rm Y}}_{lm}
+%\bm{{\rm L}}_{lm}&=&-\sqrt{l(l+1)}\frac{f_l(kr)}{kr}\bm{{\rm V}}_{lm}
+%-f_l'(kr)\bm{{\rm Y}}_{lm}
+\end{eqnarray}
+
+Como podemos ver, estas relações nos permitem construir soluções completamente
+gerais para as equações dos campos eletromagnéticos de uma maneira que é 
+intuitiva, razoável e matematicamente e numericamente tratável, de modo que 
+poderemos daqui em diante usar identidades e relações entre os harmônicos 
+esféricos vetorias e/ou as equações de Bessel, Neumann e Hankel.
+%-------------------------------------------------------------------------------
+\subsection{Relações de recorrência para funções esféricas de Bessel}
+%-------------------------------------------------------------------------------
+As seguintes relações de recorrência são válidas para as funções esféricas
+de Bessel:
+\begin{eqnarray}
+&&f_{n-1}+f_{n+1}=(2n+1)\frac{f_n}{x}\\
+&&nf_{n-1}-(n+1)f_{n+1}=(2n+1)f_n'\\
+&&(n+1)\frac{f_n}{x}+f_n'=f_{n-1}\\
+&&n\frac{f_n}{x}-f_n'=f_{n+1}.
+\end{eqnarray}
+De posse destas relações, temos diretamente que 
+\begin{eqnarray}
+\bm{{\rm N}}_{lm}&=&
+\left(\frac{l+1}{2l+1}j_{l-1}-\frac{l}{2l+1}j_{l+1}\right)
+\bm{{\rm V}}_{lm}+\frac{\sqrt{l(l+1)}}{2l+1}\Big(j_{l-1}+j_{l+1}\Big)\bm{{\rm Y}}_{lm}
+%\bm{{\rm L}}_{lm}&=&
+%-\frac{\sqrt{l(l+1)}}{2l+1}\big(f_{l-1}(kr)+f_{l+1}(kr)\big)\bm{{\rm V}}_{lm}
+%+\nonumber\\
+%&-&\left(\frac{l}{2l+1}f_{l-1}(kr)-\frac{l+1}{2l+1}f_{l+1}(kr)\right)
+%\bm{{\rm Y}}_{lm}
+\end{eqnarray}
+Com isto temos todos os harmônicos esféricos vetorias e multipolos de Hansen
+definidos.
+%-------------------------------------------------------------------------------
+\subsection{Harmônicos esféricos vetoriais para $l=0$}
+%-------------------------------------------------------------------------------
+Para $l=0$ temos
+\begin{eqnarray}
+\bm{{\rm X}}_{00}
+=
+\left[
+\begin{array}{c}
+0\\
+0\\
+0\\
+\end{array}
+\right],
+\end{eqnarray}
+mas
+\begin{eqnarray}
+\bm{{\rm Y}}_{00}
+=\frac{1}{\sqrt{8\pi}}
+\left[
+\begin{array}{c}
+\sin\theta e^{-im\phi}\\
+\sqrt{2}\cos\theta\\
+\sin\theta e^{ im\phi}\\
+\end{array}
+\right],
+\end{eqnarray}
+e finalmente, devida à dependência nas componentes de $\bm{{\rm X}}_{00}$,
+\begin{eqnarray}
+\bm{{\rm V}}_{00}
+=
+\left[
+\begin{array}{c}
+0\\
+0\\
+0\\
+\end{array}
+\right].
+\end{eqnarray}

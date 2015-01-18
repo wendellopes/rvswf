@@ -1,0 +1,439 @@
+% !Rnw root = A0Master.Rnw 
+%-------------------------------------------------------------------------------
+\chapter{Mudança de coordenadas}
+%-------------------------------------------------------------------------------
+Sistemas de coordenadas cartesiano 
+($\bm{{\rm\hat{x}}},\bm{{\rm\hat{y}}},\bm{{\rm\hat{z}}}$),
+circular
+($\bm{{\rm\hat{e}}}_-,\bm{{\rm\hat{z}}},\bm{{\rm\hat{e}}}_+$),
+cilíndrico
+($\bm{{\rm\hat{\rho}}},\bm{{\rm\hat{\phi}}},\bm{{\rm\hat{z}}}$),
+e esférico
+($\bm{{\rm\hat{r}}},\bm{{\rm\hat{\theta}}},\bm{{\rm\hat{\phi}}}$).
+Os sistemas são definidos como 
+$\bm{{\rm r}}=r\bm{{\rm\hat{r}}}$
+ou 
+$r\bm{{\rm\hat{r}}}=x\bm{{\rm\hat{x}}}+y\bm{{\rm\hat{y}}}+z\bm{{\rm\hat{z}}}$
+ou 
+$r\bm{{\rm\hat{r}}}=\rho\bm{{\rm\hat{\rho}}}+z\bm{{\rm\hat{z}}}$,
+já que 
+$\rho\bm{{\rm\hat{\rho}}}=x\bm{{\rm\hat{x}}}+y\bm{{\rm\hat{y}}}$,
+ou ainda
+$r\bm{{\rm\hat{r}}}=\rho(e^{-i\phi}\bm{{\rm\hat{e}}}_++e^{i\phi}\bm{{\rm\hat{e}}}_-)/\sqrt{2}+z\bm{{\rm\hat{z}}}$.
+Temos ainda que $\cos\theta=z/r$, $\sin\theta=\rho/r$, $\cos\phi=x/\rho$ e $\sin\phi=y/\rho$. Das
+relações de amplitude, $r^2=\rho^2+z^2$ e $\rho^2=x^2+y^2$. Finalmente, obtemos
+$\rho\bm{{\rm\hat{\phi}}}=\rho(\bm{{\rm\hat{z}}}\times\bm{{\rm\hat{\rho}}})=-y\bm{{\rm\hat{x}}}+x\bm{{\rm\hat{y}}}$,
+e 
+$r\bm{{\rm\hat{\theta}}}=r(\bm{{\rm\hat{\phi}}}\times\bm{{\rm\hat{r}}})=z\bm{{\rm\hat{\rho}}}-\rho\bm{{\rm\hat{z}}}$.
+Deste modo, podemos passar de um sistema de referências para outro.
+As relações, escritas na forma matricial são dadas abaixo.
+%=======================================
+As coordenadas cilíndricas são dadas por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi & \sin\phi & 0 \\
+-\sin\phi & \cos\phi & 0 \\
+        0 &        0 & 1 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\bm{{\rm\hat{z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e a relação inversa entre elas por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\bm{{\rm\hat{z}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi & -\sin\phi & 0 \\
+ \sin\phi &  \cos\phi & 0 \\
+        0 &        0 & 1 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+As coordenadas esféricas são dadas por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta\cos\phi & \sin\theta\sin\phi &  \cos\theta \\
+ \cos\theta\cos\phi & \cos\theta\sin\phi & -\sin\theta \\
+          -\sin\phi &           \cos\phi &           0 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\bm{{\rm\hat{z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+A relação de cilíndrica para esféricas 
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta & 0 &  \cos\theta \\
+ \cos\theta & 0 & -\sin\theta \\
+          0 & 1 &           0 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{z   }}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e a relação de esféricas para cilíndricas
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{z   }}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta & 0 &  \cos\theta \\
+ \cos\theta & 0 & -\sin\theta \\
+          0 & 1 &           0 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+A relação de circular para cilíndrica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+  \sin\theta e^{i\phi} & \sqrt{2}\cos\theta &  \sin\theta e^{-i\phi}\\
+  \cos\theta e^{i\phi} &-\sqrt{2}\sin\theta &  \cos\theta e^{-i\phi}\\
+           i e^{i\phi} &                  0 &          -i e^{-i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_-\\
+\bm{{\rm\hat{z}}}\\
+\bm{{\rm\hat{e}}}_+\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+As relações abaixo são relações dois
+a dois, sendo que temos
+%=======================================
+de cilíndrica para esférica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta &  \cos\theta \\
+ \cos\theta & -\sin\theta \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+de esférica para cilíndrica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta &  \cos\theta \\
+ \cos\theta & -\sin\theta \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+No plano $xy$, de cartesiana para cilíndrica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi &  \sin\phi \\
+-\sin\phi &  \cos\phi \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e de cilíndrica pra cartesiana
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi & -\sin\phi \\
+ \sin\phi &  \cos\phi \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+As relações entre cartesianas e circulares
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+ 1 &  i\\
+ 1 & -i\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e de circulares para cartesianas.
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+ 1 &  1\\
+-i &  i\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+De cilíndrica para circular
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+ e^{ i\phi} &  ie^{ i\phi}\\
+ e^{-i\phi} & -ie^{-i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e de circular pra cilíndrica.
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+  e^{-i\phi} &  e^{i\phi}\\
+-ie^{-i\phi} & ie^{i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+%%-------------------------------------------------------------------------------
+%% GRADIENTE EM COORDENADAS CARTESIANAS
+%%-------------------------------------------------------------------------------
+%Por último, vamos calcular o gradiente de $Y_l^m$. Para isto, 
+%vamos lembrar que 
+%\begin{eqnarray}
+%Y_l^m(\bm{{\rm\hat{r}}})=Q_l^m(z/r)e^{im\phi}=Q_l^m(z/r)\left(\frac{x}{\rho}+i\frac{y}{\rho}\right)^m
+%\end{eqnarray}
+%Vale lembrar de que $r=\sqrt{x^2+y^2+z^2}$ e que $\sqrt{l(l+1)}\bm{{\rm V}}_{lm}=r\nabla Y_l^m$.
+%Deste modo, vamos fazer concomitantemente as derivadas em $x$ e em $y$, começando com
+%\begin{eqnarray}
+%r\partial_x Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_x\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}r\partial_x\left(\frac{x}{\rho}+i\frac{y}{\rho}\right)\\
+%r\partial_y Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_y\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}r\partial_y\left(\frac{x}{\rho}+i\frac{y}{\rho}\right)
+%\end{eqnarray}
+%em que o segundo termo tem três derivadas. Realizando as derivadas
+%e fazendo $x+iy=\rho e^{i\phi}$ vamos obter
+%\begin{eqnarray}
+%r\partial_x Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_x\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}\left( \frac{r}{\rho}+e^{i\phi}\rho r\partial_x\left(\frac{1}{\rho}\right)\right)\\
+%r\partial_y Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_y\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}\left(i\frac{r}{\rho}+e^{i\phi}\rho r\partial_y\left(\frac{1}{\rho}\right)\right)
+%\end{eqnarray}
+%Temos que $r\partial_{(x,y)} (1/r)=-{(x,y)}/r^2$ e também $\rho\partial_{(x,y)} (1/\rho)=-{(x,y)}/\rho^2$
+%vamos obter
+%\begin{eqnarray}
+%r\partial_x Y_l^m&=&-\frac{xz}{r^2}Q_l^m{}'e^{im\phi}+mQ_l^me^{i(m-1)\phi}\left(\frac{ r}{\rho}-\frac{rxe^{i\phi}}{\rho^2}\right)\\
+%r\partial_y Y_l^m&=&-\frac{yz}{r^2}Q_l^m{}'e^{im\phi}+mQ_l^me^{i(m-1)\phi}\left(\frac{ir}{\rho}-\frac{rye^{i\phi}}{\rho^2}\right)
+%\end{eqnarray} 
+%Juntando os termos
+%\begin{eqnarray}
+%r(\partial_x+i\partial_y)Y_l^m&=&-\frac{z\rho}{r^2}Q_l^m{}'e^{i(m+1)\phi}-\frac{r}{\rho}mQ_l^me^{i(m+1)\phi}\\
+%r(\partial_y-i\partial_y)Y_l^m&=&-\frac{z\rho}{r^2}Q_l^m{}'e^{i(m-1)\phi}+\frac{r}{\rho}mQ_l^me^{i(m-1)\phi}
+%\end{eqnarray} 
+%conforme já havíamos visto.
+
+%-------------------------------------------------------------------------------
+\section{Produtos vetoriais}
+%-------------------------------------------------------------------------------
+Os produtos vetorias são triviais, exceto para o caso de vetores complexos, de 
+modo que
+para 
+$\bm{{\rm A}}=A_-\bm{{\rm\hat{e}}}_++A_z\bm{{\rm\hat{z}}}+A_+\bm{{\rm\hat{e}}}_-$
+$\bm{{\rm B}}=B_-\bm{{\rm\hat{e}}}_++B_z\bm{{\rm\hat{z}}}+B_+\bm{{\rm\hat{e}}}_-$
+vamos ter
+\begin{eqnarray}
+\bm{{\rm A}}\times\bm{{\rm B}}
+=i
+\left|
+\begin{array}{ccc}
+\bm{{\rm\hat{e}}}_-&\bm{{\rm\hat{z}}}&\bm{{\rm\hat{e}}}_+\\
+A_-                &A_z              &A_+                \\
+B_-                &B_z              &B_+                \\
+\end{array}
+\right|
+\end{eqnarray}
+sendo que $A_\pm=\bm{{\rm\hat{e}}}_\pm\cdot\bm{{\rm A}}$. Os vetores são
+representados como sendo
+\begin{eqnarray}
+\bm{{\rm A}}
+=
+\left[
+\begin{array}{c}
+A_-\\
+A_z\\
+A_+\\
+\end{array}
+\right]
+\end{eqnarray}

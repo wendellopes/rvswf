@@ -4,7 +4,7 @@
 #' polarized.
 #' @param P Polarity of the Bessel beam (\eqn{S=\pm 1}).
 #' @param M Order of the Bessel Beam.
-#' @param S Chirality of the Bessel Beam (\eqn{S=\pm 1})
+#' @param S Chirality of the Bessel Beam (\eqn{S=\pm 1}).
 #' @param g Transversal component of the Bessel Beam (\eqn{\gamma}).
 #' @param kz Component \eqn{z} of the wave vector (single value).
 #' @param x Component \eqn{x} of the position vector (vector).

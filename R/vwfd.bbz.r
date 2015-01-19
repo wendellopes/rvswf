@@ -4,7 +4,7 @@
 #' Transversal Electric (TE), that means that \eqn{E_z=0}, or Transversal
 #' Magnetic (TM), that means \eqn{H_z=0},  in terms of the components of the
 #' wave vector and the position vector.
-#' @param TE Type of the wave field.
+#' @param TE Type of the wave field (TE or TM).
 #' @param M Order of the Bessel Beam.
 #' @param S Chirality of the Bessel Beam (\eqn{S=\pm 1})
 #' @param g Transversal component of the Bessel Beam (\eqn{\gamma}).

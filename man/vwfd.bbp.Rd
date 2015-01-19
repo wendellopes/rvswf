@@ -9,7 +9,7 @@ vwfd.bbp(P, M, S, g, kz, x, y, z)
 
   \item{M}{Order of the Bessel Beam.}
 
-  \item{S}{Chirality of the Bessel Beam (\eqn{S=\pm 1})}
+  \item{S}{Chirality of the Bessel Beam (\eqn{S=\pm 1}).}
 
   \item{g}{Transversal component of the Bessel Beam
   (\eqn{\gamma}).}

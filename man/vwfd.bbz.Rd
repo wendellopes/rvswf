@@ -5,7 +5,7 @@
 vwfd.bbz(TM = TRUE, M, S, g, kz, x, y, z)
 }
 \arguments{
-  \item{TE}{Type of the wave field.}
+  \item{TE}{Type of the wave field (TE or TM).}
 
   \item{M}{Order of the Bessel Beam.}
 

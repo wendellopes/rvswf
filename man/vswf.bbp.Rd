@@ -29,6 +29,10 @@ vswf.bbp(gama, kz, xo, yo, zo, lmax, M, s, p)
 
   \item{p}{Polarity of the Bessel beam (\eqn{S=\pm 1}).}
 }
+\value{
+The Beam Shape Coefficients for a Circularly polarized
+Bessel Beam.
+}
 \description{
 Beam Shape Coefficient for Circularly polarized Bessel Beam
 }

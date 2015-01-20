@@ -1,6 +1,21 @@
-#-------------------------------------------------------------------------------
-# VECTOR AND SCALAR SPHERICAL HARMONICS
-#-------------------------------------------------------------------------------
+#' Calculates the Vector Spherical Harmonics from zero to lmax.
+#' 
+#' @details Calculate the three complex components \eqn{\hat{e}_-},
+#' \eqn{\hat{e}_z} and \eqn{\hat{e}_+} of the three vector spherical
+#' harmonics \eqn{\bm{X}_{lm}}, \eqn{\bm{V}_{lm}} and \eqn{\bm{Y}_{lm}} and
+#' also the three complex components of the three vector spherical harmonics
+#' \eqn{\bm{Y}_{l,l}^m}, \eqn{\bm{Y}_{l,l-1}^m} and \eqn{\bm{Y}_{l,l+1}^m}.
+#' @param x The component \eqn{x} of the position vector.
+#' @param y The component \eqn{y} of the position vector.
+#' @param z The component \eqn{z} of the position vector.
+#' @param lmax The maximum value of \eqn{l}.
+#' @return A list with the values of \eqn{l}, \eqn{-l\leq m\geq l}, the scalar
+#' spherical harmonics and the components of the vector spherical harmonics.
+#' @examples
+#' th<-pi/3
+#' ph<-pi/4
+#' VSH<-vswf.vsh(sin(th)*cos(ph),sin(th)*sin(ph),cos(th),5)
+#' str(VSH)
 vswf.vsh<-function(x,y,z,lmax){
 #-------------------------------------------------------------------------------
 # UNIDADES BASICAS

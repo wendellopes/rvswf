@@ -1,6 +1,20 @@
-#-------------------------------------------------------------------------------
-# MULIPOLOS DE HANSEN
-#-------------------------------------------------------------------------------
+#' Hansen Multipoles.
+#' 
+#' @details The Hansen Multipoles combine the Vector Spherical Harmonics with
+#' the spherical Bessel functions.
+#' @param k The module of the wave vector.
+#' @param x The component \eqn{x} of the position vector.
+#' @param y The component \eqn{y} of the position vector.
+#' @param z The component \eqn{z} of the position vector.
+#' @param lmax The maximum value of \eqn{l}.
+#' @return A list with the complex components of the Hansen Multipoles 
+#' \eqn{M_{lm}} and \eqn{N_{lm}}.
+#' @seealso \code{\link{vswf.sbf}}, \code{\link{vswf.vsh}}.
+#' @examples
+#' th<-pi/3
+#' ph<-pi/4
+#' VSH<-vswf.hmp(1,sin(th)*cos(ph),sin(th)*sin(ph),cos(th),5)
+#' print(as.data.frame(VSH))
 vswf.hmp<-function(k,x,y,z,lmax){
 #------------------------------------------------
    LMAX=lmax*(lmax+2)+1

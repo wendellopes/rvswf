@@ -13,14 +13,14 @@
 #' points(Im(a$GTE),pch=4,col='red',type='b')
 #' plot(Re(a$GTM),type='b')
 #' points(Im(a$GTM),pch=4,col='red',type='b')
-vswf.mpw<-function(lmax,norm=FALSE,s=1){
+vswf.mpw<-function(lmax,norm=TRUE,s=1){
 #-------------------------------------------------------------------------------
    if(lmax<1){lmax<-1}                         # Pelo menos 1 termo
    LMAX=lmax*(lmax+2)+1                        # Vetor para lmax
 #-------------------------------------------------------------------------------
    gte<-rep(0,LMAX)
    gtm<-rep(0,LMAX)
-   glm<-function(l,m,norm=FALSE){
+   glm<-function(l,m,norm=TRUE){
       k<-(1i^l)*sqrt(4*pi*(2*l+1))
       k<-rep(k,2*l+1)
       k[m!=s]<-0

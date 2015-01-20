@@ -1,0 +1,35 @@
+\name{vswf.psi}
+\alias{vswf.psi}
+\title{Auxiliary function used in calculations of Bessel Beams and Cylindrical Wave Guides.}
+\usage{
+vswf.psi(gama, kz, x, y, z, m, s = 1)
+}
+\arguments{
+  \item{gama}{The transversal component of the wave
+  vector.}
+
+  \item{kz}{The longitudinal component of the wave vector.}
+
+  \item{x}{The component \eqn{x} of the position vector.}
+
+  \item{y}{The component \eqn{y} of the position vector.}
+
+  \item{z}{The component \eqn{z} of the position vector.}
+
+  \item{s}{The chirality of the function.}
+}
+\value{
+The complex value of \eqn{\psi_m(x)}.
+}
+\description{
+Auxiliary function used in calculations of Bessel Beams and
+Cylindrical Wave Guides.
+}
+\details{
+The definition is given by
+\eqn{\psi_m(\bm{k};\bm{r})=J_m(kr)e^{ism\phi}e^{ik_zz}}.
+}
+\examples{
+vswf.psi(1,2,3,4,5,6)
+}
+

@@ -1,6 +1,13 @@
-#-------------------------------------------------------------------------------
-# NORMALIZED ASSOCIATED LEGENDRE POLYNOMIALS
-#-------------------------------------------------------------------------------
+#' Normalized Legendre Functions and its derivatives
+#' 
+#' @details Calculate the normalized Legendre Functions \eqn{Q_l^m}, in the 
+#' way that \eqn{Y_{lm}(\theta,\phi)=Q_l^m(\cos\theta) e^{im\phi}}.
+#' @param cth The argument of \eqn{Q_l^m(x)}, so \eqn{-1<x=\cos\theta<1}.
+#' @param lmax The maximum value of \eqn{l}.
+#' @return An array of \eqn{Q_l^m} and its derivative \eqn{Q_l^m{}'}.
+#' @examples
+#' u<-vswf.qlm(.5,5)
+#' print(u)
 vswf.qlm<-function(cth,lmax){
    sth<-sqrt(1-cth^2)
 #-------------------------------------------------------------------------------

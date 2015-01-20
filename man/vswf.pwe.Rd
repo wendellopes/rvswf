@@ -47,9 +47,12 @@ Ep<-0
 Hm<--1i*Em
 Hz<--1i*Ez
 Hp<--1i*Ep
+#-------------------------------------------------------------------------------
+# MIE PLANE WAVE
+#-------------------------------------------------------------------------------
 v<-vswf.hmp(k,xo,yo,zo,lmax)
 u<-vswf.mpw(lmax,norm=TRUE)
-
+#-------------------------------------------------------------------------------
 Em.pweZ<-sum(u$GTE*v$M.m-u$GTM*v$N.m)
 Ez.pweZ<-sum(u$GTE*v$M.z-u$GTM*v$N.z)
 Ep.pweZ<-sum(u$GTE*v$M.p-u$GTM*v$N.p)
@@ -58,7 +61,7 @@ Hm.pweZ<-sum(u$GTM*v$M.m+u$GTE*v$N.m)
 Hz.pweZ<-sum(u$GTM*v$M.z+u$GTE*v$N.z)
 Hp.pweZ<-sum(u$GTM*v$M.p+u$GTE*v$N.p)
 #-------------------------------------------------------------------------------
-# PLANE WAVE
+# GENERIC PLANE WAVE
 #-------------------------------------------------------------------------------
 w<-vswf.gpw(0,0,k,1/sqrt(2),1i/sqrt(2),0,lmax)
 
@@ -70,7 +73,7 @@ Hm.pweK<-sum(w$GTM*v$M.m+w$GTE*v$N.m)
 Hz.pweK<-sum(w$GTM*v$M.z+w$GTE*v$N.z)
 Hp.pweK<-sum(w$GTM*v$M.p+w$GTE*v$N.p)
 #-------------------------------------------------------------------------------
-# CONFERINDO
+# CHECKING
 #-------------------------------------------------------------------------------
 b<-data.frame(DEF=c(Em,Ez,Ep,Hm,Hz,Hp),
               row.names=c("Em","Ez","Ep","Hm","Hz","Hp"))

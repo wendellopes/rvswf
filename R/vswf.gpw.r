@@ -55,6 +55,7 @@ vswf.gpw<-function(kx,ky,kz,ux,uy,uz,lmax,xo=0,yo=0,zo=0,implicit=TRUE){
    ham<-1i*(hkm*huz-hkz*hum)
    haz<-1i*(hkp*hum-hkm*hup)
    hap<-1i*(hkz*hup-hkp*huz)
+   # VECTORS
    GTE<-rep(0,LMAX)
    GTM<-rep(0,LMAX)
    Il<-rep(0,LMAX)
@@ -71,8 +72,7 @@ vswf.gpw<-function(kx,ky,kz,ux,uy,uz,lmax,xo=0,yo=0,zo=0,implicit=TRUE){
       U<-vswf.qlm(kz/k,lmax+1)
       qlm<-U$Qlm
       rm(U)
-      # Normalized Associated Legendre Polynomials
-      # Constants
+      # Constants for Normalized Associated Legendre Polynomials
       cplm<-function(l,m){return(sqrt(l*(l+1)-m*(m+1)))}
       cmlm<-function(l,m){return(sqrt(l*(l+1)-m*(m-1)))}
       il<-function(l){return((1i^l)/sqrt(l*(l+1)))}

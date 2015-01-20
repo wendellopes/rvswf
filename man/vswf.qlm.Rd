@@ -1,0 +1,28 @@
+\name{vswf.qlm}
+\alias{vswf.qlm}
+\title{Normalized Legendre Functions and its derivatives}
+\usage{
+vswf.qlm(cth, lmax)
+}
+\arguments{
+  \item{cth}{The argument of \eqn{Q_l^m(x)}, so
+  \eqn{-1<x=\cos\theta<1}.}
+
+  \item{lmax}{The maximum value of \eqn{l}.}
+}
+\value{
+An array of \eqn{Q_l^m} and its derivative \eqn{Q_l^m{}'}.
+}
+\description{
+Normalized Legendre Functions and its derivatives
+}
+\details{
+Calculate the normalized Legendre Functions \eqn{Q_l^m}, in
+the way that \eqn{Y_{lm}(\theta,\phi)=Q_l^m(\cos\theta)
+e^{im\phi}}.
+}
+\examples{
+u<-vswf.qlm(.5,5)
+print(u)
+}
+

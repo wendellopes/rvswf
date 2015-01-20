@@ -2,7 +2,7 @@
 \alias{vswf.mpw}
 \title{Beam Shape Coefficients for a Plane Wave, as done by Mie}
 \usage{
-vswf.mpw(lmax, norm = FALSE, s = 1)
+vswf.mpw(lmax, norm = TRUE, s = 1)
 }
 \arguments{
   \item{lmax}{The maximum value of \eqn{l}.}

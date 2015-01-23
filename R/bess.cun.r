@@ -1,3 +1,7 @@
+#' Cylindrical Bessel function of order one \eqn{J_1(x)}.
+#' 
+#' @details Cylindrical Bessel function calculated by series summation.
+#' AINDA POR FAZER
 bess.cun<-function(x){
    Kj<-function(x,j){
       return(x/j)

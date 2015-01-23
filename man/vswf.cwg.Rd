@@ -119,8 +119,8 @@ PWE<-vswf.pwe(k,x,y,z,lmax,BSC$GTE,BSC$GTM)
 #-------------------------------------------------------------------------------
 # VALUES
 #-------------------------------------------------------------------------------
-cat("Distance x from origin in wavelength (from ",-a/(2*lambda),"to ",a/(2*lambda),"):",x/lambda,"\\n")
-cat("Distance y from origin in wavelength (from ",-b/(2*lambda),"to ",b/(2*lambda),"):",y/lambda,"\\n")
+cat("Distance x from origin in wavelength (from ",-R/(2*lambda),"to ",R/(2*lambda),"):",x/lambda,"\\n")
+cat("Distance y from origin in wavelength (from ",-R/(2*lambda),"to ",R/(2*lambda),"):",y/lambda,"\\n")
 df<-data.frame(
    PWE=c(PWE$Em,PWE$Ez,PWE$Ep,PWE$Hm,PWE$Hz,PWE$Hp),
    CWG=c(CWG$Em,CWG$Ez,CWG$Ep,CWG$Hm,CWG$Hz,CWG$Hp),

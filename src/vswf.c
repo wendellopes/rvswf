@@ -624,7 +624,7 @@ void lcfa_cyl( /* FUNCTION */
       NMAY=*NMAX;
       lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
       lcfe_cbd(nmax,x,NMAX,&gn[*nmax]);
-      printf("Precision increased to %d\n",*NMAX);
+      //printf("Precision increased to %d\n",*NMAX);
    }
    // Downward Recursion
    int n;
@@ -656,7 +656,7 @@ void lcfa_sph( /* FUNCTION */
       NMAY=*NMAX;
       lcfe_sbl(nmax,x,NMAX,&Dn[*nmax]);
       lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
-      printf("Precision increased to %d\n",*NMAX);
+      //printf("Precision increased to %d\n",*NMAX);
    }
    // Downward Recursion
    int n;
@@ -688,7 +688,7 @@ void lcfa_ric( /* FUNCTION */
       NMAY=*NMAX;
       lcfe_rbl(nmax,x,NMAX,&Dn[*nmax]);
       lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
-      printf("Precision increased to %d\n",*NMAX);
+      //printf("Precision increased to %d\n",*NMAX);
    }
    // Downward Recursion
    int n;
@@ -842,6 +842,7 @@ void bess_ssv( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Array of Spherical Bessel functions
+// NEED COMPLEX VERSION?
 void bess_sph( /* FUNCTION */
       int *nmax, 
       double *x, 
@@ -977,7 +978,7 @@ void bess_ric( /* FUNCTION */
    }
 }
 /*------------------------------------------------------------------------------
- *                  VECTOR SPHERICAL WAVE FUNCTIONS                            *
+ *                  VECTOR SPHERICAL WAVE FUNC                                *
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 // Psi_m(\vec{k},\vec{r}): Basic function for cylindrical simetries

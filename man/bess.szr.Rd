@@ -1,25 +1,25 @@
-\name{bess.sun}
-\alias{bess.sun}
-\title{Spherical Bessel function of order one \eqn{j_1(x)}}
+\name{bess.szr}
+\alias{bess.szr}
+\title{Spherical Bessel function of order one \eqn{j_0(x)}}
 \usage{
-bess.sun(x)
+bess.szr(x)
 }
 \arguments{
   \item{x}{Complex argument of the Spherical Bessel
   function of order one.}
 }
 \value{
-Complex values for \eqn{j_1(x)}.
+Complex values for \eqn{j_0(x)}.
 }
 \description{
-Spherical Bessel function of order one \eqn{j_1(x)}
+Spherical Bessel function of order one \eqn{j_0(x)}
 }
 \details{
 It uses the series solution to calculate the values of the
 Spherical Bessel function for \eqn{x \to 0}.
 }
 \examples{
-print(bess.sun(3+2i))
-print(bess.sun(0:10))
+print(bess.szr(3+2i))
+print(bess.szr(0:10))
 }
 

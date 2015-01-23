@@ -1,17 +1,26 @@
+#' Calculation of Spherical Bessel Functions.
+#' 
+#' @details We use Lentz method for calculating the starting value
+#'  j_lmax(x)=bo+(a1/b1+)(a2/b2+)(a3/b3+)...(an/bn),
+#'  and then we use downward recurrence to calculate the other values,
+#'  from lmax-1 to 0.
+#'  @param lmax The maximum value of \eqn{l}.
+#'  @param xo The argument of \eqn{j_l}. Can be real or complex.
+#'  @param compare Make the comparison with the GSL (Gnu Scientific Library).
+#'  @param verbose Shows the normalizations on downward recurrence.
+#'  @return An array with the Spherical Bessel functions and its derivatives.
+#'  @seealso \code{\link{bess.sph}}, \code{\link{bess.cyl}}, \code{\link{bess.ric}},
+#'  \code{\link{bess.czr}}, \code{\link{bess.cun}}, \code{\link{bess.szr}},
+#'  \code{\link{bess.sun}}.
+#'  @examples
+#'  vswf.sbf(5,3,compare=TRUE)
 #-------------------------------------------------------------------------------
-# Calculation of Spherical Bessel Functions by Continued Fractions
-# Lentz Method
-# fn=bo+(a1/b1+)(a2/b2+)(a3/b3+)...(an/bn)
-# DOWNWARD RECURRENCE WITH EXTRA RENORMALIZATIONS
-# Works for Lmax>x. If Lmax<x, performs calculations for Lmax'>x and then
-# discards terms greater than Lmax. (Not the best performance choice)
-#-------------------------------------------------------------------------------
-vswf.sbf<-function(NN,xo,compare=FALSE,verbose=FALSE){
-   NN.length<-NN+1
-   if(NN<2*xo){
-      NN<-as.integer(2*xo)
+vswf.sbf<-function(lmax,xo,compare=FALSE,verbose=FALSE){
+   lmax.length<-lmax+1
+   if(lmax<2*abs(xo)){
+      lmax<-as.integer(2*abs(xo))
    }
-   NN<-NN+10
+   lmax<-lmax+10
    Tk<-function(x,k){return((2*k+1)/x)}
    eo<-.Machine$double.xmin
    ACC<-10^-50
@@ -19,10 +28,10 @@ vswf.sbf<-function(NN,xo,compare=FALSE,verbose=FALSE){
 # L > x
 # Case x>L: Calculate j_l for L2=int(1.5x)
 #-------------------------------------------------------------------------------
-#   print(NN/xo)
+#   print(lmax/xo)
 #-------------------------------------------------------------------------------
-   fn<-NN/xo
-   if(fn==0){fn<-eo}
+   fn<-lmax/xo
+   if(abs(fn)==0){fn<-eo}
    Cn<-fn
    Dn<-0
    N<-1
@@ -32,9 +41,9 @@ vswf.sbf<-function(NN,xo,compare=FALSE,verbose=FALSE){
       an<--1
       bn<-Tk(xo,N)
       Cn<-bn+an/Cn
-      if(Cn==0){Cn<-eo}
+      if(abs(Cn)==0){Cn<-eo}
       Dn<-bn+an*Dn
-      if(Dn==0){Dn<-eo}
+      if(abs(Dn)==0){Dn<-eo}
       Dn<-1/Dn
       DN<-Cn*Dn
       fn<-fn*DN
@@ -55,7 +64,7 @@ vswf.sbf<-function(NN,xo,compare=FALSE,verbose=FALSE){
    gno<-1
    dgno<-f  # dgno=gno*dgno
    RN<-1
-   for(n in NN:1){
+   for(n in lmax:1){
       gnom<-gno*(n+1)/xo+dgno
       dgno<-gnom*(n-1)/xo-gno
       gno<-gnom
@@ -74,29 +83,25 @@ vswf.sbf<-function(NN,xo,compare=FALSE,verbose=FALSE){
    }
 #-------------------------------------------------------------------------------
 # NORMALIZATION
-   xu<-(xo/pi)-as.integer(xo/pi)
+   xu<-sin(xo)/xo
    # Verify if xo is not a zero of j_0(x)
-   if(xu>1e-3){                   # this way, normalize by j_0
+   if(abs(xu)>1e-5){                   # this way, normalize by j_0
       gn<-(sin(xo)/xo)*gn/gn[1]
    }else{                         # otherwise normalize by j_1
-      cat("Zero de j_l(x)\n")
       gn<-(-cos(xo)+sin(xo)/xo)*(1/xo)*gn/gn[2]
    }
-   # Verify if xo is not a zero of j_0'(x)=-j_1(x)
-   # x=4.4934 (example)
-   if(gn[2]>1e-2){
+   if(abs(gn[2])>1e-5){
       dgn<-dgn*(-gn[2])/dgn[1]
    }else{
-      cat("Zero de j_l'(x)\n")
       dgn<-((1-(2/(xo^2)))*(sin(xo)/xo)+2*cos(xo)/(xo^2))*dgn/dgn[2]
    }
-   if(compare){ #perform comparison with gnu scientif library
+   if(compare & !is.complex(xo)){ #perform comparison with gnu scientif library
       library(gsl)
-      gsl<-bessel_jl_steed_array(lmax=NN,x=xo)
+      gsl<-bessel_jl_steed_array(lmax=lmax,x=xo)
       u<-data.frame(jn_gsl=gsl,jn=gn,djn=dgn)
-      return(u[1:NN.length,])
+      return(u[1:lmax.length,])
    }else{
       u<-data.frame(jn=gn,djn=dgn)
-      return(u[1:NN.length,])
+      return(u[1:lmax.length,])
    }
 }

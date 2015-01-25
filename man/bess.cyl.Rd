@@ -39,12 +39,12 @@ the relation, \deqn{(S_n-D_n)(S_{n+1}+D_{n+1})=1.
 calculated upward or downward.
 }
 \examples{
-x<-5
+x<-30
 nmax<-50
 a<-bess.cyl(nmax,x,code="C")
 b<-bess.cyl(nmax,x,code="R")
 d<-besselJ(x=x,nu=0:nmax)
-plot(a$Jn)
+plot(a$Jn,type='b')
 points(b$Jn,col='red',pch=4)
 points(d,col='blue',pch=3)
 }

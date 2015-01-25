@@ -14,7 +14,9 @@ bess.sph(nmax, x, code = "C")
 }
 \value{
 An array of Spherical Bessel functions and its derivatives
-from 0 to \code{nmax} at point \code{x}
+from 0 to \code{nmax} at point \code{x}, and also the
+logarithmic derivative \eqn{c_n=j_n'/j_n} and the ratio
+\eqn{\rho_n=j_n/j_{n+1}}.
 }
 \description{
 Calculates Spherical Bessel functions from 0 to nmax.
@@ -38,12 +40,12 @@ the relation, \deqn{(S_{n+2}-c_{n+1})(S_n+c_n)=1.
 upward or downward.
 }
 \examples{
-x<-5
+x<-30
 nmax<-50
 a<-bess.sph(nmax,x,code="C")
 b<-bess.sph(nmax,x,code="R")
 d<-sqrt(pi/(2*x))*besselJ(x=x,nu=.5+(0:nmax))
-plot(a$jn)
+plot(a$jn,type='b')
 points(b$jn,col='red',pch=4)
 points(d,col='blue',pch=3)
 }

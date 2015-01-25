@@ -21,12 +21,12 @@
 #' @return An array of Cylindrical Bessel functions and its derivatives.
 #' from 0 to \code{nmax} at point \code{x}
 #' @examples
-#' x<-5
+#' x<-30
 #' nmax<-50
 #' a<-bess.cyl(nmax,x,code="C")
 #' b<-bess.cyl(nmax,x,code="R")
 #' d<-besselJ(x=x,nu=0:nmax)
-#' plot(a$Jn)
+#' plot(a$Jn,type='b')
 #' points(b$Jn,col='red',pch=4)
 #' points(d,col='blue',pch=3)
 bess.cyl<-function(nmax,x,code="C"){ # PROBLEMAS COM ZEROS #
@@ -43,8 +43,7 @@ bess.cyl<-function(nmax,x,code="C"){ # PROBLEMAS COM ZEROS #
             x=as.double(x),
             Jn=as.double(dummy),
             Dn=as.double(dummy),
-            J0=as.double(besselJ(x,0)),
-            J1=as.double(besselJ(x,1)))
+            NMAX=as.integer(2000))
       return(data.frame(Jn=u$Jn,dJn=u$Dn))
    }else{
       S<-function(n,x){

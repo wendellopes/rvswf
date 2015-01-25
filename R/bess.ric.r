@@ -21,12 +21,12 @@
 #' @return An array of Ricatti-Bessel functions and its derivatives.
 #' from 0 to \code{nmax} at point \code{x}
 #' @examples
-#' x<-5
+#' x<-30
 #' nmax<-50
 #' a<-bess.ric(nmax,x,code="C")
 #' b<-bess.ric(nmax,x,code="R")
 #' d<-sqrt(x*pi/2)*besselJ(x=x,nu=.5+(0:nmax))
-#' plot(a$Rn)
+#' plot(a$Rn,type='b')
 #' points(b$Rn,col='red',pch=4)
 #' points(d,col='blue',pch=3)
 bess.ric<-function(nmax,x,code="C"){

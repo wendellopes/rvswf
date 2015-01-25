@@ -1,6 +1,14 @@
-#-------------------------------------------------------------------------------
-# J_{n}/J_{n+1} [OK] DIRECT - Cylindrical Bessel Ratio Direct
-#-------------------------------------------------------------------------------
+#' Calculates the ratio of Cylindrical Bessel Functions.
+#' 
+#' @details Using Lentz method is possible to calculate the ratio 
+#' \eqn{\gamma_n(x)=J_{n}(x)/J_{n+1}(x)}. By downward recurrence one can 
+#' calculate \eqn{\gamma_n}.
+#' @param n The order of \eqn{\gamma_n(x)}.
+#' @param x The argument of \eqn{\gamma_n(x)} of type complex.
+#' @param NMAX The maximum number of iterations.
+#' @param code Choice between \code{C} or native {R} code.
+#' @return The value of \eqn{\gamma_n} for complex arguments.
+#' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
 lcfe.cbd<-function(n,x,NMAX=2000,code="C"){
    n<-as.integer(n)
    nmaxo<-NMAX

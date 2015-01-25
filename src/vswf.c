@@ -14,17 +14,16 @@
 #ifdef _OPENMP
    #include <omp.h>
 #endif
-/*------------------------------------------------------------------------------
- *                             BESSEL FUNCTIONS                                *
-------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*
+ *                             BESSEL                                         *
+ *----------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
-//# Auxliary Functions
+//# Auxliary 
 //------------------------------------------------------------------------------
 double lcfe_afs(/* FUNCTION */
       int n,
       double x
    ){
-   //-----------------------------------
    return(n/x);
 }
 //------------------------------------------------------------------------------
@@ -32,7 +31,6 @@ double complex lcfc_afs(/* FUNCTION */
       int n,
       double complex x
    ){
-   //-----------------------------------
    return(n/x);
 }
 //------------------------------------------------------------------------------
@@ -585,7 +583,7 @@ void lcfc_sbi(/* FUNCTION */
    *NMAX=j;
 }
 //------------------------------------------------------------------------------
-// Auxiliary function for calculation of Bessel functions by expansion
+// Auxiliary func for calculation of Bessel functions by expansion
 double KJ( /* FUNCTION */
       int j, 
       double x){
@@ -593,7 +591,7 @@ double KJ( /* FUNCTION */
    return(x/j);
 }
 //------------------------------------------------------------------------------
-// Auxiliary function for calculation of Bessel functions by downward recurrency
+// Auxiliary func for calculation of Bessel functions by downward recurrency
 double SN( /* FUNCTION */
       int j, 
       double x
@@ -602,7 +600,7 @@ double SN( /* FUNCTION */
    return(j/x);
 }
 //------------------------------------------------------------------------------
-// Cylindrical Bessel function ratio and logarithmic derivative 
+// Cylindrical Bessel func ratio and logarithmic derivative 
 // \gamma_n = J_{n}/J_{n+1} == gn;
 // D_{n}    = J_{n}'/J_{n}  == Dn;
 void lcfa_cyl( /* FUNCTION */
@@ -634,7 +632,7 @@ void lcfa_cyl( /* FUNCTION */
    }
 }
 //------------------------------------------------------------------------------
-// Spherical Bessel function ratio and logarithmic derivative 
+// Spherical Bessel func ratio and logarithmic derivative 
 // \rho_{n} = j_{n}/j_{n+1} == gn;
 // c_{n}    = j_{n}'/j_{n}  == Dn;
 void lcfa_sph( /* FUNCTION */
@@ -666,7 +664,7 @@ void lcfa_sph( /* FUNCTION */
    }
 }
 //------------------------------------------------------------------------------
-// Riccati-Bessel function ratio and logarithmic derivative 
+// Riccati-Bessel func ratio and logarithmic derivative 
 // \rho_n = R_{n}/R_{n+1} =j_{n}/j_{n+1} == gn;
 // C_{n}    = R_{n}'/R_{n}  == Dn;
 void lcfa_ric( /* FUNCTION */
@@ -698,7 +696,7 @@ void lcfa_ric( /* FUNCTION */
    }
 }
 //------------------------------------------------------------------------------
-// Spherical Bessel function j_0(x)
+// Spherical Bessel func j_0(x)
 void bess_zro( /* FUNCTION */
       double *x, 
       double *j0
@@ -714,7 +712,7 @@ void bess_zro( /* FUNCTION */
    }
 }
 //------------------------------------------------------------------------------
-// Spherical Bessel function j_1(x)
+// Spherical Bessel func j_1(x)
 void bess_uno( /* FUNCTION */
       double *x, 
       double *j1
@@ -731,7 +729,7 @@ void bess_uno( /* FUNCTION */
    }
 }
 //------------------------------------------------------------------------------
-//Starting values for downward recurrence, Cylindrical Bessel functions
+//Starting values for downward recurrence, Cylindrical Bessel func
 //For calculation of J_n(x), one can calculate by downward recurrence from
 //   J_{n-dig}(x), where dig is the number of precision in J_n(x).
 void bess_csv( /* FUNCTION */
@@ -743,8 +741,8 @@ void bess_csv( /* FUNCTION */
    ){
 //--------------------------------------
    double Jn[*dig], Dn[*dig];
-   Jn[*dig]=0.0;  // n-th Bessel function
-   Dn[*dig]=1.0;  // Derivative of the n-th Bessel function
+   Jn[*dig]=0.0;  // n-th Bessel func
+   Dn[*dig]=1.0;  // Derivative of the n-th Bessel func
    int n,j;
    for(n=*dig;n>0;n--){
       // Downward Recursion
@@ -752,7 +750,7 @@ void bess_csv( /* FUNCTION */
       Dn[n-1]=SN(*nmax+n-1,*x)*Jn[n-1]-Jn[n];
       //Renormalization may be required
       if(fabs(Jn[n-1])>1e+2){
-         for(j=n-1;j<=*dig;j++){
+         for(j=*dig;j>=n-1;j--){
             Dn[j]=Dn[j]/Jn[n-1];
             Jn[j]=Jn[j]/Jn[n-1];
          }
@@ -762,44 +760,51 @@ void bess_csv( /* FUNCTION */
    *DN=Dn[0];
 }
 //------------------------------------------------------------------------------
-// Array of cylindrical Bessel functions
+// Array of cylindrical Bessel func
 void bess_cyl( /* FUNCTION */
       int *nmax, 
       double *x, 
       double *Jn, 
       double *Dn, 
-      double *J0, 
-      double *J1
+      int *NMAX
    ){
 //--------------------------------------
-   Jn[*nmax]=0.0;  // n-th Bessel function
-   Dn[*nmax]=1.0;  // Derivative of the n-th Bessel function
+   Jn[*nmax]=0.0;  // n-th Bessel func
+   Dn[*nmax]=1.0;  // Derivative of the n-th Bessel func
    int dig=15;     // Number of digits of precision
    int n,j;
    bess_csv(nmax,&dig,x,&Jn[*nmax],&Dn[*nmax]);
+   //lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
    for(n=*nmax;n>0;n--){
       // Downward Recursion
       Jn[n-1]=SN(n  ,*x)*Jn[n  ]+Dn[n];
       Dn[n-1]=SN(n-1,*x)*Jn[n-1]-Jn[n];
       //Renormalization may be required
       if(fabs(Jn[n-1])>1e2){
-         for(j=n-1;j<=*nmax;j++){
+         for(j=*nmax;j>=n-1;j--){
             Dn[j]=Dn[j]/Jn[n-1];
             Jn[j]=Jn[j]/Jn[n-1];
          }
       }
    }
-   // Normalization factor for the function
+   // Normalization factor for the func
    double pf=1.0;
-   if(fabs(*J0)>1e-10){
-      pf=*J0/Jn[0];
+   // Using j0(x) and j1(x) from math.h,
+   // otherwise it should be entered from R
+   // or calculated internally.
+   double J0=j0(*x);
+   double J1=j1(*x);
+   if(fabs(J0)>1e-10){
+      //pf=*J0/Jn[0];
+      pf=j0(*x)/Jn[0];
    }else{
-      pf=*J1/Jn[1];
+      //pf=*J1/Jn[1];
+      pf=j1(*x)/Jn[1];
    }
    // Normalization factor for the derivative
    double pd=1.0;
-   if(fabs(*J1)>1e-10){
-      pd=-(*J1)/Dn[0];
+   if(fabs(J1)>1e-10){
+      pd=-(J1)/Dn[0];
    }else{
       pd=0.5*(Jn[0]-Jn[2])/Dn[1];
    }
@@ -811,7 +816,7 @@ void bess_cyl( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-//Starting values for downward recurrence, Spherical Bessel functions
+//Starting values for downward recurrence, Spherical Bessel func
 void bess_ssv( /* FUNCTION */
       int *nmax,
       int *dig,
@@ -822,8 +827,8 @@ void bess_ssv( /* FUNCTION */
 //--------------------------------------
    //printf("passei\n");
    double jn[*dig], cn[*dig];
-   jn[*dig]=1.0;  // n-th Bessel function
-   cn[*dig]=0.0;  // Derivative of the n-th Bessel function
+   jn[*dig]=1.0;  // n-th Bessel func
+   cn[*dig]=0.0;  // Derivative of the n-th Bessel func
    int n,j;
    for(n=*dig;n>0;n--){
       // Downward Recursion
@@ -831,7 +836,7 @@ void bess_ssv( /* FUNCTION */
       cn[n-1]=SN(*nmax+n-1,*x)*jn[n-1]-jn[n];
       //Renormalization may be required
       if(fabs(jn[n-1])>1e+2){
-         for(j=n-1;j<=*dig;j++){
+         for(j=n-1;j<=*dig;j--){
             cn[j]=cn[j]/jn[n-1];
             jn[j]=jn[j]/jn[n-1];
          }
@@ -841,60 +846,69 @@ void bess_ssv( /* FUNCTION */
    *CN=cn[0];
 }
 //------------------------------------------------------------------------------
-// Array of Spherical Bessel functions
+// Array of Spherical Bessel func
 // NEED COMPLEX VERSION?
 void bess_sph( /* FUNCTION */
       int *nmax, 
       double *x, 
       double *jn, 
-      double *dn
+      double *dn,
+      int *NMAX
    ){
 //--------------------------------------
-   double jo=0.0;  // Initialization values
-   double ju=0.0;  // Initialization values
-   double *j0=&jo;
-   double *j1=&ju;
-   bess_zro(x,j0);
-   bess_uno(x,j1);
-   //beginning of the array calculation
-   int dig=15;     // Number of digits of precision
-   bess_ssv(nmax,&dig,x,&jn[*nmax],&dn[*nmax]);
-   int n,j;
+   double j0=0.0;  // Normalization values
+   double j1=0.0;  // Normalization values
+   bess_zro(x,&j0);
+   bess_uno(x,&j1);
+//--------------------------------------
+   int NMAY=*NMAX;
+   lcfe_sbl(nmax,x,NMAX,&dn[*nmax]);
+   while(*NMAX==NMAY){
+      *NMAX=2*NMAY;
+      NMAY=*NMAX;
+      lcfe_sbl(nmax,x,NMAX,&dn[*nmax]);
+   }
+//--------------------------------------
+   int j,n;
+   jn[*nmax] = 1.0; //rn[*nmax];
+   //dn[*nmax] = 0.0; //rn[*nmax];
    for(n=*nmax;n>0;n--){
-      // Downward Recursion
-      jn[n-1]=SN(n+1,*x)*jn[n  ]+dn[n];
-      dn[n-1]=SN(n-1,*x)*jn[n-1]-jn[n];
-      //Renormalization may be required
-      if(fabs(jn[n-1])>1e10){
-         for(j=n-1;j<=*nmax;j++){
+      jn[n-1]=SN(n+1,*x)*jn[n  ]+dn[n  ];
+      dn[n-1]=SN(n-1,*x)*jn[n-1]-jn[n  ];
+      // Renormalization
+      if(fabs(jn[n-1])>1e2){
+         for(j=*nmax;j<=n-1;j--){
             dn[j]=dn[j]/jn[n-1];
             jn[j]=jn[j]/jn[n-1];
          }
       }
    }
-   // Normalization factor for the function
-   double pf=1.0;
-   if(fabs(*j0)>1e-10){
-      pf=*j0/jn[0];
+//--------------------------------------
+   // Normalization factor for the func
+   double pj=1.0;
+   if(fabs(j0)>1e-10){
+      pj=j0/jn[0];
    }else{
-      pf=*j1/jn[1];
+      pj=j1/jn[1];
    }
+//--------------------------------------
    // Normalization factor for the derivative
    double pd=1.0;
-   if(fabs(*j1)>1e-10){
-      pd=-(*j1)/dn[0];
+   if(fabs(j1)>1e-10){
+      pd=-(j1)/dn[0];
    }else{
       pd=(1./3.)*(jn[0]-2*jn[2])/dn[1];
    }
+//--------------------------------------
    // Normalizations
    for(n=0;n<=*nmax;n++){
-      jn[n]=jn[n]*pf;
+      jn[n]=jn[n]*pj;
       dn[n]=dn[n]*pd;
    }
 }
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-//Starting values for downward recurrence, Spherical Bessel functions
+//Starting values for downward recurrence, Spherical Bessel func
 void bess_rsv( /* FUNCTION */
       int *nmax,
       int *dig,
@@ -904,8 +918,8 @@ void bess_rsv( /* FUNCTION */
    ){
 //--------------------------------------
    double Rn[*dig], Cn[*dig];
-   Rn[*dig]=0.0;  // n-th Bessel function
-   Cn[*dig]=1.0;  // Derivative of the n-th Bessel function
+   Rn[*dig]=0.0;  // n-th Bessel func
+   Cn[*dig]=1.0;  // Derivative of the n-th Bessel func
    int n,j;
    for(n=*dig;n>0;n--){
       // Downward Recursion
@@ -913,7 +927,7 @@ void bess_rsv( /* FUNCTION */
       Cn[n-1]=SN(n+*nmax,*x)*Rn[n-1]-Rn[n];
       //Renormalization may be required
       if(fabs(Rn[n-1])>1e2){
-         for(j=n-1;j<=*dig;j++){
+         for(j=*dig;j>=n-1;j--){
             Cn[j]=Cn[j]/Rn[n-1];
             Rn[j]=Rn[j]/Rn[n-1];
          }
@@ -923,7 +937,7 @@ void bess_rsv( /* FUNCTION */
    *CN=Cn[0];
 }
 //------------------------------------------------------------------------------
-// Array of Riccati-Bessel functions
+// Array of Riccati-Bessel func
 void bess_ric( /* FUNCTION */
       int *nmax, 
       double *x, 
@@ -931,16 +945,14 @@ void bess_ric( /* FUNCTION */
       double *Cn
    ){
 //--------------------------------------
-   double j0=0.0;  // Initialization values
+   double R0=0.0;  // Initialization values
+   double R1=0.0;  // Initialization values
    double j1=0.0;  // Initialization values
-   double ro=0.0;
-   double ru=0.0;
-   double *R0=&ro;
-   double *R1=&ru;
-   bess_zro(x,&j0);
+   bess_zro(x,&R0);
+   bess_uno(x,&R1);
    bess_uno(x,&j1);
-   *R0=*x*j0;
-   *R1=*x*j1;
+   R0=*x*R0;
+   R1=*x*R1;
    int dig=15;
    bess_rsv(nmax,&dig,x,&Rn[*nmax],&Cn[*nmax]);
    //printf("Rn = %f, Cn = %f\n",Rn[*nmax],Cn[*nmax]);
@@ -951,25 +963,25 @@ void bess_ric( /* FUNCTION */
       Cn[n-1]=SN(n,*x)*Rn[n-1]-Rn[n];
       //Renormalization may be required
       if(fabs(Rn[n-1])>1e2){
-         for(j=n-1;j<=*nmax;j++){
+         for(j=*nmax;j>=n-1;j--){
             Cn[j]=Cn[j]/Rn[n-1];
             Rn[j]=Rn[j]/Rn[n-1];
          }
       }
    }
-   // Normalization factor for the function
+   // Normalization factor for the func
    double pf=1.0;
-   if(fabs(*R0)>1e-10){
-      pf=(*R0)/Rn[0];
+   if(fabs(R0)>1e-10){
+      pf=(R0)/Rn[0];
    }else{
-      pf=(*R1)/Rn[1];
+      pf=(R1)/Rn[1];
    }
    // Normalization factor for the derivative
    double pd=1.0;
-   if(fabs(*R1)>1e-10){
+   if(fabs(R1)>1e-10){
       pd=cos(*x)/Cn[0];
    }else{
-      pd=(-j1+*R0)/Cn[1];
+      pd=(-j1+R0)/Cn[1];
    }
    // Normalizations
    for(n=0;n<=*nmax;n++){
@@ -981,7 +993,7 @@ void bess_ric( /* FUNCTION */
  *                  VECTOR SPHERICAL WAVE FUNC                                *
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
-// Psi_m(\vec{k},\vec{r}): Basic function for cylindrical simetries
+// Psi_m(\vec{k},\vec{r}): Basic func for cylindrical simetries
 //------------------------------------------------------------------------------
 double complex vswf_psi(/* FUNCTION */
       int *m,int *s,
@@ -995,7 +1007,10 @@ double complex vswf_psi(/* FUNCTION */
    sph=*y/rho;
    double complex eiph=cpow(cph+I*sph,*m*(*s));
    double complex eikz=cexp(I*(*kz)*(*z)); 
+   // gsl
    double jn=gsl_sf_bessel_Jn(*m,rho*(*gamma));
+   // math.h
+   //double jn=jn(*m,rho*(*gamma));
    double complex u=jn*eiph*eikz;
    return(u);
 }
@@ -1301,7 +1316,7 @@ void vwfd_bbp(/* FUNCTION */
 //------------------------------------------------------------------------------
 }
 //------------------------------------------------------------------------------
-// VECTOR SPHERICAL WAVE FUNCTIONS CALCULATIONS
+// VSWF - CALCULATIONS
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 // CONSTANTS FOR Qlm (NORMALIZED ASSOCIATED LEGENDRE POLYNOMIALS)
@@ -1428,10 +1443,18 @@ void vswf_def(/* FUNCTION */
       sph=*y/rho;
    }
    /*---------------------------------*/
-   /* SPHERICAL BESSEL FUNCTIONS      */
+   /* SPHERICAL BESSEL                */
    /*---------------------------------*/
-   double JLM[*lmax+2];
-   gsl_sf_bessel_jl_steed_array(*lmax+1,*k*r,JLM);
+   // GSL
+   //gsl_sf_bessel_jl_steed_array(*lmax+1,*k*r,JLM);
+   // INTERNAL
+   double  JLM[*lmax+2]; //Spherical Bessel func.
+   double dJLM[*lmax+2]; //Derivative of Spherical Bessel func
+   int lp1=*lmax+1;
+   double kr =*k*r;
+   int maxn=2000;
+   bess_sph(&lp1,&kr,(void *)&JLM,(void *)&dJLM,&maxn);
+   //printf("HAS PASSED BY HERE\n");
    //-----------------------------------
    // Qlm - First 4 terms
    double Qlm[LMAXE];

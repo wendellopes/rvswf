@@ -1,6 +1,13 @@
-#-------------------------------------------------------------------------------
-# Logarithmic Derivative Spherical Bessel [OK]
-#-------------------------------------------------------------------------------
+#' Calculates the logarithmic derivative of Spherical Bessel Functions.
+#' 
+#' @details Using Lentz method is possible to calculate the ratio 
+#' \eqn{c_n(x)=j_{n}'(x)/j_{n}(x)}. 
+#' @param n The order of \eqn{c_n(x)}.
+#' @param x The argument of \eqn{c_n(x)} of type complex.
+#' @param NMAX The maximum number of iterations.
+#' @param code Choice between \code{C} or native {R} code.
+#' @return The value of \eqn{c_n} for complex arguments.
+#' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
 lcfe.sbl<-function(n,x,NMAX=2000,code="C"){
    nmaxo<-NMAX
    fn<-0

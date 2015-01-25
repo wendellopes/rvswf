@@ -19,14 +19,15 @@
 #' @param code If you prefer to use native R or C language.
 #' The algorithm is the same.
 #' @return An array of Spherical Bessel functions and its derivatives 
-#' from 0 to \code{nmax} at point \code{x}
+#' from 0 to \code{nmax} at point \code{x}, and also the logarithmic
+#' derivative \eqn{c_n=j_n'/j_n} and the ratio \eqn{\rho_n=j_n/j_{n+1}}.
 #' @examples
-#' x<-5
+#' x<-30
 #' nmax<-50
 #' a<-bess.sph(nmax,x,code="C")
 #' b<-bess.sph(nmax,x,code="R")
 #' d<-sqrt(pi/(2*x))*besselJ(x=x,nu=.5+(0:nmax))
-#' plot(a$jn)
+#' plot(a$jn,type='b')
 #' points(b$jn,col='red',pch=4)
 #' points(d,col='blue',pch=3)
 #-------------------------------------------------------------------------------
@@ -38,67 +39,44 @@ bess.sph<-function(nmax,x,code="C"){
       stop("Code must be \"C\" or \"R\"")
    }
    if(code=="C"){
-      dummy<-rep(0,nmax+1)
+      dummy<-rep(1,nmax+1)
       u<-.C("bess_sph",
             nmax=as.integer(nmax),
             x=as.double(x),
             jn=as.double(dummy),
-            dn=as.double(dummy))
+            dn=as.double(dummy),
+            NMAX=as.integer(2000))
       return(data.frame(jn=u$jn,djn=u$dn))
    }else{
       S<-function(n,x){
          return(n/x)
       }
-	   cn<-rep(0,nmax+1)  # Vector 
-	   rn<-rep(1,nmax+1)  # Vector
-	   rm<-rn
-	   cn[nmax+1]<-lcfe.sbl(nmax,x) # Last element
-	   rn[nmax+1]<-lcfe.sbd(nmax,x) # Last element
-	   cm<-cn
+	   dn<-rep(0,nmax+1)  # Vector 
+	   jn<-rep(1,nmax+1)  # Vector
+	   dn[nmax+1]<-lcfe.sbl(nmax,x) # Last element
 	   # DOWNWARD RECURRENCE
-	   RN<-1
       for(n in nmax:1){
-         #print(c(n,rm[n+1],cm[n+1]))
-         #rn[n]<-S(2*n+1,x)-1/rn[n+1]  # Only \rho_n
-         rn[n]<-S(n+1,x)+cn[n+1]  # [OK]
-         cn[n]<-S(n-1,x)-1/rn[n]  # [OK]
-      	# modified (permits one step normalization)
-         # AQUI! #
-      	rm[n]<-S(n+1,x)*rm[n+1]+cm[n+1]
-      	cm[n]<-S(n-1,x)*rm[n]-rm[n+1]
-         # zeroing
-         if(abs(rm[n])<1e-14){
-            rm[n]<-0
-         }
-         if(abs(cm[n])<1e-14){
-            cm[n]<-0
-         }
-         #print(c(n-1,rm[n],cm[n]))
-      	# Normalization
-      	#print(c(rn[n-1],cn[n-1]))
-      	if(abs(rm[n])>1e2){
-      	  	#cat("renorming...\n")
-      	  	#print(c(rn[n-1],cn[n-1]))
-      	  	cm<-cm/rm[n] # this must be done first
-      	   rm<-rm/rm[n] # otherwise the result will be wrong.
+      	jn[n]<-S(n+1,x)*jn[n+1]+dn[n+1]
+      	dn[n]<-S(n-1,x)*jn[n  ]-jn[n+1]
+      	if(abs(jn[n])>1e2){
+      	  	dn<-dn/jn[n] # this must be done first
+      	   jn<-jn/jn[n] # otherwise the result will be wrong.
       	}
       }
-      # one step normalization taking care about zeros
       # Bessel function
       b0<-bess.szr(x)
       b1<-bess.sun(x)
-      if(abs(b0)>1e-10){ # j_0 != 0
-         jn<-(rm/rm[1])*b0 # create functions for normalizations
-      }else{            # j_0 == 0
-         jn<-(rm/rm[2])*b1
+      if(abs(b0)>1e-10){   # j_0 != 0
+         jn<-(jn/jn[1])*b0 # create functions for nojnalizations
+      }else{               # j_0 == 0
+         jn<-(jn/jn[2])*b1
       }
       # Its Derivative
-      if(abs(b1)>1e-10){ # j_0' != 0
-      	  djn<-(cm/cm[1])*(-b1) # j_0'=-j_1
-      }else{            # j_0' == 0
-      	  djn<-(cm/cm[2])*b0 # j_1' = (2/x)j_0'+j_0 = j_0 # APROXIMADO!
+      if(abs(b1)>1e-10){         # j_0' != 0
+      	  djn<-(dn/dn[1])*(-b1) # j_0'=-j_1
+      }else{                     # j_0' == 0
+      	  djn<-(dn/dn[2])*b0    # j_1' = (2/x)j_0'+j_0 = j_0 # APROXIMADO!
       }
-      return(data.frame(rn,cn,jn,djn))
+      return(data.frame(jn,djn))
    }
-   # Return results
 }

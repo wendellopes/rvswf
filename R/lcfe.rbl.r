@@ -1,6 +1,13 @@
-#-------------------------------------------------------------------------------
-# Logarithmic Derivative Riccati-Bessel [OK]
-#-------------------------------------------------------------------------------
+#' Calculates the logarithmic derivative of Ricatti-Bessel Functions.
+#' 
+#' @details Using Lentz method is possible to calculate the ratio 
+#' \eqn{C_n(x)=(xj_{n}(x))'/xj_{n}(x)}.
+#' @param n The order of \eqn{C_n(x)}.
+#' @param x The argument of \eqn{C_n(x)} of type complex.
+#' @param NMAX The maximum number of iterations.
+#' @param code Choice between \code{C} or native {R} code.
+#' @return The value of \eqn{C_n} for complex arguments.
+#' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
 lcfe.rbl<-function(n,x,NMAX=2000,code="C"){
    nmaxo<-NMAX
    fn<-0

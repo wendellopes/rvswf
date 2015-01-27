@@ -1,8 +1,18 @@
-#-------------------------------------------------------------------------------
-# SCATTERING COEFFICIENTS
-#-------------------------------------------------------------------------------
-# Single value at time
-lmie.cal<-function(m,x){
+#' Scattering coeficients in the Lorentz-Mie
+#' 
+#' @details Scattering and Extinction coefficients.
+#' @param m Ratio of refraction indices.
+#' @param x Form factor
+#' @return Extinction and Scattering coefficients
+#' @examples
+#' # Cantrell papers.
+lmie.sct<-function(m,x){
+   if(length(x)>1){
+      Q<-sapply(x,lmie.sct,m=m)
+      Q<-as.data.frame(apply(t(Q),2,as.numeric))
+      
+      return(Q)
+   }
    ab<-lmie.exp(m,x)
    n<-nrow(ab)
    n<-1:n
@@ -13,11 +23,4 @@ lmie.cal<-function(m,x){
    Q<-data.frame(Qsca,Qext)
    return(Q)
 }
-# Vector of values
-lmie.sct<-function(m,x){
-   u<-data.frame(Qsca=x,Qext=x)
-   for(i in 1:length(x)){
-      u[i,]<-lmie.cal(m,x[i])
-   }
-   return(u)
-}
+

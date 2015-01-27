@@ -2,7 +2,7 @@
 # Lorentz-Mie Plane Wave Expansion
 # G^TE, G^TM For Plane Waves +1 (Jackson's Classical Electrodynamics book)
 #-------------------------------------------------------------------------------
-mie.gbsc<-function(m,x){
+lmie.fpw<-function(m,x){
    u<-ofc.abcn(m,x)
    pM<-nrow(u)
    An<-Bn<-Cn<-GTE<-GTM<-l<-m<-j<-1:(pM*(pM+2))

@@ -1,3 +1,26 @@
+#' Array of logarithmic derivative and ratio of Spherical Bessel functions.
+#' 
+#' @details Calculate by downward recurrence the derivative of Spherical Bessel functions
+#' \eqn{c_n=j_n'(x)/j_n(x)}  and simultaneously
+#' the ratio \eqn{\rho_n=j_n(x)/j_{n+1}(x)}, from 0 to 
+#' \code{nmax}. The starting values are calculated by Lentz continued fraction
+#' method.
+#' @param nmax Maximun value of \code{n}.
+#' @param x The argument of the functions. Can be complex.
+#' @param code If the \code{C} code or \code{R} built in.
+#' @param NMAX Maximum number of iterations on the Lentz algorithm.
+#' @seealso \code{\link{lcfe.sbl}}, \code{\link{lcfe.sbd}}, \code{\link{lcfe.sbi}}.
+#' @examples
+#' nmax<-10
+#' x<-5
+#' u.c<-lcfa.sph(nmax,x,code="C")
+#' u.r<-lcfa.sph(nmax,x,code="R")
+#' u<-data.frame(
+#'    # Logarithmic Derivatives
+#'    C.LogDev=u.c$cn,R.LogDev=u.r$cn,
+#'    # Ratio between Spherical Bessel functions
+#'    C.SphRat=u.c$rn,R.SphRat=u.r$rn)
+#' print(u)
 #-------------------------------------------------------------------------------
 # SPHERICAL BESSEL FUNCTIONS [DONE]
 #-------------------------------------------------------------------------------
@@ -16,13 +39,23 @@ lcfa.sph<-function(nmax,x,code="C",NMAX=200){ # PROBLEMAS COM ZEROS #
    }
    if(code=="C"){
       dummy<-rep(0,nmax+1)
-      u<-.C("lcfa_sph",
-            nmax=as.integer(nmax),
-            x=as.double(x),
-            rn=as.double(dummy),
-            cn=as.double(dummy),
-            NMAX=as.integer(NMAX))
-      return(data.frame(rn=u$rn,cn=u$cn))
+      if(is.complex(x)){
+         u<-.C("lcfc_sph",
+               nmax=as.integer(nmax),
+               x=as.complex(x),
+               rn=as.complex(dummy),
+               cn=as.complex(dummy),
+               NMAX=as.integer(NMAX))
+         return(data.frame(rn=u$rn,cn=u$cn))  
+      }else{
+         u<-.C("lcfa_sph",
+               nmax=as.integer(nmax),
+               x=as.double(x),
+               rn=as.double(dummy),
+               cn=as.double(dummy),
+               NMAX=as.integer(NMAX))
+         return(data.frame(rn=u$rn,cn=u$cn))
+      }
    }else{
       S<-function(n,x){
          return(n/x)

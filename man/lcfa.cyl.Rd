@@ -7,7 +7,7 @@ lcfa.cyl(nmax, x, code = "C", NMAX = 200)
 \arguments{
   \item{nmax}{The maximum order of \eqn{J_n(x)}}
 
-  \item{x}{The argument of \eqn{J_n(x)}}
+  \item{x}{The argument of the functions. Can be complex.}
 
   \item{code}{If you prefer to use native R or C language.}
 
@@ -45,16 +45,16 @@ by downward recurrence, and the inicial values calculated
 by Lentz method.
 }
 \examples{
+nmax<-10
 x<-5
-nmax<-50
-a<-lcfa.cyl(nmax,x,code="C")
-b<-lcfa.cyl(nmax,x,code="R")
-# RATIO BETWEEN CONSECUTIVE CYLINDRICAL BESSEL FUNCTIONS g_n=J_n/J_{n+1}
-plot(a$gn)
-points(b$gn,col='red',pch=4)
-# LOGARITMIC DERIVATIVES \\eqn{D_n=J_n'/J_n}
-plot(a$Dn)
-points(b$Dn,col='red',pch=4)
+u.c<-lcfa.cyl(nmax,x,code="C")
+u.r<-lcfa.cyl(nmax,x,code="R")
+u<-data.frame(
+   # Logarithmic Derivatives
+   C.LogDev=u.c$Dn,R.LogDev=u.r$Dn,
+   # Ratio between Cylindrical Bessel functions
+   C.CylRat=u.c$gn,R.CylRat=u.r$gn)
+print(u)
 }
 \seealso{
 \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},

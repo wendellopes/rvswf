@@ -1,6 +1,15 @@
-x<-5
-nmax<-10
-n<-0:10
-#v.cal<-bess.cyl(x,nmax)$Jn
-#v.ref<-reff.cjn(x,0:nmax)
-#print(cbind(n,v.ref,v.cal))
+#' Compare results for Cylindrical Bessel Functions.
+#' 
+#' @details Compare results using vswf, built in \code{R} and \code{gsl} algorithms.
+#' @param x The argument of \eqn{J_n(x)}.
+#' @param n The order of the Cylindrical Bessel function.
+#' @examples
+#' x<-5
+#' nmax<-10
+#' print(comp.cyl(5,3))
+comp.cyl<-function(nmax,x){
+   u<-besselJ(x,0:nmax)
+   v<-bess.cyl(nmax,x)$Jn
+   w<-bessel_Jn_array(0,nmax,x)
+   return(data.frame(R=u,VSWF=v,GSL=w))
+}

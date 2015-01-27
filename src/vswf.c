@@ -587,22 +587,10 @@ void lcfc_sbi(/* FUNCTION */
 double KJ( /* FUNCTION */
       int j, 
       double x){
-//--------------------------------------
    return(x/j);
 }
 //------------------------------------------------------------------------------
-// Auxiliary func for calculation of Bessel functions by downward recurrency
-double SN( /* FUNCTION */
-      int j, 
-      double x
-   ){
-//--------------------------------------
-   return(j/x);
-}
-//------------------------------------------------------------------------------
 // Cylindrical Bessel func ratio and logarithmic derivative 
-// \gamma_n = J_{n}/J_{n+1} == gn;
-// D_{n}    = J_{n}'/J_{n}  == Dn;
 void lcfa_cyl( /* FUNCTION */
       int *nmax,
       double *x,
@@ -611,30 +599,34 @@ void lcfa_cyl( /* FUNCTION */
       int *NMAX
    ){
 //--------------------------------------
-   int NMAY=*NMAX;
-   // starting values calculated by Lentz
    lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
    lcfe_cbd(nmax,x,NMAX,&gn[*nmax]);
-   // testing if Lentz reached max number of iterations
-   // if yes, so we must increase the number of iteratations
-   while(*NMAX==NMAY){
-      *NMAX=2*NMAY;
-      NMAY=*NMAX;
-      lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
-      lcfe_cbd(nmax,x,NMAX,&gn[*nmax]);
-      //printf("Precision increased to %d\n",*NMAX);
-   }
-   // Downward Recursion
    int n;
    for(n=*nmax;n>0;n--){
-      gn[n-1]=SN(n  ,*x)+Dn[n];
-      Dn[n-1]=SN(n-1,*x)-1/gn[n-1];
+      gn[n-1]=lcfe_afs(n  ,*x)+Dn[n];
+      Dn[n-1]=lcfe_afs(n-1,*x)-1/gn[n-1];
+   }
+}
+//------------------------------------------------------------------------------
+// Cylindrical Bessel func ratio and logarithmic derivative -- COMPLEX
+void lcfc_cyl( /* FUNCTION */
+      int *nmax,
+      double complex *x,
+      double complex *gn,
+      double complex *Dn,
+      int *NMAX
+   ){
+//--------------------------------------
+   lcfc_cbl(nmax,x,NMAX,&Dn[*nmax]);
+   lcfc_cbd(nmax,x,NMAX,&gn[*nmax]);
+   int n;
+   for(n=*nmax;n>0;n--){
+      gn[n-1]=lcfc_afs(n  ,*x)+Dn[n];
+      Dn[n-1]=lcfc_afs(n-1,*x)-1/gn[n-1];
    }
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func ratio and logarithmic derivative 
-// \rho_{n} = j_{n}/j_{n+1} == gn;
-// c_{n}    = j_{n}'/j_{n}  == Dn;
 void lcfa_sph( /* FUNCTION */
       int *nmax,
       double *x,
@@ -643,30 +635,34 @@ void lcfa_sph( /* FUNCTION */
       int *NMAX
    ){
 //--------------------------------------
-   int NMAY=*NMAX;
-   // starting values calculated by Lentz
    lcfe_sbl(nmax,x,NMAX,&Dn[*nmax]);
    lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
-   // testing if Lentz reached max number of iterations
-   // if yes, so we must increase the number of iteratations
-   while(*NMAX==NMAY){
-      *NMAX=2*NMAY;
-      NMAY=*NMAX;
-      lcfe_sbl(nmax,x,NMAX,&Dn[*nmax]);
-      lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
-      //printf("Precision increased to %d\n",*NMAX);
-   }
-   // Downward Recursion
    int n;
    for(n=*nmax;n>0;n--){
-      gn[n-1]=SN(n+1,*x)+Dn[n];
-      Dn[n-1]=SN(n-1,*x)-1/gn[n-1];
+      gn[n-1]=lcfe_afs(n+1,*x)+Dn[n];
+      Dn[n-1]=lcfe_afs(n-1,*x)-1/gn[n-1];
+   }
+}
+//------------------------------------------------------------------------------
+// Spherical Bessel func ratio and logarithmic derivative -- COMPLEX
+void lcfc_sph( /* FUNCTION */
+      int *nmax,
+      double complex *x,
+      double complex *gn,
+      double complex *Dn,
+      int *NMAX
+   ){
+//--------------------------------------
+   lcfc_sbl(nmax,x,NMAX,&Dn[*nmax]);
+   lcfc_sbd(nmax,x,NMAX,&gn[*nmax]);
+   int n;
+   for(n=*nmax;n>0;n--){
+      gn[n-1]=lcfc_afs(n+1,*x)+Dn[n];
+      Dn[n-1]=lcfc_afs(n-1,*x)-1/gn[n-1];
    }
 }
 //------------------------------------------------------------------------------
 // Riccati-Bessel func ratio and logarithmic derivative 
-// \rho_n = R_{n}/R_{n+1} =j_{n}/j_{n+1} == gn;
-// C_{n}    = R_{n}'/R_{n}  == Dn;
 void lcfa_ric( /* FUNCTION */
       int *nmax,
       double *x,
@@ -675,24 +671,30 @@ void lcfa_ric( /* FUNCTION */
       int *NMAX
    ){
 //--------------------------------------
-   int NMAY=*NMAX;
-   // starting values calculated by Lentz
    lcfe_rbl(nmax,x,NMAX,&Dn[*nmax]);
    lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
-   // testing if Lentz reached max number of iterations
-   // if yes, so we must increase the number of iteratations
-   while(*NMAX==NMAY){
-      *NMAX=2*NMAY;
-      NMAY=*NMAX;
-      lcfe_rbl(nmax,x,NMAX,&Dn[*nmax]);
-      lcfe_sbd(nmax,x,NMAX,&gn[*nmax]);
-      //printf("Precision increased to %d\n",*NMAX);
-   }
-   // Downward Recursion
    int n;
    for(n=*nmax;n>0;n--){
-      gn[n-1]=SN(n,*x)+Dn[n];
-      Dn[n-1]=SN(n,*x)-1/gn[n-1];
+      gn[n-1]=lcfe_afs(n,*x)+Dn[n];
+      Dn[n-1]=lcfe_afs(n,*x)-1/gn[n-1];
+   }
+}
+//------------------------------------------------------------------------------
+// Riccati-Bessel func ratio and logarithmic derivative -- COMPLEX
+void lcfc_ric( /* FUNCTION */
+      int *nmax,
+      double complex *x,
+      double complex *gn,
+      double complex *Dn,
+      int *NMAX
+   ){
+//--------------------------------------
+   lcfc_rbl(nmax,x,NMAX,&Dn[*nmax]);
+   lcfc_sbd(nmax,x,NMAX,&gn[*nmax]);
+   int n;
+   for(n=*nmax;n>0;n--){
+      gn[n-1]=lcfc_afs(n,*x)+Dn[n];
+      Dn[n-1]=lcfc_afs(n,*x)-1/gn[n-1];
    }
 }
 //------------------------------------------------------------------------------
@@ -746,8 +748,8 @@ void bess_csv( /* FUNCTION */
    int n,j;
    for(n=*dig;n>0;n--){
       // Downward Recursion
-      Jn[n-1]=SN(*nmax+n  ,*x)*Jn[n  ]+Dn[n];
-      Dn[n-1]=SN(*nmax+n-1,*x)*Jn[n-1]-Jn[n];
+      Jn[n-1]=lcfe_afs(*nmax+n  ,*x)*Jn[n  ]+Dn[n];
+      Dn[n-1]=lcfe_afs(*nmax+n-1,*x)*Jn[n-1]-Jn[n];
       //Renormalization may be required
       if(fabs(Jn[n-1])>1e+2){
          for(j=*dig;j>=n-1;j--){
@@ -777,8 +779,8 @@ void bess_cyl( /* FUNCTION */
    //lcfe_cbl(nmax,x,NMAX,&Dn[*nmax]);
    for(n=*nmax;n>0;n--){
       // Downward Recursion
-      Jn[n-1]=SN(n  ,*x)*Jn[n  ]+Dn[n];
-      Dn[n-1]=SN(n-1,*x)*Jn[n-1]-Jn[n];
+      Jn[n-1]=lcfe_afs(n  ,*x)*Jn[n  ]+Dn[n];
+      Dn[n-1]=lcfe_afs(n-1,*x)*Jn[n-1]-Jn[n];
       //Renormalization may be required
       if(fabs(Jn[n-1])>1e2){
          for(j=*nmax;j>=n-1;j--){
@@ -832,8 +834,8 @@ void bess_ssv( /* FUNCTION */
    int n,j;
    for(n=*dig;n>0;n--){
       // Downward Recursion
-      jn[n-1]=SN(*nmax+n+1,*x)*jn[n  ]+cn[n];
-      cn[n-1]=SN(*nmax+n-1,*x)*jn[n-1]-jn[n];
+      jn[n-1]=lcfe_afs(*nmax+n+1,*x)*jn[n  ]+cn[n];
+      cn[n-1]=lcfe_afs(*nmax+n-1,*x)*jn[n-1]-jn[n];
       //Renormalization may be required
       if(fabs(jn[n-1])>1e+2){
          for(j=n-1;j<=*dig;j--){
@@ -873,8 +875,8 @@ void bess_sph( /* FUNCTION */
    jn[*nmax] = 1.0; //rn[*nmax];
    //dn[*nmax] = 0.0; //rn[*nmax];
    for(n=*nmax;n>0;n--){
-      jn[n-1]=SN(n+1,*x)*jn[n  ]+dn[n  ];
-      dn[n-1]=SN(n-1,*x)*jn[n-1]-jn[n  ];
+      jn[n-1]=lcfe_afs(n+1,*x)*jn[n  ]+dn[n  ];
+      dn[n-1]=lcfe_afs(n-1,*x)*jn[n-1]-jn[n  ];
       // Renormalization
       if(fabs(jn[n-1])>1e2){
          for(j=*nmax;j<=n-1;j--){
@@ -923,8 +925,8 @@ void bess_rsv( /* FUNCTION */
    int n,j;
    for(n=*dig;n>0;n--){
       // Downward Recursion
-      Rn[n-1]=SN(n+*nmax,*x)*Rn[n  ]+Cn[n];
-      Cn[n-1]=SN(n+*nmax,*x)*Rn[n-1]-Rn[n];
+      Rn[n-1]=lcfe_afs(n+*nmax,*x)*Rn[n  ]+Cn[n];
+      Cn[n-1]=lcfe_afs(n+*nmax,*x)*Rn[n-1]-Rn[n];
       //Renormalization may be required
       if(fabs(Rn[n-1])>1e2){
          for(j=*dig;j>=n-1;j--){
@@ -959,8 +961,8 @@ void bess_ric( /* FUNCTION */
    int n,j;
    for(n=*nmax;n>0;n--){
       // Downward Recursion
-      Rn[n-1]=SN(n,*x)*Rn[n  ]+Cn[n];
-      Cn[n-1]=SN(n,*x)*Rn[n-1]-Rn[n];
+      Rn[n-1]=lcfe_afs(n,*x)*Rn[n  ]+Cn[n];
+      Cn[n-1]=lcfe_afs(n,*x)*Rn[n-1]-Rn[n];
       //Renormalization may be required
       if(fabs(Rn[n-1])>1e2){
          for(j=*nmax;j>=n-1;j--){

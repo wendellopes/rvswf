@@ -1,7 +1,19 @@
+#' Calculates the Lorentz-Mie coefficients \eqn{a_n} and \eqn{b_n}.
+#' 
+#' @details Calculation done using the ratio between Ricatti-Bessel functions.
+#' @param m The ratio between the refractive indices.
+#' @param x The form factor value.
+#' @param NMAX The maximum value of \code{n}. Default value from paper.
+#' @return The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and also
+#' the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}.
+#' @examples
+#' n<-5
+#' x<-3
+#' print(lmie.rho(1.2,5))
 #-------------------------------------------------------------------------------
 # MIE COEFFICIENTS BY MEANS OF RATIO BETWEEN BESSEL FUNCTIONS
 #-------------------------------------------------------------------------------
-lmie.rho<-function(m,x,NMAX=floor(x+7.5*x^(1/3))+2){#,DIRECT=TRUE){
+lmie.rho<-function(m,x,NMAX=floor(abs(x+7.5*x^(1/3))+2)){#,DIRECT=TRUE){
    # STOPPING CRITERIUM
    # We need the zeroth therm at postion [1]
    rho.1<-rho.m<-g<-Cn<-rep(-17,NMAX+1)

@@ -17,7 +17,7 @@
 #' The values are calculated by downward recurrence, and the inicial values
 #' calculated by Lentz method.
 #' @param nmax The maximum order of \eqn{J_n(x)}
-#' @param x The argument of \eqn{J_n(x)}
+#' @param x The argument of the functions. Can be complex.
 #' @param code If you prefer to use native R or C language.
 #' @param NMAX Maximum number of iterations
 #' @return An array of the logarithmic derivative of Cylindrical Bessel 
@@ -25,29 +25,39 @@
 #' from 0 to \code{nmax} at point \code{x}
 #' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}}, \code{\link{cfe.cbd}}.
 #' @examples
+#' nmax<-10
 #' x<-5
-#' nmax<-50
-#' a<-lcfa.cyl(nmax,x,code="C")
-#' b<-lcfa.cyl(nmax,x,code="R")
-#' # RATIO BETWEEN CONSECUTIVE CYLINDRICAL BESSEL FUNCTIONS g_n=J_n/J_{n+1}
-#' plot(a$gn)
-#' points(b$gn,col='red',pch=4)
-#' # LOGARITMIC DERIVATIVES \eqn{D_n=J_n'/J_n}
-#' plot(a$Dn)
-#' points(b$Dn,col='red',pch=4)
+#' u.c<-lcfa.cyl(nmax,x,code="C")
+#' u.r<-lcfa.cyl(nmax,x,code="R")
+#' u<-data.frame(
+#'    # Logarithmic Derivatives
+#'    C.LogDev=u.c$Dn,R.LogDev=u.r$Dn,
+#'    # Ratio between Cylindrical Bessel functions
+#'    C.CylRat=u.c$gn,R.CylRat=u.r$gn)
+#' print(u)
 lcfa.cyl<-function(nmax,x,code="C",NMAX=200){ # PROBLEMAS COM ZEROS #
    if(!code%in%c("C","R")){
       stop("Code must be \"C\" or \"R\"")
    }
    if(code=="C"){
       dummy<-rep(0,nmax+1)
-      u<-.C("lcfa_cyl",
-            nmax=as.integer(nmax),
-            x=as.double(x),
-            gn=as.double(dummy),
-            Dn=as.double(dummy),
-            NMAX=as.integer(NMAX))
-      return(data.frame(gn=u$gn,Dn=u$Dn))
+      if(is.complex(x)){   
+         u<-.C("lcfc_cyl",
+               nmax=as.integer(nmax),
+               x=as.complex(x),
+               gn=as.complex(dummy),
+               Dn=as.complex(dummy),
+               NMAX=as.integer(NMAX))
+         return(data.frame(gn=u$gn,Dn=u$Dn))
+      }else{
+         u<-.C("lcfa_cyl",
+               nmax=as.integer(nmax),
+               x=as.double(x),
+               gn=as.double(dummy),
+               Dn=as.double(dummy),
+               NMAX=as.integer(NMAX))
+         return(data.frame(gn=u$gn,Dn=u$Dn))
+      }
    }else{
       S<-function(n,x){
          return(n/x)

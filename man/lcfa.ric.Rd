@@ -1,0 +1,45 @@
+\name{lcfa.ric}
+\alias{lcfa.ric}
+\title{Array of logarithmic derivative and ratio of Ricatti-Bessel functions.}
+\usage{
+lcfa.ric(nmax, x, code = "C", NMAX = 200)
+}
+\arguments{
+  \item{nmax}{Maximun value of \code{n}.}
+
+  \item{x}{The argument of the functions. Can be complex.}
+
+  \item{code}{If the \code{C} code or \code{R} built in.}
+
+  \item{NMAX}{Maximum number of iterations on the Lentz
+  algorithm.}
+}
+\description{
+Array of logarithmic derivative and ratio of Ricatti-Bessel
+functions.
+}
+\details{
+Calculate by downward recurrence the derivative of
+Ricatti-Bessel functions \eqn{C_n=\psi_n'(x)/\psi_n(x)},
+where \eqn{\psi_n(x)=xj_n(x)}, and simultaneously the ratio
+\eqn{\rho_n=\psi_n(x)/\psi_{n+1}(x)=j_n(x)/j_{n+1}(x)},
+from 0 to \code{nmax}. The starting values are calculated
+by Lentz continued fraction method.
+}
+\examples{
+nmax<-10
+x<-5
+u.c<-lcfa.ric(nmax,x,code="C")
+u.r<-lcfa.ric(nmax,x,code="R")
+u<-data.frame(
+   # Logarithmic Derivatives
+   C.LogDev=u.c$Cn,R.LogDev=u.r$Cn,
+   # Ratio between Ricatti-Bessel functions
+   C.RicRat=u.c$rn,R.RicRat=u.r$rn)
+print(u)
+}
+\seealso{
+\code{\link{lcfe.rbl}}, \code{\link{lcfe.sbd}},
+\code{\link{lcfe.sbi}}.
+}
+

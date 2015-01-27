@@ -1,0 +1,32 @@
+\name{lmie.rho}
+\alias{lmie.rho}
+\title{Calculates the Lorentz-Mie coefficients \eqn{a_n} and \eqn{b_n}.}
+\usage{
+lmie.rho(m, x, NMAX = floor(abs(x + 7.5 * x^(1/3)) + 2))
+}
+\arguments{
+  \item{m}{The ratio between the refractive indices.}
+
+  \item{x}{The form factor value.}
+
+  \item{NMAX}{The maximum value of \code{n}. Default value
+  from paper.}
+}
+\value{
+The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and
+also the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}.
+}
+\description{
+Calculates the Lorentz-Mie coefficients \eqn{a_n} and
+\eqn{b_n}.
+}
+\details{
+Calculation done using the ratio between Ricatti-Bessel
+functions.
+}
+\examples{
+n<-5
+x<-3
+print(lmie.rho(1.2,5))
+}
+

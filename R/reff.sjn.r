@@ -1,6 +1,7 @@
-#-------------------------------------------------------------------------------
-# Spherical Bessel Functions
-#-------------------------------------------------------------------------------
+#' Reference function for Spherical Bessel Functions.
+#' 
+#' @details It uses de built in Cylindrical Bessel function to calculate the
+#' Spherical Bessel function, taking care about the zero.
 reff.sjn<-function(x,n){
    if(x==0){
       if(n==0){

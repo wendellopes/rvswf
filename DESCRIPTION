@@ -67,8 +67,10 @@ Collate:lcfe.afs.r
         test.abc.r
         test.abn.r
         lmie.exp.r
-        lmie.pwv.r
         lmie.log.r
         lmie.sct.r
         lmie.rho.r
-        parm.abn.r
+        lmie.ofc.r
+        lmie.fpw.r
+        ridx.pol.r
+        ridx.h2o.r

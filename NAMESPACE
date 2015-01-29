@@ -33,7 +33,8 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        lmie.exp, # Lorentz-Mie an/bn (choose between log/rho)
        lmie.sct, # Lorentz-Mie Q_ext and Q_sct calculation
        lmie.ofc, # Parameters to calculate Optical Force.
-       lmie.fpw, # Force of a plane wave.
+       lmie.phs, # Scattering phase calculation.
+       lmie.leg, # Modified Legendre functions for expansion of plane waves
        reff.cjn, # Reference function: Cylindrical Bessel J_n(x)
        reff.sjn, # Reference function: Spherical Bessel function j_n(x)
        reff.rjn, # Reference function: Riccati-Bessel x j_n(x)

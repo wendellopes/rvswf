@@ -71,6 +71,7 @@ Collate:lcfe.afs.r
         lmie.sct.r
         lmie.rho.r
         lmie.ofc.r
-        lmie.fpw.r
+        lmie.phs.r
+        lmie.leg.r
         ridx.pol.r
         ridx.h2o.r

@@ -17,19 +17,6 @@
 # MIE COEFFICIENTS BY MEANS OF LOGARITHMIC DERIVATIVES
 #-------------------------------------------------------------------------------
 lmie.log<-function(m,x,NMAX=floor(abs(x+7.5*x^(1/3))+2)){
-   # STOPPING CRITERIUM
-   # DOWNWARD RECURRENCE
-   #An.1<-rep(-17,NMAX)
-   #An.m<-rep(-17,NMAX)
-   #------------------------------------
-   # CALCULATIONS - ORIG
-   #An.1[NMAX]<-lcfe.rbl(NMAX,  x)
-   #An.m[NMAX]<-lcfe.rbl(NMAX,m*x)
-   #for(n in NMAX:2){
-   #   An.1[n-1]<-lcfe.afs(n,  x)-1/(n/(  x)+An.1[n])
-   #   An.m[n-1]<-lcfe.afs(n,m*x)-1/(n/(m*x)+An.m[n])
-   #}
-   #------------------------------------
    # CALCULATIONS - It must exclude first value (n=0)
    An.1<-lcfa.ric(NMAX  ,x)$Cn[-1]
    An.m<-lcfa.ric(NMAX,m*x)$Cn[-1]

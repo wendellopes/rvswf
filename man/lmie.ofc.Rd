@@ -2,7 +2,7 @@
 \alias{lmie.ofc}
 \title{Lorentz-Mie Optical Force Calculation.}
 \usage{
-lmie.ofc(m, x)
+lmie.ofc(m, x, GTE, GTM, lmax = floor(x + 2 + 4 * x^(1/3)))
 }
 \arguments{
   \item{m}{The ratio between the refractive indices.}
@@ -19,5 +19,11 @@ calculate the Optical force.
 }
 \description{
 Lorentz-Mie Optical Force Calculation.
+}
+\examples{
+lmax<-20
+lambda=.532  # Green 532 nm
+m<-ridx.pol(lambda)/ridx.h2o(lambda)
+g<-vswf.mpw(lmax)
 }
 

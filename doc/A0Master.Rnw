@@ -51,6 +51,7 @@ Fun\c c\~oes de Onda Vetoriais}
 \SweaveInput{C1SphericalHarmonics.Rnw}
 \SweaveInput{C2Expansoes.Rnw}
 \part{C\'alculos de For\c ca \'Optica}
+\SweaveInput{C5Espalhamento.Rnw}
 \SweaveInput{C3CalculoForca.Rnw}
 \appendix
 \SweaveInput{C4MudancaCoordenadas.Rnw}

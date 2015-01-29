@@ -1,0 +1,45 @@
+\name{lmie.phs}
+\alias{lmie.phs}
+\title{Phase calculation}
+\usage{
+lmie.phs(th, m, x, lmax = floor(x + 2 + 3 * x^{     1/3 }))
+}
+\arguments{
+  \item{th}{The angle at which the phase will be
+  calculated}
+
+  \item{m}{The relative refraction index}
+
+  \item{x}{The form factor}
+
+  \item{lmax}{The maximum value of \code{n}}
+}
+\description{
+Phase calculation
+}
+\examples{
+# Bohren and Hoffman example, pg 114, section 4.4.5
+th<-seq(0,pi,pi/199)
+lmax<-5
+m<-1.33+1e-8i
+x<-3
+u<-lmie.phs(th,m,x,lmax)
+i.p<-abs(u$S2)**2 # paralell
+i.s<-abs(u$S1)**2 # senkrecht (orthogonal)
+P<-(i.s-i.p)/(i.s+i.p)
+# Range
+imx<-max(c(i.p,i.s))
+imn<-min(c(i.p,i.s))
+# Main plot
+plot(cos(th)*i.s,sin(th)*i.s,type='l',lwd=1,asp=1,xlim=imx*c(-1,1),xlab="",ylab="")
+points(cos(-th)*i.p,sin(-th)*i.p,type='l',lwd=1,col='red')
+# x10 plot (zoom)
+points(10*cos(th)*i.s,10*sin(th)*i.s,type='l',lwd=2)
+points(10*cos(-th)*i.p,10*sin(-th)*i.p,type='l',lwd=2,col='red')
+# Log plot
+plot(th,i.p,type='l',log='y',ylim=c(imn,imx))
+points(th,i.s,type='l',col='red')
+# Polarization
+plot(th,P,type='l')
+}
+

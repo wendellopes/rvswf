@@ -17,4 +17,7 @@ Data frame with values \eqn{A_n}, \eqn{B_n} and \eqn{C_n}.
 \description{
 Test the calculation of Mie Coefficients
 }
+\details{
+Must be rewritten
+}
 

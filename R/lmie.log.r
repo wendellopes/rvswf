@@ -8,7 +8,7 @@
 #' @return The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and also
 #' the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}. The maximum value of
 #' \code{n}.
-#' @import lcfa.ric
+#' @include lcfa.ric
 #' @export
 #' @examples
 #' m<-1.2+.1i

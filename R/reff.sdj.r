@@ -4,7 +4,7 @@
 #' @param x The argument of the function
 #' @param n The order of the function
 #' @return The derivative \eqn{j_n'(x)}.
-#' @import reff.sjn
+#' @include reff.sjn.r
 #' @export
 reff.sdj<-function(x,n){
    a<-n/(2*n+1)

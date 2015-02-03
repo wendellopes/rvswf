@@ -20,8 +20,7 @@
 #' The algorithm is the same.
 #' @return An array of Cylindrical Bessel functions and its derivatives.
 #' from 0 to \code{nmax} at point \code{x}
-#' @useDynLib rvswf
-#' @import lcfe.cbl, lcfe.cbd
+#' @include lcfe.cbl.r lcfe.cbd.r
 #' @export
 #' @examples
 #' x<-30

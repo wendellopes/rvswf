@@ -21,8 +21,7 @@
 #' @return An array of Spherical Bessel functions and its derivatives 
 #' from 0 to \code{nmax} at point \code{x}, and also the logarithmic
 #' derivative \eqn{c_n=j_n'/j_n} and the ratio \eqn{\rho_n=j_n/j_{n+1}}.
-#' @useDynLib rvswf
-#' @import lcfe.sbl, lcfe.sbd
+#' @include lcfe.sbl.r lcfe.sbd.r
 #' @export
 #' @examples
 #' x<-30

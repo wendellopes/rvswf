@@ -3,7 +3,7 @@
 #' @details Compare results using vswf, built in \code{R} and \code{gsl} algorithms.
 #' @param x The argument of \eqn{\psi_n(x)=xj_n(x)}.
 #' @param n The order of the Ricatti-Bessel function.
-#' @import lcfe.afs,lcfe.sbd,lcfe.sbi
+#' @include lcfe.afs.r lcfe.sbd.r lcfe.sbi.r
 #' @export
 #' @examples
 #' x<-5

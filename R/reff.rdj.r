@@ -4,7 +4,7 @@
 #' @param x The argument of the function
 #' @param n The order of the function
 #' @return The derivative \eqn{\psi_n'(x)=j_n(x)+xj_n'(x)}.
-#' @import reff.rjn
+#' @include reff.rjn.r
 #' @export
 reff.rdj<-function(n,x){
    a<-n/(2*n+1)

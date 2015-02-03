@@ -4,7 +4,7 @@
 #' @param m  The relative refraction index
 #' @param x  The form factor
 #' @param lmax The maximum value of \code{n}
-#' @import lmie.exp
+#' @include lmie.exp.r
 #' @export
 #' @examples
 #' # Bohren and Hoffman example, pg 114, section 4.4.5

@@ -8,7 +8,7 @@
 #' @return Data frame with the values calculated by the algorithm.
 #' @seealso \code{\link{lcfe.sbi}}, \code{\link{lcfe.sbl}}, \code{\link{lcfe.sbd}},
 #' \code{\link{lcfe.afs}}, \code{\link{besselJ}}.
-#' @import reff.sdj,reff.sjn,lcfe.sbl,lcfe.afs
+#' @include reff.sdj.r reff.sjn.r lcfe.sbl.r lcfe.afs.r
 #' @export
 #' @examples 
 #' comp.sbl(5,4,code="C")

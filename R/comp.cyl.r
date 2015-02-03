@@ -4,7 +4,7 @@
 #' @param x The argument of \eqn{J_n(x)}.
 #' @param n The order of the Cylindrical Bessel function.
 #' @return Table comparing built-in \code{R} functions, \code{gsl} and \code{rvswf}.
-#' @import bess.cyl
+#' @include bess.cyl.r
 #' @export
 #' @examples
 #' x<-5

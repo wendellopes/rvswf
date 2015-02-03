@@ -14,7 +14,6 @@
 #' @param z Component \eqn{z} of the position vector (vector).
 #' @return A list with the input values, the number of points and the six complex
 #' values of components of the electromagnetic fields.
-#' @useDynLib rvswf
 #' @export
 vwfd.cwg<-function(TE=TRUE,M,S,g,kz,x,y,z){
    if(abs(S)!=1){

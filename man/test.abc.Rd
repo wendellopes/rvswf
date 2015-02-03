@@ -15,4 +15,7 @@ Data frame with values \eqn{A_n}, \eqn{B_n} and \eqn{C_n}.
 \description{
 Test the calculation
 }
+\details{
+Must be rewritten
+}
 

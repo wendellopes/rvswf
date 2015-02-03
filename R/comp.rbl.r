@@ -9,12 +9,12 @@
 #' @return Data frame with the values calculated by the algorithm.
 #' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},
 #' \code{\link{lcfe.afs}}, \code{\link{besselJ}}.
-#' @import reff.rdj,reff.rjn,lcfe.rbl,lcfe.afs
+#' @include reff.rdj.r reff.rjn.r lcfe.rbl.r lcfe.afs.r
 #' @export
 #' @examples 
 #' comp.rbl(5,4,code="C")
 #' comp.rbl(5,4,code="R")
-comp.rbl<-function(n,x){
+comp.rbl<-function(n,x,code="C"){
    #------------------------------------
    # Riccati Bessel Function
    # (S_{n+1}-C_n)(S_{n+1}+C_{n+1})=1
@@ -25,8 +25,8 @@ comp.rbl<-function(n,x){
    #------------------------------------
    a<-reff.rdj(x,n  )/reff.rjn(x,n  )
    b<-reff.rdj(x,n+1)/reff.rjn(x,n+1)
-   c<-lcfe.rbl(n  ,x)
-   d<-lcfe.rbl(n+1,x)
+   c<-lcfe.rbl(n  ,x,code=code)
+   d<-lcfe.rbl(n+1,x,code=code)
    e<-lcfe.afs(n+1,x)
    f<-lcfe.afs(n+1,x)
    g<-(n+1)/x

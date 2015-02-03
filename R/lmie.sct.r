@@ -8,7 +8,7 @@
 #' \code{dist=FALSE}. If \code{dist=TRUE}, so the contribution of \eqn{a_n} and
 #' \eqn{b_n} are distinguished in \eqn{Q_{sca}\to Q_{sca}+Q_{scb}} and 
 #' \eqn{Q_{ext}\to Q_{exa}+Q_{exb}}.
-#' @import lmie.exp
+#' @include lmie.exp.r
 #' @export
 #' @examples
 #' dx<-.1   # FAST VALUE

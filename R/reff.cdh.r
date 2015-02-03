@@ -5,7 +5,7 @@
 #' @param x The argument of the function
 #' @param n The order of the function
 #' @param type 1 or 2.
-#' @import reff.chn
+#' @include reff.chn.r
 #' @export 
 reff.cdh<-function(n,x,type=1){
    if(abs(type)!=1){

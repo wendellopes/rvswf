@@ -13,7 +13,6 @@
 #' @seealso \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}}, \code{\link{vswf.pwe}}.
 #' @return A list with the input values, the number of points and the six complex
 #' values of components of the electromagnetic fields.
-#' @useDynLib rvswf
 #' @export
 vwfd.bbp<-function(P,M,S,g,kz,x,y,z){
    if(abs(P)!=1){

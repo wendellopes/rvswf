@@ -9,7 +9,7 @@
 #' @param lmax The maximum value of \eqn{l}.
 #' @return A list with the complex components of the Hansen Multipoles 
 #' \eqn{M_{lm}} and \eqn{N_{lm}}.
-#' @import bess.sph, vswf.vsh
+#' @include bess.sph.r vswf.vsh.r
 #' @export
 #' @seealso \code{\link{vswf.sbf}}, \code{\link{vswf.vsh}}.
 #' @examples
@@ -19,13 +19,13 @@
 #' print(as.data.frame(VSH))
 vswf.hmp<-function(k,x,y,z,lmax){
    LMAX=lmax*(lmax+2)+1
+   r<-sqrt(x^2+y^2+z^2)
    #------------------------------------------------
    # GNU SCIENTIFIC LIBRARY (GSL) - RESULT AS MATRIX
    # jl<-bessel_jl_steed_array(lmax+1,k*r)
    #------------------------------------------------
    jl<-bess.sph(lmax+1,k*r)$jn
    u<-vswf.vsh(x,y,z,lmax) 
-   r<-sqrt(x^2+y^2+z^2)
    #------------------------------------------------
    jl.m<-0 # Correct Value: cos(k*r)/(k*r); Nevertheless, M,N,L starts in 1
    jl.o<-jl[1]

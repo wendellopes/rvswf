@@ -11,7 +11,7 @@
 #' @param lmax The maximum value of \eqn{l}.
 #' @return A list with the values of \eqn{l}, \eqn{-l\leq m\geq l}, the scalar
 #' spherical harmonics and the components of the vector spherical harmonics.
-#' @import vswf.jlm
+#' @include vswf.jlm.r
 #' @export
 #' @examples
 #' th<-pi/3

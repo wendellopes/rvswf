@@ -12,7 +12,7 @@
 #' @param M Order of the Bessel Beam.
 #' @param s Chirality of the Bessel Beam (\eqn{S=\pm 1}).
 #' @seealso \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}}, \code{\link{vswf.pwe}}.
-#' @import vswf.qlm, vswf.jlm, vswf.psi
+#' @include vswf.qlm, vswf.jlm, vswf.psi
 #' @export
 #' @examples
 #' lambda=.5e-6            # Propagating wavelength

@@ -4,7 +4,7 @@
 #' @param x The argument of \eqn{\psi_n(x)=xj_n(x)}.
 #' @param n The order of the Ricatti-Bessel function.
 #' @return Table comparing built-in \code{R} functions, \code{gsl} and \code{rvswf}.
-#' @import reff.sjn, bess.ric
+#' @include reff.sjn.r bess.ric.r
 #' @export
 #' @examples
 #' x<-5

@@ -5,7 +5,7 @@
 #' between Ricatti-Bessel functions.
 #' @return The coefficients \eqn{A_n}, \eqn{B_n} and \eqn{C_n} used to calculate
 #' the Optical force.
-#' @import lmie.exp
+#' @include lmie.exp
 #' @export
 #' @examples
 #' lmax<-20

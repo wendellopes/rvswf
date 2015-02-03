@@ -10,7 +10,7 @@
 #' @param  y Component \eqn{y} of the origin of the expansion (vector).
 #' @param  z Component \eqn{z} of the origin of the expansion (vector).
 #' @return The Beam Shape Coefficients \eqn{G^{TE}_{lm}} and \eqn{G^{TM}_{lm}}.
-#' @import vswf.qlm
+#' @include vswf.qlm.r
 #' @export
 #' @seealso \code{\link{vwfd.rwg}}, \code{\link{vswf.pwe}}, \code{\link{vswf.gwg}}.
 #' @examples

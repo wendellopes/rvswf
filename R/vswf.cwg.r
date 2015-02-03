@@ -11,7 +11,7 @@
 #' @param  m Order of the wave guide.
 #' @param  s Chirality of the wave guide (\eqn{S=\pm 1}).
 #' @return The Beam Shape Coefficients \eqn{G^{TE}_{lm}} and \eqn{G^{TM}_{lm}}.
-#' @import vswf.qlm, vswf.jlm, vswf.psi
+#' @include vswf.qlm.r vswf.jlm.r vswf.psi.r
 #' @export
 #' @seealso \code{\link{vwfd.cwg}}, \code{\link{vswf.pwe}}, \code{\link{vswf.gwg}}.
 #' @examples

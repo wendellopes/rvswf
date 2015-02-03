@@ -5,6 +5,8 @@
 #' @param cth The argument of \eqn{Q_l^m(x)}, so \eqn{-1<x=\cos\theta<1}.
 #' @param lmax The maximum value of \eqn{l}.
 #' @return An array of \eqn{Q_l^m} and its derivative \eqn{Q_l^m{}'}.
+#' @import vswf.jlm
+#' @export
 #' @examples
 #' u<-vswf.qlm(.5,5)
 #' print(u)

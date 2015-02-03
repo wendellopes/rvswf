@@ -2,7 +2,11 @@
 #' 
 #' @details It uses de built in Cylindrical Bessel function to calculate the
 #' Spherical Bessel function, taking care about the zero.
-reff.sjn<-function(x,n){
+#' @param n The order of the function
+#' @param x The argument of the function
+#' @return The value of the spherical Bessel function \eqn{j_n(x)}
+#' @export
+reff.sjn<-function(n,x){
    if(x==0){
       if(n==0){
          u<-1

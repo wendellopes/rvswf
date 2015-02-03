@@ -7,6 +7,8 @@
 #' @param kz The longitudinal component of the wave vector \eqn{k_z}.
 #' @param lmax The maximum value of \eqn{l} of the expansion.
 #' @return The values \eqn{A} and \eqn{B}.
+#' @import vswf.qlm
+#' @export
 #' @seealso \code{\link{vswf.cwg}}, \code{\link{vswf.rwg}}.
 #' @examples 
 #' th<-pi/3

@@ -1,6 +1,19 @@
-#-------------------------------------------------------------------------------
-# RHO FOR CYLINDRICAL BESSEL J
-#-------------------------------------------------------------------------------
+#' Checks the results of Lentz method and internal R Bessel function
+#' 
+#' @details In order to check the results of Lentz method for calculation
+#' of Ricatti-Bessel logarithmic derivative \eqn{D_n}.
+#' @param n Order of the logarithmic derivative given by \eqn{c_n=\psi_n'/\psi_n},
+#' where \eqn{\psi_n=xj_n(x)}.
+#' @param x Argument of Bessel functions.
+#' @param code If C or native R function.
+#' @return Data frame with the values calculated by the algorithm.
+#' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},
+#' \code{\link{lcfe.afs}}, \code{\link{besselJ}}.
+#' @import reff.rdj,reff.rjn,lcfe.rbl,lcfe.afs
+#' @export
+#' @examples 
+#' comp.rbl(5,4,code="C")
+#' comp.rbl(5,4,code="R")
 comp.rbl<-function(n,x){
    #------------------------------------
    # Riccati Bessel Function

@@ -3,6 +3,9 @@
 #' @details Compare results using vswf, built in \code{R} and \code{gsl} algorithms.
 #' @param x The argument of \eqn{j_n(x)}.
 #' @param n The order of the Spherical Bessel function.
+#' @return Table comparing built-in \code{R} functions, \code{gsl} and \code{rvswf}.
+#' @import reff.sjn, bess.sph
+#' @export
 #' @examples
 #' x<-5
 #' nmax<-10

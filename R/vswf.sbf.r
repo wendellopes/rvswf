@@ -9,6 +9,7 @@
 #'  @param compare Make the comparison with the GSL (Gnu Scientific Library).
 #'  @param verbose Shows the normalizations on downward recurrence.
 #'  @return An array with the Spherical Bessel functions and its derivatives.
+#'  @export
 #'  @seealso \code{\link{bess.sph}}, \code{\link{bess.cyl}}, \code{\link{bess.ric}},
 #'  \code{\link{bess.czr}}, \code{\link{bess.cun}}, \code{\link{bess.szr}},
 #'  \code{\link{bess.sun}}.

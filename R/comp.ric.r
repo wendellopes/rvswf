@@ -1,6 +1,19 @@
-x<-5
-nmax<-10
-n<-0:10
-#v.cal<-bess.ric(x,nmax)$Jn
-#v.ref<-reff.rjn(x,0:nmax)
-#print(cbind(n,v.ref,v.cal))
+#' Compare results for Ricatti-Bessel Functions.
+#' 
+#' @details Compare results using vswf, built in \code{R} and \code{gsl} algorithms.
+#' @param x The argument of \eqn{\psi_n(x)=xj_n(x)}.
+#' @param n The order of the Ricatti-Bessel function.
+#' @return Table comparing built-in \code{R} functions, \code{gsl} and \code{rvswf}.
+#' @import reff.sjn, bess.ric
+#' @export
+#' @examples
+#' x<-5
+#' nmax<-10
+#' print(comp.ric(5,3))
+comp.ric<-function(nmax,x){
+   u<-x*reff.sjn(x,0:nmax)
+   v<-bess.ric(nmax,x)$Rn
+   w<-x*bessel_jl_array(nmax,x)
+   t<-x*bessel_jl_steed_array(nmax,x)
+   return(data.frame(R=u,VSWF=v,GSL=w,GSL.STEED=t))
+}

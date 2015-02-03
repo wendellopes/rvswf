@@ -5,6 +5,9 @@
 #' @param lmax The maximum value of \eqn{l}.
 #' @param norm If TRUE, the Beam Shape Coefficient will be divided by \eqn{\sqrt{2}}.
 #' @param s The polarity of the plane wave.
+#' @return Beam Shape Coefficients for a Mie Plane Wave (z-direction).
+#' @import vswf.jlm
+#' @export
 #' @seealso \code{\link{vswf.gpw}}, \code{\link{vswf.jlm}}.
 #' @examples
 #' lm<-5

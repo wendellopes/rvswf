@@ -9,6 +9,7 @@
 #' @param  z The component \eqn{z} of the position vector.
 #' @param  s The chirality of the function.
 #' @return The complex value of \eqn{\psi_m(x)}.
+#' @export
 #' @examples
 #' vswf.psi(1,2,3,4,5,6)
 vswf.psi<-function(gama,kz,x,y,z,m,s=1){

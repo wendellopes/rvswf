@@ -1,0 +1,24 @@
+\name{lmie.leg}
+\alias{lmie.leg}
+\title{Modified Legendre Polynomials used in scattering theories}
+\usage{
+lmie.leg(th, lmax)
+}
+\arguments{
+  \item{th}{The angle \eqn{\theta}}
+
+  \item{lmax}{The maximum value of \eqn{l}.}
+}
+\value{
+The functions \eqn{\pi_n} and \eqn{\tau_n}.
+}
+\description{
+Modified Legendre Polynomials used in scattering theories
+}
+\details{
+The functions
+\eqn{\pi_n(\cos\theta)=\frac{P_n^1(\cos\theta)}{\sin\theta}}
+and \eqn{\tau_n(\cos\theta)=\frac{d
+P_n^1(\cos\theta)}{d\theta}}.
+}
+

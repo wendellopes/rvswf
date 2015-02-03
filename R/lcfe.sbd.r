@@ -8,7 +8,8 @@
 #' @param NMAX The maximum number of iterations.
 #' @param code Choice between \code{C} or native {R} code.
 #' @return The value of \eqn{\rho_n} for complex arguments.
-#' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+#' @seealso \code{\link{lcfa.cyl}}, \code{\link{lcfe.cbd}}.
+#' @export
 lcfe.sbd<-function(n,x,NMAX=2000,code="C"){
    nmaxo<-NMAX
    fn<-0

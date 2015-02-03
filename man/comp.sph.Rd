@@ -9,6 +9,10 @@ comp.sph(nmax, x)
 
   \item{n}{The order of the Spherical Bessel function.}
 }
+\value{
+Table comparing built-in \code{R} functions, \code{gsl} and
+\code{rvswf}.
+}
 \description{
 Compare results for Spherical Bessel Functions.
 }

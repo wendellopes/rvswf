@@ -11,6 +11,8 @@
 #' @param  m Order of the wave guide.
 #' @param  s Chirality of the wave guide (\eqn{S=\pm 1}).
 #' @return The Beam Shape Coefficients \eqn{G^{TE}_{lm}} and \eqn{G^{TM}_{lm}}.
+#' @import vswf.qlm, vswf.jlm, vswf.psi
+#' @export
 #' @seealso \code{\link{vwfd.cwg}}, \code{\link{vswf.pwe}}, \code{\link{vswf.gwg}}.
 #' @examples
 #' #-------------------------------------------------------------------------------
@@ -89,7 +91,7 @@
 #' # BSC CALCULATIONS
 #' #-------------------------------------------------------------------------------
 #' CWG<-vwfd.cwg(TE=!TM,M,S,g,kz,x+xo,y+yo,z+zo)
-#' BSC<-vswf.cwg(TM,g,kz,xo,yo,zo,lmax,m=M,s=S)
+#' BSC<-vswf.cwg(TM,m=M,s=S,g,kz,xo,yo,zo,lmax)
 #' PWE<-vswf.pwe(k,x,y,z,lmax,BSC$GTE,BSC$GTM)
 #' #-------------------------------------------------------------------------------
 #' # VALUES
@@ -103,7 +105,7 @@
 #'    )
 #' df$DIF<-df$PWE-df$CWG
 #' print(df)
-vswf.cwg<-function(TM=TRUE,gama,kz,x,y,z,lmax,m,s=1){
+vswf.cwg<-function(TM=TRUE,m,s=1,gama,kz,x,y,z,lmax){
    LMAX=lmax*(lmax+2)+1
    k<-sqrt(gama^2+kz^2)
    #----------------------------------------

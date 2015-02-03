@@ -6,6 +6,7 @@
 #' @param NMAX The maximum value of \code{n}. Default value from paper.
 #' @return The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and also
 #' the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}.
+#' @export
 #' @examples
 #' n<-5
 #' x<-3

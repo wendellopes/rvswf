@@ -13,6 +13,8 @@
 #' @param p Polarity of the Bessel beam (\eqn{S=\pm 1}).
 #' @return The Beam Shape Coefficients for a Circularly polarized Bessel Beam.
 #' @seealso \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}}, \code{\link{vswf.pwd}}.
+#' @import vswf.qlm, vswf.jlm, vswf.psi
+#' @export
 #' @examples
 #' lambda=.5e-6            # Propagating wavelength
 #' a<-8*lambda             # Size x of the waveguide (Rectangular Wave Guide)

@@ -2,7 +2,7 @@
 \alias{vswf.cwg}
 \title{Beam Shape Coefficients for Cylindrical Wave Guides.}
 \usage{
-vswf.cwg(TM = TRUE, gama, kz, x, y, z, lmax, m, s = 1)
+vswf.cwg(TM = TRUE, m, s = 1, gama, kz, x, y, z, lmax)
 }
 \arguments{
   \item{TM}{Type of the wave field.}
@@ -114,7 +114,7 @@ y<-sample(y,1)
 # BSC CALCULATIONS
 #-------------------------------------------------------------------------------
 CWG<-vwfd.cwg(TE=!TM,M,S,g,kz,x+xo,y+yo,z+zo)
-BSC<-vswf.cwg(TM,g,kz,xo,yo,zo,lmax,m=M,s=S)
+BSC<-vswf.cwg(TM,m=M,s=S,g,kz,xo,yo,zo,lmax)
 PWE<-vswf.pwe(k,x,y,z,lmax,BSC$GTE,BSC$GTM)
 #-------------------------------------------------------------------------------
 # VALUES

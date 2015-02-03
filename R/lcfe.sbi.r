@@ -9,6 +9,7 @@
 #' @param code Choice between \code{C} or native {R} code.
 #' @return The value of \eqn{1/\rho_n} for complex arguments.
 #' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+#' @export
 lcfe.sbi<-function(n,x,NMAX=2000,code="C"){
    nmaxo<-NMAX
    fn<-0

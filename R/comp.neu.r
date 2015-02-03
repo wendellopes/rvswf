@@ -1,7 +1,15 @@
-#-------------------------------------------------------------------------------
-# RHO FOR SPHERICAL AND RICCATI BESSEL Y
-#-------------------------------------------------------------------------------
-comp.sby<-function(n,x){
+#' Compare results for Cylindrical Neumann Functions.
+#' 
+#' @details Compare results using vswf, built in \code{R} and \code{gsl} algorithms.
+#' @param x The argument of \eqn{\psi_n(x)=xj_n(x)}.
+#' @param n The order of the Ricatti-Bessel function.
+#' @import lcfe.afs,lcfe.sbd,lcfe.sbi
+#' @export
+#' @examples
+#' x<-5
+#' nmax<-10
+#' print(comp.neu(5,3))
+comp.neu<-function(n,x){
    #------------------------------------
    # Cylindrical Bessel Function y
    # \rho*_n+1/\rho*_{n+1}=S_{2(n+1)+1}
@@ -34,6 +42,6 @@ comp.sby<-function(n,x){
    v.rfj<-c(d,e,f)
    v.dir<-c(g,h,g+h)
    v.inv<-c(i,j,i+j)
-   return(cbind(names,v.rfy,v.rfj,v.dir,v.inv))
+   return(as.data.frame(cbind(v.rfy,v.rfj,v.dir,v.inv),row.names=names))
    #------------------------------------ 
 }

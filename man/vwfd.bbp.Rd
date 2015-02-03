@@ -39,4 +39,8 @@ Beam
 Calculates the vector components of Bessel Beam circularly
 polarized.
 }
+\seealso{
+\code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}},
+\code{\link{vswf.pwe}}.
+}
 

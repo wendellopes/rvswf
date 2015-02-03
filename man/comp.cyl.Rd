@@ -9,6 +9,10 @@ comp.cyl(nmax, x)
 
   \item{n}{The order of the Cylindrical Bessel function.}
 }
+\value{
+Table comparing built-in \code{R} functions, \code{gsl} and
+\code{rvswf}.
+}
 \description{
 Compare results for Cylindrical Bessel Functions.
 }

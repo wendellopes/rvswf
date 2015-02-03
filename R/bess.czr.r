@@ -1,6 +1,7 @@
 #' Cylindrical Bessel function of order zero \eqn{J_0(x)}
 #' 
 #' @param x Argument of the Spherical Bessel function of order zero.
+#' @export
 bess.czr<-function(x){
    Kj<-function(x,j){
       return(x/j)

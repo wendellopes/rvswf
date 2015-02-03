@@ -58,6 +58,6 @@ print(u)
 }
 \seealso{
 \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},
-\code{\link{cfe.cbd}}.
+\code{\link{lcfe.cbd}}.
 }
 

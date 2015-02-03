@@ -7,12 +7,13 @@
 #' @param NMAX The maximum value of \code{n}. Default value from paper.
 #' @return The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and also
 #' the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}. The maximum value of
-#' \code{n} wil
+#' \code{n}.
+#' @import lcfa.ric
+#' @export
 #' @examples
 #' m<-1.2+.1i
 #' x<-3
 #' print(lmie.rho(1.2,5))
-#' 
 #-------------------------------------------------------------------------------
 # MIE COEFFICIENTS BY MEANS OF LOGARITHMIC DERIVATIVES
 #-------------------------------------------------------------------------------

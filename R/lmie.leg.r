@@ -1,3 +1,11 @@
+#' Modified Legendre Polynomials used in scattering theories
+#' 
+#' @details The functions \eqn{\pi_n(\cos\theta)=\frac{P_n^1(\cos\theta)}{\sin\theta}}
+#' and \eqn{\tau_n(\cos\theta)=\frac{d P_n^1(\cos\theta)}{d\theta}}.
+#' @param th The angle \eqn{\theta}
+#' @param lmax The maximum value of \eqn{l}.
+#' @return The functions \eqn{\pi_n} and \eqn{\tau_n}.
+#' @export
 lmie.leg<-function(th,lmax){
    p<-t<-rep(0,lmax)
    # Initial value

@@ -96,6 +96,6 @@ print(df)
 }
 \seealso{
 \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}},
-\code{\link{vswf.pwd}}.
+\code{\link{vswf.pwe}}.
 }
 

@@ -23,7 +23,8 @@
 #' @return An array of the logarithmic derivative of Cylindrical Bessel 
 #' functions and the ratio between two consecutive Cylindrical Bessel functions.
 #' from 0 to \code{nmax} at point \code{x}
-#' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}}, \code{\link{cfe.cbd}}.
+#' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}}, \code{\link{lcfe.cbd}}.
+#' @export
 #' @examples
 #' nmax<-10
 #' x<-5

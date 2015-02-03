@@ -12,6 +12,9 @@ vswf.mpw(lmax, norm = TRUE, s = 1)
 
   \item{s}{The polarity of the plane wave.}
 }
+\value{
+Beam Shape Coefficients for a Mie Plane Wave (z-direction).
+}
 \description{
 Beam Shape Coefficients for a Plane Wave, as done by Mie
 }

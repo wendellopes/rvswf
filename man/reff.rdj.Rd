@@ -1,0 +1,22 @@
+\name{reff.rdj}
+\alias{reff.rdj}
+\title{Reference function Derivative of Ricatti-Bessel function .}
+\usage{
+reff.rdj(n, x)
+}
+\arguments{
+  \item{x}{The argument of the function}
+
+  \item{n}{The order of the function}
+}
+\value{
+The derivative \eqn{\psi_n'(x)=j_n(x)+xj_n'(x)}.
+}
+\description{
+Reference function Derivative of Ricatti-Bessel function .
+}
+\details{
+The derivative of the Ricatti-Bessel function
+\eqn{\psi_n(x)=xj_n(x)}.
+}
+

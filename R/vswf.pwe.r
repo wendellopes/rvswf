@@ -12,6 +12,8 @@
 #' @param gtm The oder component of the expansion.
 #' @return A list with the input values, the position and the
 #' values of the electromagnetic fields.
+#' @useDynLib rvswf
+#' @export
 #' @examples
 #' lambda=.5e-6
 #' k=2*pi/lambda

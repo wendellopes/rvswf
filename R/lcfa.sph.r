@@ -10,6 +10,7 @@
 #' @param code If the \code{C} code or \code{R} built in.
 #' @param NMAX Maximum number of iterations on the Lentz algorithm.
 #' @seealso \code{\link{lcfe.sbl}}, \code{\link{lcfe.sbd}}, \code{\link{lcfe.sbi}}.
+#' @export
 #' @examples
 #' nmax<-10
 #' x<-5

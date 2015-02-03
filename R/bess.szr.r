@@ -4,6 +4,7 @@
 #' the Spherical Bessel function for \eqn{x \to 0}.
 #' @param x Complex argument of the Spherical Bessel function of order one.
 #' @return Complex values for \eqn{j_0(x)}.
+#' @export
 #' @examples
 #' print(bess.szr(3+2i))
 #' print(bess.szr(0:10))

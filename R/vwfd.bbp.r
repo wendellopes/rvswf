@@ -10,8 +10,11 @@
 #' @param x Component \eqn{x} of the position vector (vector).
 #' @param y Component \eqn{y} of the position vector (vector).
 #' @param z Component \eqn{z} of the position vector (vector).
+#' @seealso \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}}, \code{\link{vswf.pwe}}.
 #' @return A list with the input values, the number of points and the six complex
 #' values of components of the electromagnetic fields.
+#' @useDynLib rvswf
+#' @export
 vwfd.bbp<-function(P,M,S,g,kz,x,y,z){
    if(abs(P)!=1){
       stop("P must be plus or minus 1")

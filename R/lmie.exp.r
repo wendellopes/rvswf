@@ -7,6 +7,8 @@
 #' between Ricatti-Bessel functions.
 #' @return The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and also
 #' the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}.
+#' @import lmie.log, lmie.rho
+#' @export
 #' @examples
 #' # Table 4.1 - Bohren and Hoffman Book, pg 114
 #' # The values showed bellow are conjugated. Probably

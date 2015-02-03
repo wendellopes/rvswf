@@ -1,19 +1,7 @@
 #-------------------------------------------------------------------------------
-# ESCREVER PARA CONVERTER LOCAL
-SEP<-"#-------------------------------------------------------------------------------\n"
+# PARAMETERS
 #-------------------------------------------------------------------------------
-# ONDA PLANA
-#-------------------------------------------------------------------------------
-# Campo Eletrico \vec{k}=k\hat{k}_z
-# E=Eo exp(ik_zz)
-#-------------------------------------------------------------------------------
-# FUNCOES
-#-------------------------------------------------------------------------------
-source("BSC.R")
-source("HansenMultipoles.R")
-#-------------------------------------------------------------------------------
-# PARAMETROS DO GUIA DE ONDA
-#-------------------------------------------------------------------------------
+TM<-TRUE
 lambda=.5e-6
 k=2*pi/lambda
 n.lambda=10
@@ -32,13 +20,6 @@ x<-seq(0,a,dx)
 y<-seq(0,b,dy)
 z<-x
 lmax<-as.integer(max(c(10,max(k*abs(x)),max(k*abs(y)))))
-print(lmax)
-cat(SEP)
-cat("LMAX=",lmax,"\n",sep="")
-#-------------------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
-# POSICAO DA EXPANSAO (DE 1 A 200)
 #-------------------------------------------------------------------------------
 nxo<-sample(1:200,1)
 nyo<-sample(1:200,1)
@@ -114,46 +95,43 @@ H.TE.m<-(H.TE.x-1i*H.TE.y)/sqrt(2)
 H.TE.p<-(H.TE.x+1i*H.TE.y)/sqrt(2)
 H.TE<-c(H.TE.m,H.TE.z,H.TE.p)
 #-------------------------------------------------------------------------------
-cat(SEP)
-cat("TM MODE\n")
-cat(SEP)
-print(cbind(E.TM,H.TM))
-cat(SEP)
-cat("TE MODE\n")
-cat(SEP)
-print(cbind(E.TE,H.TE))
-#-------------------------------------------------------------------------------
-# Calcula os BSC
-#-------------------------------------------------------------------------------
-#MODE = 1, TM
-#MODE = 2, TE
-cat(SEP)
-u<-WaveGuides(kx,ky,kz,xo,yo,zo,lmax,mode=2)
-v<-HansenMultipoles(k,xe,ye,ze,lmax)
-
-Em.pwe<-sum(u$GTE*v$M.m-u$GTM*v$N.m)
-Ez.pwe<-sum(u$GTE*v$M.z-u$GTM*v$N.z)
-Ep.pwe<-sum(u$GTE*v$M.p-u$GTM*v$N.p)
-
-Hm.pwe<-sum(u$GTM*v$M.m+u$GTE*v$N.m)
-Hz.pwe<-sum(u$GTM*v$M.z+u$GTE*v$N.z)
-Hp.pwe<-sum(u$GTM*v$M.p+u$GTE*v$N.p)
-#-------------------------------------------------------------------------------
-# CONFERINDO
-#-------------------------------------------------------------------------------
-E.pwe<-c(Em.pwe,Ez.pwe,Ep.pwe)
-H.pwe<-c(Hm.pwe,Hz.pwe,Hp.pwe)
-cat(SEP)
-print(cbind(E.pwe,H.pwe))
-cat(SEP)
-#-------------------------------------------------------------------------------
-# CALCULO EM LARGA ESCALA
-#-------------------------------------------------------------------------------
-LE<-FALSE
-LE<-TRUE
-if(LE){
-   source("LE-RWG.R")
+if(TM){
+   E.wfd<-E.TM
+   H.wfd<-H.TM
+}else{
+   E.wfd<-E.TE
+   H.wfd<-H.TE
 }
 #-------------------------------------------------------------------------------
-# FIM
+t<-vwfd.rwg(!TM,kx,ky,kz,xe+xo,ye+yo,ze+zo)
+u<-vswf.rwg(TM,kx,ky,kz,xo,yo,zo,lmax)
+v<-vswf.hmp(k,xe,ye,ze,lmax)
+w<-vswf.pwe(k,xe,ye,ze,lmax,u$GTE,u$GTM)
+#-------------------------------------------------------------------------------
+Em.hmp<-sum(u$GTE*v$M.m-u$GTM*v$N.m)
+Ez.hmp<-sum(u$GTE*v$M.z-u$GTM*v$N.z)
+Ep.hmp<-sum(u$GTE*v$M.p-u$GTM*v$N.p)
+
+Hm.hmp<-sum(u$GTM*v$M.m+u$GTE*v$N.m)
+Hz.hmp<-sum(u$GTM*v$M.z+u$GTE*v$N.z)
+Hp.hmp<-sum(u$GTM*v$M.p+u$GTE*v$N.p)
+#-------------------------------------------------------------------------------
+E.vwf<-c(t$Em,t$Ez,t$Ep)
+H.vwf<-c(t$Hm,t$Hz,t$Hp)
+
+E.hmp<-c(Em.hmp,Ez.hmp,Ep.hmp)
+H.hmp<-c(Hm.hmp,Hz.hmp,Hp.hmp)
+
+E.pwe<-c(w$Em,w$Ez,w$Ep)
+H.pwe<-c(w$Hm,w$Hz,w$Hp)
+#-------------------------------------------------------------------------------
+VWF<-as.data.frame(cbind(E.vwf,H.vwf),row.names=c("m","z","p"))
+WFD<-as.data.frame(cbind(E.wfd,H.wfd),row.names=c("m","z","p"))
+HMP<-as.data.frame(cbind(E.hmp,H.hmp),row.names=c("m","z","p"))
+PWE<-as.data.frame(cbind(E.pwe,H.pwe),row.names=c("m","z","p"))
+#
+print(VWF)
+print(WFD)
+print(HMP)
+print(PWE)
 #-------------------------------------------------------------------------------

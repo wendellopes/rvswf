@@ -28,6 +28,6 @@ one can calculate \eqn{\rho_n}, as shown in Barnett's
 paper.
 }
 \seealso{
-\code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+\code{\link{lcfa.cyl}}, \code{\link{lcfe.cbd}}.
 }
 

@@ -26,6 +26,6 @@ Using Lentz method is possible to calculate the ratio
 can calculate \eqn{D_n}.
 }
 \seealso{
-\code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+\code{\link{lcfa.cyl}}, \code{\link{lcfe.cbd}}.
 }
 

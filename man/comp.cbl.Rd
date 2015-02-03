@@ -30,7 +30,6 @@ comp.cbl(5,4,code="R")
 }
 \seealso{
 \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},
-\code{\link{lcfe.cbd}}, \code{\link{lcfe.afs}},
-\code{\link{besselJ}}.
+\code{\link{lcfe.afs}}, \code{\link{besselJ}}.
 }
 

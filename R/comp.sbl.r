@@ -8,6 +8,8 @@
 #' @return Data frame with the values calculated by the algorithm.
 #' @seealso \code{\link{lcfe.sbi}}, \code{\link{lcfe.sbl}}, \code{\link{lcfe.sbd}},
 #' \code{\link{lcfe.afs}}, \code{\link{besselJ}}.
+#' @import reff.sdj,reff.sjn,lcfe.sbl,lcfe.afs
+#' @export
 #' @examples 
 #' comp.sbl(5,4,code="C")
 #' comp.sbl(5,4,code="R")
@@ -18,8 +20,8 @@ comp.sbl<-function(n,x,code="C"){
    d<-lcfe.sbl(n+1,x,code=code)
    e<-lcfe.afs(n  ,x)
    f<-lcfe.afs(n+2,x)
-   g<-n/x
-   h<-(n+2)/x
+   g<-lcfe.afs(n,x)
+   h<-lcfe.afs(n+2,x)
    #------------------------------------
    rnames=c("c_{n  }",             # a,s
             "c_{n+1}",             # b,d

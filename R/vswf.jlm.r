@@ -3,6 +3,7 @@
 #' @param l The orbital angular momentum eigenvalue
 #' @param m The eigenvalue of the projection of angular momentum on \eqn{z} axis
 #' @return A unique value used to transform a double summation on a single one.
+#' @export
 #' @examples 
 #' for(l in 0:5){
 #'    for(m in -l:l){

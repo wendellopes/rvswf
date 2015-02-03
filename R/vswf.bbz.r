@@ -11,7 +11,9 @@
 #' @param lmax The maximum value of \eqn{l} in the expansion.
 #' @param M Order of the Bessel Beam.
 #' @param s Chirality of the Bessel Beam (\eqn{S=\pm 1}).
-#' @seealso \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}}, \code{\link{vswf.pwd}}.
+#' @seealso \code{\link{vwfd.bbp}}, \code{\link{vswf.bbp}}, \code{\link{vswf.pwe}}.
+#' @import vswf.qlm, vswf.jlm, vswf.psi
+#' @export
 #' @examples
 #' lambda=.5e-6            # Propagating wavelength
 #' a<-8*lambda             # Size x of the waveguide (Rectangular Wave Guide)

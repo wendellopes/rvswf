@@ -8,6 +8,8 @@
 #' @return Data frame with the values calculated by the algorithms.
 #' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}}, \code{\link{lcfe.cbd}},
 #' \code{\link{lcfe.afs}}, \code{\link{besselJ}}.
+#' @import lcfe.cbd,lcfe.cbi
+#' @export
 #' @examples 
 #' comp.cbd(5,4,code="C")
 #' comp.cbd(5,4,code="R")

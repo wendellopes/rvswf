@@ -8,7 +8,8 @@
 #' @param NMAX The maximum number of iterations.
 #' @param code Choice between \code{C} or native {R} code.
 #' @return The value of \eqn{1/\gamma_n} for complex arguments.
-#' @seealso \code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+#' @export
+#' @seealso \code{\link{lcfa.cyl}}, \code{\link{lcfe.cbd}}.
 lcfe.cbi<-function(n,x,NMAX=2000,code="C"){
    nmaxo<-NMAX
    fn<-0

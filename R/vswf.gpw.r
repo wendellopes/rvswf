@@ -16,6 +16,8 @@
 #' @param implicit The way it calculates the Beam Shape Coefficients. If TRUE,
 #' so we use the function \code{vswf.vsh} to calculate. If FALSE, we use
 #' the explicit expression for the components.
+#' @import vswf.vsh,vswf.qlm, vswf.jlm
+#' @export
 #' @seealso \code{\link{vswf.vsh}}, \code{\link{vswf.mpw}}, \code{\link{vswf.qlm}},
 #' \code{\link{vswf.jlm}}.
 #' @examples

@@ -27,6 +27,6 @@ recurrence one can calculate \eqn{1/g_n}, as shown in
 Barnett's paper.
 }
 \seealso{
-\code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+\code{\link{lcfa.cyl}}, \code{\link{lcfe.cbd}}.
 }
 

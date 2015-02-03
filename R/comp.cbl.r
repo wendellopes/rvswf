@@ -6,8 +6,10 @@
 #' @param x Argument of Bessel functions.
 #' @param code If C or native R function.
 #' @return Data frame with the values calculated by the algorithm.
-#' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}}, \code{\link{lcfe.cbd}},
+#' @seealso \code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},
 #' \code{\link{lcfe.afs}}, \code{\link{besselJ}}.
+#' @import lcfe.cbl,lcfe.afs,reff.cdj
+#' @export
 #' @examples 
 #' comp.cbl(5,4,code="C")
 #' comp.cbl(5,4,code="R")

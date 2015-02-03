@@ -25,6 +25,6 @@ Using Lentz method is possible to calculate the ratio
 \eqn{C_n(x)=(xj_{n}(x))'/xj_{n}(x)}.
 }
 \seealso{
-\code{\link{lcfa.cyl}}, \code{\link{cfe.cbd}}.
+\code{\link{lcfa.cyl}}, \code{\link{lcfe.cbd}}.
 }
 

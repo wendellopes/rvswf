@@ -20,6 +20,9 @@
 #' The algorithm is the same.
 #' @return An array of Ricatti-Bessel functions and its derivatives.
 #' from 0 to \code{nmax} at point \code{x}
+#' @useDynLib rvswf
+#' @import lcfe.rbl, lcfe.sbd
+#' @export
 #' @examples
 #' x<-30
 #' nmax<-50

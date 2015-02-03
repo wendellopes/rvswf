@@ -1,0 +1,32 @@
+rm(list=ls())
+ph<-function(th,n){
+   return(asin(sin(th)/n))
+}
+Dk<-function(th,n,k){
+   return(2*(th-ph(th,n))+k*(pi-2*ph(th,n)))
+}
+Wk<-function(th,n,k){
+   return(2*th-k*(pi-2*ph(th,n)))
+}
+Ek<-function(n,k){
+   return(
+         (2-k)*pi
+         -
+         2*asin(sqrt(((k+1)**2-n**2)/((k+1)**2-1)))
+         -
+         2*(k+1)*asin(sqrt(((k+1)**2-n**2)/((k+1)**2-1))/n)
+         )
+}
+#-------------------------------------------------------------------------------
+thj<-seq(0,pi/2,pi/199)
+n<-1.33
+d1<-Dk(thj,n,1)
+d2<-2*pi-Dk(thj,n,2)
+w3<-Wk(thj,n,3)+3*pi
+w4<-Wk(thj,n,4)+4*pi
+e1<-Ek(n,1)
+e2<-Ek(n,2)
+plot(sin(thj),d1,type='l',ylim=range(c(d1,d2)))
+points(sin(thj),d2,type='l',col='red')
+#plot(sin(thj),w3,type='l',col='blue',ylim=range(c(w3,w4)))
+#points(sin(thj),w4,type='l',col='green')

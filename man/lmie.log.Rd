@@ -15,7 +15,7 @@ lmie.log(m, x, NMAX = floor(abs(x + 7.5 * x^(1/3)) + 2))
 \value{
 The coefficients \eqn{a_n=C_nT_a} and \eqn{b_n=C_nT_b} and
 also the coefficients \eqn{C_n}, \eqn{T_a} and \eqn{T_b}.
-The maximum value of \code{n} wil
+The maximum value of \code{n}.
 }
 \description{
 Calculates the Lorentz-Mie coefficients \eqn{a_n} and

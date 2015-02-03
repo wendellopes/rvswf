@@ -1,0 +1,35 @@
+\name{comp.rbl}
+\alias{comp.rbl}
+\title{Checks the results of Lentz method and internal R Bessel function}
+\usage{
+comp.rbl(n, x)
+}
+\arguments{
+  \item{n}{Order of the logarithmic derivative given by
+  \eqn{c_n=\psi_n'/\psi_n}, where \eqn{\psi_n=xj_n(x)}.}
+
+  \item{x}{Argument of Bessel functions.}
+
+  \item{code}{If C or native R function.}
+}
+\value{
+Data frame with the values calculated by the algorithm.
+}
+\description{
+Checks the results of Lentz method and internal R Bessel
+function
+}
+\details{
+In order to check the results of Lentz method for
+calculation of Ricatti-Bessel logarithmic derivative
+\eqn{D_n}.
+}
+\examples{
+comp.rbl(5,4,code="C")
+comp.rbl(5,4,code="R")
+}
+\seealso{
+\code{\link{lcfe.cbi}}, \code{\link{lcfe.cbl}},
+\code{\link{lcfe.afs}}, \code{\link{besselJ}}.
+}
+

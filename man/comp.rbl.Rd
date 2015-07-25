@@ -2,7 +2,7 @@
 \alias{comp.rbl}
 \title{Checks the results of Lentz method and internal R Bessel function}
 \usage{
-comp.rbl(n, x)
+comp.rbl(n, x, code = "C")
 }
 \arguments{
   \item{n}{Order of the logarithmic derivative given by

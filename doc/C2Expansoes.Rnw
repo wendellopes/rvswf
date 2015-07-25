@@ -1594,7 +1594,7 @@ Z\bm{{\rm H}}\\
 \right]
 \end{eqnarray}
 sendo que em um caso $\bm{{\rm A}}_I=\psi_M\bm{{\rm\hat{z}}}$
-em outro caso $\bm{{\rm A}}_{II}=\psi_{M-1}\bm{{\rm\hat{e}}}_\pm$ e
+em outro caso $\bm{{\rm A}}_{II}=\psi_{M}\bm{{\rm\hat{e}}}_\pm$ e
 $\psi_M(\bm{{\rm k}};\bm{{\rm r}})$ é o mesmo definido
 para guia de onda cilíndrico.
 
@@ -1662,11 +1662,11 @@ Das propriedades das funções de Bessel
 \end{eqnarray}
 temos então que
 \begin{eqnarray}
-\partial_\pm\psi_m=\mp\frac{\gamma s}{\sqrt{2}}\psi_{m\pm s}
+\partial_\pm\psi_m=\mp\frac{\gamma s}{\sqrt{2}}\psi_{M\pm s}
 \end{eqnarray}
 Fazendo $p=\pm(1)$, vamos ter
 \begin{eqnarray}
-\partial_p\psi_m=-ps\frac{\gamma}{\sqrt{2}}\psi_{m+ps}
+\partial_p\psi_m=-ps\frac{\gamma}{\sqrt{2}}\psi_{M+ps}
 \end{eqnarray}
 A expressão acima vai ser amplamente utilizada.
 
@@ -1687,86 +1687,86 @@ Z\bm{{\rm H}}\\
 \right]
 \end{eqnarray}
 sendo que em um caso $\bm{{\rm A}}_I=\psi_M\bm{{\rm\hat{z}}}$
-em outro caso $\bm{{\rm A}}_{II}=\psi_{M-1}\bm{{\rm\hat{e}}}_\pm$ e
+em outro caso $\bm{{\rm A}}_{II}=\psi_{M}\bm{{\rm\hat{e}}}_\pm$ e
 $\psi_M(\bm{{\rm k}};\bm{{\rm r}})$ é o mesmo definido
 para guia de onda cilíndrico.
 
 Assim, para o caso $I$ vamos ter 
-$\nabla\cdot\bm{{\rm A}}_I=\nabla\cdot\bm{{\rm\hat{z}}}\psi_m=\partial_z\psi_m=ik_z\psi_m$
+$\nabla\cdot\bm{{\rm A}}_I=\nabla\cdot\bm{{\rm\hat{z}}}\psi_M=\partial_z\psi_M=ik_z\psi_M$
 cujo gradiente vai dar
 \begin{eqnarray}
-ik_z\nabla\psi_m
+ik_z\nabla\psi_M
 =ik_z\left[\frac{\gamma s}{\sqrt{2}}
-\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_+-\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
-+ik_z\psi_m\bm{{\rm\hat{z}}}\right]
+\Big(\psi_{M-s}\bm{{\rm\hat{e}}}_+-\psi_{M+s}\bm{{\rm\hat{e}}}_-\Big)
++ik_z\psi_M\bm{{\rm\hat{z}}}\right]
 \end{eqnarray}      
 o que nos dá
 \begin{eqnarray}
 \frac{1}{k^2}\nabla\nabla\cdot\bm{{\rm A}}
 =
 \frac{is}{\sqrt{2}}\frac{k_z\gamma}{k^2}
-\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_+-\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
--\left(\frac{k_z}{k}\right)^2\psi_m\bm{{\rm\hat{z}}}
+\Big(\psi_{M-s}\bm{{\rm\hat{e}}}_+-\psi_{M+s}\bm{{\rm\hat{e}}}_-\Big)
+-\left(\frac{k_z}{k}\right)^2\psi_M\bm{{\rm\hat{z}}}
 \end{eqnarray}      
 e com isso
 \begin{eqnarray}
 \bm{{\rm E}}_I=
 \frac{is}{\sqrt{2}}\frac{k_z\gamma}{k^2}
-\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_+-\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
-+\left(\frac{\gamma}{k}\right)^2\psi_m\bm{{\rm\hat{z}}}
+\Big(\psi_{M-s}\bm{{\rm\hat{e}}}_+-\psi_{M+s}\bm{{\rm\hat{e}}}_-\Big)
++\left(\frac{\gamma}{k}\right)^2\psi_M\bm{{\rm\hat{z}}}
 \end{eqnarray}
 e o campo magnético por $-i\nabla\times\bm{{\rm A}}/k$ o que nos dá
 \begin{eqnarray}
 \bm{{\rm H}}_I=
 \frac{is}{\sqrt{2}}\frac{\gamma}{k}
-\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_++\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
+\Big(\psi_{M-s}\bm{{\rm\hat{e}}}_++\psi_{M+s}\bm{{\rm\hat{e}}}_-\Big)
 \end{eqnarray}
 
 
 Para caso $II$ vamos ter 
-$\nabla\cdot\bm{{\rm A}}_{II}=\nabla\cdot\bm{{\rm\hat{e}}}_p\psi_{m-1}
-=\partial_p\psi_{m-1}=-ps(\gamma/\sqrt{2})\psi_{m+ps-1}$. 
+$\nabla\cdot\bm{{\rm A}}_{II}=\nabla\cdot\bm{{\rm\hat{e}}}_p\psi_{M}
+=\partial_p\psi_{M}=-ps(\gamma/\sqrt{2})\psi_{M+ps}$. 
 O gradiente é então dado por 
 $\nabla=\partial_-\bm{{\rm\hat{e}}}_++\partial_+\bm{{\rm\hat{e}}}_-+\partial_z\bm{{\rm\hat{z}}}$
 o que nos diz que vamos ter
-$\partial_{+}\partial_p\psi_{m-1}$,
-$\partial_{-}\partial_p\psi_{m-1}$,
-$\partial_{z}\partial_p\psi_{m-1}$.
+$\partial_{+}\partial_p\psi_{M}$,
+$\partial_{-}\partial_p\psi_{M}$,
+$\partial_{z}\partial_p\psi_{M}$.
 Sendo assim, vamos ter
 \begin{eqnarray}
-\partial_{+}\partial_p\psi_{m-1}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{+}\psi_{m+ps-1}=  ps\frac{\gamma^2}{2}\psi_{(m-1)+s(p+1)}\\
-\partial_{-}\partial_p\psi_{m-1}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{-}\psi_{m+ps-1}=- ps\frac{\gamma^2}{2}\psi_{(m-1)+s(p-1)}\\
-\partial_{z}\partial_p\psi_{m-1}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{z}\psi_{m+ps-1}=-ips\frac{\gamma k_z}{\sqrt{2}}\psi_{(m-1)+ps}
+\partial_{+}\partial_p\psi_{M}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{+}\psi_{M+ps}=  ps\frac{\gamma^2}{2}\psi_{M+s(p+1)}\\
+\partial_{-}\partial_p\psi_{M}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{-}\psi_{M+ps}=- ps\frac{\gamma^2}{2}\psi_{M+s(p-1)}\\
+\partial_{z}\partial_p\psi_{M}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{z}\psi_{M+ps}=-ips\frac{\gamma k_z}{\sqrt{2}}\psi_{M+ps}
 \end{eqnarray}
 O gradiente vai dar
 \begin{eqnarray}
--ps\frac{\gamma}{\sqrt{2}}\nabla\psi_{m+ps-1}
+-ps\frac{\gamma}{\sqrt{2}}\nabla\psi_{M+ps}
 =-ps\frac{\gamma}{\sqrt{2}}\left[\frac{\gamma s}{\sqrt{2}}
-\Big(\psi_{m+ps-s-1}\bm{{\rm\hat{e}}}_+-\psi_{m+ps+s-1}\bm{{\rm\hat{e}}}_-\Big)
-+ik_z\psi_{m+ps-1}\bm{{\rm\hat{z}}}\right]
+\Big(\psi_{M+ps-s}\bm{{\rm\hat{e}}}_+-\psi_{M+ps+s}\bm{{\rm\hat{e}}}_-\Big)
++ik_z\psi_{M+ps}\bm{{\rm\hat{z}}}\right]
 \end{eqnarray}
 o que nos dá
 \begin{eqnarray}
 \frac{1}{k^2}\nabla\nabla\cdot\bm{{\rm A}}
 =-p\left[\frac{1}{2}\left(\frac{\gamma}{k}\right)^2
-\Big(\psi_{m+ps-s-1}\bm{{\rm\hat{e}}}_+-\psi_{m+ps+s-1}\bm{{\rm\hat{e}}}_-\Big)
-+\frac{is}{\sqrt{2}}\frac{\gamma k_z}{k^2}\psi_{m+ps-1}\bm{{\rm\hat{z}}}\right]
+\Big(\psi_{M+ps-s}\bm{{\rm\hat{e}}}_+-\psi_{M+ps+s}\bm{{\rm\hat{e}}}_-\Big)
++\frac{is}{\sqrt{2}}\frac{\gamma k_z}{k^2}\psi_{M+ps}\bm{{\rm\hat{z}}}\right]
 \end{eqnarray}
 Necessitamos agora somar o potencial vetor
- $\bm{{\rm A}}=\psi_{m-1}\bm{{\rm\hat{e}}}_p$ que só tem uma componente. 
+ $\bm{{\rm A}}=\psi_{M}\bm{{\rm\hat{e}}}_p$ que só tem uma componente. 
 Vamos então reescrever o potencial como duas componentes dependentes
 de deltas de Kronecker de modo que possa ser incorporado às duas
 componentes do campo elétrico. Vamos escrever então 
-$\bm{{\rm A}}=\psi_{m-1}\big(\delta_{p,-1}\bm{{\rm\hat{e}}}_-+\delta_{p,1}\bm{{\rm\hat{e}}}_+\big)$,
+$\bm{{\rm A}}=\psi_{M}\big(\delta_{p,-1}\bm{{\rm\hat{e}}}_-+\delta_{p,1}\bm{{\rm\hat{e}}}_+\big)$,
 de modo que o campo elétrico seja escrito como
 \begin{eqnarray}
 \bm{{\rm E}}_{II}
 &=&
-\left(\delta_{p, 1}\psi_{m-1}-p\frac{1}{2}\frac{\gamma^2}{k^2}\psi_{(m-1)+s(p-1)}\right)\bm{{\rm\hat{e}}}_+
+\left(\delta_{p, 1}\psi_{M}-p\frac{1}{2}\frac{\gamma^2}{k^2}\psi_{M+s(p-1)}\right)\bm{{\rm\hat{e}}}_+
 +
-\left(\delta_{p,-1}\psi_{m-1}+p\frac{1}{2}\frac{\gamma^2}{k^2}\psi_{(m-1)+s(p+1)}\right)\bm{{\rm\hat{e}}}_-
+\left(\delta_{p,-1}\psi_{M}+p\frac{1}{2}\frac{\gamma^2}{k^2}\psi_{M+s(p+1)}\right)\bm{{\rm\hat{e}}}_-
 +\nonumber\\
-&-&\frac{ips}{\sqrt{2}}\frac{\gamma k_z}{k^2}\psi_{m+ps-1}\bm{{\rm\hat{z}}}
+&-&\frac{ips}{\sqrt{2}}\frac{\gamma k_z}{k^2}\psi_{M+ps}\bm{{\rm\hat{z}}}
 \end{eqnarray}
 O campo magnético depende do rotacional. Para o caso em que $\bm{{\rm A}}=\psi\bm{{\rm\hat{e}}}_+$
 o que nos diz que o único termo não zero de $\bm{{\rm A}}$ é $A_-$, o que vai nos dar
@@ -1779,12 +1779,12 @@ $\bm{{\rm H}}=(-\bm{{\rm\hat{z}}}\partial_-+\bm{{\rm\hat{e}}}_-\partial_z)\psi/k
 Sendo assim, em um caso geral
 $\bm{{\rm A}}=\psi\bm{{\rm\hat{e}}}_p$ vamos ter
 $\bm{{\rm H}}=p(\bm{{\rm\hat{z}}}\partial_p-\bm{{\rm\hat{e}}}_p\partial_z)\psi/k$.
-Substituindo as derivadas de $\psi_{m-1}$ vamos obter
+Substituindo as derivadas de $\psi_{M-1}$ vamos obter
 \begin{eqnarray}
 \bm{{\rm H}}_{II}
-=\frac{p}{k}\Big(\bm{{\rm\hat{z}}}\partial_p-\bm{{\rm\hat{e}}}_p\partial_z\Big)\psi_{m-1}
-=-\Big(\frac{s}{\sqrt{2}}\frac{\gamma}{k}\psi_{m+ps-1}\bm{{\rm\hat{z}}}+ip\frac{k_z}{k}\psi_{m-1}\bm{{\rm\hat{e}}}_p\Big)
-%=ip\Big(k_z\psi_{m-1}\bm{{\rm\hat{e}}}_p+ps\frac{\gamma}{\sqrt{2}}\psi_{m+ps-1}\bm{{\rm\hat{z}}}\Big)
+=\frac{p}{k}\Big(\bm{{\rm\hat{z}}}\partial_p-\bm{{\rm\hat{e}}}_p\partial_z\Big)\psi_{M}
+=-\Big(\frac{s}{\sqrt{2}}\frac{\gamma}{k}\psi_{M+ps}\bm{{\rm\hat{z}}}+ip\frac{k_z}{k}\psi_{M-1}\bm{{\rm\hat{e}}}_p\Big)
+%=ip\Big(k_z\psi_{M-1}\bm{{\rm\hat{e}}}_p+ps\frac{\gamma}{\sqrt{2}}\psi_{M+ps-1}\bm{{\rm\hat{z}}}\Big)
 \end{eqnarray}
 %------------------------------------------------------------------------------
 \subsection{Expansão em ondas parciais}
@@ -2021,7 +2021,8 @@ Além disso, podemos usar o fato de que
 =i\big(
 k_+\bm{{\rm\hat{e}}}_--k_-\bm{{\rm\hat{e}}}_+
 \big)
-=\frac{i}{\sqrt{2}}\frac{\gamma}{k}\big(e^{i\zeta}\bm{{\rm\hat{e}}}_--e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)
+=\frac{i}{\sqrt{2}}\frac{\gamma}{k}\big(e^{i\zeta}\bm{{\rm\hat{e}}}_-
+   -e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)
 \end{eqnarray}
 Assim, fazendo 
 \begin{eqnarray}
@@ -2059,7 +2060,7 @@ conveniente.
 %-------------------------------------------------------------------------------
 \subsection{Caso $II$}
 %-------------------------------------------------------------------------------
-Para o caso $II$ que $M'=M-1$ e $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_\pm$.
+Para o caso $II$ que $M-1\to M$ e $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_\pm$.
 Para tanto vamos novamente usar $p=\pm(1)$ para determinar a polarização do potencial
 vetor, sendo então que $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_p$ e os
 as componentes dos harmônicos esféricos vetorias conjugados dadas por
@@ -2067,7 +2068,8 @@ as componentes dos harmônicos esféricos vetorias conjugados dadas por
 %V_+&=& (l+1)K_{ -,l}^{m,m+1}Y_{l-1}^{m+1}+l K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}\\
 %V_-&=&-(l+1)K_{ +,l}^{m,m-1}Y_{l-1}^{m-1}-l K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}\\
 X_p^*&=&c_{p}^{lm}Q_l^{m+p}e^{-i(m+p)\zeta'}\\
-V_p^*&=&p\Big((l+1)K_{-p,l}^{m,m+p}Q_{l-1}^{m+p}+l K_{p,l+1}^{m,m+p}Q_{l+1}^{m+p}\Big)e^{-i(m+p)\zeta'}
+V_p^*&=&p\Big((l+1)K_{-p,l}^{m,m+p}Q_{l-1}^{m+p}+l K_{p,l+1}^{m,m+p}Q_{l+1}^{m+p}\Big)
+   e^{-i(m+p)\zeta'}
 \end{eqnarray}
 sendo que, dado
 $\bm{{\rm U}}=U_+\bm{{\rm\hat{e}}}_-+U_-\bm{{\rm\hat{e}}}_++U_z\bm{{\rm\hat{e}}}_z$
@@ -2093,7 +2095,7 @@ G_{lm}^{TE}\\
 G_{lm}^{TM}\\
 \end{array}
 \right]
-&=&\frac{2i^l}{\sqrt{l(l+1)}}\sum_j(-i)^j \psi_{M-1-j}%(\bm{{\rm k}};\bm{{\rm r}}_0)
+&=&\frac{2i^l}{\sqrt{l(l+1)}}\sum_j(-i)^j \psi_{-j}%(\bm{{\rm k}};\bm{{\rm r}}_0)
 \left[
 \begin{array}{c}
 % \bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
@@ -2156,32 +2158,38 @@ Para o caso de $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_p$,
 sabendo que
 \begin{eqnarray}
 \bm{{\rm\hat{k}}}=\frac{1}{\sqrt{2}}\frac{\gamma}{k}
-\big(e^{i\zeta}\bm{{\rm\hat{e}}}_-+e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)+\frac{k_z}{k}\bm{{\rm\hat{z}}}
+\big(e^{i\zeta}\bm{{\rm\hat{e}}}_-+e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)
+   +\frac{k_z}{k}\bm{{\rm\hat{z}}}
 \end{eqnarray}
 vamos obter
 \begin{eqnarray}
 \bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p
 %=ip(k_p\bm{{\rm\hat{z}}}-k_z\bm{{\rm\hat{e}}}_p)
-=ip\left(\frac{1}{\sqrt{2}}\frac{\gamma}{k}e^{ip\zeta}\bm{{\rm\hat{z}}}-\frac{k_z}{k}\bm{{\rm\hat{e}}}_p\right)
+=ip\left(\frac{1}{\sqrt{2}}\frac{\gamma}{k}e^{ip\zeta}\bm{{\rm\hat{z}}}
+   -\frac{k_z}{k}\bm{{\rm\hat{e}}}_p\right)
 \end{eqnarray}
 Neste caso
 \begin{eqnarray}
-\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p=\frac{1}{\sqrt{2}}c_{-p}^{lm}Q_l^{m-p}e^{-i(m-p)\zeta}
+\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p
+   =\frac{1}{\sqrt{2}}c_{-p}^{lm}Q_l^{m-p}e^{-i(m-p)\zeta}
 \end{eqnarray}
 Deste modo, temos também
 \begin{eqnarray}
 \bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
-=\frac{ip}{\sqrt{2}}\left(m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}\right)e^{-i(m-p)\zeta}
+=\frac{ip}{\sqrt{2}}\left(m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}\right)
+   e^{-i(m-p)\zeta}
 \end{eqnarray}
 Outro modo é observar que
 \begin{eqnarray}
 \bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
-=ip\left(\frac{m}{\sqrt{2}}\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p\right)e^{-i(m-p)\zeta}
+=ip\left(\frac{m}{\sqrt{2}}\frac{\gamma}{k}Q_l^m
+      -\frac{k_z}{k}\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p\right)e^{-i(m-p)\zeta}
 \end{eqnarray}
 de modo que explicitamente temos
 \begin{eqnarray}
 \bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
-=\frac{ip}{\sqrt{2}}\left(m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}\right)e^{-i(m-p)\zeta}
+=\frac{ip}{\sqrt{2}}\left(m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}\right)
+   e^{-i(m-p)\zeta}
 \end{eqnarray}
 De outro modo, temos também que 
 \begin{eqnarray}
@@ -2261,7 +2269,8 @@ e ainda de que  $r\bm{{\rm\hat{\theta}}}=z\bm{{\rm\hat{\rho}}}-\rho\bm{{\rm\hat{
 é possível separar os termos transversais do gradiente, obtendo
 \begin{eqnarray}
 r\nabla
-=\left(-\frac{z\rho}{r^2}Q_l^m{}'\bm{{\rm\hat{\rho}}}+im\frac{r}{\rho}Q_l^m\bm{{\rm\hat{\phi}}}\right)e^{im\phi}
+=\left(-\frac{z\rho}{r^2}Q_l^m{}'\bm{{\rm\hat{\rho}}}
+   +im\frac{r}{\rho}Q_l^m\bm{{\rm\hat{\phi}}}\right)e^{im\phi}
 +\frac{\rho^2}{r^2}Q_l^m{}'e^{im\phi}\bm{{\rm\hat{z}}}
 \end{eqnarray}
 Agora usando

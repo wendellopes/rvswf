@@ -18,7 +18,7 @@ The Mie angular functions are
 \end{eqnarray}
 
 If the detailed shape of the angular scattering pattern is required, e.g. to get the phase matrix or phase function for radiative-transfer calculations (Chandrasekhar, 1960), the scattering functions $S_1$ and $S_2$ are required. These functions describe the scattered field $\bm{{\rm E}}_s$. The scattered far field in spherical coordinates 
-($E_{s\theta$}, $E_{s\phi}$) for a unit-amplitude incident field (where the time variation $exp(-i\omega t)$ has been omitted) is given by
+($E_{s\theta}$, $E_{s\phi}$) for a unit-amplitude incident field (where the time variation $exp(-i\omega t)$ has been omitted) is given by
 \begin{eqnarray}
 E_{s\theta}&=&-\frac{e^{ikr}}{ikr}\cos\phi~S_2(\cos\theta)\\
 E_{s\theta}&=& \frac{e^{ikr}}{ikr}\sin\phi~S_1(\cos\theta)\\

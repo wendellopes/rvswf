@@ -699,7 +699,7 @@ void lcfc_ric( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func j_0(x)
-void bess_zro( /* FUNCTION */
+void bess_szr( /* FUNCTION */
       double *x, 
       double *j0
    ){
@@ -708,6 +708,7 @@ void bess_zro( /* FUNCTION */
       *j0=sin(*x)/(*x);
    }else{
       int j;
+      *j0=1.0;
       for(j=10;j>0;j--){
          *j0=1.-*j0*KJ(*x,2*j)*KJ(*x,2*j+1);
       }
@@ -715,7 +716,7 @@ void bess_zro( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func j_1(x)
-void bess_uno( /* FUNCTION */
+void bess_sun( /* FUNCTION */
       double *x, 
       double *j1
    ){
@@ -724,8 +725,9 @@ void bess_uno( /* FUNCTION */
       *j1=(sin(*x)/(*x)-cos(*x))/(*x);
    }else{
       int j;
+      *j1=0.0;
       for(j=10;j>0;j--){
-         *j1=(2*j*1.)/(2*j+1.)-*j1*KJ(*x,2*j+1)*KJ(*x,2*j+2);
+         *j1=(2.*j)/(2*j+1.)-*j1*KJ(*x,2*j+1)*KJ(*x,2*j+2);
       }
       *j1=(*x)*(*j1)/2.0;
    }
@@ -860,8 +862,8 @@ void bess_sph( /* FUNCTION */
 //--------------------------------------
    double j0=0.0;  // Normalization values
    double j1=0.0;  // Normalization values
-   bess_zro(x,&j0);
-   bess_uno(x,&j1);
+   bess_szr(x,&j0);
+   bess_sun(x,&j1);
 //--------------------------------------
    int NMAY=*NMAX;
    lcfe_sbl(nmax,x,NMAX,&dn[*nmax]);
@@ -950,9 +952,9 @@ void bess_ric( /* FUNCTION */
    double R0=0.0;  // Initialization values
    double R1=0.0;  // Initialization values
    double j1=0.0;  // Initialization values
-   bess_zro(x,&R0);
-   bess_uno(x,&R1);
-   bess_uno(x,&j1);
+   bess_szr(x,&R0);
+   bess_sun(x,&R1);
+   bess_sun(x,&j1);
    R0=*x*R0;
    R1=*x*R1;
    int dig=15;

@@ -585,8 +585,8 @@ void lcfc_sbi(/* FUNCTION */
 //------------------------------------------------------------------------------
 // Auxiliary func for calculation of Bessel functions by expansion
 double KJ( /* FUNCTION */
-      int j, 
-      double x){
+      double x,
+      int j){
    return(x/j);
 }
 //------------------------------------------------------------------------------

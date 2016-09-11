@@ -17,19 +17,33 @@
 #' points(Im(u$A),type='b',pch=4,col='red')
 #' plot(Re(u$B),type='b')
 #' points(Im(u$B),type='b',pch=4,col='red')
-vswf.gwg<-function(gama,kz,lmax){
-   k<-sqrt(gama^2+kz^2)
-   LMAX=lmax*(lmax+2)+1
-   #----------------------------------------
-   u<-vswf.qlm(kz/k,lmax)
-   Qlm<-u$Qlm
-   dQlm<-u$dQlm
-   ll<-u$l
-   mm<-u$m
-   llp1<-1/sqrt(ll*(ll+1))
-   llp1[1]<-0
-   #----------------------------------------
-   A<-2*(1i^ll)*((k/gama)^2)*Qlm*mm*llp1
-   B<-2*(1i^(ll-1))*dQlm*llp1
-   return(data.frame(A,B))
+vswf.gwg<-function(gama,kz,lmax,code="C"){
+   if(!code%in%c("C","R")){
+      stop("Code must be \"C\" or \"R\"")
+   }
+   if(code=="C"){
+      dummy<-rep(0,lmax*(lmax+2)+1)
+      u<-.C("vswf_gwg",
+            gamma=as.double(gama),
+            kz=as.double(kz),
+            lmax=as.integer(lmax),
+            A=as.complex(dummy),
+            B=as.complex(dummy))
+      return(data.frame(A=u$A,B=u$B))
+   }else{
+      k<-sqrt(gama^2+kz^2)
+      LMAX=lmax*(lmax+2)+1
+      #----------------------------------------
+      u<-vswf.qlm(kz/k,lmax)
+      Qlm<-u$Qlm
+      dQlm<-u$dQlm
+      ll<-u$l
+      mm<-u$m
+      llp1<-1/sqrt(ll*(ll+1))
+      llp1[1]<-0
+      #----------------------------------------
+      A<-2*(1i^ll)*((k/gama)^2)*Qlm*mm*llp1
+      B<-2*(1i^(ll-1))*dQlm*llp1
+      return(data.frame(A,B))
+   }
 }

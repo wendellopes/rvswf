@@ -584,14 +584,14 @@ void lcfc_sbi(/* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Auxiliary func for calculation of Bessel functions by expansion
-double KJ( /* FUNCTION */
+double KJ(/* FUNCTION */
       double x,
       int j){
-   return(x/j);
+   return(x/(1.*j));
 }
 //------------------------------------------------------------------------------
 // Cylindrical Bessel func ratio and logarithmic derivative 
-void lcfa_cyl( /* FUNCTION */
+void lcfa_cyl(/* FUNCTION */
       int *nmax,
       double *x,
       double *gn,
@@ -609,7 +609,7 @@ void lcfa_cyl( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Cylindrical Bessel func ratio and logarithmic derivative -- COMPLEX
-void lcfc_cyl( /* FUNCTION */
+void lcfc_cyl(/* FUNCTION */
       int *nmax,
       double complex *x,
       double complex *gn,
@@ -627,7 +627,7 @@ void lcfc_cyl( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func ratio and logarithmic derivative 
-void lcfa_sph( /* FUNCTION */
+void lcfa_sph(/* FUNCTION */
       int *nmax,
       double *x,
       double *gn,
@@ -645,7 +645,7 @@ void lcfa_sph( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func ratio and logarithmic derivative -- COMPLEX
-void lcfc_sph( /* FUNCTION */
+void lcfc_sph(/* FUNCTION */
       int *nmax,
       double complex *x,
       double complex *gn,
@@ -663,7 +663,7 @@ void lcfc_sph( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Riccati-Bessel func ratio and logarithmic derivative 
-void lcfa_ric( /* FUNCTION */
+void lcfa_ric(/* FUNCTION */
       int *nmax,
       double *x,
       double *gn,
@@ -681,7 +681,7 @@ void lcfa_ric( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Riccati-Bessel func ratio and logarithmic derivative -- COMPLEX
-void lcfc_ric( /* FUNCTION */
+void lcfc_ric(/* FUNCTION */
       int *nmax,
       double complex *x,
       double complex *gn,
@@ -699,7 +699,7 @@ void lcfc_ric( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func j_0(x)
-void bess_szr( /* FUNCTION */
+void bess_szr(/* FUNCTION */
       double *x, 
       double *j0
    ){
@@ -716,7 +716,7 @@ void bess_szr( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Spherical Bessel func j_1(x)
-void bess_sun( /* FUNCTION */
+void bess_sun(/* FUNCTION */
       double *x, 
       double *j1
    ){
@@ -736,7 +736,7 @@ void bess_sun( /* FUNCTION */
 //Starting values for downward recurrence, Cylindrical Bessel func
 //For calculation of J_n(x), one can calculate by downward recurrence from
 //   J_{n-dig}(x), where dig is the number of precision in J_n(x).
-void bess_csv( /* FUNCTION */
+void bess_csv(/* FUNCTION */
       int *nmax,
       int *dig,
       double *x,
@@ -765,7 +765,7 @@ void bess_csv( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Array of cylindrical Bessel func
-void bess_cyl( /* FUNCTION */
+void bess_cyl(/* FUNCTION */
       int *nmax, 
       double *x, 
       double *Jn, 
@@ -821,7 +821,7 @@ void bess_cyl( /* FUNCTION */
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 //Starting values for downward recurrence, Spherical Bessel func
-void bess_ssv( /* FUNCTION */
+void bess_ssv(/* FUNCTION */
       int *nmax,
       int *dig,
       double *x,
@@ -829,7 +829,6 @@ void bess_ssv( /* FUNCTION */
       double *CN
    ){
 //--------------------------------------
-   //printf("passei\n");
    double jn[*dig], cn[*dig];
    jn[*dig]=1.0;  // n-th Bessel func
    cn[*dig]=0.0;  // Derivative of the n-th Bessel func
@@ -852,7 +851,7 @@ void bess_ssv( /* FUNCTION */
 //------------------------------------------------------------------------------
 // Array of Spherical Bessel func
 // NEED COMPLEX VERSION?
-void bess_sph( /* FUNCTION */
+void bess_sph(/* FUNCTION */
       int *nmax, 
       double *x, 
       double *jn, 
@@ -913,7 +912,7 @@ void bess_sph( /* FUNCTION */
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 //Starting values for downward recurrence, Spherical Bessel func
-void bess_rsv( /* FUNCTION */
+void bess_rsv(/* FUNCTION */
       int *nmax,
       int *dig,
       double *x,
@@ -942,7 +941,7 @@ void bess_rsv( /* FUNCTION */
 }
 //------------------------------------------------------------------------------
 // Array of Riccati-Bessel func
-void bess_ric( /* FUNCTION */
+void bess_ric(/* FUNCTION */
       int *nmax, 
       double *x, 
       double *Rn, 
@@ -959,7 +958,6 @@ void bess_ric( /* FUNCTION */
    R1=*x*R1;
    int dig=15;
    bess_rsv(nmax,&dig,x,&Rn[*nmax],&Cn[*nmax]);
-   //printf("Rn = %f, Cn = %f\n",Rn[*nmax],Cn[*nmax]);
    int n,j;
    for(n=*nmax;n>0;n--){
       // Downward Recursion
@@ -1399,24 +1397,90 @@ int lijk(/* FUNCTION */
 //------------------------------------------------------------------------------
 // CONSTANTS FOR \vec{X}_{lm}
 //------------------------------------------------------------------------------
-double cp(/* FUNCTION */
-      int lo, 
-      int mo
+double clmp(/* FUNCTION */
+      int l, 
+      int m,
+      int p
    ){
-   //-----------------------------------
-   double l=lo;
-   double m=mo;
-   return sqrt(l*(l+1)-m*(m+1));
+   return sqrt(1.*l*(l+1.)-1.*m*(m+p));
 }
 //------------------------------------------------------------------------------
-double cm(/* FUNCTION */
-      int lo, 
-      int mo
+double Klmqp(/* FUNCTION */
+      int l,
+      int m,
+      int q,
+      int p
+   ){
+   return ((1.*l+p*m)*(1.*l+p*q))/((2.*l-1.)*(2.*l+1.));
+}
+//------------------------------------------------------------------------------
+// NORMALIZED ASSOCIATED LEGENDRE POLYNOMIALS
+//------------------------------------------------------------------------------
+void vswf_qlm(/* FUNCTION */
+      double *x,
+      int *lmax, 
+      double *Qlm, double *dQlm,
+      int *lo, int *mo
    ){
    //-----------------------------------
-   double l=lo;
-   double m=mo;
-   return sqrt(l*(l+1)-m*(m-1));
+   int l,m;
+   double kl;
+   double cth = *x;
+   double sth = sqrt(1-cth*cth);
+   double cs2 = pow(sth,-2);
+   //-----------------------------------
+   // Qlm - First 4 terms
+   Qlm[jlm(0, 0)]=1/sqrt(4*M_PI);
+   Qlm[jlm(1, 1)]=-gammaQ(1)*sth*Qlm[jlm(0,0)]; // Q11
+   Qlm[jlm(1, 0)]=sqrt(3.0)*cth*Qlm[jlm(0,0)];  // Q10
+   Qlm[jlm(1,-1)]=-Qlm[jlm(1,1)];               // Q11*(-1)
+   //-----------------------------------
+   // dQlm - First 4 terms
+   dQlm[jlm(0, 0)]=0.0;
+   dQlm[jlm(1, 1)]= -cth*Qlm[jlm(1, 1)]*cs2;
+   dQlm[jlm(1, 0)]=-(cth*Qlm[jlm(1, 0)]-sqrt(3.)*Qlm[jlm(0,0)])*cs2;
+   dQlm[jlm(1,-1)]= -cth*Qlm[jlm(1,-1)]*cs2;
+   //-----------------------------------
+   // lo - First 4 terms
+   lo[jlm(0, 0)] = 0;
+   lo[jlm(1,-1)] = 1;
+   lo[jlm(1, 0)] = 1;
+   lo[jlm(1, 1)] = 1;
+   // mo - First 4 terms
+   mo[jlm(0, 0)] =  0;
+   mo[jlm(1,-1)] = -1;
+   mo[jlm(1, 0)] =  0;
+   mo[jlm(1, 1)] =  1;
+   //-----------------------------------
+   for(l=2;l<=(*lmax);l++){
+      //Qlm positives extremes 
+      Qlm[jlm(l, l  )]=-gammaQ(l)*sth*Qlm[jlm(l-1,l-1)];
+      Qlm[jlm(l, l-1)]= deltaQ(l)*cth*Qlm[jlm(l-1,l-1)];
+      //dQlm positives extremes 
+      Qlm[jlm(l,-l  )]=pow(-1,l  )*Qlm[jlm(l,l  )];
+      Qlm[jlm(l,-l+1)]=pow(-1,l-1)*Qlm[jlm(l,l-1)];
+      
+      kl=1/(sqrt(l*(l+1)));
+      //--------------------------------
+      for(m=l; m>=0; m--){
+         lo[jlm(l, m)] =  l;
+         lo[jlm(l,-m)] =  l;
+         mo[jlm(l, m)] =  m;
+         mo[jlm(l,-m)] = -m;
+
+         if(m<l-1){
+            Qlm[jlm(l, m)]=alfaQ(l,m)*cth*Qlm[jlm(l-1,m)]
+               -betaQ(l,m)*Qlm[jlm(l-2,m)];
+            Qlm[jlm(l,-m)]=pow(-1,m)*Qlm[jlm(l, m)];
+         }
+
+         dQlm[jlm(l, m)] = -l*cth*cs2*Qlm[jlm(l, m)]+
+             sqrt((2*l+1.)/(2*l-1.))*sqrt((l+m)*(l-m))*cs2*Qlm[jlm(l-1, m)];
+
+         dQlm[jlm(l,-m)] = -l*cth*cs2*Qlm[jlm(l,-m)]+
+             sqrt((2*l+1.)/(2*l-1.))*sqrt((l+m)*(l-m))*cs2*Qlm[jlm(l-1,-m)];
+      }
+   }
 }
 //------------------------------------------------------------------------------
 // POSITION DEPENDENT CALCULATIONS - MULTIPLE LOOPS - COMPLETE CALCULATIONS
@@ -1458,7 +1522,6 @@ void vswf_def(/* FUNCTION */
    double kr =*k*r;
    int maxn=2000;
    bess_sph(&lp1,&kr,(void *)&JLM,(void *)&dJLM,&maxn);
-   //printf("HAS PASSED BY HERE\n");
    //-----------------------------------
    // Qlm - First 4 terms
    double Qlm[LMAXE];
@@ -1545,9 +1608,9 @@ void vswf_def(/* FUNCTION */
          }
          // CALCULATIONS OF VSH
          // X
-         XM=kl*cm(l,m)*Ylm[jlm(l,m-1)]/sqrt(2);
+         XM=kl*clmp(l,m, 1)*Ylm[jlm(l,m-1)]/sqrt(2);
          XZ=kl*m*Ylm[jlm(l,m  )];
-         XP=kl*cp(l,m)*Ylm[jlm(l,m+1)]/sqrt(2);
+         XP=kl*clmp(l,m,-1)*Ylm[jlm(l,m+1)]/sqrt(2);
          // Y
          YM=rm*Ylm[jlm(l,m)];
          YZ=rz*Ylm[jlm(l,m)];
@@ -1617,4 +1680,682 @@ void vswf_pwe(/* FUNCTION */
       } /* end for iy */    
    } /* end for ix */    
 }
+//------------------------------------------------------------------------------
+void vswf_vsh(/* FUNCTION */
+      double *x, double *y, double *z,
+      int *lmax, 
+      double complex *Y,
+      double complex *VM, double complex *VZ, double complex *VP,
+      double complex *XM, double complex *XZ, double complex *XP,
+      double complex *YM, double complex *YZ, double complex *YP
+   ){
+   //-----------------------------------
+//   int LMAX=*lmax*(*lmax+2); # MUST CALCULATE ONE MORE POINT #
+   int LMAXE=(*lmax+1)*(*lmax+3);
+   int l,m;
+   double cph; 
+   double sph;
+   double rho=sqrt(*x*(*x)+*y*(*y));
+   double r=sqrt(rho*rho+*z*(*z));
+   double sth=rho/r;
+   double cth=*z/r;
+   //-----------------------------------
+   if((*x==0)&&(*y==0)){
+      cph=1;
+      sph=0;
+   }else{
+      cph=*x/rho;
+      sph=*y/rho;
+   }
+   //-----------------------------------
+   // Qlm - First 4 terms
+   double Qlm[LMAXE];
+   Qlm[jlm(0, 0)]=1/sqrt(4*M_PI);
+   Qlm[jlm(1, 1)]=-gammaQ(1)*sth*Qlm[jlm(0,0)]; // Q11
+   Qlm[jlm(1, 0)]=sqrt(3.0)*cth*Qlm[jlm(0,0)];  // Q10
+   Qlm[jlm(1,-1)]=-Qlm[jlm(1,1)];               // Q11*(-1)
+   //-----------------------------------
+   // Complex Exponencial for m=-1,0,1
+   double complex Eim[2*(*lmax)+3];
+   Eim[*lmax-1]=(cph-I*sph);
+   Eim[*lmax  ]=1+I*0;
+   Eim[*lmax+1]=(cph+I*sph);
+   //-----------------------------------
+   // Ylm - First 4 terms
+   double complex Ylm[LMAXE];
+   Ylm[jlm(0, 0)]=Qlm[jlm(0, 0)];
+   Ylm[jlm(1,-1)]=Qlm[jlm(1,-1)]*Eim[*lmax-1];
+   Ylm[jlm(1, 0)]=Qlm[jlm(1, 0)];
+   Ylm[jlm(1, 1)]=Qlm[jlm(1, 1)]*Eim[*lmax+1];
+   /*---------------------------------*/
+   /* VECTOR SPHERICAL HARMONICS      */
+   /*---------------------------------*/
+   // r
+   double complex rm=sth*(cph-I*sph)/sqrt(2);
+   double complex rz=cth;
+   double complex rp=sth*(cph+I*sph)/sqrt(2);
+   double kl;
+   //-----------------------------------
+   // MAIN LOOP
+   //-----------------------------------
+   Y[jlm(0,0)]=Ylm[jlm(0, 0)];
+
+   YM[jlm(0,0)]=rm*Ylm[jlm(0,0)];
+   YZ[jlm(0,0)]=rz*Ylm[jlm(0,0)];
+   YP[jlm(0,0)]=rp*Ylm[jlm(0,0)];
+   for(l=1;l<=(*lmax);l++){
+      //Qlm extremos positivos um passo a frente
+      Qlm[jlm(l+1, l+1)]=-gammaQ(l+1)*sth*Qlm[jlm(l,l)];
+      Qlm[jlm(l+1, l  )]= deltaQ(l+1)*cth*Qlm[jlm(l,l)];
+      //Qlm extremos negativos um passo a frente
+      Qlm[jlm(l+1,-l-1)]=pow(-1,l+1)*Qlm[jlm(l+1, l+1)];
+      Qlm[jlm(l+1,-l  )]=pow(-1,l  )*Qlm[jlm(l+1, l  )];
+      // Exponenciais um passo a frente
+      Eim[*lmax+l+1]=Eim[*lmax+l]*(cph+I*sph);
+      Eim[*lmax-l-1]=Eim[*lmax-l]*(cph-I*sph);
+      // Harmonicos esfericos extremos um passo a frente
+      Ylm[jlm(l+1, l+1)]=Qlm[jlm(l+1, l+1)]*Eim[*lmax+l+1];
+      Ylm[jlm(l+1, l  )]=Qlm[jlm(l+1, l  )]*Eim[*lmax+l  ];
+      Ylm[jlm(l+1,-l-1)]=Qlm[jlm(l+1,-l-1)]*Eim[*lmax-l-1];
+      Ylm[jlm(l+1,-l  )]=Qlm[jlm(l+1,-l  )]*Eim[*lmax-l  ];
+      // others
+      kl=1./(sqrt(1.*l*(l+1.)));
+      //--------------------------------
+      for(m=l; m>=(-l); m--){
+         // CALCULATIONS OF SSH
+         if(m>=0){
+            Qlm[jlm(l+1, m)]=alfaQ(l+1,m)*cth*Qlm[jlm(l,m)]
+               -betaQ(l+1,m)*Qlm[jlm(l-1,m)];
+            Qlm[jlm(l+1,-m)]=pow(-1,m)*Qlm[jlm(l+1, m)];
+            Ylm[jlm(l+1, m)]=Qlm[jlm(l+1, m)]*Eim[*lmax+m];
+            Ylm[jlm(l+1,-m)]=Qlm[jlm(l+1,-m)]*Eim[*lmax-m];
+         }
+         // CALCULATIONS OF VSH
+         Y[jlm(l,m)]=Ylm[jlm(l,m)];
+         // X
+         XM[jlm(l,m)]=kl*clmp(l,m,-1)*Ylm[jlm(l,m-1)]/sqrt(2);
+         XZ[jlm(l,m)]=kl*m*Ylm[jlm(l,m  )];
+         XP[jlm(l,m)]=kl*clmp(l,m, 1)*Ylm[jlm(l,m+1)]/sqrt(2);
+         // Y
+         YM[jlm(l,m)]=rm*Ylm[jlm(l,m)];
+         YZ[jlm(l,m)]=rz*Ylm[jlm(l,m)];
+         YP[jlm(l,m)]=rp*Ylm[jlm(l,m)];
+         // V
+         VM[jlm(l,m)]=rm*XZ[jlm(l,m)]-rz*XM[jlm(l,m)];
+         VZ[jlm(l,m)]=rp*XM[jlm(l,m)]-rm*XP[jlm(l,m)];
+         VP[jlm(l,m)]=rz*XP[jlm(l,m)]-rp*XZ[jlm(l,m)];
+      }
+   }
+}
+//------------------------------------------------------------------------------
+// MIE COEFFICIENTS CALCULATION
+//------------------------------------------------------------------------------
+void lmie_rho(/* FUNCTION */
+      double complex  *m, double complex *x, 
+      int *lmax, int *NMAX,
+      double complex *an, double complex *bn
+   ){
+   // initial values
+   double complex p0 = csin(*x);
+   double complex q0 = ccos(*x);
+   double complex p1 = p0/(*x)-q0;
+   double complex q1 = q0/(*x)+p0;
+   double complex z0 = p0+I*q0;
+   double complex z1 = p1+I*q1;
+   // starting series
+   double complex g,Cn;
+   g  = z0/z1;
+   Cn = p0/z0;
+   //------------------------------------
+   // CALCULATION OF THE RATIOS
+   double complex mx = *m * *x;
+   double complex rho1[*lmax+1],rhom[*lmax+1],Dn1[*lmax+1],Dnm[*lmax+1];
+   lcfc_ric(lmax,  x,rho1,Dn1,NMAX);
+   lcfc_ric(lmax,&mx,rhom,Dnm,NMAX);
+   //------------------------------------
+   // UPWARD RECURRENCE
+   int l;
+   double complex k, Ta, Tb;
+
+   for(l=0; l<*lmax; l++){
+      Cn=Cn*g/rho1[l];
+
+      k = (1-1/((*m)*(*m)))*(l+1)/(*x);
+      Ta = (rhom[l]/(*m)-rho1[l]+k)/(rhom[l]/(*m)-g+k);
+      Tb = (rhom[l]*(*m)-rho1[l]  )/(rhom[l]*(*m)-g  );
+      an[l] = Cn*Ta; 
+      bn[l] = Cn*Tb;
+
+      g=1/(lcfc_afs(2*(l+1)+1,*x)-g);
+   }
+}
+//------------------------------------------------------------------------------
+void lmie_log(/* FUNCTION */
+      double complex  *m, double complex *x, 
+      int *lmax, int *NMAX,
+      double complex *an, double complex *bn
+   ){
+   //------------------------------------
+   // CALCULATION OF THE RATIOS
+   double complex mx = *m * *x;
+   double complex rho1[*lmax+1],rhom[*lmax+1],An1[*lmax+1],Anm[*lmax+1];
+   lcfc_ric(lmax,  x,rho1,An1,NMAX);
+   lcfc_ric(lmax,&mx,rhom,Anm,NMAX);
+   double complex Cn,Bn,Ta,Tb;
+   // STARTING VALUES
+   Cn = 1/(1+I*(ccos(*x)+*x*csin(*x))/(csin(*x)-*x*ccos(*x)));
+   Bn = -lcfc_afs(1,*x)+1/(lcfc_afs(1,*x)+I);
+
+   Ta = (Anm[1]/(*m)-An1[1])/(Anm[1]/(*m)-Bn);
+   Tb = (Anm[1]*(*m)-An1[1])/(Anm[1]*(*m)-Bn);
+
+   an[0] = Cn*Ta;
+   bn[0] = Cn*Tb;
+   
+   // UPWARD RECURRENCE
+   int n;
+   for(n=1;n<*lmax;n++){
+      Bn = -lcfc_afs(n+1,*x)+1/(lcfc_afs(n+1,*x)-Bn);
+      Cn = Cn*(Bn+(n+1)/(*x))/(An1[n+1]+(n+1)/(*x));
+
+      Ta = (Anm[n+1]/(*m)-An1[n+1])/(Anm[n+1]/(*m)-Bn);
+      Tb = (Anm[n+1]*(*m)-An1[n+1])/(Anm[n+1]*(*m)-Bn);
+      
+      an[n] = Cn*Ta;
+      bn[n] = Cn*Tb;
+   }
+}
+/*----------------------------------------------------------------------------*/
+/*                    MIE OPTICAL FORCE CALCULATIONS                          */
+/*----------------------------------------------------------------------------*/
+void lmie_ofc(/* FUNCTION */
+      double complex *M,double complex *x, 
+      int *lmax,int *NMAX,
+      double complex *GTE, double complex *GTM,
+      double *Fx, double *Fy, double *Fz
+   ){
+   double complex an[*lmax+1],bn[*lmax+1],An,Bn,Cn;
+   int lmaxe = *lmax+1;
+   lmie_log(M,x,&lmaxe,NMAX,an,bn);
+
+   double K1,K2,K3,K4;
+   double complex U,V,W,Y,Fxy,Fzz;
+
+   Fxy=0.0+0.0*I;
+   Fzz=0.0+0.0*I;
+
+   int l,m;
+   int ll;
+   for(l=0;l<*lmax;l++){
+
+      An = an[l]+conj(an[l+1])-2*an[l]*conj(an[l+1]);
+      Bn = bn[l]+conj(bn[l+1])-2*bn[l]*conj(bn[l+1]);
+      Cn = an[l]+conj(bn[l  ])-2*an[l]*conj(bn[l  ]);
+
+      ll=l+1;
+
+      for(m=-ll;m<=ll;m++){
+
+         K1 = sqrt((ll*(ll+2.))/((2*ll+1.)*(2*ll+3.)));
+         K2 = sqrt((ll+m+2.)*(ll+m+1.));
+         K3 = sqrt((ll-m)*(ll+m+1.));
+         K4 = sqrt((ll+m+1.)*(ll-m+1.));
+
+         U = An*GTM[jlm(ll,m)]*conj(GTM[jlm(ll+1,m+1)])
+           + Bn*GTE[jlm(ll,m)]*conj(GTE[jlm(ll+1,m+1)])
+           + conj(An*GTM[jlm(ll,-m)])*GTM[jlm(ll+1,-m-1)]
+           + conj(Bn*GTE[jlm(ll,-m)])*GTE[jlm(ll+1,-m-1)];
+
+         V = Cn*GTM[jlm(ll,m)]*conj(GTE[jlm(ll,m+1)])
+           -  conj(Cn)*GTE[jlm(ll,m)]*conj(GTM[jlm(ll,m+1)]);
+
+         W = An*GTM[jlm(ll,m)]*conj(GTM[jlm(ll+1,m)])
+           - Bn*GTE[jlm(ll,m)]*conj(GTE[jlm(ll+1,m)]);
+
+         Y = Cn*GTM[jlm(ll,m)]*conj(GTE[jlm(ll,m)]);
+
+         Fxy = (K1*K2*U-K3*V/(1.*ll))/(ll+1.);
+         Fzz = (K1*K4*W-m*Y/(1.*ll))/(ll+1.);
+
+         *Fx = *Fx + creal(Fxy);
+         *Fy = *Fy + cimag(Fxy);
+         *Fz = *Fz + creal(I*Fzz);
+
+        // printf("Fx = %f, Fy = %f, Fz = %f\n",*Fx,*Fy,*Fz);
+      }
+   }
+}
+/*----------------------------------------------------------------------------*/
+void vswf_gpw(/* FUNCTION */ 
+      double *kx, double *ky, double *kz,
+      double complex *ux, double complex *uy, double complex *uz,
+      int *lmax,
+      double complex *GTE, double complex *GTM
+   ){
+   int LMAX=(*lmax)*(*lmax+2)+1;
+   double k = sqrt(pow(*kx,2)+pow(*ky,2)+pow(*kz,2));
+   double u = sqrt(conj(*ux)**ux+conj(*uy)**uy+conj(*uz)**uz);
+   
+
+   double complex Y[LMAX];
+   double complex VM[LMAX],VZ[LMAX],VP[LMAX];
+   double complex XM[LMAX],XZ[LMAX],XP[LMAX];
+   double complex YM[LMAX],YZ[LMAX],YP[LMAX]; 
+
+   vswf_vsh(kx,ky,kz,lmax,Y,VM,VZ,VP,XM,XZ,XP,YM,YZ,YP);
+   // k normalization
+   double hkx = *kx/k;
+   double hky = *ky/k;
+   double hkz = *kz/k;
+   double complex hkp = (hkx+I*hky)/sqrt(2.);
+   double complex hkm = (hkx-I*hky)/sqrt(2.);
+   // u normalization
+   double complex hux = *ux/u;
+   double complex huy = *uy/u;
+   double complex huz = *uz/u;
+   double complex hup = (hux+I*huy)/sqrt(2.);
+   double complex hum = (hux-I*huy)/sqrt(2.);
+   // ALFA a = k x u
+   double complex ham = I*(hkm*huz-hkz*hum);
+   double complex haz = I*(hkp*hum-hkm*hup);
+   double complex hap = I*(hkz*hup-hkp*huz);
+
+   int l,m;
+   for(l=1;l<=*lmax;l++){
+      for(m=-l;m<=l;m++){
+         GTE[jlm(l,m)] = 4*M_PI*cpow(I,l)*(conj(XM[jlm(l,m)])*hum+conj(XZ[jlm(l,m)])*huz+conj(XP[jlm(l,m)])*hup);
+         GTM[jlm(l,m)] = 4*M_PI*cpow(I,l)*(conj(XM[jlm(l,m)])*ham+conj(XZ[jlm(l,m)])*haz+conj(XP[jlm(l,m)])*hap);
+      }
+   }
+}
+//------------------------------------------------------------------------------
+void vswf_gwg(/* FUNCTION */ 
+      double *gamma, double *kz,
+      int *lmax,
+      double complex *A, double complex *B
+   ){
+   int LMAX=(*lmax)*(*lmax+2)+1;
+
+   double k = sqrt(pow(*gamma,2)+pow(*kz,2));
+   double cth = (*kz)/k;
+
+   double Qlm[LMAX],dQlm[LMAX];
+   int ll[LMAX],mm[LMAX];
+
+   vswf_qlm(&cth,lmax,Qlm,dQlm,ll,mm);
+
+   int l,m;
+   double llp1;
+   for(l=1;l<=*lmax;l++){
+      for(m=-l;m<=l;m++){
+         llp1 = 1/sqrt((1.*l)*(1.*l+1.));
+         A[jlm(l,m)] = 2*cpow(I,l)*pow(k/(*gamma),2)*Qlm[jlm(l,m)]*m*llp1;
+         B[jlm(l,m)] = 2*cpow(I,l-1)*dQlm[jlm(l,m)]*llp1;
+      }
+   }
+}
+//------------------------------------------------------------------------------
+void vswf_cwg(/* FUNCTION */ 
+      int *M,int *s,int *lmax,int *NMAX,int *TM,
+      double *gamma, double *kz,
+      double *x, double *y, double *z,
+      double complex *GTE, double complex *GTM
+   ){
+   int LMAX=(*lmax)*(*lmax+2)+1;
+
+   double rho = sqrt(pow(*x,2)+pow(*y,2));
+   double k = sqrt(pow(*gamma,2)+pow(*kz,2));
+   double gr = *gamma*rho;
+
+   double cth = (*kz)/k;
+   double cph = *x/rho;
+   double sph = *y/rho;
+   double zz = (*kz)*(*z);
+
+   double Qlm[LMAX],dQlm[LMAX],Jn[LMAX],Dn[LMAX];
+   int ll[LMAX],mm[LMAX];
+
+   int ls,le,mo;
+   ls = abs(*M-*lmax);
+   le = abs(*M+*lmax);
+   if(ls>le){
+      le=ls;
+      ls=0;
+   }
+   vswf_qlm(&cth,lmax,Qlm,dQlm,ll,mm);
+   bess_cyl(&le,&gr,Jn,Dn,NMAX); 
+
+   double complex A,B,A0,psi;
+   double llp1;
+   int l,m;
+   for(l=1;l<=*lmax;l++){
+      for(m=-l;m<=l;m++){
+         mo = *M-*s*m;
+         A0 = 2*M_PI*cpow(-I*(*s),m);
+         if(mo<0){
+            psi = Jn[abs(mo)]*cpow((cph+*s*I*sph),mo)*cexp(I*zz)*pow(-1,abs(mo));
+         }else{
+            psi = Jn[abs(mo)]*cpow((cph+*s*I*sph),mo)*cexp(I*zz);
+         }
+
+         llp1 = 1/sqrt((1.*l)*(1.*l+1.));
+         A = 2*cpow(I,l)*pow(k/(*gamma),2)*Qlm[jlm(l,m)]*m*llp1;
+         B = 2*cpow(I,l-1)*dQlm[jlm(l,m)]*llp1;
+
+         if(*TM==1){
+            GTE[jlm(l,m)] =  A*A0*psi;
+            GTM[jlm(l,m)] = -B*A0*psi;
+         }else{
+            GTE[jlm(l,m)] =  B*A0*psi;
+            GTM[jlm(l,m)] =  A*A0*psi;
+         }
+      }
+   }
+}
+//------------------------------------------------------------------------------
+void vswf_bbp(/* FUNCTION */ 
+      int *M,int *S,int *P,int *lmax,int *NMAX,
+      double *gamma, double *kz,
+      double *x, double *y, double *z,
+      double complex *GTE, double complex *GTM
+   ){
+   int LMAX=(*lmax)*(*lmax+2)+1;
+
+   double rho = sqrt(pow(*x,2)+pow(*y,2));
+   double k = sqrt(pow(*gamma,2)+pow(*kz,2));
+   double gr = *gamma*rho;
+
+   double cth = (*kz)/k;
+   double sth = (*gamma)/k;
+   double cph = *x/rho;
+   double sph = *y/rho;
+   double zz = (*kz)*(*z);
+
+   double Qlm[LMAX],dQlm[LMAX],Jn[LMAX],Dn[LMAX];
+   int ll[LMAX],mm[LMAX];
+
+   int ls,le,mo;
+   ls = abs(*M-*lmax-1);
+   le = abs(*M+*lmax+1);
+   if(ls>le){
+      le=ls;
+      ls=0;
+   }
+   vswf_qlm(&cth,lmax,Qlm,dQlm,ll,mm);
+   bess_cyl(&le,&gr,Jn,Dn,NMAX); 
+
+   double complex A0,psi;
+   int l,m;
+   for(l=1;l<=*lmax;l++){
+      for(m=-l;m<=l;m++){
+         mo = *M-*S*(m-*P);
+         A0 = 4*M_PI*cpow(I,l-*S*(m-*P))/sqrt(2.*l*(l+1.));
+         if(mo<0){
+            psi = Jn[abs(mo)]*cpow((cph+*S*I*sph),mo)*cexp(I*zz)*pow(-1,abs(mo));
+         }else{
+            psi = Jn[abs(mo)]*cpow((cph+*S*I*sph),mo)*cexp(I*zz);
+         }
+         GTE[jlm(l,m)] =   A0*psi*clmp(l,m,-*P)*Qlm[jlm(l,m-*P)];
+         GTM[jlm(l,m)] =-I*A0*psi*(cth*sth*dQlm[jlm(l,m)]-*P*m*Qlm[jlm(l,m)]/sth);
+      }
+   }
+}
+//------------------------------------------------------------------------------
+void vswf_bbz(/* FUNCTION */ 
+      int *M,int *S,int *lmax,int *NMAX,int *TM,
+      double *gamma, double *kz,
+      double *x, double *y, double *z,
+      double complex *GTE, double complex *GTM
+   ){
+   int LMAX=(*lmax)*(*lmax+2)+1;
+
+   double rho = sqrt(pow(*x,2)+pow(*y,2));
+   double k = sqrt(pow(*gamma,2)+pow(*kz,2));
+   double gr = *gamma*rho;
+
+   double cth = (*kz)/k;
+   double sth = (*gamma)/k;
+   double cph = *x/rho;
+   double sph = *y/rho;
+   double zz = (*kz)*(*z);
+
+   double Qlm[LMAX],dQlm[LMAX],Jn[LMAX],Dn[LMAX];
+   int ll[LMAX],mm[LMAX];
+
+   int ls,le,mo;
+   ls = abs(*M-*lmax-1);
+   le = abs(*M+*lmax+1);
+   if(ls>le){
+      le=ls;
+      ls=0;
+   }
+   vswf_qlm(&cth,lmax,Qlm,dQlm,ll,mm);
+   bess_cyl(&le,&gr,Jn,Dn,NMAX); 
+
+   double complex A0,psi;
+   int l,m;
+   for(l=1;l<=*lmax;l++){
+      for(m=-l;m<=l;m++){
+         mo = *M-*S*m;
+         A0 = 4*M_PI*cpow(I,l-*S*m)/sqrt(l*(l+1.));
+         if(mo<0){
+            psi = Jn[abs(mo)]*cpow((cph+*S*I*sph),mo)*cexp(I*zz)*pow(-1,abs(mo));
+         }else{
+            psi = Jn[abs(mo)]*cpow((cph+*S*I*sph),mo)*cexp(I*zz);
+         }
+         if(*TM==1){
+            GTE[jlm(l,m)] =   A0*psi*m*Qlm[jlm(l,m)];
+            GTM[jlm(l,m)] = I*A0*psi*pow(sth,2)*dQlm[jlm(l,m)];
+         }else{
+            GTE[jlm(l,m)] = I*A0*psi*pow(sth,2)*dQlm[jlm(l,m)];
+            GTM[jlm(l,m)] =  -A0*psi*m*Qlm[jlm(l,m)];
+
+         }
+      }
+   }
+}
+//------------------------------------------------------------------------------
+void vswf_rwg(/* FUNCTION */ 
+      int *TM,int *lmax,
+      double *kx, double *ky, double *kz,
+      double  *x, double  *y, double  *z,
+      double complex *GTE, double complex *GTM
+   ){
+   int LMAX=(*lmax)*(*lmax+2)+1;
+
+   double k = sqrt(pow(*kx,2)+pow(*ky,2)+pow(*kz,2));
+   double gamma = sqrt(pow(*kx,2)+pow(*ky,2));
+
+   double cth = (*kz)/k;
+   double kzz = (*kz)*(*z);
+
+   double Qlm[LMAX],dQlm[LMAX];
+   int ll[LMAX],mm[LMAX];
+
+   vswf_qlm(&cth,lmax,Qlm,dQlm,ll,mm);
+
+   double complex A,B,eimz,f,g;
+   double llp1;
+   int l,m;
+   int S = 1-2*(*TM);
+
+   double complex EXmY = cexp(I*(*kx*(*x)-*ky*(*y)));
+   double complex EXpY = cexp(I*(*kx*(*x)+*ky*(*y)));
+   double czt  = *kx/gamma;
+   double szt  = *ky/gamma;
+   
+
+//   #pragma omp parallel for private (m)
+   for(l=1;l<=*lmax;l++){
+      for(m=-l;m<=l;m++){
+
+         llp1 = 1/sqrt((1.*l)*(1.*l+1.));
+         A = 2*cpow(I,l)*pow(k/(gamma),2)*Qlm[jlm(l,m)]*m*llp1;
+         B = 2*cpow(I,l-1)*dQlm[jlm(l,m)]*llp1;
+
+         eimz = cpow(czt+I*szt,m);
+         f = pow(-1,m);
+
+         g = .5*M_PI*cexp(I*kzz)*((EXmY+f*conj(EXmY))*eimz+S*((EXpY+f*conj(EXpY))*conj(eimz)));
+         
+         if(*TM==1){
+            GTE[jlm(l,m)] =  A*g;
+            GTM[jlm(l,m)] = -B*g;
+         }else{
+            GTE[jlm(l,m)] =  B*g;
+            GTM[jlm(l,m)] =  A*g;
+         }
+      }
+   }
+}
+//------------------------------------------------------------------------------
+// POSITION CALCULATIONS - LOOPS - COMPLETE CALCULATIONS
+//------------------------------------------------------------------------------
+void bscf_rwg(/* FUNCTION */
+      int *TM, int *lmax, int *NMAX,
+      double *kx, double *ky, double *kz,
+      double complex *M, double complex *X,
+      double *x, double *y, double *z,
+      int *nx, int *ny, int *nz,
+      double *rx, double *ry, double *rz,
+      double *Fx, double *Fy, double *Fz
+   ){
+   //-----------------------------------
+   int lmaxe=*lmax+1;
+   int LMAXE=(lmaxe)*(lmaxe+2)+1;
+   #pragma omp parallel for
+   for(int ix=0; ix<*nx; ix++){
+      for(int iy=0; iy<*ny; iy++){
+         for(int iz=0; iz<*nz; iz++){
+            double complex GTE[LMAXE],GTM[LMAXE];
+            int i=iz+(*nz)*iy+(*nz)*(*ny)*ix;
+            rx[i]=x[ix];
+            ry[i]=y[iy];
+            rz[i]=z[iz];
+            vswf_rwg(TM,&lmaxe,kx,ky,kz,&x[ix],&y[iy],&z[iz],GTE,GTM);
+            lmie_ofc(M,X,lmax,NMAX,GTE,GTM,&Fx[i],&Fy[i],&Fz[i]);
+         }
+      }
+   }
+}
+//------------------------------------------------------------------------------
+void bscf_cwg(/* FUNCTION */
+      int *TM, int *m, int *s,int *lmax, int *NMAX,
+      double *gamma, double *kz,
+      double complex *M, double complex *X,
+      double *x, double *y, double *z,
+      int *nx, int *ny, int *nz,
+      double *rx, double *ry, double *rz,
+      double *Fx, double *Fy, double *Fz
+   ){
+   //-----------------------------------
+   int lmaxe=*lmax+1;
+   int LMAXE=(lmaxe)*(lmaxe+2)+1;
+   #pragma omp parallel for
+   for(int ix=0; ix<*nx; ix++){
+      for(int iy=0; iy<*ny; iy++){
+         for(int iz=0; iz<*nz; iz++){
+            double complex GTE[LMAXE],GTM[LMAXE];
+            int i=iz+(*nz)*iy+(*nz)*(*ny)*ix;
+            rx[i]=x[ix];
+            ry[i]=y[iy];
+            rz[i]=z[iz];
+            vswf_cwg(m,s,&lmaxe,NMAX,TM,gamma,kz,&x[ix],&y[iy],&z[iz],GTE,GTM);
+            lmie_ofc(M,X,lmax,NMAX,GTE,GTM,&Fx[i],&Fy[i],&Fz[i]);
+         } /* end for iz */    
+      } /* end for iy */    
+   } /* end for ix */    
+}
+//------------------------------------------------------------------------------
+void bscf_bbz(/* FUNCTION */
+      int *TM, int *m, int *s, int *lmax, int *NMAX,
+      double *gamma, double *kz,
+      double complex *M, double complex *X,
+      double *x, double *y, double *z,
+      int *nx, int *ny, int *nz,
+      double *rx, double *ry, double *rz,
+      double *Fx, double *Fy, double *Fz
+   ){
+   //-----------------------------------
+   int lmaxe=*lmax+1;
+   int LMAXE=(lmaxe)*(lmaxe+2)+1;
+   #pragma omp parallel for
+   for(int ix=0; ix<*nx; ix++){
+      for(int iy=0; iy<*ny; iy++){
+         for(int iz=0; iz<*nz; iz++){
+            double complex GTE[LMAXE],GTM[LMAXE];
+            int i=iz+(*nz)*iy+(*nz)*(*ny)*ix;
+            rx[i]=x[ix];
+            ry[i]=y[iy];
+            rz[i]=z[iz];
+            vswf_bbz(m,s,&lmaxe,NMAX,TM,gamma,kz,&x[ix],&y[iy],&z[iz],GTE,GTM);
+            lmie_ofc(M,X,lmax,NMAX,GTE,GTM,&Fx[i],&Fy[i],&Fz[i]);
+         } /* end for iz */    
+      } /* end for iy */    
+   } /* end for ix */    
+}
+//------------------------------------------------------------------------------
+void bscf_bbp(/* FUNCTION */
+      int *TM, int *m, int *s, int *p, int *lmax, int *NMAX,
+      double *gamma, double *kz,
+      double complex *M, double complex *X,
+      double *x, double *y, double *z,
+      int *nx, int *ny, int *nz,
+      double *rx, double *ry, double *rz,
+      double *Fx, double *Fy, double *Fz
+   ){
+   //-----------------------------------
+   int lmaxe=*lmax+1;
+   int LMAXE=(lmaxe)*(lmaxe+2)+1;
+   #pragma omp parallel for
+   for(int ix=0; ix<*nx; ix++){
+      for(int iy=0; iy<*ny; iy++){
+         for(int iz=0; iz<*nz; iz++){
+            double complex GTE[LMAXE],GTM[LMAXE];
+            int i=iz+(*nz)*iy+(*nz)*(*ny)*ix;
+            rx[i]=x[ix];
+            ry[i]=y[iy];
+            rz[i]=z[iz];
+            vswf_bbp(m,s,p,&lmaxe,NMAX,gamma,kz,&x[ix],&y[iy],&z[iz],GTE,GTM);
+            lmie_ofc(M,X,lmax,NMAX,GTE,GTM,&Fx[i],&Fy[i],&Fz[i]);
+         } /* end for iz */    
+      } /* end for iy */    
+   } /* end for ix */    
+}
+//------------------------------------------------------------------------------
+void bscf_gpw(/* FUNCTION */
+      int *lmax, int *NMAX,
+      double *kx, double *ky, double *kz,
+      double complex *ux, double complex *uy, double complex *uz,
+      double complex *M, double complex *X,
+      double *x, double *y, double *z,
+      int *nx, int *ny, int *nz,
+      double *rx, double *ry, double *rz,
+      double *Fx, double *Fy, double *Fz
+   ){
+   //-----------------------------------
+   int lmaxe=*lmax+1;
+   int LMAXE=(lmaxe)*(lmaxe+2)+1;
+   #pragma omp parallel for
+   for(int ix=0; ix<*nx; ix++){
+      for(int iy=0; iy<*ny; iy++){
+         for(int iz=0; iz<*nz; iz++){
+            double complex GTE[LMAXE],GTM[LMAXE];
+            int i=iz+(*nz)*iy+(*nz)*(*ny)*ix;
+            rx[i]=x[ix];
+            ry[i]=y[iy];
+            rz[i]=z[iz];
+            vswf_gpw(kx,ky,kz,ux,uy,uz,&lmaxe,GTE,GTM);
+            lmie_ofc(M,X,lmax,NMAX,GTE,GTM,&Fx[i],&Fy[i],&Fz[i]);
+         } /* end for iz */    
+      } /* end for iy */    
+   } /* end for ix */    
+}
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/

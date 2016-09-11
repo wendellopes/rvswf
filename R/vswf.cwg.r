@@ -91,7 +91,7 @@
 #' # BSC CALCULATIONS
 #' #-------------------------------------------------------------------------------
 #' CWG<-vwfd.cwg(TE=!TM,M,S,g,kz,x+xo,y+yo,z+zo)
-#' BSC<-vswf.cwg(TM,m=M,s=S,g,kz,xo,yo,zo,lmax)
+#' BSC<-vswf.cwg(g,kz,xo,yo,zo,lmax,M,TM,s=S)
 #' PWE<-vswf.pwe(k,x,y,z,lmax,BSC$GTE,BSC$GTM)
 #' #-------------------------------------------------------------------------------
 #' # VALUES
@@ -105,29 +105,60 @@
 #'    )
 #' df$DIF<-df$PWE-df$CWG
 #' print(df)
-vswf.cwg<-function(TM=TRUE,m,s=1,gama,kz,x,y,z,lmax){
+vswf.cwg<-function(gama,kz,x,y,z,lmax,M,TM=TRUE,s=1,code="C"){
    LMAX=lmax*(lmax+2)+1
-   k<-sqrt(gama^2+kz^2)
-   #----------------------------------------
-   u<-vswf.qlm(kz/k,lmax)
-   Qlm<-u$Qlm
-   dQlm<-u$dQlm
-   ll<-u$l
-   mm<-u$m
-   llp1<-1/sqrt(ll*(ll+1))
-   llp1[1]<-0
-   #----------------------------------------
-   A<-2*(1i^ll)*((k/gama)^2)*Qlm*mm*llp1
-   B<-2*(1i^(ll-1))*dQlm*llp1
-   #----------------------------------------
-   g<-2*pi*((-1i*s)^mm)*vswf.psi(gama,kz,x,y,z,m-s*mm,s)
-   #----------------------------------------
-   if(TM){# TM CWG
-      GTE<- A*g
-      GTM<--B*g
-   }else{ # TE CWG
-      GTE<-B*g
-      GTM<-A*g
+   dummy<-rep(0,LMAX)
+   if(!code%in%c("C","R")){
+      stop("Code must be \"C\" or \"R\"")
    }
-   return(data.frame(GTE,GTM))
+   if(code=="C"){
+      if(TM){
+         tm<-1
+      }else{
+         tm<-0
+      }
+      u<-.C("vswf_cwg",
+         M=as.integer(M),
+         s=as.integer(s),
+         lmax=as.integer(lmax),
+         NMAX=as.integer(200),
+         TM=as.integer(tm),
+
+         gamma=as.double(gama),
+         kz=as.double(kz),
+
+         x=as.double(x),
+         y=as.double(y),
+         z=as.double(z),
+
+         GTE=as.complex(dummy),      # an
+         GTM=as.complex(dummy))      # bn
+      return(data.frame(GTE=u$GTE,GTM=u$GTM))
+   }else{
+      k<-sqrt(gama^2+kz^2)
+      #----------------------------------------
+      # Legendre 
+      u<-vswf.qlm(kz/k,lmax)
+      Qlm<-u$Qlm
+      dQlm<-u$dQlm
+      ll<-u$l
+      mm<-u$m
+      #----------------------------------------
+      llp1<-1/sqrt(ll*(ll+1))
+      llp1[1]<-0
+      #----------------------------------------
+      A<-2*(1i^ll)*((k/gama)^2)*Qlm*mm*llp1
+      B<-2*(1i^(ll-1))*dQlm*llp1
+      #----------------------------------------
+      g<-2*pi*((-1i*s)^mm)*vswf.psi(gama,kz,x,y,z,M-s*mm,s)
+      #----------------------------------------
+      if(TM){# TM CWG
+         GTE<- A*g
+         GTM<--B*g
+      }else{ # TE CWG
+         GTE<-B*g
+         GTM<-A*g
+      }
+      return(data.frame(GTE,GTM))
+   }
 }

@@ -1,8 +1,8 @@
 Package: rvswf
 Type: Package
 Title: RVSWF: Expansion in Vector Spherical Wave Functions written in R
-Version: 1.5.1
-Date: 2015-02-02
+Version: 2.1.0
+Date: 2016-09-09
 Author: Wendel Lopes Moreira
 Maintainer: Wendel Lopes Moreira <wendellopes@gmail.com>
 Depends: gsl
@@ -10,68 +10,18 @@ SystemRequirements: Gnu Scientific Library version >= 1.12
 Description: Expansion in Vector Spherical Wave Functions
 License: GPL-3
 LazyLoad: yes
-Packaged: 2015-02-02
-Collate:lcfe.afs.r
-        lcfe.cbl.r
-        lcfe.cbd.r
-        lcfe.cbi.r
-        lcfe.rbl.r
-        lcfe.sbl.r
-        lcfe.sbd.r
-        lcfe.sbi.r
-        lcfa.cyl.r
-        lcfa.sph.r
-        lcfa.ric.r
-        bess.czr.r
-        bess.cun.r
-        bess.cyl.r
-        bess.ric.r
-        bess.szr.r
-        bess.sun.r
-        bess.sph.r
-        vswf.bbp.r
-        vswf.bbz.r
-        vswf.cwg.r
-        vswf.gpw.r
-        vswf.gwg.r
-        vswf.hmp.r
-        vswf.mpw.r
-        vswf.psi.r
-        vswf.pwe.r
-        vswf.qlm.r
-        vswf.rwg.r
-        vswf.sbf.r
-        vswf.vsh.r
-        vwfd.bbp.r
-        vwfd.bbz.r
-        vwfd.cwg.r
-        vwfd.rwg.r
-        vswf.jlm.r
-        reff.cdh.r
-        reff.cdj.r
-        reff.chn.r
-        reff.cjn.r
-        reff.rdj.r
-        reff.rjn.r
-        reff.sdj.r
-        reff.sjn.r
-        comp.cbl.r
-        comp.rbl.r
-        comp.sbl.r
-        comp.cbd.r
-        comp.sbd.r
-        comp.neu.r
-        comp.cyl.r
-        comp.sph.r
-        comp.ric.r
-        test.abc.r
-        test.abn.r
-        lmie.exp.r
-        lmie.log.r
-        lmie.sct.r
-        lmie.rho.r
-        lmie.ofc.r
-        lmie.phs.r
-        lmie.leg.r
-        ridx.pol.r
-        ridx.h2o.r
+Packaged: 2016-09-09 18:13:19 UTC; god0
+Collate: lcfe.afs.r lcfe.cbl.r lcfe.cbd.r lcfe.cbi.r lcfe.rbl.r
+        lcfe.sbl.r lcfe.sbd.r lcfe.sbi.r lcfa.cyl.r lcfa.sph.r
+        lcfa.ric.r bess.czr.r bess.cun.r bess.cyl.r bess.ric.r
+        bess.szr.r bess.sun.r bess.sph.r vswf.bbp.r vswf.bbz.r
+        vswf.cwg.r vswf.gpw.r vswf.gwg.r vswf.hmp.r vswf.mpw.r
+        vswf.psi.r vswf.pwe.r vswf.qlm.r vswf.rwg.r vswf.sbf.r
+        vswf.vsh.r vwfd.bbp.r vwfd.bbz.r vwfd.cwg.r vwfd.rwg.r
+        vswf.jlm.r reff.cdh.r reff.cdj.r reff.chn.r reff.cjn.r
+        reff.rdj.r reff.rjn.r reff.sdj.r reff.sjn.r comp.cbl.r
+        comp.rbl.r comp.sbl.r comp.cbd.r comp.sbd.r comp.neu.r
+        comp.cyl.r comp.sph.r comp.ric.r test.abc.r test.abn.r
+        lmie.exp.r lmie.log.r lmie.sct.r lmie.rho.r lmie.ofc.r
+        lmie.phs.r lmie.leg.r ridx.pol.r ridx.h2o.r lmie.rfc.r
+        bscf.bbp.r bscf.bbz.r bscf.cwg.r bscf.gpw.r bscf.rwg.r

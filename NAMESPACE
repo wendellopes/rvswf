@@ -35,6 +35,11 @@ export(vwfd.rwg, # Vector Wave Field Definition: Rectangular Wave Guide
        lmie.ofc, # Parameters to calculate Optical Force.
        lmie.phs, # Scattering phase calculation.
        lmie.leg, # Modified Legendre functions for expansion of plane waves
+       bscf.bbp, # Beam Shape Coefficients Force calculation Bessel Beams P
+       bscf.bbz, # Beam Shape Coefficients Force calculation Bessel Beams Z
+       bscf.cwg, # Beam Shape Coefficients Force calculation Cylindrical WG
+       bscf.rwg, # Beam Shape Coefficients Force calculation Rectangular WG
+       bscf.gpw, # Beam Shape Coefficients Force calculation Generic Plane Wave
        reff.cjn, # Reference function: Cylindrical Bessel J_n(x)
        reff.sjn, # Reference function: Spherical Bessel function j_n(x)
        reff.rjn, # Reference function: Riccati-Bessel x j_n(x)

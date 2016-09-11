@@ -13,14 +13,12 @@
 #' @examples
 #' vswf.psi(1,2,3,4,5,6)
 vswf.psi<-function(gama,kz,x,y,z,m,s=1){
-   rho<-sqrt(x^2+y^2)
-   if(abs(rho)<1e-14){
-      cph<-1
-      sph<-0
-   }else{
-      cph<-x/rho
-      sph<-y/rho   
+   if(abs(s)!=1){
+      stop("s must be 1 or -1")
    }
+   rho<-sqrt(x^2+y^2)
+   cph<-ifelse(abs(rho)<1e-14,1,x/rho)
+   sph<-ifelse(abs(rho)<1e-14,0,y/rho)
    u<-besselJ(gama*rho,m)*((cph+1i*s*sph)^m)*exp(1i*kz*z)
    return(u)
 }

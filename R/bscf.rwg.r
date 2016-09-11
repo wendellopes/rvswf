@@ -78,68 +78,62 @@
 #'    )
 #' df$DIF<-df$PWE-df$RWG
 #' print(df)
-vswf.rwg<-function(kx,ky,kz,x,y,z,lmax,TM=TRUE,code="C"){
-   LMAX=lmax*(lmax+2)+1
-   dummy<-rep(0,LMAX)
+bscf.rwg<-function(M,X,kx,ky,kz,x,y,z,lmax,TM=TRUE,code="C"){
+   nx<-length(x)
+   ny<-length(y)
+   nz<-length(z)
+   dummy<-rep(0,nx*ny*nz)
+   tm<-ifelse(TM,1,0)
    if(!code%in%c("C","R")){
       stop("Code must be \"C\" or \"R\"")
    }
    if(code=="C"){
-      if(TM){
-         tm<-1
-      }else{
-         tm<-0
-      }
-      u<-.C("vswf_rwg",
+      cat("C  CODE\n")
+      x[x==0]<-.Machine$double.xmin
+      y[y==0]<-.Machine$double.xmin
+      z[z==0]<-.Machine$double.xmin
+      u<-.C("bscf_rwg",
          TM=as.integer(tm),
          lmax=as.integer(lmax),
+         NMAX=as.integer(200),
 
          kx=as.double(kx),
          ky=as.double(ky),
          kz=as.double(kz),
+      
+         M=as.complex(M),
+         X=as.complex(X),
 
          x=as.double(x),
          y=as.double(y),
          z=as.double(z),
 
-         GTE=as.complex(dummy),      # an
-         GTM=as.complex(dummy))      # bn
-      return(data.frame(GTE=u$GTE,GTM=u$GTM))
+         nx=as.integer(nx),
+         ny=as.integer(ny),
+         nz=as.integer(nz),
+
+         rx=as.double(dummy),
+         ry=as.double(dummy),
+         rz=as.double(dummy),
+
+         Fx=as.double(dummy),
+         Fy=as.double(dummy),
+         Fz=as.double(dummy))
+      return(data.frame(x=u$rx,y=u$ry,z=u$rz,Fx=u$Fx,Fy=u$Fy,Fz=u$Fz))
    }else{
-      if(TM){
-         s<--1   #s=-1 -> TM MODE
-      }else{
-         s<- 1   #s=+1 -> TE MODE
+      cat("R  CODE\n")
+      xxx<-data.frame(x=dummy,y=dummy,z=dummy,Fx=dummy,Fy=dummy,Fz=dummy)
+      for(ix in 1:nx){
+         for(iy in 1:ny){
+            for(iz in 1:nz){
+               i<-iz+nz*(iy-1)+nz*ny*(ix-1)
+#               cat(ix-1,iy-1,iz-1,i-1,"\n")
+               g.rwg<-vswf.rwg(kx,ky,kz,x[ix],y[iy],z[iz],lmax+1,TM)
+               h.rwg<-lmie.ofc(M,X,g.rwg$GTE,g.rwg$GTM,lmax)
+               xxx[i,]<-cbind(data.frame(x=x[ix],y=y[iy],z=z[iz]),h.rwg)
+            }
+         }
       }
-      gama<-sqrt(kx^2+ky^2)
-      k<-sqrt(kx^2+ky^2+kz^2)
-      #----------------------------------------
-      u<-vswf.qlm(kz/k,lmax)
-      Qlm<-u$Qlm
-      dQlm<-u$dQlm
-      ll<-u$l
-      mm<-u$m
-      llp1<-1/sqrt(ll*(ll+1))
-      llp1[1]<-0
-      #----------------------------------------
-      A<-2*(1i^ll)*((k/gama)^2)*Qlm*mm*llp1
-      B<-2*(1i^(ll-1))*dQlm*llp1
-      #----------------------------------------
-      EXmY<-exp(1i*(kx*x-ky*y))
-      EXpY<-exp(1i*(kx*x+ky*y))
-      czt<-kx/gama
-      szt<-ky/gama
-      eimz<-(czt+1i*szt)^mm    
-      f<-(-1)^mm
-      #----------------------------------------
-      g<-.5*pi*exp(1i*kz*z)*((EXmY+f*Conj(EXmY))*eimz+s*((EXpY+f*Conj(EXpY))*Conj(eimz)))
-      if(TM){# TM CWG
-         GTE<- A*g
-         GTM<--B*g
-      }else{ # TE CWG
-         GTE<-B*g
-         GTM<-A*g
-      }
-      return(data.frame(GTE,GTM))
    }
+   return(xxx)
 }

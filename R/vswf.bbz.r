@@ -57,7 +57,7 @@
 #' # BSC CALCULATIONS
 #' #-------------------------------------------------------------------------------
 #' BBZ<-vwfd.bbz(TM,M,S,gama,kz,x+xo,y+yo,z+zo)
-#' BSC<-vswf.bbz(TM,gama,kz,xo,yo,zo,lmax,M,S)
+#' BSC<-vswf.bbz(gama,kz,xo,yo,zo,lmax,M,S,TM)
 #' PWE<-vswf.pwe(k,x,y,z,lmax,BSC$GTE,BSC$GTM)
 #' #-------------------------------------------------------------------------------
 #' # VALUES
@@ -71,31 +71,64 @@
 #'    )
 #' df$DIF<-df$PWE-df$BBZ
 #' print(df)
-vswf.bbz<-function(TM=TRUE,gama,kz,xo,yo,zo,lmax,M,s){
-   k<-sqrt(gama^2+kz^2)
+vswf.bbz<-function(gama,kz,xo,yo,zo,lmax,M,s,TM=TRUE,code="C"){
    LMAX=lmax*(lmax+2)+1
-   #----------------------------------------
-   u<-vswf.qlm(kz/k,lmax+1)
-   Qlm<-u$Qlm
-   dQlm<-u$dQlm
-   rm(u)
-   #----------------------------------------
-   GTE<-rep(0,LMAX)
-   GTM<-rep(0,LMAX)
-   for(l in 1:lmax){
-      m<--l:l
-      psio<-vswf.psi(gama,kz,xo,yo,zo,M-s*m,s)
-      if(l>0){
-         A0<-4*pi*(1i^(l-s*m))*psio/sqrt(l*(l+1))
-      }else{
-         A0<-0
-      }
-     GTE[vswf.jlm(l,m)]<-m*Qlm[vswf.jlm(l,m)]*A0
-     GTM[vswf.jlm(l,m)]<-1i*((gama/k)^2)*dQlm[vswf.jlm(l,m)]*A0
+   dummy<-rep(0,LMAX)
+   if(!code%in%c("C","R")){
+      stop("Code must be \"C\" or \"R\"")
    }
-   if(TM){
-      return(data.frame(GTE,GTM))
+   if(code=="C"){
+      if(TM){
+         tm<-1
+         cat("TM MODE\n")
+      }else{
+         tm<-0
+         cat("TE MODE\n")
+      }
+      u<-.C("vswf_bbz",
+         M=as.integer(M),
+         s=as.integer(s),
+         lmax=as.integer(lmax),
+         NMAX=as.integer(200),
+         TM=as.integer(tm),
+
+         gamma=as.double(gama),
+         kz=as.double(kz),
+
+         x=as.double(x),
+         y=as.double(y),
+         z=as.double(z),
+
+         GTE=as.complex(dummy),
+         GTM=as.complex(dummy))
+      return(data.frame(GTE=u$GTE,GTM=u$GTM))
    }else{
-      return(data.frame(GTE=GTM,GTM=-GTE))
+      k<-sqrt(gama^2+kz^2)
+      #----------------------------------------
+      u<-vswf.qlm(kz/k,lmax+1)
+      Qlm<-u$Qlm
+      dQlm<-u$dQlm
+      rm(u)
+      #----------------------------------------
+      GTE<-rep(0,LMAX)
+      GTM<-rep(0,LMAX)
+      for(l in 1:lmax){
+         m<--l:l
+         psio<-vswf.psi(gama,kz,xo,yo,zo,M-s*m,s)
+         if(l>0){
+            A0<-4*pi*(1i^(l-s*m))*psio/sqrt(l*(l+1))
+         }else{
+            A0<-0
+         }
+        GTE[vswf.jlm(l,m)]<-m*Qlm[vswf.jlm(l,m)]*A0
+        GTM[vswf.jlm(l,m)]<-1i*((gama/k)^2)*dQlm[vswf.jlm(l,m)]*A0
+      }
+      if(TM){
+         cat("TM MODE\n")
+         return(data.frame(GTE,GTM))
+      }else{
+         cat("TE MODE\n")
+         return(data.frame(GTE=GTM,GTM=-GTE))
+      }
    }
 }

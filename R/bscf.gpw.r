@@ -78,68 +78,44 @@
 #'    )
 #' df$DIF<-df$PWE-df$RWG
 #' print(df)
-vswf.rwg<-function(kx,ky,kz,x,y,z,lmax,TM=TRUE,code="C"){
-   LMAX=lmax*(lmax+2)+1
-   dummy<-rep(0,LMAX)
-   if(!code%in%c("C","R")){
-      stop("Code must be \"C\" or \"R\"")
-   }
-   if(code=="C"){
-      if(TM){
-         tm<-1
-      }else{
-         tm<-0
-      }
-      u<-.C("vswf_rwg",
-         TM=as.integer(tm),
-         lmax=as.integer(lmax),
+bscf.gpw<-function(M,X,kx,ky,kz,ux,uy,uz,x,y,z,lmax,TM=TRUE){
+   x[x==0]<-.Machine$double.xmin
+   y[y==0]<-.Machine$double.xmin
+   z[z==0]<-.Machine$double.xmin
+   nx<-length(x)
+   ny<-length(y)
+   nz<-length(z)
+   dummy<-rep(0,nx*ny*nz)
+   tm<-ifelse(TM,1,0)
+   u<-.C("bscf_gpw",
+      lmax=as.integer(lmax),
+      NMAX=as.integer(200),
 
-         kx=as.double(kx),
-         ky=as.double(ky),
-         kz=as.double(kz),
+      kx=as.double(kx),
+      ky=as.double(ky),
+      kz=as.double(kz),
+   
+      ux=as.complex(ux),
+      uy=as.complex(uy),
+      uz=as.complex(uz),
+   
+      M=as.complex(M),
+      X=as.complex(X),
 
-         x=as.double(x),
-         y=as.double(y),
-         z=as.double(z),
+      x=as.double(x),
+      y=as.double(y),
+      z=as.double(z),
 
-         GTE=as.complex(dummy),      # an
-         GTM=as.complex(dummy))      # bn
-      return(data.frame(GTE=u$GTE,GTM=u$GTM))
-   }else{
-      if(TM){
-         s<--1   #s=-1 -> TM MODE
-      }else{
-         s<- 1   #s=+1 -> TE MODE
-      }
-      gama<-sqrt(kx^2+ky^2)
-      k<-sqrt(kx^2+ky^2+kz^2)
-      #----------------------------------------
-      u<-vswf.qlm(kz/k,lmax)
-      Qlm<-u$Qlm
-      dQlm<-u$dQlm
-      ll<-u$l
-      mm<-u$m
-      llp1<-1/sqrt(ll*(ll+1))
-      llp1[1]<-0
-      #----------------------------------------
-      A<-2*(1i^ll)*((k/gama)^2)*Qlm*mm*llp1
-      B<-2*(1i^(ll-1))*dQlm*llp1
-      #----------------------------------------
-      EXmY<-exp(1i*(kx*x-ky*y))
-      EXpY<-exp(1i*(kx*x+ky*y))
-      czt<-kx/gama
-      szt<-ky/gama
-      eimz<-(czt+1i*szt)^mm    
-      f<-(-1)^mm
-      #----------------------------------------
-      g<-.5*pi*exp(1i*kz*z)*((EXmY+f*Conj(EXmY))*eimz+s*((EXpY+f*Conj(EXpY))*Conj(eimz)))
-      if(TM){# TM CWG
-         GTE<- A*g
-         GTM<--B*g
-      }else{ # TE CWG
-         GTE<-B*g
-         GTM<-A*g
-      }
-      return(data.frame(GTE,GTM))
-   }
+      nx=as.integer(nx),
+      ny=as.integer(ny),
+      nz=as.integer(nz),
+
+      rx=as.double(dummy),
+      ry=as.double(dummy),
+      rz=as.double(dummy),
+
+      Fx=as.complex(dummy),
+      Fy=as.complex(dummy),
+      Fz=as.complex(dummy))
+   return(data.frame(x=u$rx,y=u$ry,z=u$rz,u$Fx,u$Fy,u$Fz))
 }
